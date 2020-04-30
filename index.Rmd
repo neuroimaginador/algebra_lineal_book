@@ -22,6 +22,9 @@ set.seed(1234)
 En este libro vamos a recopilar algunas de las preguntas y dudas más frecuentes en los temas de Álgebra Lineal, con ejemplos resueltos, y acompañados de la teoría necesaria para comprender los resultados.
 
 Cada capítulo incluye preguntas y sus respuestas acerca de aquellos procedimientos más usuales relacionados con el tema correspondiente.
+
+La idea de uso de este _libro_ es que se pueda navegar libremente, yendo a aquellas preguntas sobre las que se tenga dudas, ya que en su respuesta se incluirán enlaces a todos los contenidos y procedimientos necesarios para poder resolver dicha cuestión.
+
 ```{r}
 library(stringr)
 library(tidyverse)

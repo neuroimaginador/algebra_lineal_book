@@ -83,10 +83,12 @@
 </ul></li>
 <li class="chapter" data-level="2.6" data-path="ev.html"><a href="ev.html#param2cartesian"><i class="fa fa-check"></i><b>2.6</b> Cómo convertir entre ecuaciones cartesianas y paramétricas de un subespacio vectorial</a></li>
 <li class="chapter" data-level="2.7" data-path="ev.html"><a href="ev.html#interseccion"><i class="fa fa-check"></i><b>2.7</b> Cómo hallar la intersección de dos subespacios vectoriales</a></li>
-<li class="chapter" data-level="2.8" data-path="ev.html"><a href="ev.html#suma"><i class="fa fa-check"></i><b>2.8</b> Cómo hallar la suma de dos subespacios vectoriales</a></li>
-<li class="chapter" data-level="2.9" data-path="ev.html"><a href="ev.html#comprobación-del-teorema-de-la-dimensión"><i class="fa fa-check"></i><b>2.9</b> Comprobación del teorema de la dimensión</a></li>
-<li class="chapter" data-level="2.10" data-path="ev.html"><a href="ev.html#coord"><i class="fa fa-check"></i><b>2.10</b> Cómo calcular las coordenadas de un vector con respecto a una base dada</a></li>
-<li class="chapter" data-level="2.11" data-path="ev.html"><a href="ev.html#cambiobase"><i class="fa fa-check"></i><b>2.11</b> Cómo calcular la matriz de cambio de base entre dos bases de un mismo espacio vectorial</a></li>
+<li class="chapter" data-level="2.8" data-path="ev.html"><a href="ev.html#es-la-unión-de-subespacios-un-subespacio"><i class="fa fa-check"></i><b>2.8</b> ¿Es la unión de subespacios un subespacio?</a></li>
+<li class="chapter" data-level="2.9" data-path="ev.html"><a href="ev.html#suma"><i class="fa fa-check"></i><b>2.9</b> Cómo hallar la suma de dos subespacios vectoriales</a></li>
+<li class="chapter" data-level="2.10" data-path="ev.html"><a href="ev.html#comprobación-del-teorema-de-la-dimensión"><i class="fa fa-check"></i><b>2.10</b> Comprobación del teorema de la dimensión</a></li>
+<li class="chapter" data-level="2.11" data-path="ev.html"><a href="ev.html#cómo-calcular-el-subespacio-suplementario-de-uno-dado"><i class="fa fa-check"></i><b>2.11</b> Cómo calcular el subespacio suplementario de uno dado</a></li>
+<li class="chapter" data-level="2.12" data-path="ev.html"><a href="ev.html#coord"><i class="fa fa-check"></i><b>2.12</b> Cómo calcular las coordenadas de un vector con respecto a una base dada</a></li>
+<li class="chapter" data-level="2.13" data-path="ev.html"><a href="ev.html#cambiobase"><i class="fa fa-check"></i><b>2.13</b> Cómo calcular la matriz de cambio de base entre dos bases de un mismo espacio vectorial</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="apli.html"><a href="apli.html"><i class="fa fa-check"></i><b>3</b> Aplicaciones lineales</a>
 <ul>
@@ -490,7 +492,7 @@ que es la expresión en cartesianas del espacio <span class="math inline">\(U\)<
 <p>Si un vector <span class="math inline">\(v\)</span> pertenece a la intersección, entonces verifica tanto las ecuaciones paramétricas de <span class="math inline">\(U\)</span> como las de <span class="math inline">\(W\)</span>. Por tanto, podemos construir un sistema de ecuaciones con todas las ecuaciones de <span class="math inline">\(U\)</span> y de <span class="math inline">\(W\)</span>, y la intersección <span class="math inline">\(U\cap W\)</span> será el conjunto solución de este sistema homogéneo <em>ampliado</em>.</p>
 <p>A partir de ese sistema, ya hemos explicado <a href="ev.html#base">cómo encontrar la base</a> del subespacio intersección.</p>
 <p><strong>Ejemplo</strong></p>
-<p>los subespacios siguientes:</p>
+<p>Consideremos los subespacios siguientes:</p>
 <p><span class="math display">\[U = \left\{\left(\begin{array}{c}
 x\\
 y\\
@@ -507,22 +509,188 @@ z\\
 t
 \end{array}\right)
  \in\mathbb{R}^{4}:\begin{array}{ccr}
-3y+ z &amp; = &amp; 0\\
-3y+ 2z+ 2t &amp; = &amp; 0\\
+3x+ z+ 3t &amp; = &amp; 0\\
 \end{array}\right\}\]</span></p>
-<p>El subespacio <span class="math inline">\(U\)</span> ya lo hemos estudiado antes</p>
+<p>El subespacio <span class="math inline">\(U\)</span> ya lo hemos estudiado <a href="ev.html#base">antes</a>.
+Para calcular la intersección <span class="math inline">\(U\cap W\)</span>, construimos un sistema de ecuaciones con todas las ecuaciones de <span class="math inline">\(U\)</span> y las de <span class="math inline">\(W\)</span>. La intersección es el conjunto solución del sistema homogéneo resultante:
+<span class="math display">\[\left\{\begin{array}{rrrrcr}
+3x &amp; -y &amp;  &amp; + t &amp; = &amp; 0\\
+3x &amp; + y &amp;  &amp; -t &amp; = &amp; 0\\
+3x &amp;  &amp; + z &amp; + 3t &amp; = &amp; 0\\
+\end{array}\right.\]</span></p>
+<p>Aplicamos lo que hemos visto <a href="ev.html#base">antes</a> para estudiar este sistema.</p>
+<p>Este sistema, resuelto por Gauss, nos da las siguientes expresiones paramétricas:
+<span class="math display">\[\left(\begin{array}{c}
+x\\
+y\\
+z\\
+t
+\end{array}\right)
+ = \alpha\left(\begin{array}{c}
+0\\
+1\\
+-3\\
+1
+\end{array}\right)
+{}\]</span></p>
+<p>Por tanto, una base de <span class="math inline">\(U\cap W\)</span> será:
+<span class="math display">\[\mathcal{B}_{U\cap W} = \left\{\left(\begin{array}{c}
+0\\
+1\\
+-3\\
+1
+\end{array}\right)
+\right\}\]</span></p>
+<p>Y, así, <span class="math inline">\(\mathrm{dim}(U\cap W) = 1\)</span>.</p>
 </div>
-<div id="suma" class="section level2" number="2.8">
-<h2 number="2.8"><span class="header-section-number">2.8</span> Cómo hallar la suma de dos subespacios vectoriales</h2>
+<div id="es-la-unión-de-subespacios-un-subespacio" class="section level2" number="2.8">
+<h2 number="2.8"><span class="header-section-number">2.8</span> ¿Es la unión de subespacios un subespacio?</h2>
+<p>En general, no. La única forma en que la unión de dos subespacios sea también un subespacio es que sean iguales o que, al menos, uno de ellos sea el espacio <span class="math inline">\(\{0\}\)</span> o el total, <span class="math inline">\(V\)</span>.</p>
 </div>
-<div id="comprobación-del-teorema-de-la-dimensión" class="section level2" number="2.9">
-<h2 number="2.9"><span class="header-section-number">2.9</span> Comprobación del teorema de la dimensión</h2>
+<div id="suma" class="section level2" number="2.9">
+<h2 number="2.9"><span class="header-section-number">2.9</span> Cómo hallar la suma de dos subespacios vectoriales</h2>
+<p>Dados dos subespacios <span class="math inline">\(U\)</span> y <span class="math inline">\(W\)</span> de <span class="math inline">\(V\)</span>, se define su <strong>suma</strong> <span class="math inline">\(U+W\)</span> como el conjunto de vectores que son combinación lineal de un vector de <span class="math inline">\(U\)</span> y otro de <span class="math inline">\(W\)</span>.</p>
+<p>Si, además, <span class="math inline">\(U\cap W = \{0\}\)</span> y <span class="math inline">\(U+W = V\)</span>, entonces se llama <strong>suma ortogonal</strong> y se denota por <span class="math inline">\(U\bigoplus W\)</span>. Se dice entonces que <span class="math inline">\(U\)</span> es el <strong>subespacio suplementario</strong> de <span class="math inline">\(W\)</span> y viceversa.</p>
+<p>El resultado teórico esencial es el siguiente:</p>
+<blockquote>
+<p>Si <span class="math inline">\(\mathcal{B}_U\)</span> y <span class="math inline">\(\mathcal{B}_W\)</span> son bases de <span class="math inline">\(U\)</span> y <span class="math inline">\(W\)</span> respectivamente, entonces <span class="math inline">\(\mathcal{G} = \mathcal{B}_U \cup \mathcal{B}_W\)</span> es un sistema generador de <span class="math inline">\(U+W\)</span>.</p>
+</blockquote>
+<p>Por tanto, teniendo bases de <span class="math inline">\(U\)</span> y de <span class="math inline">\(W\)</span>, lo primero será unirlas para obtener un sistema generador de la suma. Después, usaremos la <a href="ev.html#sistgenabase">técnica para conseguir una base de un subespacio a partir de un sistema generador</a>.</p>
+<p><strong>Ejemplo</strong></p>
+<p>Consideramos los mismos espacios <span class="math inline">\(U\)</span> y <span class="math inline">\(W\)</span> del ejemplo de la <a href="ev.html#interseccion">sección sobre intersección</a>.
+<span class="math display">\[U = \left\{\left(\begin{array}{c}
+x\\
+y\\
+z\\
+t
+\end{array}\right)
+ \in\mathbb{R}^{4}:\begin{array}{ccr}
+3x-y+ t &amp; = &amp; 0\\
+3x+ y-t &amp; = &amp; 0\\
+\end{array}\right\}\]</span><span class="math display">\[W = \left\{\left(\begin{array}{c}
+x\\
+y\\
+z\\
+t
+\end{array}\right)
+ \in\mathbb{R}^{4}:\begin{array}{ccr}
+3x+ z+ 3t &amp; = &amp; 0\\
+\end{array}\right\}\]</span></p>
+<p>Podemos aplicar la <a href="ev.html#base">técnica para conseguir una base a partir de las ecuaciones cartesianas</a>, y llegamos a las siguientes bases:
+<span class="math display">\[\mathcal{B}_{U} = \left\{\left(\begin{array}{c}
+0\\
+0\\
+1\\
+0
+\end{array}\right)
+, \left(\begin{array}{c}
+0\\
+1\\
+0\\
+1
+\end{array}\right)
+\right\}\]</span></p>
+<p><span class="math display">\[\mathcal{B}_{W} = \left\{\left(\begin{array}{c}
+0\\
+1\\
+0\\
+0
+\end{array}\right)
+, \left(\begin{array}{c}
+-1/3\\
+0\\
+1\\
+0
+\end{array}\right)
+, \left(\begin{array}{c}
+-1\\
+0\\
+0\\
+1
+\end{array}\right)
+\right\}\]</span></p>
+<p>Ahora, tomando
+<span class="math display">\[\mathcal{G} = \mathcal{B}_{U} \cup \mathcal{B}_{W}\left\{\left(\begin{array}{c}
+0\\
+0\\
+1\\
+0
+\end{array}\right)
+, \left(\begin{array}{c}
+0\\
+1\\
+0\\
+1
+\end{array}\right)
+, \left(\begin{array}{c}
+0\\
+1\\
+0\\
+0
+\end{array}\right)
+, \left(\begin{array}{c}
+-1/3\\
+0\\
+1\\
+0
+\end{array}\right)
+, \left(\begin{array}{c}
+-1\\
+0\\
+0\\
+1
+\end{array}\right)
+\right\}\]</span>
+que es un sistema generador de la suma, podemos construir una base de <span class="math inline">\(U+W\)</span> <a href="ev.html#sistgenabase">eliminando los vectores de <span class="math inline">\(\mathcal{G}\)</span> que sean combinaciones lineales de los demás</a>, lo cual requiere usar el método de Gauss para obtener la forma escalonada reducida de ese sistema de vectores.</p>
+<p>De esta forma, encontramos una base de <span class="math inline">\(U+W\)</span>:
+<span class="math display">\[\mathcal{B}_{U + W} = \left\{\left(\begin{array}{c}
+0\\
+1\\
+0\\
+1
+\end{array}\right)
+, \left(\begin{array}{c}
+0\\
+1\\
+0\\
+0
+\end{array}\right)
+, \left(\begin{array}{c}
+-1/3\\
+0\\
+1\\
+0
+\end{array}\right)
+, \left(\begin{array}{c}
+-1\\
+0\\
+0\\
+1
+\end{array}\right)
+\right\}\]</span></p>
+<p>Y, así, tenemos que <span class="math inline">\(\mathrm{dim}(U+W) = 4\)</span>.</p>
 </div>
-<div id="coord" class="section level2" number="2.10">
-<h2 number="2.10"><span class="header-section-number">2.10</span> Cómo calcular las coordenadas de un vector con respecto a una base dada</h2>
+<div id="comprobación-del-teorema-de-la-dimensión" class="section level2" number="2.10">
+<h2 number="2.10"><span class="header-section-number">2.10</span> Comprobación del teorema de la dimensión</h2>
+<p>Hay un resultado teórico que relaciona las dimensiones de dos subespacios <span class="math inline">\(U\)</span> y <span class="math inline">\(W\)</span> con las de su intersección y su suma:</p>
+<blockquote>
+<p><span class="math inline">\(\mathrm{dim}(U+W) = \mathrm{dim}(U) + \mathrm{dim}(W) - \mathrm{dim}(U\cap W)\)</span></p>
+</blockquote>
+<p><strong>Ejemplo</strong></p>
+<p>Si consideremos los espacios <span class="math inline">\(U\)</span> y <span class="math inline">\(W\)</span> que hemos usado como ejemplos en <a href="#intersección">las secciones anteriores</a>, podemos comprobar fácilmente el teorema de la dimensión:</p>
+<p><span class="math display">\[\begin{array}{ccccccc}
+\mathrm{dim}(U+W) &amp; = &amp; \mathrm{dim}(U) &amp; + &amp; \mathrm{dim}(W) &amp; - &amp; \mathrm{dim}(U\cap V) \\
+4 &amp; = &amp; 2 &amp; + &amp; 3 &amp; - &amp; 1 \\
+\end{array}\]</span></p>
 </div>
-<div id="cambiobase" class="section level2" number="2.11">
-<h2 number="2.11"><span class="header-section-number">2.11</span> Cómo calcular la matriz de cambio de base entre dos bases de un mismo espacio vectorial</h2>
+<div id="cómo-calcular-el-subespacio-suplementario-de-uno-dado" class="section level2" number="2.11">
+<h2 number="2.11"><span class="header-section-number">2.11</span> Cómo calcular el subespacio suplementario de uno dado</h2>
+</div>
+<div id="coord" class="section level2" number="2.12">
+<h2 number="2.12"><span class="header-section-number">2.12</span> Cómo calcular las coordenadas de un vector con respecto a una base dada</h2>
+</div>
+<div id="cambiobase" class="section level2" number="2.13">
+<h2 number="2.13"><span class="header-section-number">2.13</span> Cómo calcular la matriz de cambio de base entre dos bases de un mismo espacio vectorial</h2>
 
 </div>
 </div>
