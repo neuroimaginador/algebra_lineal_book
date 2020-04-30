@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Espacios Vectoriales | Álgebra Lineal</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Espacios Vectoriales | Álgebra Lineal" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Espacios Vectoriales | Álgebra Lineal" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Domingo López" />
+
+
+<meta name="date" content="2020-04-30" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="apli.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Preguntas y respuestas de Álgebra Lineal</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="ev.html"><a href="ev.html"><i class="fa fa-check"></i><b>2</b> Espacios Vectoriales</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="ev.html"><a href="ev.html#qué-es-un-subespacio-vectorial"><i class="fa fa-check"></i><b>2.1</b> Qué es un subespacio vectorial</a></li>
+<li class="chapter" data-level="2.2" data-path="ev.html"><a href="ev.html#qué-es-un-sistema-de-vectores-linealmente-independiente"><i class="fa fa-check"></i><b>2.2</b> Qué es un sistema de vectores linealmente independiente</a></li>
+<li class="chapter" data-level="2.3" data-path="ev.html"><a href="ev.html#qué-es-un-sistema-generador-y-el-subespacio-generado-por-un-conjunto-de-vectores"><i class="fa fa-check"></i><b>2.3</b> Qué es un sistema generador y el subespacio generado por un conjunto de vectores</a></li>
+<li class="chapter" data-level="2.4" data-path="ev.html"><a href="ev.html#sistgenabase"><i class="fa fa-check"></i><b>2.4</b> Cómo extraemos una base a partir de un sistema generador de un (sub)espacio vectorial</a></li>
+<li class="chapter" data-level="2.5" data-path="ev.html"><a href="ev.html#base"><i class="fa fa-check"></i><b>2.5</b> Cómo encontrar la base (y la dimensión) para un subespacio vectorial</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="ev.html"><a href="ev.html#partiendo-de-las-ecuaciones-paramétricas"><i class="fa fa-check"></i><b>2.5.1</b> Partiendo de las ecuaciones paramétricas</a></li>
+<li class="chapter" data-level="2.5.2" data-path="ev.html"><a href="ev.html#partiendo-de-las-ecuaciones-cartesianas"><i class="fa fa-check"></i><b>2.5.2</b> Partiendo de las ecuaciones cartesianas</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="ev.html"><a href="ev.html#param2cartesian"><i class="fa fa-check"></i><b>2.6</b> Cómo convertir entre ecuaciones cartesianas y paramétricas de un subespacio vectorial</a></li>
+<li class="chapter" data-level="2.7" data-path="ev.html"><a href="ev.html#interseccion"><i class="fa fa-check"></i><b>2.7</b> Cómo hallar la intersección de dos subespacios vectoriales</a></li>
+<li class="chapter" data-level="2.8" data-path="ev.html"><a href="ev.html#suma"><i class="fa fa-check"></i><b>2.8</b> Cómo hallar la suma de dos subespacios vectoriales</a></li>
+<li class="chapter" data-level="2.9" data-path="ev.html"><a href="ev.html#comprobación-del-teorema-de-la-dimensión"><i class="fa fa-check"></i><b>2.9</b> Comprobación del teorema de la dimensión</a></li>
+<li class="chapter" data-level="2.10" data-path="ev.html"><a href="ev.html#coord"><i class="fa fa-check"></i><b>2.10</b> Cómo calcular las coordenadas de un vector con respecto a una base dada</a></li>
+<li class="chapter" data-level="2.11" data-path="ev.html"><a href="ev.html#cambiobase"><i class="fa fa-check"></i><b>2.11</b> Cómo calcular la matriz de cambio de base entre dos bases de un mismo espacio vectorial</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="apli.html"><a href="apli.html"><i class="fa fa-check"></i><b>3</b> Aplicaciones lineales</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="apli.html"><a href="apli.html#cuál-es-la-matriz-asociada-a-una-aplicación-lineal-en-unas-bases-dadas"><i class="fa fa-check"></i><b>3.1</b> Cuál es la matriz asociada a una aplicación lineal en unas bases dadas</a></li>
+<li class="chapter" data-level="3.2" data-path="apli.html"><a href="apli.html#cómo-determinar-el-núcleo-de-una-aplicación-lineal"><i class="fa fa-check"></i><b>3.2</b> Cómo determinar el núcleo de una aplicación lineal</a></li>
+<li class="chapter" data-level="3.3" data-path="apli.html"><a href="apli.html#caracterización-de-la-inyectividad"><i class="fa fa-check"></i><b>3.3</b> Caracterización de la inyectividad</a></li>
+<li class="chapter" data-level="3.4" data-path="apli.html"><a href="apli.html#cómo-calcular-el-subespacio-imagen-de-una-aplicación-lineal"><i class="fa fa-check"></i><b>3.4</b> Cómo calcular el subespacio imagen de una aplicación lineal</a></li>
+<li class="chapter" data-level="3.5" data-path="apli.html"><a href="apli.html#caracterización-de-la-sobreyectividad"><i class="fa fa-check"></i><b>3.5</b> Caracterización de la sobreyectividad</a></li>
+<li class="chapter" data-level="3.6" data-path="apli.html"><a href="apli.html#a-qué-se-llama-rango-y-nulidad-de-la-aplicación-lineal"><i class="fa fa-check"></i><b>3.6</b> A qué se llama rango y nulidad de la aplicación lineal</a></li>
+<li class="chapter" data-level="3.7" data-path="apli.html"><a href="apli.html#comprobación-del-teorema-de-la-dimensión-1"><i class="fa fa-check"></i><b>3.7</b> Comprobación del teorema de la dimensión</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="diagonalización.html"><a href="diagonalización.html"><i class="fa fa-check"></i><b>4</b> Diagonalización</a></li>
+<li class="chapter" data-level="5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html"><i class="fa fa-check"></i><b>5</b> Espacios Euclídeos</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Álgebra Lineal</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ev" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Espacios Vectoriales</h1>
+<!-- You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods). -->
+<p>Supongamos un cuerpo <span class="math inline">\(\mathcal{K}\)</span> (generalmente <span class="math inline">\(\mathcal{K} = \mathbb{R}\)</span>). Consideremos un conjunto <span class="math inline">\(V\)</span> dotado de dos operaciones:</p>
+<ul>
+<li>Una operación interna, la <em>suma</em>, de forma que si <span class="math inline">\(u,v\in V\)</span> entonces su suma es <span class="math inline">\(u+v\in V\)</span>.</li>
+<li>Una operación externa, <em>producto por un escalar</em> de <span class="math inline">\(\mathcal{K}\)</span>: si <span class="math inline">\(c\in \mathcal{K}\)</span> y <span class="math inline">\(v\in V\)</span>, su producto es <span class="math inline">\(c \cdot v \in V\)</span>.</li>
+</ul>
+<p>Si:</p>
+<ul>
+<li><span class="math inline">\(V\)</span> con la operación es grupo abeliano.</li>
+<li>El producto por un escalar verifica las propiedades distributiva (<span class="math inline">\((c+d)\cdot v = c\cdot v + d\cdot v\)</span> y <span class="math inline">\(c\cdot (u+v) = c\cdot u + c\cdot v\)</span>, para <span class="math inline">\(c,d\in\mathcal{K},u,v\in V\)</span>), pseudoasociativa (<span class="math inline">\(c(dv) = (cd)v\)</span> para <span class="math inline">\(c,d\in\mathcal{K},v\in V\)</span>) y existencia de neutro (<span class="math inline">\(1\cdot v = v\)</span> para todo <span class="math inline">\(v\in V\)</span>).</li>
+</ul>
+<p>Entonces a <span class="math inline">\((V, +, \cdot)\)</span> se de denomina espacio vectorial, y a los elementos de <span class="math inline">\(V\)</span>, vectores.</p>
+<p>En este documento, nos referiremos normalmente a resultados sobre espacios vectoriales denominados <em>de dimensión finita</em>. Este concepto lo hablaremos más adelante.</p>
+<p><strong>Ejemplo</strong></p>
+<p><span class="math inline">\(V=\mathbb{R}^{4}\)</span> es un espacio vectorial y <span class="math inline">\(\left( \begin{array}{c@{}} 2\\ 1\\ -2\\ -1 \end{array} \right)\)</span>
+es un vector de <span class="math inline">\(V\)</span>.</p>
+<div id="qué-es-un-subespacio-vectorial" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> Qué es un subespacio vectorial</h2>
+<p>Un subconjunto de <span class="math inline">\(U\subset V\)</span> es un <strong>subespacio vectorial</strong> de <span class="math inline">\(V\)</span> si la restricción de las operaciones suma y producto por un escalar a ese conjunto son operaciones cerradas.</p>
+<p>Eso equivale a decir que la suma de dos vectores cualesquiera de <span class="math inline">\(U\)</span> debe estar en <span class="math inline">\(U\)</span>, y si multplicamos por un escalar un vector de <span class="math inline">\(U\)</span>, el producto vuelve a estar en <span class="math inline">\(U\)</span>.</p>
+<p><strong>Ejemplo</strong></p>
+<p><span class="math inline">\(U = \left\{\left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right) \in\mathbb{R}^{4}: x + y - z = 0\right\}\)</span> es un subespacio de <span class="math inline">\(V=\mathbb{R}^{4}\)</span>.</p>
+</div>
+<div id="qué-es-un-sistema-de-vectores-linealmente-independiente" class="section level2" number="2.2">
+<h2 number="2.2"><span class="header-section-number">2.2</span> Qué es un sistema de vectores linealmente independiente</h2>
+<p>Supongamos un conjunto de vectores <span class="math inline">\(\{v_1,\ldots,v_n\}\)</span>. Este conjunto es <strong>linealmente independiente</strong> si ninguno de los vectores se puede poner como combinación lineal de los demás vectores.</p>
+<p>Esto es equivalente a que si tenemos una combinación lineal igualada a 0, de la forma
+<span class="math display">\[\alpha_1 v_1 + \ldots + \alpha_n v_n = 0\]</span>
+entonces el sistema de los <span class="math inline">\(v_i\)</span> será independiente si necesariamente todos los <span class="math inline">\(\alpha_i\)</span> valen 0.</p>
+<p>Evidentemente, cualquier sistema de vectores que incluya al vector 0 no es linealmente independiente.</p>
+<p><strong>Ejemplo</strong></p>
+<p>Consideremos el sistema de vectores <span class="math inline">\(\left\{\left(\begin{array}{c} 2\\ 1\\ -2\\ -1 \end{array}\right) , \left(\begin{array}{c} 1\\ 0\\ 1\\ 0 \end{array}\right) , \left(\begin{array}{c} 4\\ 3\\ -8\\ -3 \end{array}\right) \right\}\)</span>.</p>
+<p>¿Cómo podemos saber si es linealmente independiente?</p>
+<p>Comenzamos por ver que no está el vector 0. Estudiemos entonces qué pasa si escribimos una combinación lineal de los tres vectores igualada a cero:
+<span class="math display">\[\alpha_{1}\left(\begin{array}{c}
+2\\
+1\\
+-2\\
+-1
+\end{array}\right)
+{}+\alpha_{2}\left(\begin{array}{c}
+1\\
+0\\
+1\\
+0
+\end{array}\right)
+{}+\alpha_{3}\left(\begin{array}{c}
+4\\
+3\\
+-8\\
+-3
+\end{array}\right)
+{} = \left(\begin{array}{c}
+0\\
+0\\
+0\\
+0
+\end{array}\right)
+\]</span></p>
+<p>Esto lo podemos reescribir como un sistema de ecuaciones lineales donde las incógnitas son las <span class="math inline">\(\alpha_i\)</span>.</p>
+<p><span class="math display">\[\left\{\begin{array}{rrrcr}
+2\alpha_{1} &amp; + \alpha_{2} &amp; + 4\alpha_{3} &amp; = &amp; 0\\
+\alpha_{1} &amp;  &amp; + 3\alpha_{3} &amp; = &amp; 0\\
+-2\alpha_{1} &amp; + \alpha_{2} &amp; -8\alpha_{3} &amp; = &amp; 0\\
+-\alpha_{1} &amp;  &amp; -3\alpha_{3} &amp; = &amp; 0\\
+\end{array}\right.\]</span></p>
+<p>Fijaos en que la matriz de coeficientes está formada por los vectores puestos por <em>columnas</em>.</p>
+<p>Pueden ocurrir dos casos:</p>
+<ul>
+<li>Si el sistema es compatible <em>determinado</em>, entonces su única solución es que todos los <span class="math inline">\(\alpha_i = 0\)</span>. Esto, por el comentario anterior, nos dice que el sistema será linealmente independiente.</li>
+<li>Si el sistema es compatible <em>indeterminado</em>, entonces admite más soluciones aparte de la trivial. Por tanto, hay una combinación lineal, donde no todos los <span class="math inline">\(\alpha_i\)</span> son nulos, y que da igual al vector 0. Eso nos indica que el sistema no es linealmente independiente.</li>
+</ul>
+<p>Lo más sencillo en este caso es usar el método de Gauss para encontrar la forma escalonada de la matriz de coeficientes. Del estudio de sistemas homogéneos, sabemos el siguiente resultado, que se aplica tras tener la forma escalonada:</p>
+<blockquote>
+<p>Si el número de ecuaciones (filas) es menor estrictamente que el número de incógnitas (columnas), entonces el sistema es compatible indeterminado. En otro caso (mismo número de ecuaciones que de incógnitas), será compatible determinado.</p>
+</blockquote>
+<p>Usamos entonces Gauss:
+<span class="math display">\[\left(
+\begin{array}{ccc|c}
+2 &amp; 1 &amp; 4 &amp; 0\\
+1 &amp; 0 &amp; 3 &amp; 0\\
+-2 &amp; 1 &amp; -8 &amp; 0\\
+-1 &amp; 0 &amp; -3 &amp; 0
+\end{array}
+\right)
+\sim\left(
+\begin{array}{ccc|c}
+2 &amp; 1 &amp; 4 &amp; 0\\
+0 &amp; -1/2 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 0
+\end{array}
+\right)
+\]</span></p>
+<p>En este caso, tenemos 2 filas no nulas y 3 incógnitas. Por lo anterior, el sistema es compatible indeterminado, tiene infinitas soluciones, y eso implica que el sistema no es linealmente independiente.</p>
+<p>Si hubiéramos llegado a 3 ecuaciones no nulas, entonces estaríamos en la situación de un sistema compatible determinado, luego la única solución es la nula. Por lo anterior, el sistema sería linealmente independiente.</p>
+</div>
+<div id="qué-es-un-sistema-generador-y-el-subespacio-generado-por-un-conjunto-de-vectores" class="section level2" number="2.3">
+<h2 number="2.3"><span class="header-section-number">2.3</span> Qué es un sistema generador y el subespacio generado por un conjunto de vectores</h2>
+<p>Consideramos un sistema de vectores <span class="math inline">\(\mathcal{S} = \{v_1,\ldots,v_n\}\)</span>. El <strong>subespacio generado</strong> por <span class="math inline">\(\mathcal{S}\)</span> es el conjunto de vectores que se calcula como combinaciones lineales de los de <span class="math inline">\(\mathcal{S}\)</span>.</p>
+<p>Es decir, si yo voy dando valores a unos escalares <span class="math inline">\(\alpha_1,\ldots,\alpha_n\)</span>, entonces el vector <span class="math inline">\(\alpha_1v_1+\ldots+\alpha_nv_n\)</span> es combinación lineal de los de <span class="math inline">\(\mathcal{S}\)</span>, luego pertenece al subespacio generado por éste.</p>
+<p>Denotamos como <span class="math inline">\(\mathcal{L}(\mathcal{S})\)</span> al subsepacio generado por <span class="math inline">\(\mathcal{S}\)</span>.</p>
+<p><strong>Ejemplo</strong></p>
+<p>Consideremos el sistema de vectores <span class="math inline">\(\mathcal{S} = \left\{\left(\begin{array}{c} 2\\ 1\\ -2\\ -1 \end{array}\right) , \left(\begin{array}{c} 1\\ 0\\ 1\\ 0 \end{array}\right) \right\}\)</span>.</p>
+<p>Entonces
+<span class="math display">\[\mathcal{L}(\mathcal{S}) = \left\{\alpha_{1}\left(\begin{array}{c}
+2\\
+1\\
+-2\\
+-1
+\end{array}\right)
+{}+\alpha_{2}\left(\begin{array}{c}
+1\\
+0\\
+1\\
+0
+\end{array}\right)
+{}:\alpha_i\in\mathbb{R}\right\}\]</span></p>
+<p>Dando valores a <span class="math inline">\(\alpha_1\)</span> y <span class="math inline">\(\alpha_2\)</span> tendremos todos los vectores generados en <span class="math inline">\(\mathcal{L}(\mathcal{S})\)</span>. Por ejemplo, para
+<span class="math display">\[\alpha_1 = -1,\quad\alpha_2 = 2\quad\Rightarrow\quad v = -1\left(\begin{array}{c}
+2\\
+1\\
+-2\\
+-1
+\end{array}\right)
+{}+2\left(\begin{array}{c}
+1\\
+0\\
+1\\
+0
+\end{array}\right)
+{} = \left(\begin{array}{c}
+0\\
+-1\\
+4\\
+1
+\end{array}\right)
+\in \mathcal{L}(\mathcal{S})\]</span></p>
+</div>
+<div id="sistgenabase" class="section level2" number="2.4">
+<h2 number="2.4"><span class="header-section-number">2.4</span> Cómo extraemos una base a partir de un sistema generador de un (sub)espacio vectorial</h2>
+<p>Para cualquier espacio vectorial, o subespacio, una <strong>base</strong> es un sistema de vectores que lo genera (mediante combinaciones lineales, como hemos visto antes) y que es linealmente independiente.</p>
+<p>Si tenemos un sistema generador de un (sub)espacio vectorial, siempre podremos encontrar una base, gracias al siguiente resultado:</p>
+<blockquote>
+<p>Todo sistema generador de un subespacio contiene un sistema linealmente independiente, que también genera el mismo subespacio.</p>
+</blockquote>
+<p>El concepto de <strong>dimensión</strong> está intrínsecamente relacionado con el de base: es el número de vectores en <em>cualquier</em> base del espacio. Hay que tener en cuenta que todas las bases que se puedan encontrar en un mismo espacio vectorial tienen el mismo número de elementos.</p>
+<p>Aparte, hay dos propiedades más que relacionan las bases y las propiedades de ser sistema generador o linealmente independiente. Si <span class="math inline">\(n\)</span> es la dimensión de un espacio vectorial:</p>
+<ul>
+<li>Todo sistema de vectores con más de <span class="math inline">\(n\)</span> elementos no puede ser linealmente independiente.</li>
+<li>Todo sistema generador de ese espacio debe tener, al menos, <span class="math inline">\(n\)</span> elementos.</li>
+</ul>
+<p>Dado un sistema de vectores <span class="math inline">\(S\)</span> que se sepa que es sistema generador de un espacio o de un subespacio, la mejor estrategia es utilizar transformaciones elementales sobre <span class="math inline">\(S\)</span> para eliminar aquellos vectores que sean combinaciones lineales de los demás.</p>
+<p><strong>Ejemplo</strong></p>
+<p>Consideremos el sistema de vectores <span class="math inline">\(\mathcal{S} = \left\{\left(\begin{array}{c} -1\\ 2\\ -1\\ -1 \end{array}\right) , \left(\begin{array}{c} -2\\ -1\\ -1\\ -1 \end{array}\right) , \left(\begin{array}{c} -2\\ -2\\ -1\\ 2 \end{array}\right) , \left(\begin{array}{c} -5\\ -1\\ -3\\ 0 \end{array}\right) \right\}\)</span>. Vamos a encontrar un sistema de vectores que sea base de <span class="math inline">\(\mathcal{L}(S)\)</span>. Para ellos, vamos a eliminar de <span class="math inline">\(S\)</span> aquellos vectores que sean combinaciones lineales de los demás.</p>
+<p>Esa tarea es justo la que realiza el método de Gauss con las filas de una matriz, al ponerla en forma escalonada. Si aplicamos Gauss a una matriz, las filas que acaban siendo de ceros son las que originalmente eran combinación lineal de las demás.</p>
+<p>Por tanto, nos aprovechamos de esta propiedad para eliminar vectores linealmente dependientes. Vamos a construir la matriz <span class="math inline">\(M\)</span> resultado de poner los vectores de <span class="math inline">\(S\)</span> por filas (primer vector en primera fila, segundo en segunda fila, etc.).
+<span class="math display">\[M = \left(
+\begin{array}{cccc@{}}
+-1 &amp; 2 &amp; -1 &amp; -1\\
+-2 &amp; -1 &amp; -1 &amp; -1\\
+-2 &amp; -2 &amp; -1 &amp; 2\\
+-5 &amp; -1 &amp; -3 &amp; 0
+\end{array}
+\right)
+\]</span></p>
+<p>Si aplicamos Gauss para encontrar la forma escalonada (omitimos los detalles intermedios):
+<span class="math display">\[\left(
+\begin{array}{cccc@{}}
+-1 &amp; 2 &amp; -1 &amp; -1\\
+-2 &amp; -1 &amp; -1 &amp; -1\\
+-2 &amp; -2 &amp; -1 &amp; 2\\
+-5 &amp; -1 &amp; -3 &amp; 0
+\end{array}
+\right)
+ \sim \left(
+\begin{array}{cccc@{}}
+-1 &amp; 2 &amp; -1 &amp; -1\\
+0 &amp; -5 &amp; 1 &amp; 1\\
+0 &amp; 0 &amp; -1/5 &amp; 14/5\\
+0 &amp; 0 &amp; 0 &amp; 0
+\end{array}
+\right)
+\]</span></p>
+<p>Como se puede ver, tenemos que la última fila es de ceros. Por tanto, el vector original del que procede esa fila es linealmente dependiente del resto de vectores de <span class="math inline">\(S\)</span>.</p>
+<p>Si hubiéramos tenido que intercambiar filas en algún momento, habría que llevar cuenta de cada intercambio para saber a qué vector original se corresponden aquellas filas que valen 0.</p>
+<p>Por tanto, la base del subespacio generado por <span class="math inline">\(S\)</span>, que consiste en únicamente los vectores linealmente independientes de <span class="math inline">\(S\)</span>, es:
+<span class="math display">\[\mathcal{B}_{\mathcal{L}(\mathcal{S})} = \left\{\left(\begin{array}{c}
+-1\\
+2\\
+-1\\
+-1
+\end{array}\right)
+, \left(\begin{array}{c}
+-2\\
+-1\\
+-1\\
+-1
+\end{array}\right)
+, \left(\begin{array}{c}
+-2\\
+-2\\
+-1\\
+2
+\end{array}\right)
+\right\}\]</span></p>
+</div>
+<div id="base" class="section level2" number="2.5">
+<h2 number="2.5"><span class="header-section-number">2.5</span> Cómo encontrar la base (y la dimensión) para un subespacio vectorial</h2>
+<p>En muchas ocasiones, necesitaremos encontrar una base para un subespacio vectorial, puesto que con las bases tenemos mucha información adicional sobre un subespacio. Además, cada subespacio queda completamente caracterizado una vez dada su base.</p>
+<p>Sin embargo, existen otras formas en las que podemos definir un subespacio vectorial, y necesitamos conocer cómo extraer una base de dicho subespacio, para tener una forma <em>estándar</em> de describir los subespacios.</p>
+<div id="partiendo-de-las-ecuaciones-paramétricas" class="section level3" number="2.5.1">
+<h3 number="2.5.1"><span class="header-section-number">2.5.1</span> Partiendo de las ecuaciones paramétricas</h3>
+<p>La primera forma escrita en que podemos definir un subespacio vectorial es mediante sus ecuaciones paramétricas, que nos indican cómo determinar las diversas componentes de cada vector (<span class="math inline">\(x,y,\ldots\)</span>) a partir de unos parámetros libres <span class="math inline">\(\alpha_1,\ldots,\alpha_n\)</span>.</p>
+<p>Realmente esto es equivalente a escribir un vector genérico <span class="math inline">\(v\)</span> como combinación lineal de otros vectores. Esos otros vectores que forman la combinación lineal son, por tanto, un sistema generador del subespacio que queremos definir. Usando lo explicado en la <a href="ev.html#sistgenabase">sección correspondiente</a>, obtendríamos la base deseada.</p>
+<p><strong>Ejemplo</strong></p>
+<p>Consideremos el subespacio <span class="math inline">\(U\)</span> dado en su forma paramétrica:
+<span class="math display">\[U = \left\{\left(\begin{array}{c}
+x\\
+y\\
+z\\
+t
+\end{array}\right)
+\in V:\quad\begin{array}{c@{}cc}
+x &amp;  =  &amp; -\alpha -2\beta -2\gamma -5\delta\\
+y &amp;  =  &amp; 2\alpha -\beta -2\gamma -\delta\\
+z &amp;  =  &amp; -\alpha -\beta -\gamma -3\delta\\
+t &amp;  =  &amp; -\alpha -\beta + 2\gamma
+\end{array}
+,\alpha,\beta,\gamma,\delta\in\mathbb{R}\right\}\]</span></p>
+<p>En este caso, lo que debemos hacer es expresar esas ecuaciones paramétricas en forma de combinación lineal de vectores. Para ello, consideramos los coeficientes que acompañan a cada uno de los parámetros <span class="math inline">\(\alpha,\beta,\gamma,\delta\)</span>.</p>
+<p>Si lo hacemos, nos queda (ya poniéndolo en formato vectorial) que un vector <span class="math inline">\(v\)</span> pertenece a <span class="math inline">\(U\)</span> si se puede expresar como una combinación lineal de la forma:
+<span class="math display">\[v = \left(\begin{array}{c}
+x\\
+y\\
+z\\
+t
+\end{array}\right)
+ = \alpha\left(\begin{array}{c}
+-1\\
+2\\
+-1\\
+-1
+\end{array}\right)
+{}+\beta\left(\begin{array}{c}
+-2\\
+-1\\
+-1\\
+-1
+\end{array}\right)
+{}+\gamma\left(\begin{array}{c}
+-2\\
+-2\\
+-1\\
+2
+\end{array}\right)
+{}+\delta\left(\begin{array}{c}
+-5\\
+-1\\
+-3\\
+0
+\end{array}\right)
+{}\]</span></p>
+<p>Es decir, <span class="math inline">\(\mathcal{S} = \left\{\left(\begin{array}{c} -1\\ 2\\ -1\\ -1 \end{array}\right) , \left(\begin{array}{c} -2\\ -1\\ -1\\ -1 \end{array}\right) , \left(\begin{array}{c} -2\\ -2\\ -1\\ 2 \end{array}\right) , \left(\begin{array}{c} -5\\ -1\\ -3\\ 0 \end{array}\right) \right\}\)</span> es un sistema generador del subespacio <span class="math inline">\(U\)</span>. Este proceso no nos asegura que sean vectores linealmente independientes, así que no podemos decir, de momento, que sea una base de <span class="math inline">\(U\)</span>.</p>
+<p>A partir de aquí, basta aplicar lo descrito en <a href="ev.html#sistgenabase">la sección sobre cómo extraer una base a partir de un sistema generador</a>.</p>
+</div>
+<div id="partiendo-de-las-ecuaciones-cartesianas" class="section level3" number="2.5.2">
+<h3 number="2.5.2"><span class="header-section-number">2.5.2</span> Partiendo de las ecuaciones cartesianas</h3>
+<p>Un subespacio vectorial puede venir definido mediante unas expresiones cartesianas que relacionan las componentes <span class="math inline">\(x,y,\ldots\)</span> entre sí.</p>
+<p>Esas expresiones cartesianas realmente expresan un sistema de ecuaciones homogéneo cuyo conjunto solución es el propio subespacio que buscamos.</p>
+<p>Por tanto, la forma de proceder es tomar las ecuaciones cartesianas, formar el sistema, y resolverlo. Para ello, haciendo Gauss, pasamos a forma escalonada o escalonada reducida y desde esa forma, calculamos las expresiones paramétricas del conjunto solución y aplicamos lo explicado en la sección anterior.</p>
+<p><strong>Ejemplo</strong></p>
+<p>Sea el subespacio
+<span class="math display">\[U = \left\{\left(\begin{array}{c}
+x\\
+y\\
+z\\
+t
+\end{array}\right)
+ \in\mathbb{R}^{4}:\begin{array}{ccr}
+3x-y+ t &amp; = &amp; 0\\
+3x+ y-t &amp; = &amp; 0\\
+\end{array}\right\}\]</span></p>
+<p>El sistema homogéneo dado por su ecuaciones cartesianas es:</p>
+<p><span class="math display">\[\left\{\begin{array}{rrrrcr}
+3x &amp; -y &amp;  &amp; + t &amp; = &amp; 0\\
+3x &amp; + y &amp;  &amp; -t &amp; = &amp; 0\\
+\end{array}\right.\]</span></p>
+<p>Este sistema, resuelto por Gauss, nos da las siguientes expresiones paramétricas:
+<span class="math display">\[\left(\begin{array}{c}
+x\\
+y\\
+z\\
+t
+\end{array}\right)
+ = \alpha\left(\begin{array}{c}
+0\\
+0\\
+1\\
+0
+\end{array}\right)
+{}+\beta\left(\begin{array}{c}
+0\\
+1\\
+0\\
+1
+\end{array}\right)
+{}\]</span></p>
+<p>A partir de aquí, ya sabemos que estos dos vectores son un sistema generador de <span class="math inline">\(U\)</span>, luego podemos encontrar una base para <span class="math inline">\(U\)</span> si seguimos las explicaciones en <a href="ev.html#sistgenabase">la sección correspondiente</a>.</p>
+<p>Podemos fijarnos que, en este ejemplo, ya los dos vectores son linealmente independientes, así que ya conforman una base, pero no es la situación general y conviene hacer, para estar seguros, lo mencionado en el párrafo anterior.</p>
+<p>Luego, además, podemos saber que la dimensión de <span class="math inline">\(U\)</span> es <span class="math inline">\(\mathrm{dim}(U) = 2\)</span>.</p>
+</div>
+</div>
+<div id="param2cartesian" class="section level2" number="2.6">
+<h2 number="2.6"><span class="header-section-number">2.6</span> Cómo convertir entre ecuaciones cartesianas y paramétricas de un subespacio vectorial</h2>
+<p>En la <a href="ev.html#base">sección anterior</a>, ya hemos visto que para pasar de ecuaciones cartesianas a paramétricas, basta con usar el método de Gauss-Jordan para resolver el sistema de ecuaciones homogéneo.</p>
+<p>Para pasar de ecuaciones paramétricas de un subespacio a las ecuaciones cartesianas, se suele utilizar el método de <em>eliminación de parámetros</em>.</p>
+<p>Si tenemos <span class="math inline">\(m\)</span> parámetros <span class="math inline">\(\alpha_i\)</span> (<span class="math inline">\(i = 1,\ldots,m\)</span>) y el espacio es de dimensión <span class="math inline">\(n &gt; m\)</span>, entonces tendremos, a lo sumo, <span class="math inline">\(n - m\)</span> ecuaciones cartesianas. Buscamos un sistema de ecuaciones lineales homogéneo (las ecuaciones cartesianas) cuya solución, en forma paramétrica sea las ya dadas.</p>
+<p>Para ello, comenzamos con la expresión paramétrica con una ecuación por cada coordenada cartesiana del subespacio (una expresión de <span class="math inline">\(x\)</span> en función de los <span class="math inline">\(\alpha_i\)</span>, una para la <span class="math inline">\(y\)</span>, etc.).</p>
+<p>Se toma uno de los parámetros, y se despeja de alguna de las ecuaciones en las que aparece. Se sutituye en las demás ecuaciones y desechamos la ecuación de la que hemos despejado el parámetro. En esta situación, tenemos una ecuación menos y un parámetro menos.</p>
+<p>Con el nuevo sistema de ecuaciones, repetimos el proceso anterior: seleccionar un parámetro, despejarlo de una ecuación y sustituirlo en las demás, eliminando la ecuación de la que se ha despejado.</p>
+<p>Repetimos todo el proceso hasta que no queden parámetros que eliminar.</p>
+<p><strong>Ejemplo</strong></p>
+<p>Consideramos el subespacio
+<span class="math display">\[U = \left\{\left(\begin{array}{c}
+x\\
+y\\
+z\\
+t
+\end{array}\right)
+\in V:\quad\begin{array}{c@{}cc}
+x &amp;  =  &amp; -\alpha -2\beta -2\gamma -5\delta\\
+y &amp;  =  &amp; 2\alpha -\beta -2\gamma -\delta\\
+z &amp;  =  &amp; -\alpha -\beta -\gamma -3\delta\\
+t &amp;  =  &amp; -\alpha -\beta + 2\gamma
+\end{array}
+,\alpha,\beta,\gamma,\delta\in\mathbb{R}\right\}\]</span></p>
+<p>Vamos a aplicar el método de eliminación de los parámetros:</p>
+<ul>
+<li>Despejamos <span class="math inline">\(\alpha\)</span> de la ecuación 1, y sustituimos en las demás, lo cual nos da:
+<span class="math display">\[\begin{array}{c@{}cc}
+2x + y &amp;  =  &amp; -5\beta -6\gamma -11\delta\\
+-x + z &amp;  =  &amp; \beta + \gamma + 2\delta\\
+-x + t &amp;  =  &amp; \beta + 4\gamma + 5\delta
+\end{array}
+\]</span></li>
+<li>Despejamos <span class="math inline">\(\beta\)</span> de la ecuación 1, y sustituimos en las demás, lo cual nos da:
+<span class="math display">\[\begin{array}{c@{}cc}
+-3/5x + 1/5y + z &amp;  =  &amp; -1/5\gamma -1/5\delta\\
+-3/5x + 1/5y + t &amp;  =  &amp; 14/5\gamma + 14/5\delta
+\end{array}
+\]</span></li>
+<li>Por último, despejando <span class="math inline">\(\gamma\)</span> de la ecuación 1, nos queda:<span class="math display">\[\begin{array}{rrrrcr}
+-9x &amp; + 3y &amp; + 14z &amp; + t &amp; = &amp; 0\\
+\end{array}\]</span>
+que es la expresión en cartesianas del espacio <span class="math inline">\(U\)</span>.</li>
+</ul>
+</div>
+<div id="interseccion" class="section level2" number="2.7">
+<h2 number="2.7"><span class="header-section-number">2.7</span> Cómo hallar la intersección de dos subespacios vectoriales</h2>
+<p>Si tenemos dos subespacios, <span class="math inline">\(U\)</span> y <span class="math inline">\(W\)</span> de <span class="math inline">\(V\)</span>, podemos calcular su intersección, que es el conjunto de vectores que pertenecen a ambos subespacios a la vez.</p>
+<blockquote>
+<p>La intersección de dos subespacios es un nuevo subespacio, aunque puede suceder que la intersección sea únicamente el vector 0.</p>
+</blockquote>
+<p>Conviene tener ambos subespacios expresados en forma de ecuaciones cartesianas. Si no estuviera así (porque solo se dé su base o, lo que es equivalente, las ecuaciones paramétricas), basta ver la sección sobre <a href="ev.html#param2cartesian">cómo convertir de ecuaciones paramétricas a cartesianas</a>.</p>
+<p>Si un vector <span class="math inline">\(v\)</span> pertenece a la intersección, entonces verifica tanto las ecuaciones paramétricas de <span class="math inline">\(U\)</span> como las de <span class="math inline">\(W\)</span>. Por tanto, podemos construir un sistema de ecuaciones con todas las ecuaciones de <span class="math inline">\(U\)</span> y de <span class="math inline">\(W\)</span>, y la intersección <span class="math inline">\(U\cap W\)</span> será el conjunto solución de este sistema homogéneo <em>ampliado</em>.</p>
+<p>A partir de ese sistema, ya hemos explicado <a href="ev.html#base">cómo encontrar la base</a> del subespacio intersección.</p>
+<p><strong>Ejemplo</strong></p>
+<p>los subespacios siguientes:</p>
+<p><span class="math display">\[U = \left\{\left(\begin{array}{c}
+x\\
+y\\
+z\\
+t
+\end{array}\right)
+ \in\mathbb{R}^{4}:\begin{array}{ccr}
+3x-y+ t &amp; = &amp; 0\\
+3x+ y-t &amp; = &amp; 0\\
+\end{array}\right\}\]</span><span class="math display">\[W = \left\{\left(\begin{array}{c}
+x\\
+y\\
+z\\
+t
+\end{array}\right)
+ \in\mathbb{R}^{4}:\begin{array}{ccr}
+3y+ z &amp; = &amp; 0\\
+3y+ 2z+ 2t &amp; = &amp; 0\\
+\end{array}\right\}\]</span></p>
+<p>El subespacio <span class="math inline">\(U\)</span> ya lo hemos estudiado antes</p>
+</div>
+<div id="suma" class="section level2" number="2.8">
+<h2 number="2.8"><span class="header-section-number">2.8</span> Cómo hallar la suma de dos subespacios vectoriales</h2>
+</div>
+<div id="comprobación-del-teorema-de-la-dimensión" class="section level2" number="2.9">
+<h2 number="2.9"><span class="header-section-number">2.9</span> Comprobación del teorema de la dimensión</h2>
+</div>
+<div id="coord" class="section level2" number="2.10">
+<h2 number="2.10"><span class="header-section-number">2.10</span> Cómo calcular las coordenadas de un vector con respecto a una base dada</h2>
+</div>
+<div id="cambiobase" class="section level2" number="2.11">
+<h2 number="2.11"><span class="header-section-number">2.11</span> Cómo calcular la matriz de cambio de base entre dos bases de un mismo espacio vectorial</h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="apli.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Algebra_Lineal.pdf", "Algebra_Lineal.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

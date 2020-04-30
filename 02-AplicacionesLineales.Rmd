@@ -1,0 +1,16 @@
+# Aplicaciones lineales {#apli}
+
+## Cuál es la matriz asociada a una aplicación lineal en unas bases dadas
+
+## Cómo determinar el núcleo de una aplicación lineal
+
+## Caracterización de la inyectividad
+
+## Cómo calcular el subespacio imagen de una aplicación lineal
+
+## Caracterización de la sobreyectividad
+
+## A qué se llama rango y nulidad de la aplicación lineal
+
+## Comprobación del teorema de la dimensión
+

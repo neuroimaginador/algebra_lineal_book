@@ -1,0 +1,465 @@
+# Espacios Vectoriales {#ev}
+
+```{r echo = FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      results = "asis",
+                      message = FALSE,
+                      warning = FALSE)
+
+set.seed(1234)
+``` 
+
+```{r}
+n <- 4
+vec0 <- rVector(n) * 0
+
+unknowns <- c("x", "y", "z", "t", "u")[seq(n)]
+generic_vector <- matrix(unknowns, ncol = 1)
+```
+
+
+<!-- You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods). -->
+
+Supongamos un cuerpo $\mathcal{K}$ (generalmente $\mathcal{K} = \mathbb{R}$). Consideremos un conjunto $V$ dotado de dos operaciones:
+
+- Una operación interna, la _suma_, de forma que si $u,v\in V$ entonces su suma es $u+v\in V$.
+- Una operación externa, _producto por un escalar_ de $\mathcal{K}$: si $c\in \mathcal{K}$ y $v\in V$, su producto es $c \cdot v \in V$.
+
+Si:
+
+- $V$ con la operación es grupo abeliano.
+- El producto por un escalar verifica las propiedades distributiva ($(c+d)\cdot v = c\cdot v + d\cdot v$ y $c\cdot (u+v) = c\cdot u + c\cdot v$, para $c,d\in\mathcal{K},u,v\in V$), pseudoasociativa ($c(dv) = (cd)v$ para $c,d\in\mathcal{K},v\in V$) y existencia de neutro ($1\cdot v = v$ para todo $v\in V$).
+
+Entonces a $(V, +, \cdot)$ se de denomina espacio vectorial, y a los elementos de $V$, vectores.
+
+En este documento, nos referiremos normalmente a resultados sobre espacios vectoriales denominados _de dimensión finita_. Este concepto lo hablaremos más adelante.
+
+__Ejemplo__
+```{r}
+vec <- rVector(n)
+vec1 <- rVector(n)
+vec2 <- 3 * vec - 2 * vec1
+sistema <- cbind(vec, vec1, vec2)
+```
+
+$V=\mathbb{R}^{`r n`}$ es un espacio vectorial y `r glue_matrices(vec, latex = TRUE, ldeco = "$\\left(", rdeco = "\\right)$")` es un vector de $V$.
+
+## Qué es un subespacio vectorial
+
+Un subconjunto de $U\subset V$ es un __subespacio vectorial__ de $V$ si la restricción de las operaciones suma y producto por un escalar a ese conjunto son operaciones cerradas.
+
+Eso equivale a decir que la suma de dos vectores cualesquiera de $U$ debe estar en $U$, y si multplicamos por un escalar un vector de $U$, el producto vuelve a estar en $U$.
+
+__Ejemplo__
+
+$U = \left\{`r paste0(to_latex(generic_vector))`\in\mathbb{R}^{`r n`}: x + y - z = 0\right\}$ es un subespacio de $V=\mathbb{R}^{`r n`}$.
+
+## Qué es un sistema de vectores linealmente independiente
+
+Supongamos un conjunto de vectores $\{v_1,\ldots,v_n\}$. Este conjunto es __linealmente independiente__ si ninguno de los vectores se puede poner como combinación lineal de los demás vectores.
+
+Esto es equivalente a que si tenemos una combinación lineal igualada a 0, de la forma 
+$$\alpha_1 v_1 + \ldots + \alpha_n v_n = 0$$
+entonces el sistema de los $v_i$ será independiente si necesariamente todos los $\alpha_i$ valen 0.
+
+Evidentemente, cualquier sistema de vectores que incluya al vector 0 no es linealmente independiente.
+
+__Ejemplo__
+
+Consideremos el sistema de vectores `r glue("$\\left\\{", "[vectors_to_latex(sistema)]", "\\right\\}$", .open = "[", .close = "]")`. 
+
+¿Cómo podemos saber si es linealmente independiente?
+
+Comenzamos por ver que no está el vector 0. Estudiemos entonces qué pasa si escribimos una combinación lineal de los tres vectores igualada a cero:
+```{r}
+params <- paste0("\\alpha_{", 
+                 seq(ncol(sistema)), "}")
+glue("$$",
+     "[write_linear_combination(sistema, vars = params)] = [to_latex(vec0)]",
+     "$$",
+     .open = "[", .close = "]") %>% 
+  cat()
+```
+
+Esto lo podemos reescribir como un sistema de ecuaciones lineales donde las incógnitas son las $\alpha_i$. 
+
+```{r}
+glue("$$\\left\\{",
+     "[str_flatten(write_system(sistema, vec0, latex = TRUE, vars = params))]\\right.",
+     "$$",
+     .open = "[", .close = "]") %>% 
+  cat(sep = "")
+```
+
+
+Fijaos en que la matriz de coeficientes está formada por los vectores puestos por _columnas_.
+
+Pueden ocurrir dos casos:
+
+- Si el sistema es compatible _determinado_, entonces su única solución es que todos los $\alpha_i = 0$. Esto, por el comentario anterior, nos dice que el sistema será linealmente independiente.
+- Si el sistema es compatible _indeterminado_, entonces admite más soluciones aparte de la trivial. Por tanto, hay una combinación lineal, donde no todos los $\alpha_i$ son nulos, y que da igual al vector 0. Eso nos indica que el sistema no es linealmente independiente.
+
+Lo más sencillo en este caso es usar el método de Gauss para encontrar la forma escalonada de la matriz de coeficientes. Del estudio de sistemas homogéneos, sabemos el siguiente resultado, que se aplica tras tener la forma escalonada:
+
+> Si el número de ecuaciones (filas) es menor estrictamente que el número de incógnitas (columnas), entonces el sistema es compatible indeterminado. En otro caso (mismo número de ecuaciones que de incógnitas), será compatible determinado.
+
+Usamos entonces Gauss:
+```{r}
+s <- gauss_elimination(sistema, vec0)
+glue_latex(
+  "[glue_matrices(sistema, vec0, latex = TRUE)]",
+  "\\sim",
+  "[glue_matrices(s$splits, latex = TRUE, fractions = TRUE)]",
+) %>% 
+  cat()
+```
+
+En este caso, tenemos 2 filas no nulas y 3 incógnitas. Por lo anterior, el sistema es compatible indeterminado, tiene infinitas soluciones, y eso implica que el sistema no es linealmente independiente.
+
+Si hubiéramos llegado a 3 ecuaciones no nulas, entonces estaríamos en la situación de un sistema compatible determinado, luego la única solución es la nula. Por lo anterior, el sistema sería linealmente independiente.
+
+## Qué es un sistema generador y el subespacio generado por un conjunto de vectores
+
+Consideramos un sistema de vectores $\mathcal{S} = \{v_1,\ldots,v_n\}$. El __subespacio generado__ por $\mathcal{S}$ es el conjunto de vectores que se calcula como combinaciones lineales de los de $\mathcal{S}$.
+
+Es decir, si yo voy dando valores a unos escalares $\alpha_1,\ldots,\alpha_n$, entonces el vector $\alpha_1v_1+\ldots+\alpha_nv_n$ es combinación lineal de los de $\mathcal{S}$, luego pertenece al subespacio generado por éste.
+
+Denotamos como $\mathcal{L}(\mathcal{S})$ al subsepacio generado por $\mathcal{S}$.
+
+__Ejemplo__
+
+Consideremos el sistema de vectores $\mathcal{S} = \left\{`r vectors_to_latex(cbind(vec, vec1))`\right\}$.
+
+Entonces
+```{r}
+glue_latex(
+  "\\mathcal{L}(\\mathcal{S}) = \\left\\{",
+  "[write_linear_combination(cbind(vec, vec1), vars = params)]:\\alpha_i\\in\\mathbb{R}",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+
+Dando valores a $\alpha_1$ y $\alpha_2$ tendremos todos los vectores generados en $\mathcal{L}(\mathcal{S})$. Por ejemplo, para
+```{r}
+S <- cbind(vec, vec1)
+scalars <- rVector(n = 2)
+alpha1 <- scalars[1]
+alpha2 <- scalars[2]
+new_vector <- S %*% scalars
+glue_latex(
+  "\\alpha_1 = [alpha1],\\quad\\alpha_2 = [alpha2]",
+  "\\quad\\Rightarrow\\quad",
+  "\ v = [write_linear_combination(S, scalars)] = ",
+  "[to_latex(new_vector)]\\in \\mathcal{L}(\\mathcal{S})"
+)
+```
+
+
+## Cómo extraemos una base a partir de un sistema generador de un (sub)espacio vectorial {#sistgenabase}
+
+Para cualquier espacio vectorial, o subespacio, una __base__ es un sistema de vectores que lo genera (mediante combinaciones lineales, como hemos visto antes) y que es linealmente independiente.
+
+Si tenemos un sistema generador de un (sub)espacio vectorial, siempre podremos encontrar una base, gracias al siguiente resultado:
+
+> Todo sistema generador de un subespacio contiene un sistema linealmente independiente, que también genera el mismo subespacio.
+
+El concepto de __dimensión__ está intrínsecamente relacionado con el de base: es el número de vectores en _cualquier_ base del espacio. Hay que tener en cuenta que todas las bases que se puedan encontrar en un mismo espacio vectorial tienen el mismo número de elementos.
+
+Aparte, hay dos propiedades más que relacionan las bases y las propiedades de ser sistema generador o linealmente independiente. Si $n$ es la dimensión de un espacio vectorial:
+
+- Todo sistema de vectores con más de $n$ elementos no puede ser linealmente independiente.
+- Todo sistema generador de ese espacio debe tener, al menos, $n$ elementos.
+
+Dado un sistema de vectores $S$ que se sepa que es sistema generador de un espacio o de un subespacio, la mejor estrategia es utilizar transformaciones elementales sobre $S$ para eliminar aquellos vectores que sean combinaciones lineales de los demás.
+
+__Ejemplo__
+
+```{r}
+S <- rMatrix(n = n, m = 3)
+S <- cbind(S, rowSums(S))
+P <- gauss_elimination(t(S))
+r <- abs(rowSums(P$U)) > 0 
+bLS <- S[, 1:3]
+```
+
+
+Consideremos el sistema de vectores $\mathcal{S} = \left\{`r vectors_to_latex(S)`\right\}$. Vamos a encontrar un sistema de vectores que sea base de $\mathcal{L}(S)$. Para ellos, vamos a eliminar de $S$ aquellos vectores que sean combinaciones lineales de los demás. 
+
+Esa tarea es justo la que realiza el método de Gauss con las filas de una matriz, al ponerla en forma escalonada. Si aplicamos Gauss a una matriz, las filas que acaban siendo de ceros son las que originalmente eran combinación lineal de las demás.
+
+Por tanto, nos aprovechamos de esta propiedad para eliminar vectores linealmente dependientes. Vamos a construir la matriz $M$ resultado de poner los vectores de $S$ por filas (primer vector en primera fila, segundo en segunda fila, etc.).
+```{r}
+glue_latex(
+  "M = [glue_matrices(t(S), latex = TRUE)]"
+) %>% 
+  cat()
+```
+
+Si aplicamos Gauss para encontrar la forma escalonada (omitimos los detalles intermedios):
+```{r}
+glue_latex(
+  "[glue_matrices(t(S), latex = TRUE)] \\sim ",
+  "[glue_matrices(P$splits, latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+
+Como se puede ver, tenemos que la última fila es de ceros. Por tanto, el vector original del que procede esa fila es linealmente dependiente del resto de vectores de $S$.
+
+Si hubiéramos tenido que intercambiar filas en algún momento, habría que llevar cuenta de cada intercambio para saber a qué vector original se corresponden aquellas filas que valen 0.
+
+Por tanto, la base del subespacio generado por $S$, que consiste en únicamente los vectores linealmente independientes de $S$, es:
+```{r}
+glue_latex(
+  "\\mathcal{B}_{\\mathcal{L}(\\mathcal{S})} = \\left\\{",
+  "[vectors_to_latex(bLS)]",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+
+## Cómo encontrar la base (y la dimensión) para un subespacio vectorial {#base}
+
+En muchas ocasiones, necesitaremos encontrar una base para un subespacio vectorial, puesto que con las bases tenemos mucha información adicional sobre un subespacio. Además, cada subespacio queda completamente caracterizado una vez dada su base.
+
+Sin embargo, existen otras formas en las que podemos definir un subespacio vectorial, y necesitamos conocer cómo extraer una base de dicho subespacio, para tener una forma _estándar_ de describir los subespacios.
+
+### Partiendo de las ecuaciones paramétricas
+
+La primera forma escrita en que podemos definir un subespacio vectorial es mediante sus ecuaciones paramétricas, que nos indican cómo determinar las diversas componentes de cada vector ($x,y,\ldots$) a partir de unos parámetros libres $\alpha_1,\ldots,\alpha_n$.
+
+Realmente esto es equivalente a escribir un vector genérico $v$ como combinación lineal de otros vectores. Esos otros vectores que forman la combinación lineal son, por tanto, un sistema generador del subespacio que queremos definir. Usando lo explicado en la [sección correspondiente](#sistgenabase), obtendríamos la base deseada.
+
+__Ejemplo__
+
+Consideremos el subespacio $U$ dado en su forma paramétrica:
+```{r}
+params <- c("\\alpha", "\\beta", "\\gamma", "\\delta")
+str <- (write_system(S, 
+                    format = 'c', vars = params) %>% 
+  stringr::str_split(pattern = "\n"))[[1]] %>% 
+  matrix(ncol = 1)
+equals <- rep(" = ", nrow(S)) %>% matrix(ncol = 1)
+glue_latex(
+  "U = \\left\\{",
+  "[to_latex(generic_vector)]\\in V:\\quad",
+  "[glue_matrices(generic_vector, equals, str, latex = TRUE, sep = '', ldeco = '', rdeco = '')],",
+  "\\alpha,\\beta,\\gamma,\\delta\\in\\mathbb{R}",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+
+En este caso, lo que debemos hacer es expresar esas ecuaciones paramétricas en forma de combinación lineal de vectores. Para ello, consideramos los coeficientes que acompañan a cada uno de los parámetros $\alpha,\beta,\gamma,\delta$.
+
+Si lo hacemos, nos queda (ya poniéndolo en formato vectorial) que un vector $v$ pertenece a $U$ si se puede expresar como una combinación lineal de la forma:
+```{r}
+glue_latex("v = ",
+  "[to_latex(generic_vector)] = ",
+  "[write_linear_combination(S, vars = params)]"
+) %>% 
+  cat()
+```
+
+Es decir, $\mathcal{S} = \left\{`r vectors_to_latex(S)`\right\}$ es un sistema generador del subespacio $U$. Este proceso no nos asegura que sean vectores linealmente independientes, así que no podemos decir, de momento, que sea una base de $U$.
+
+A partir de aquí, basta aplicar lo descrito en [la sección sobre cómo extraer una base a partir de un sistema generador](#sistgenabase).
+
+### Partiendo de las ecuaciones cartesianas
+
+Un subespacio vectorial puede venir definido mediante unas expresiones cartesianas que relacionan las componentes $x,y,\ldots$ entre sí.
+
+Esas expresiones cartesianas realmente expresan un sistema de ecuaciones homogéneo cuyo conjunto solución es el propio subespacio que buscamos.
+
+Por tanto, la forma de proceder es tomar las ecuaciones cartesianas, formar el sistema, y resolverlo. Para ello, haciendo Gauss, pasamos a forma escalonada o escalonada reducida y desde esa forma, calculamos las expresiones paramétricas del conjunto solución y aplicamos lo explicado en la sección anterior.
+
+__Ejemplo__
+
+```{r}
+n_U <- sample(1:(n - 2), size = 1)
+## Matrices aleatorias para sus cartesianas
+A_U <- rMatrix(n = n_U, m = n, values = -1:3)
+```
+
+Sea el subespacio
+```{r}
+glue_latex("U = \\left\\{",
+           "[to_latex(generic_vector)] \\in\\mathbb{R}^{[n]}:",
+           "[str_flatten(write_system(A_U, vec0, latex = TRUE, format = 'c'))]",
+           "\\right\\}"
+) %>% 
+  cat()
+```
+
+El sistema homogéneo dado por su ecuaciones cartesianas es:
+
+```{r}
+glue::glue("$$\\left\\{",
+           "[str_flatten(write_system(A_U, vec0, latex = TRUE))]",
+           "\\right.$$",
+           .open = "[", .close = "]") %>% 
+  cat()
+```
+
+Este sistema, resuelto por Gauss, nos da las siguientes expresiones paramétricas:
+```{r}
+genU <- solve_homogeneous(A_U)
+params <- c("\\alpha", "\\beta", "\\delta", "\\gamma")
+glue::glue(
+  "$$",
+  "[to_latex(generic_vector)] = ",
+  "[write_linear_combination(genU, vars = params)]",
+  "$$",
+  .open = "[", .close = "]"
+) %>% 
+  cat()
+```
+
+A partir de aquí, ya sabemos que estos dos vectores son un sistema generador de $U$, luego podemos encontrar una base para $U$ si seguimos las explicaciones en [la sección correspondiente](#sistgenabase).
+
+Podemos fijarnos que, en este ejemplo, ya los dos vectores son linealmente independientes, así que ya conforman una base, pero no es la situación general y conviene hacer, para estar seguros, lo mencionado en el párrafo anterior.
+
+Luego, además, podemos saber que la dimensión de $U$ es $\mathrm{dim}(U) = 2$.
+
+## Cómo convertir entre ecuaciones cartesianas y paramétricas de un subespacio vectorial {#param2cartesian}
+
+En la [sección anterior](#base), ya hemos visto que para pasar de ecuaciones cartesianas a paramétricas, basta con usar el método de Gauss-Jordan para resolver el sistema de ecuaciones homogéneo.
+
+Para pasar de ecuaciones paramétricas de un subespacio a las ecuaciones cartesianas, se suele utilizar el método de _eliminación de parámetros_.
+
+Si tenemos $m$ parámetros $\alpha_i$ ($i = 1,\ldots,m$) y el espacio es de dimensión $n > m$, entonces tendremos, a lo sumo, $n - m$ ecuaciones cartesianas. Buscamos un sistema de ecuaciones lineales homogéneo (las ecuaciones cartesianas) cuya solución, en forma paramétrica sea las ya dadas.
+
+Para ello, comenzamos con la expresión paramétrica con una ecuación por cada coordenada cartesiana del subespacio (una expresión de $x$ en función de los $\alpha_i$, una para la $y$, etc.).
+
+Se toma uno de los parámetros, y se despeja de alguna de las ecuaciones en las que aparece. Se sutituye en las demás ecuaciones y desechamos la ecuación de la que hemos despejado el parámetro. En esta situación, tenemos una ecuación menos y un parámetro menos.
+
+Con el nuevo sistema de ecuaciones, repetimos el proceso anterior: seleccionar un parámetro, despejarlo de una ecuación y sustituirlo en las demás, eliminando la ecuación de la que se ha despejado.
+
+Repetimos todo el proceso hasta que no queden parámetros que eliminar.
+
+__Ejemplo__
+
+Consideramos el subespacio
+```{r}
+params <- c("\\alpha", "\\beta", "\\gamma", "\\delta")
+str <- (write_system(S, 
+                    format = 'c', vars = params) %>% 
+  stringr::str_split(pattern = "\n"))[[1]] %>% 
+  matrix(ncol = 1)
+equals <- rep(" = ", nrow(S)) %>% matrix(ncol = 1)
+glue_latex(
+  "U = \\left\\{",
+  "[to_latex(generic_vector)]\\in V:\\quad",
+  "[glue_matrices(generic_vector, equals, str, latex = TRUE, sep = '', ldeco = '', rdeco = '')],",
+  "\\alpha,\\beta,\\gamma,\\delta\\in\\mathbb{R}",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+
+Vamos a aplicar el método de eliminación de los parámetros:
+
+```{r}
+L <- parametric_to_cartesian(S)
+params <- c("\\alpha", "\\beta", "\\gamma", "\\delta")
+
+for (p in seq_along(L$eq_idx[-1])) {
+  
+  par <- fractional(L$splits[[p]][[1]])
+  eqs <- fractional(L$splits[[p]][[2]])
+  
+  str_p <- (write_system(par, fractions = TRUE,
+                       format = 'c', 
+                       vars = params) %>% 
+            stringr::str_split(pattern = "\n"))[[1]] %>% 
+    matrix(ncol = 1)
+  
+  equals <- rep(" = ", nrow(str_p)) %>% matrix(ncol = 1)
+  
+  str_a <- (write_system(eqs, fractions = TRUE,
+                       format = 'c', 
+                       vars = unknowns) %>% 
+            stringr::str_split(pattern = "\n"))[[1]] %>% 
+    matrix(ncol = 1)
+  
+  glue("- Despejamos ${params[p]}$ de la ecuación {L$eq_idx[p]}, y sustituimos en las demás, lo cual nos da:\n",
+       "$${glue_matrices(str_a, equals, str_p, latex = TRUE, ldeco = '', rdeco = '', sep = '')}$$\n"
+       ) %>% cat()
+  cat("\n")
+
+}
+
+p <- length(L$eq_idx)
+
+glue(
+  "- Por último, despejando ${params[p]}$ de la ecuación {L$eq_idx[p]}, nos queda:\n"
+) %>% cat()
+
+glue_latex(
+  "[write_system(L$A, zeros(nrow(L$A), 1), fractions = TRUE, latex = TRUE)]"
+) %>% 
+  cat()
+
+
+```
+que es la expresión en cartesianas del espacio $U$.
+
+## Cómo hallar la intersección de dos subespacios vectoriales {#interseccion}
+
+Si tenemos dos subespacios, $U$ y $W$ de $V$, podemos calcular su intersección, que es el conjunto de vectores que pertenecen a ambos subespacios a la vez.
+
+> La intersección de dos subespacios es un nuevo subespacio, aunque puede suceder que la intersección sea únicamente el vector 0.
+
+Conviene tener ambos subespacios expresados en forma de ecuaciones cartesianas. Si no estuviera así (porque solo se dé su base o, lo que es equivalente, las ecuaciones paramétricas), basta ver la sección sobre [cómo convertir de ecuaciones paramétricas a cartesianas](#param2cartesian).
+
+Si un vector $v$ pertenece a la intersección, entonces verifica tanto las ecuaciones paramétricas de $U$ como las de $W$. Por tanto, podemos construir un sistema de ecuaciones con todas las ecuaciones de $U$ y de $W$, y la intersección $U\cap W$ será el conjunto solución de este sistema homogéneo _ampliado_.
+
+A partir de ese sistema, ya hemos explicado [cómo encontrar la base](#base) del subespacio intersección.
+
+__Ejemplo__
+
+```{r}
+# Definición de dos subespacios U y W
+## Dimensiones
+n_W <- sample(1:(n - n_U), size = 1)
+## Matrices aleatorias para sus cartesianas
+A_W <- rMatrix(n = n_W, m = n, values = -1:3)
+
+# Calcular una base y la dimensión de:
+# (a) U \cap W
+A_Intersect <- rbind(A_U, A_W)
+gen_Intersect <- solve_homogeneous(A_Intersect)
+b_Intersect <- linearly_independents(gen_Intersect)
+dim_Intersect <- ncol(b_Intersect)
+
+
+```
+
+los subespacios siguientes:
+
+```{r}
+glue::glue("$$U = \\left\\{",
+           "[to_latex(generic_vector)] \\in\\mathbb{R}^{[n]}:",
+           "[str_flatten(write_system(A_U, b = zeros(n, 1), latex = TRUE, format = 'c'))]",
+           "\\right\\}$$",
+           .open = "[", .close = "]") %>% 
+  cat()
+glue::glue("$$W = \\left\\{",
+           "[to_latex(generic_vector)] \\in\\mathbb{R}^{[n]}:",
+           "[str_flatten(write_system(A_W, b = zeros(n, 1), latex = TRUE, format = 'c'))]",
+           "\\right\\}$$",
+           .open = "[", .close = "]") %>% 
+  cat()
+
+```
+
+El subespacio $U$ ya lo hemos estudiado antes
+
+## Cómo hallar la suma de dos subespacios vectoriales {#suma}
+
+## Comprobación del teorema de la dimensión
+
+## Cómo calcular las coordenadas de un vector con respecto a una base dada {#coord}
+
+## Cómo calcular la matriz de cambio de base entre dos bases de un mismo espacio vectorial {#cambiobase}
