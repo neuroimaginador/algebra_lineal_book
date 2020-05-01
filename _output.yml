@@ -5,7 +5,7 @@ bookdown::gitbook:
       before: |
         <li><a href="./">Preguntas y respuestas de Álgebra Lineal</a></li>
       after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+        <li><a href="https://dominlopez.netlify.app" target="blank">Escrito por Domingo López</a></li>
     download: ["pdf", "epub"]
 bookdown::pdf_book:
   includes:
@@ -14,3 +14,5 @@ bookdown::pdf_book:
   citation_package: natbib
   keep_tex: yes
 bookdown::epub_book: default
+bookdown::html_book:
+  theme: paper
