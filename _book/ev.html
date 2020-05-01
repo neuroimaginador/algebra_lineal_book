@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-04-30" />
+<meta name="date" content="2020-05-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -266,6 +266,7 @@ entonces el sistema de los <span class="math inline">\(v_i\)</span> será indepe
 <div id="sistgenabase" class="section level2" number="2.4">
 <h2 number="2.4"><span class="header-section-number">2.4</span> Cómo extraemos una base a partir de un sistema generador de un (sub)espacio vectorial</h2>
 <p>Para cualquier espacio vectorial, o subespacio, una <strong>base</strong> es un sistema de vectores que lo genera (mediante combinaciones lineales, como hemos visto antes) y que es linealmente independiente.</p>
+<p>La <strong>base canónica</strong> <span class="math inline">\(\mathcal{C}\)</span> en un espacio <span class="math inline">\(\mathbb{R}^n\)</span> es la dada por los vectores <span class="math inline">\(e_i\)</span> (<span class="math inline">\(i = 1,\ldots,n\)</span>), donde <span class="math inline">\(e_i\)</span> es el vector que tiene todas sus componentes a 0 menos la <span class="math inline">\(i\)</span>-ésima que vale 1.</p>
 <p>Si tenemos un sistema generador de un (sub)espacio vectorial, siempre podremos encontrar una base, gracias al siguiente resultado:</p>
 <blockquote>
 <p>Todo sistema generador de un subespacio contiene un sistema linealmente independiente, que también genera el mismo subespacio.</p>
@@ -550,7 +551,7 @@ t
 <div id="suma" class="section level2" number="2.9">
 <h2 number="2.9"><span class="header-section-number">2.9</span> Cómo hallar la suma de dos subespacios vectoriales</h2>
 <p>Dados dos subespacios <span class="math inline">\(U\)</span> y <span class="math inline">\(W\)</span> de <span class="math inline">\(V\)</span>, se define su <strong>suma</strong> <span class="math inline">\(U+W\)</span> como el conjunto de vectores que son combinación lineal de un vector de <span class="math inline">\(U\)</span> y otro de <span class="math inline">\(W\)</span>.</p>
-<p>Si, además, <span class="math inline">\(U\cap W = \{0\}\)</span> y <span class="math inline">\(U+W = V\)</span>, entonces se llama <strong>suma ortogonal</strong> y se denota por <span class="math inline">\(U\bigoplus W\)</span>. Se dice entonces que <span class="math inline">\(U\)</span> es el <strong>subespacio suplementario</strong> de <span class="math inline">\(W\)</span> y viceversa.</p>
+<p>Si, además, <span class="math inline">\(U\cap W = \{0\}\)</span> y <span class="math inline">\(U+W = V\)</span>, entonces se llama <strong>suma ortogonal</strong> y se denota por <span class="math inline">\(U\oplus W\)</span>. Se dice entonces que <span class="math inline">\(U\)</span> es el <strong>subespacio suplementario</strong> de <span class="math inline">\(W\)</span> y viceversa.</p>
 <p>El resultado teórico esencial es el siguiente:</p>
 <blockquote>
 <p>Si <span class="math inline">\(\mathcal{B}_U\)</span> y <span class="math inline">\(\mathcal{B}_W\)</span> son bases de <span class="math inline">\(U\)</span> y <span class="math inline">\(W\)</span> respectivamente, entonces <span class="math inline">\(\mathcal{G} = \mathcal{B}_U \cup \mathcal{B}_W\)</span> es un sistema generador de <span class="math inline">\(U+W\)</span>.</p>
@@ -677,7 +678,7 @@ que es un sistema generador de la suma, podemos construir una base de <span clas
 <p><span class="math inline">\(\mathrm{dim}(U+W) = \mathrm{dim}(U) + \mathrm{dim}(W) - \mathrm{dim}(U\cap W)\)</span></p>
 </blockquote>
 <p><strong>Ejemplo</strong></p>
-<p>Si consideremos los espacios <span class="math inline">\(U\)</span> y <span class="math inline">\(W\)</span> que hemos usado como ejemplos en <a href="#intersección">las secciones anteriores</a>, podemos comprobar fácilmente el teorema de la dimensión:</p>
+<p>Si consideramos los espacios <span class="math inline">\(U\)</span> y <span class="math inline">\(W\)</span> que hemos usado como ejemplos en <a href="#intersección">las secciones anteriores</a>, podemos comprobar fácilmente el teorema de la dimensión:</p>
 <p><span class="math display">\[\begin{array}{ccccccc}
 \mathrm{dim}(U+W) &amp; = &amp; \mathrm{dim}(U) &amp; + &amp; \mathrm{dim}(W) &amp; - &amp; \mathrm{dim}(U\cap V) \\
 4 &amp; = &amp; 2 &amp; + &amp; 3 &amp; - &amp; 1 \\
@@ -685,12 +686,369 @@ que es un sistema generador de la suma, podemos construir una base de <span clas
 </div>
 <div id="cómo-calcular-el-subespacio-suplementario-de-uno-dado" class="section level2" number="2.11">
 <h2 number="2.11"><span class="header-section-number">2.11</span> Cómo calcular el subespacio suplementario de uno dado</h2>
+<p>Como hemos comentado antes, el subespacio suplementario de un subespacio <span class="math inline">\(U\)</span> es aquel <span class="math inline">\(W\)</span> que verifica:</p>
+<ul>
+<li><span class="math inline">\(U\cap W = \{0\}\)</span></li>
+<li><span class="math inline">\(U \oplus W = V\)</span></li>
+</ul>
+<p>Supongamos que tenemos una base <span class="math inline">\(\mathcal{B}_U\)</span> de <span class="math inline">\(U\)</span>. Para determinar <span class="math inline">\(W\)</span>, basta con que demos una forma de construir una base suya.</p>
+<p>El primer paso será encontrar una forma <em>sencilla</em> para la base de <span class="math inline">\(U\)</span>. Realmente, queremos encontrar una base de <span class="math inline">\(U\)</span> a partir de la que ya tenemos, donde los vectores formen un sistema escalonado reducido. El método más indicado es usar Gauss-Jordan sobre la matriz que forman los vectores de <span class="math inline">\(\mathcal{B}_U\)</span> por <em>filas</em>.</p>
+<p>Una vez que tenemos la forma escalonada reducida, nos fijamos en qué posiciones se encuentran los pivotes en esa matriz, es decir, las posiciones del primer elemento distinto de cero de cada fila.</p>
+<p>Tomamos entonces, para formar la base de <span class="math inline">\(W\)</span>, aquellos vectores de la base canónica que <strong>no</strong> tengan un 1 en esas posiciones. Los vectores así determinados nos dan la base de <span class="math inline">\(W\)</span>, el subespacio suplementario, pues nos aseguramos las dos propiedades mencionadas más arriba.</p>
+<p><strong>Ejemplo</strong></p>
+<p>Consideremos el subespacio <span class="math inline">\(U\)</span> cuya base es:
+<span class="math display">\[\mathcal{B}_U = \left\{\left(\begin{array}{c}
+2\\
+0\\
+1\\
+-1
+\end{array}\right)
+, \left(\begin{array}{c}
+1\\
+-1\\
+0\\
+1
+\end{array}\right)
+\right\}\]</span></p>
+<p>Si no tuviéramos su base, sino que <span class="math inline">\(U\)</span> viene dado de otra forma, <a href="ev.html#base">ya sabemos cómo encontrar la base</a>.</p>
+<p>Ponemos los vectores de la base de <span class="math inline">\(U\)</span> en <em>filas</em> y aplicamos el método de Gauss (o Gauss-Jordan) para encontrar la forma escalonada de la matriz:
+<span class="math display">\[\left(
+\begin{array}{cccc@{}}
+2 &amp; 0 &amp; 1 &amp; -1\\
+1 &amp; -1 &amp; 0 &amp; 1
+\end{array}
+\right)
+\sim\left(
+\begin{array}{cccc@{}}
+2 &amp; 0 &amp; 1 &amp; -1\\
+0 &amp; -1 &amp; -1/2 &amp; 3/2
+\end{array}
+\right)
+\]</span></p>
+<p>Al inspeccionar la matriz escalonada, podemos ver que sus pivotes (primer elemento no nulo de cada fila) están en las columnas <span class="math inline">\(\{1, 2\}\)</span>.</p>
+<p>Consideramos la base canónica
+<span class="math display">\[\mathcal{C} = \{e_i\} = \left\{\left(\begin{array}{c}
+1\\
+0\\
+0\\
+0
+\end{array}\right)
+, \left(\begin{array}{c}
+0\\
+1\\
+0\\
+0
+\end{array}\right)
+, \left(\begin{array}{c}
+0\\
+0\\
+1\\
+0
+\end{array}\right)
+, \left(\begin{array}{c}
+0\\
+0\\
+0\\
+1
+\end{array}\right)
+\right\}\]</span></p>
+<p>Nos vamos a quedar con aquellos vectores de <span class="math inline">\(\mathcal{C}\)</span> que no tengan un 1 en las posiciones de los pivotes (<span class="math inline">\(\{1, 2\}\)</span>). De esta forma, lo que tenemos es una base de <span class="math inline">\(W\)</span>, el subespacio suplementario de <span class="math inline">\(U\)</span>:
+<span class="math display">\[\mathcal{B}_W = \left\{\left(\begin{array}{c}
+0\\
+0\\
+1\\
+0
+\end{array}\right)
+, \left(\begin{array}{c}
+0\\
+0\\
+0\\
+1
+\end{array}\right)
+\right\}\]</span></p>
 </div>
 <div id="coord" class="section level2" number="2.12">
 <h2 number="2.12"><span class="header-section-number">2.12</span> Cómo calcular las coordenadas de un vector con respecto a una base dada</h2>
+<p>Un concepto importante es el de <strong>coordenadas</strong> de un vector, asociadas a una base <span class="math inline">\(\mathcal{B}\)</span> del espacio vectorial <span class="math inline">\(V\)</span>.</p>
+<p>Supongamos una base <span class="math inline">\(\mathcal{B} = \{v_1,\ldots,v_n\}\)</span> de <span class="math inline">\(V\)</span>. Las coordenadas de un vector <span class="math inline">\(v\)</span> son unos escalares <span class="math inline">\(\alpha_1,\ldots,\alpha_n\)</span> tales que podemos expresar <span class="math inline">\(v\)</span> como una combinación lineal de los vectores de la base con esos coeficientes:
+<span class="math display">\[v = \alpha_1 v_1 + \cdots + \alpha_n v_n\]</span></p>
+<p>Generalmente, como venimos haciendo desde el principio, estamos denotando e identificando a un vector con sus coordenadas, de forma que escribimos:
+<span class="math display">\[v = \left(
+\begin{array}{c}
+\alpha_1\\
+\vdots\\
+\alpha_n
+\end{array}
+\right)_{\mathcal{B}}\]</span></p>
+<p>Cuando la base <span class="math inline">\(\mathcal{B}\)</span> es la canónica, no es necesario indicar el nombre de la base con respecto a la cual tomamos las coordenadas, a menos que lleve a confusión.</p>
+<p>Dado un vector con sus coordenadas en la base canónica, ¿cómo puedo saber sus coordenadas en otra base <span class="math inline">\(\mathcal{B}\)</span>? Tenemos dos vías, una que esploramos aquí y otra que veremos en <a href="ev.html#cambiobase">la sección siguiente</a>.</p>
+<p>El determinar las coordenadas de un vector en una base distinta de la canónica es realmente equivalente a la resolución de un sistema de ecuaciones lineales, donde la matriz de coeficientes es la formada por los vectores de la nueva base <em>por columnas</em>.</p>
+<p>Lo vemos directamente con un ejemplo.</p>
+<p><strong>Ejemplo</strong></p>
+<p>Consideremos el vector <span class="math inline">\(v\)</span> dado por sus coordenadas en la base canónica <span class="math inline">\(\left(\begin{array}{c} -2\\ -5\\ 6\\ -2 \end{array}\right)\)</span>. Consideremos también la base:</p>
+<p><span class="math display">\[\mathcal{B}_{1} = \left\{\left(\begin{array}{c}
+0\\
+-1\\
+1\\
+-1
+\end{array}\right)
+, \left(\begin{array}{c}
+-1\\
+1\\
+0\\
+-1
+\end{array}\right)
+, \left(\begin{array}{c}
+0\\
+0\\
+1\\
+-1
+\end{array}\right)
+, \left(\begin{array}{c}
+1\\
+1\\
+-1\\
+-1
+\end{array}\right)
+\right\}\]</span></p>
+<p>Unos escalares <span class="math inline">\(a, b, c, d\)</span> serán las coordenadas de <span class="math inline">\(v\)</span> en la base <span class="math inline">\(\mathcal{B}_1\)</span> si se verifica:</p>
+<p><span class="math display">\[\left(\begin{array}{c}
+-2\\
+-5\\
+6\\
+-2
+\end{array}\right)
+ = a\left(\begin{array}{c}
+0\\
+-1\\
+1\\
+-1
+\end{array}\right)
+{}+b\left(\begin{array}{c}
+-1\\
+1\\
+0\\
+-1
+\end{array}\right)
+{}+c\left(\begin{array}{c}
+0\\
+0\\
+1\\
+-1
+\end{array}\right)
+{}+d\left(\begin{array}{c}
+1\\
+1\\
+-1\\
+-1
+\end{array}\right)
+{}\]</span>
+que se puede reescribir como el siguiente sistema de ecuaciones lineales (donde la matriz de coeficientes resulta de poner los vectores de la base <span class="math inline">\(\mathcal{B}_1\)</span> por columnas):
+<span class="math display">\[\left\{\begin{array}{rrrrcr}
+ &amp; -b &amp;  &amp; + d &amp; = &amp; -2\\
+-a &amp; + b &amp;  &amp; + d &amp; = &amp; -5\\
+a &amp;  &amp; + c &amp; -d &amp; = &amp; 6\\
+-a &amp; -b &amp; -c &amp; -d &amp; = &amp; -2\\
+\end{array}\right.\]</span></p>
+<p>Este sistema se puede resolver usando métodos Gaussianos, y nos da:
+<span class="math display">\[ v = \left(\begin{array}{c}
+a\\
+b\\
+c\\
+d
+\end{array}\right)
+_{\mathcal{B}_1} = \left(\begin{array}{c}
+3\\
+0\\
+1\\
+-2
+\end{array}\right)
+_{\mathcal{B}_1}\]</span></p>
 </div>
 <div id="cambiobase" class="section level2" number="2.13">
 <h2 number="2.13"><span class="header-section-number">2.13</span> Cómo calcular la matriz de cambio de base entre dos bases de un mismo espacio vectorial</h2>
+<p>Supongamos dos bases <span class="math inline">\(\mathcal{B}_1\)</span> y <span class="math inline">\(\mathcal{B}_2\)</span> de <span class="math inline">\(V\)</span>, y que tenemos un vector <span class="math inline">\(v\)</span>, expresado en coordenadas de <span class="math inline">\(\mathcal{B}_1\)</span>. Nos planteamos una forma sencilla de calcular las coordenadas del mismo vector <span class="math inline">\(v\)</span> respecto a la otra base <span class="math inline">\(\mathcal{B}_2\)</span>.</p>
+<p>El principal resultado teórico en el que nos basamos (y del que alguna pincelada hemos dado en <a href="ev.html#coord">la sección anterior</a>) es el que sigue:</p>
+<blockquote>
+<p>La transformación de las coordenadas para un mismo vector <span class="math inline">\(v\)</span> entre dos bases <span class="math inline">\(\mathcal{B}_1\)</span> y <span class="math inline">\(\mathcal{B}_2\)</span> viene dada por la siguiente expresión:
+<span class="math display">\[[v]_{\mathcal{B}_2} = A [v]_{\mathcal{B}_1}\]</span>
+donde <span class="math inline">\(A\)</span> es una matriz cuadrada formada por las coordenadas de cada vector de <span class="math inline">\(\mathcal{B}_1\)</span> en la base <span class="math inline">\(\mathcal{B}_2\)</span> y <span class="math inline">\([v]_{\mathcal{B}_i}\)</span> indica las coordenadas de <span class="math inline">\(v\)</span> en la base <span class="math inline">\(\mathcal{B}_i\)</span>.</p>
+</blockquote>
+<p><em>Notación</em>: A la matriz de cambio entre la base <span class="math inline">\(\mathcal{B}_1\)</span> y <span class="math inline">\(\mathcal{B}_2\)</span>, se suele denotar por <span class="math inline">\(P_{\mathcal{B}_1 \to \mathcal{B}_2}\)</span>.</p>
+<p>Para calcular <span class="math inline">\(P_{\mathcal{B}_1 \to \mathcal{B}_2}\)</span>, para cada vector de <span class="math inline">\(\mathcal{B}_1\)</span> vamos a encontrar sus coordenadas en la base <span class="math inline">\(\mathcal{B}_2\)</span>.</p>
+<p>Siguiendo las explicaciones acerca de <a href="ev.html#coord">cómo calcular coordenadas de un vector respecto de una base</a>, queremos expresar cada <span class="math inline">\(v_i\)</span> como combinación lineal de los <span class="math inline">\(v_i&#39;\)</span>:
+<span class="math display">\[v_i = a_{1,i}v_1&#39;+\ldots+a_{n,i}v_n&#39;\quad\,\,\ i = 1,\ldots,n\]</span></p>
+<p>En este caso, los valores <span class="math inline">\(a_{1,i},\ldots,a_{1,n}\)</span> son las coordenadas de <span class="math inline">\(v_i\)</span> en la base <span class="math inline">\(\mathcal{B}_2\)</span>, y podemos escribir, para todo <span class="math inline">\(i=1,\ldots,n\)</span>:
+<span class="math display">\[[v_i]_{\mathcal{B}_2} = \left(\begin{array}{c}
+a_{1,i}\\
+\vdots\\
+a_{n,i}
+\end{array}\right)\]</span></p>
+<p>Según el resultado anterior, la matriz de cambio de base <span class="math inline">\(A=P_{\mathcal{B}_1 \to \mathcal{B}_2}\)</span> tendrá por columnas estas coordenadas previamente calculadas:
+<span class="math display">\[A = ([v_1]_{\mathcal{B}_2}|\ldots|[v_n]_{\mathcal{B}_2})\]</span></p>
+<!-- Esto nos da una serie de $n$ sistemas de ecuaciones, y, si consideramos su matriz de coeficientes, resulta ser que son los vectores $v_i'$ de $\mathcal{B}_2$ puestos por columnas, mientras que el primer término, en este caso, es el vector $i$-ésimo de $\mathcal{B}_1$ puesto también en columna. -->
+<p>Llamemos <span class="math inline">\(B_1 = (v_1|v_2|\ldots|v_n)\)</span> y <span class="math inline">\(B_2 = (v_1&#39;|v_2&#39;|\ldots|v_n&#39;)\)</span> a las dos matrices que resultan de poner los vectores de las dos bases que tenemos, en forma de columna.</p>
+<p>Entonces, resulta que la combinación lineal de más arriba que relaciona un <span class="math inline">\(v_i\)</span> con los vectores de <span class="math inline">\(\mathcal{B}_2\)</span> mediante sus coordenadas se puede reescribir como:
+<span class="math display">\[v_i = B_2 [v_i]_{\mathcal{B}_2}\]</span></p>
+<p>Si vamos concatenando los <span class="math inline">\(v_i\)</span> en la izquierda, hasta formar la matriz <span class="math inline">\(B_1\)</span>, en la derecha debemos ir haciendo lo mismo con sus coordenadas en la base <span class="math inline">\(\mathcal{B}_2\)</span>, y entonces tenemos:
+<span class="math display">\[(v_1|v_2|\ldots|v_n) = B_2\  ([v_1]_{\mathcal{B}_2}|[v_2]_{\mathcal{B}_2}\ldots|[v_n]_{\mathcal{B}_2})\]</span>
+es decir,
+<span class="math display">\[B_1 = B_2 P_{\mathcal{B}_1\to\mathcal{B}_2}\]</span></p>
+<p>Como nos interesa una forma fácil de calcular <span class="math inline">\(P_{\mathcal{B}_1\to\mathcal{B}_2}\)</span>, podemos despejarla de la expresión anterior, luego tenemos <span class="math inline">\(P_{\mathcal{B}_1\to\mathcal{B}_2} = B_2^{-1} B_1\)</span>.</p>
+<p>El método práctico para calcular esta matriz de cambio de base, por tanto, será usar Gauss-Jordan, comenzando por la matriz <span class="math inline">\((B_2|B_1)\)</span> hasta dejarla en la forma <span class="math inline">\((I_n|A)\)</span>. En ese momento, en la derecha, tendremos <span class="math inline">\(A=P_{\mathcal{B}_1\to\mathcal{B}_2}\)</span>.</p>
+<p>Una vez que tenemos determinada la matriz <span class="math inline">\(A = P_{\mathcal{B}_1\to\mathcal{B}_2}\)</span> que nos proporciona el cambio de base entre <span class="math inline">\(\mathcal{B}_1\)</span> y <span class="math inline">\(\mathcal{B}_2\)</span>, el cambio inverso, es decir, entre <span class="math inline">\(\mathcal{B}_2\)</span> y <span class="math inline">\(\mathcal{B}_1\)</span>, tiene como matriz asociada <span class="math inline">\(A^{-1}\)</span>. Recordemos que la inversa de una matriz <span class="math inline">\(A\)</span> se puede calcular mediante el método de Gauss-Jordan, comenzando por <span class="math inline">\((A|I_n)\)</span> y reduciéndola a la forma <span class="math inline">\((I_n|A^{-1})\)</span>.</p>
+<p><strong>Caso particular: Cambio de base a y desde la base canónica</strong></p>
+<p>Supongamos que una de las bases, por ejemplo <span class="math inline">\(\mathcal{B}_2 = \mathcal{C}\)</span> es la base canónica. La matriz que forman sus vectores por columna en este caso sería <span class="math inline">\(B_2 = I_n\)</span>, la identidad.</p>
+<p>Aplicando lo desarrollado, tendríamos que la matriz de cambio de base de <span class="math inline">\(\mathcal{B}_1\)</span> a la canónica es:
+<span class="math inline">\(P_{\mathcal{B}_1\to\mathcal{C}} = P_{\mathcal{B}_1\to\mathcal{B}_2} = B_2^{-1} B_1 = I_n B_1 = B_1\)</span></p>
+<p>Y entonces <span class="math inline">\(P_{\mathcal{C}\to\mathcal{B}_1} = P_{\mathcal{B}_2\to\mathcal{B}_1} = B_1^{-1} B_2 = B_1^{-1} I_n = B_1^{-1}\)</span></p>
+<p><strong>Ejemplo</strong></p>
+<p>Consideremos dos bases:
+<span class="math display">\[\mathcal{B}_{1} = \left\{\left(\begin{array}{c}
+0\\
+-1\\
+1\\
+-1
+\end{array}\right)
+, \left(\begin{array}{c}
+-1\\
+1\\
+0\\
+-1
+\end{array}\right)
+, \left(\begin{array}{c}
+0\\
+0\\
+1\\
+-1
+\end{array}\right)
+, \left(\begin{array}{c}
+1\\
+1\\
+-1\\
+-1
+\end{array}\right)
+\right\}\]</span><span class="math display">\[\mathcal{B}_{2} = \left\{\left(\begin{array}{c}
+0\\
+2\\
+0\\
+0
+\end{array}\right)
+, \left(\begin{array}{c}
+2\\
+2\\
+0\\
+0
+\end{array}\right)
+, \left(\begin{array}{c}
+2\\
+2\\
+2\\
+2
+\end{array}\right)
+, \left(\begin{array}{c}
+1\\
+1\\
+0\\
+2
+\end{array}\right)
+\right\}\]</span></p>
+<p>Vamos a hallar la matriz del cambio de base entre ambas bases, en ambos sentidos.</p>
+<p>Comenzamos por hallar la matriz <span class="math inline">\(A\)</span> de cambio de base de <span class="math inline">\(\mathcal{B}_1\)</span> a <span class="math inline">\(\mathcal{B}_2\)</span>.</p>
+<p>Construimos las matrices que tienen los vectores de <span class="math inline">\(\mathcal{B}_1\)</span> y <span class="math inline">\(\mathcal{B}_2\)</span> por columnas:
+<span class="math display">\[B_1 = \left(
+\begin{array}{cccc@{}}
+0 &amp; -1 &amp; 0 &amp; 1\\
+-1 &amp; 1 &amp; 0 &amp; 1\\
+1 &amp; 0 &amp; 1 &amp; -1\\
+-1 &amp; -1 &amp; -1 &amp; -1
+\end{array}
+\right)
+\]</span><span class="math display">\[B_2 = \left(
+\begin{array}{cccc@{}}
+0 &amp; 2 &amp; 2 &amp; 1\\
+2 &amp; 2 &amp; 2 &amp; 1\\
+0 &amp; 0 &amp; 2 &amp; 0\\
+0 &amp; 0 &amp; 2 &amp; 2
+\end{array}
+\right)
+\]</span></p>
+<p>Como se ha mencionado antes, para hallar <span class="math inline">\(A\)</span>, podemos hacer Gauss-Jordan sobre <span class="math inline">\((B_2|B_1)\)</span> hasta llegar a <span class="math inline">\((I_n|A)\)</span>:
+<span class="math display">\[\left(
+\begin{array}{cccc|cccc}
+0 &amp; 2 &amp; 2 &amp; 1 &amp; 0 &amp; -1 &amp; 0 &amp; 1\\
+2 &amp; 2 &amp; 2 &amp; 1 &amp; -1 &amp; 1 &amp; 0 &amp; 1\\
+0 &amp; 0 &amp; 2 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; -1\\
+0 &amp; 0 &amp; 2 &amp; 2 &amp; -1 &amp; -1 &amp; -1 &amp; -1
+\end{array}
+\right)
+\sim\left(
+\begin{array}{cccc|cccc}
+1 &amp; 0 &amp; 0 &amp; 0 &amp; -1/2 &amp; 1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; -1/4 &amp; 0 &amp; 1\\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 1/2 &amp; 0 &amp; 1/2 &amp; -1/2\\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; -1 &amp; -1/2 &amp; -1 &amp; 0
+\end{array}
+\right)
+\]</span></p>
+<p>Luego
+<span class="math display">\[P_{\mathcal{B}_1\to\mathcal{B}_2} = \left(
+\begin{array}{cccc@{}}
+-1/2 &amp; 1 &amp; 0 &amp; 0\\
+0 &amp; -1/4 &amp; 0 &amp; 1\\
+1/2 &amp; 0 &amp; 1/2 &amp; -1/2\\
+-1 &amp; -1/2 &amp; -1 &amp; 0
+\end{array}
+\right)
+\]</span></p>
+<p>Para el camino contrario, pasar de coordenadas en <span class="math inline">\(\mathcal{B}_2\)</span> a coordenadas en <span class="math inline">\(\mathcal{B}_1\)</span>, hacemos la inversa de la matriz anterior (aunque podríamos haber aplicado el mismo razonamiento inicial):
+<span class="math display">\[\left(
+\begin{array}{cccc|cccc}
+-1/2 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; -1/4 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
+1/2 &amp; 0 &amp; 1/2 &amp; -1/2 &amp; 0 &amp; 0 &amp; 1 &amp; 0\\
+-1 &amp; -1/2 &amp; -1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1
+\end{array}
+\right)
+\sim\left(
+\begin{array}{cccc|cccc}
+1 &amp; 0 &amp; 0 &amp; 0 &amp; -2 &amp; -8/3 &amp; -16/3 &amp; -8/3\\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; -4/3 &amp; -8/3 &amp; -4/3\\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 2 &amp; 10/3 &amp; 20/3 &amp; 7/3\\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 2/3 &amp; -2/3 &amp; -1/3
+\end{array}
+\right)
+\]</span></p>
+<p>De esta forma
+<span class="math display">\[P_{\mathcal{B}_2\to\mathcal{B}_1} = \left(
+\begin{array}{cccc@{}}
+-2 &amp; -8/3 &amp; -16/3 &amp; -8/3\\
+0 &amp; -4/3 &amp; -8/3 &amp; -4/3\\
+2 &amp; 10/3 &amp; 20/3 &amp; 7/3\\
+0 &amp; 2/3 &amp; -2/3 &amp; -1/3
+\end{array}
+\right)
+\]</span></p>
+<p>Para completar el ejemplo, vemos el cambio de base entre <span class="math inline">\(\mathcal{B}_1\)</span> y <span class="math inline">\(\mathcal{C}\)</span>:
+<span class="math display">\[P_{\mathcal{B}_1\to\mathcal{C}} = B_1 = \left(
+\begin{array}{cccc@{}}
+0 &amp; -1 &amp; 0 &amp; 1\\
+-1 &amp; 1 &amp; 0 &amp; 1\\
+1 &amp; 0 &amp; 1 &amp; -1\\
+-1 &amp; -1 &amp; -1 &amp; -1
+\end{array}
+\right)
+\]</span></p>
+<p>Y entre <span class="math inline">\(\mathcal{C}\)</span> y <span class="math inline">\(\mathcal{B}_1\)</span> (calculando la inversa de <span class="math inline">\(B_1\)</span> usando Gauss-Jordan):
+<span class="math display">\[P_{\mathcal{C}\to\mathcal{B}_1} = B_1^{-1} = \left(
+\begin{array}{cccc@{}}
+-1/3 &amp; -1 &amp; -2/3 &amp; -2/3\\
+-2/3 &amp; 0 &amp; -1/3 &amp; -1/3\\
+2/3 &amp; 1 &amp; 4/3 &amp; 1/3\\
+1/3 &amp; 0 &amp; -1/3 &amp; -1/3
+\end{array}
+\right)
+\]</span></p>
 
 </div>
 </div>

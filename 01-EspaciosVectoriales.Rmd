@@ -160,6 +160,8 @@ glue_latex(
 
 Para cualquier espacio vectorial, o subespacio, una __base__ es un sistema de vectores que lo genera (mediante combinaciones lineales, como hemos visto antes) y que es linealmente independiente.
 
+La __base canónica__ $\mathcal{C}$ en un espacio $\mathbb{R}^n$ es la dada por los vectores $e_i$ ($i = 1,\ldots,n$), donde $e_i$ es el vector que tiene todas sus componentes a 0 menos la $i$-ésima que vale 1.
+
 Si tenemos un sistema generador de un (sub)espacio vectorial, siempre podremos encontrar una base, gracias al siguiente resultado:
 
 > Todo sistema generador de un subespacio contiene un sistema linealmente independiente, que también genera el mismo subespacio.
@@ -532,7 +534,7 @@ En general, no. La única forma en que la unión de dos subespacios sea también
 
 Dados dos subespacios $U$ y $W$ de $V$, se define su __suma__ $U+W$ como el conjunto de vectores que son combinación lineal de un vector de $U$ y otro de $W$.
 
-Si, además, $U\cap W = \{0\}$ y $U+W = V$, entonces se llama __suma ortogonal__ y se denota por $U\bigoplus W$. Se dice entonces que $U$ es el __subespacio suplementario__ de $W$ y viceversa.
+Si, además, $U\cap W = \{0\}$ y $U+W = V$, entonces se llama __suma ortogonal__ y se denota por $U\oplus W$. Se dice entonces que $U$ es el __subespacio suplementario__ de $W$ y viceversa.
 
 El resultado teórico esencial es el siguiente:
 
@@ -629,7 +631,7 @@ Hay un resultado teórico que relaciona las dimensiones de dos subespacios $U$ y
 
 __Ejemplo__
 
-Si consideremos los espacios $U$ y $W$ que hemos usado como ejemplos en [las secciones anteriores](#intersección), podemos comprobar fácilmente el teorema de la dimensión:
+Si consideramos los espacios $U$ y $W$ que hemos usado como ejemplos en [las secciones anteriores](#intersección), podemos comprobar fácilmente el teorema de la dimensión:
 
 $$\begin{array}{ccccccc}
 \mathrm{dim}(U+W) & = & \mathrm{dim}(U) & + & \mathrm{dim}(W) & - & \mathrm{dim}(U\cap V) \\
@@ -638,8 +640,367 @@ $$\begin{array}{ccccccc}
 
 ## Cómo calcular el subespacio suplementario de uno dado
 
+Como hemos comentado antes, el subespacio suplementario de un subespacio $U$ es aquel $W$ que verifica:
+
+- $U\cap W = \{0\}$
+- $U \oplus W = V$
+
+Supongamos que tenemos una base $\mathcal{B}_U$ de $U$. Para determinar $W$, basta con que demos una forma de construir una base suya.
+
+El primer paso será encontrar una forma _sencilla_ para la base de $U$. Realmente, queremos encontrar una base de $U$ a partir de la que ya tenemos, donde los vectores formen un sistema escalonado reducido. El método más indicado es usar Gauss-Jordan sobre la matriz que forman los vectores de $\mathcal{B}_U$ por _filas_.
+
+Una vez que tenemos la forma escalonada reducida, nos fijamos en qué posiciones se encuentran los pivotes en esa matriz, es decir, las posiciones del primer elemento distinto de cero de cada fila.
+
+Tomamos entonces, para formar la base de $W$, aquellos vectores de la base canónica que __no__ tengan un 1 en esas posiciones. Los vectores así determinados nos dan la base de $W$, el subespacio suplementario, pues nos aseguramos las dos propiedades mencionadas más arriba.
+
+
+__Ejemplo__
+
+```{r}
+# Nuevo espacio U
+A_U <- rMatrix(n = n, m = 2)
+A_U <- linearly_independents(A_U)
+
+# Gauss
+P <- gauss_elimination(t(A_U), jordan = TRUE)
+M <- P$U
+# Pivotes
+  if (nrow(M) == 1) {
+
+    pivots_idx <- which(M != 0)[1]
+    params_idx <- setdiff(seq(ncol(M)),
+                          pivots_idx)
+
+  } else {
+
+    pivots_idx <- apply(M, 1, function(r) which(r != 0)[1])
+    pivots_idx_final <- pivots_idx[!is.na(pivots_idx)]
+
+    params_idx <- setdiff(seq(ncol(M)), pivots_idx_final)
+
+  }
+
+# Canónica
+C <- eye(n)
+
+# Solo aquellos vectores de los que no tienen 1 
+# en las posiciones de los pivotes
+bW <- C[, -pivots_idx]
+
+```
+
+Consideremos el subespacio $U$ cuya base es:
+```{r}
+glue_latex(
+  "\\mathcal{B}_U = \\left\\{",
+  "[vectors_to_latex(A_U)]",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+
+Si no tuviéramos su base, sino que $U$ viene dado de otra forma, [ya sabemos cómo encontrar la base](#base).
+
+Ponemos los vectores de la base de $U$ en _filas_ y aplicamos el método de Gauss (o Gauss-Jordan) para encontrar la forma escalonada de la matriz:
+```{r}
+glue_latex(
+  "[glue_matrices(t(A_U), latex = TRUE)]",
+  "\\sim",
+  "[glue_matrices(P$U, latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+
+Al inspeccionar la matriz escalonada, podemos ver que sus pivotes (primer elemento no nulo de cada fila) están en las columnas \(\{`r str_flatten(pivots_idx, collapse = ', ')`\} \).
+
+Consideramos la base canónica
+```{r}
+glue_latex(
+  "\\mathcal{C} = \\{e_i\\} = ",
+  "\\left\\{[vectors_to_latex(C)]\\right\\}"
+) %>% 
+  cat()
+```
+
+Nos vamos a quedar con aquellos vectores de $\mathcal{C}$ que no tengan un 1 en las posiciones de los pivotes (\(\{`r str_flatten(pivots_idx, collapse = ', ')`\} \)). De esta forma, lo que tenemos es una base de $W$, el subespacio suplementario de $U$:
+```{r}
+glue_latex(
+  "\\mathcal{B}_W = \\left\\{",
+  "[vectors_to_latex(bW)]",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+
 
 
 ## Cómo calcular las coordenadas de un vector con respecto a una base dada {#coord}
 
+Un concepto importante es el de __coordenadas__ de un vector, asociadas a una base $\mathcal{B}$ del espacio vectorial $V$.
+
+Supongamos una base $\mathcal{B} = \{v_1,\ldots,v_n\}$ de $V$. Las coordenadas de un vector $v$ son unos escalares $\alpha_1,\ldots,\alpha_n$ tales que podemos expresar $v$ como una combinación lineal de los vectores de la base con esos coeficientes:
+$$v = \alpha_1 v_1 + \cdots + \alpha_n v_n$$
+
+Generalmente, como venimos haciendo desde el principio, estamos denotando e identificando a un vector con sus coordenadas, de forma que escribimos:
+$$v = \left(
+\begin{array}{c}
+\alpha_1\\
+\vdots\\
+\alpha_n
+\end{array}
+\right)_{\mathcal{B}}$$
+
+Cuando la base $\mathcal{B}$ es la canónica, no es necesario indicar el nombre de la base con respecto a la cual tomamos las coordenadas, a menos que lleve a confusión.
+
+Dado un vector con sus coordenadas en la base canónica, ¿cómo puedo saber sus coordenadas en otra base $\mathcal{B}$? Tenemos dos vías, una que esploramos aquí y otra que veremos en [la sección siguiente](#cambiobase).
+
+El determinar las coordenadas de un vector en una base distinta de la canónica es realmente equivalente a la resolución de un sistema de ecuaciones lineales, donde la matriz de coeficientes es la formada por los vectores de la nueva base _por columnas_. 
+
+Lo vemos directamente con un ejemplo.
+
+__Ejemplo__
+
+```{r}
+# Cambio de base
+# Generar una base aleatoria y encontrar lo cambios a 
+# y desde la canónica
+repeat {
+  
+  B1 <- rMatrix(n = n, m = n * 4, values = -1:1)
+  B1 <- linearly_independents(B1)
+
+  if (ncol(B1) == n) break
+  
+}
+
+repeat {
+  
+  B2 <- rMatrix(n = n, m = n * 4, values = 0:2)
+  B2 <- linearly_independents(B2)
+
+  if (ncol(B2) == n) break
+  
+}
+# De B1 a C es trivial, es la propia B1.
+# De C a B1 es su inversa.
+P <- gauss_elimination(B1, eye(n), jordan = TRUE, diag1 = TRUE)
+
+# Generar un vector aleatorio y expresarlo en las coordenadas
+# de la base nueva
+scalars <- matrix(sample(-2:4, size = n, replace = TRUE), ncol = 1)
+v <- B1 %*% scalars
+coord <- gauss_elimination(B1, v, jordan = FALSE, diag1 = FALSE)
+```
+
+
+Consideremos el vector $v$ dado por sus coordenadas en la base canónica \(`r glue::glue("{to_latex(v)}")`\). Consideremos también la base:
+
+```{r}
+glue::glue(
+  "$$",
+  "\\mathcal{B}_{1} = ",
+  "\\left\\{[vectors_to_latex(B1)]\\right\\}",
+  "$$",
+  .open = "[", .close = "]"
+) %>% 
+  cat()
+```
+
+
+```{r}
+params <- letters[seq(ncol(B1))]
+str <- c("$", str_flatten(params, ", "), "$") %>% str_flatten()
+```
+
+Unos escalares `r str` serán las coordenadas de $v$ en la base $\mathcal{B}_1$ si se verifica:
+
+```{r}
+glue::glue(
+  "$$",
+  "[to_latex(v)] = [write_linear_combination(B1, vars = params)]",
+  "$$",
+  .open = "[", .close = "]"
+  
+) %>% 
+  cat()
+```
+que se puede reescribir como el siguiente sistema de ecuaciones lineales (donde la matriz de coeficientes resulta de poner los vectores de la base $\mathcal{B}_1$ por columnas):
+```{r}
+glue::glue(
+  "$$\\left\\{",
+  "[str_flatten(write_system(B1, v, latex = TRUE, vars = params))]",
+  "\\right.",
+  "$$",
+  .open = "[", .close = "]"
+) %>% 
+  cat()
+```
+
+Este sistema se puede resolver usando métodos Gaussianos, y nos da:
+```{r}
+glue_latex(
+  " v = [to_latex(matrix(params, ncol = 1))]_{\\mathcal{B}_1} = [to_latex(scalars)]_{\\mathcal{B}_1}"
+) %>% 
+  cat()
+```
+
+
 ## Cómo calcular la matriz de cambio de base entre dos bases de un mismo espacio vectorial {#cambiobase}
+
+Supongamos dos bases $\mathcal{B}_1$ y $\mathcal{B}_2$ de $V$, y que tenemos un vector $v$, expresado en coordenadas de $\mathcal{B}_1$. Nos planteamos una forma sencilla de calcular las coordenadas del mismo vector $v$ respecto a la otra base $\mathcal{B}_2$.
+
+El principal resultado teórico en el que nos basamos (y del que alguna pincelada hemos dado en [la sección anterior](#coord)) es el que sigue:
+
+> La transformación de las coordenadas para un mismo vector $v$ entre dos bases $\mathcal{B}_1$ y $\mathcal{B}_2$ viene dada por la siguiente expresión:
+$$[v]_{\mathcal{B}_2} = A [v]_{\mathcal{B}_1}$$
+donde $A$ es una matriz cuadrada formada por las coordenadas de cada vector de $\mathcal{B}_1$ en la base $\mathcal{B}_2$ y $[v]_{\mathcal{B}_i}$ indica las coordenadas de $v$ en la base $\mathcal{B}_i$.
+
+_Notación_: A la matriz de cambio entre la base $\mathcal{B}_1$ y $\mathcal{B}_2$, se suele denotar por $P_{\mathcal{B}_1 \to \mathcal{B}_2}$.
+
+Para calcular $P_{\mathcal{B}_1 \to \mathcal{B}_2}$, para cada vector de $\mathcal{B}_1$ vamos a encontrar sus coordenadas en la base $\mathcal{B}_2$. 
+
+Siguiendo las explicaciones acerca de [cómo calcular coordenadas de un vector respecto de una base](#coord), queremos expresar cada $v_i$ como combinación lineal de los $v_i'$:
+$$v_i = a_{1,i}v_1'+\ldots+a_{n,i}v_n'\quad\,\,\ i = 1,\ldots,n$$
+
+En este caso, los valores $a_{1,i},\ldots,a_{1,n}$ son las coordenadas de $v_i$ en la base $\mathcal{B}_2$, y podemos escribir, para todo $i=1,\ldots,n$:
+$$[v_i]_{\mathcal{B}_2} = \left(\begin{array}{c}
+a_{1,i}\\
+\vdots\\
+a_{n,i}
+\end{array}\right)$$
+
+Según el resultado anterior, la matriz de cambio de base $A=P_{\mathcal{B}_1 \to \mathcal{B}_2}$ tendrá por columnas estas coordenadas previamente calculadas:
+$$A = ([v_1]_{\mathcal{B}_2}|\ldots|[v_n]_{\mathcal{B}_2})$$
+
+<!-- Esto nos da una serie de $n$ sistemas de ecuaciones, y, si consideramos su matriz de coeficientes, resulta ser que son los vectores $v_i'$ de $\mathcal{B}_2$ puestos por columnas, mientras que el primer término, en este caso, es el vector $i$-ésimo de $\mathcal{B}_1$ puesto también en columna. -->
+
+Llamemos $B_1 = (v_1|v_2|\ldots|v_n)$ y $B_2 = (v_1'|v_2'|\ldots|v_n')$ a las dos matrices que resultan de poner los vectores de las dos bases que tenemos, en forma de columna.
+
+Entonces, resulta que la combinación lineal de más arriba que relaciona un $v_i$ con los vectores de $\mathcal{B}_2$ mediante sus coordenadas se puede reescribir como:
+$$v_i = B_2 [v_i]_{\mathcal{B}_2}$$
+
+Si vamos concatenando los $v_i$ en la izquierda, hasta formar la matriz $B_1$, en la derecha debemos ir haciendo lo mismo con sus coordenadas en la base $\mathcal{B}_2$, y entonces tenemos:
+$$(v_1|v_2|\ldots|v_n) = B_2\  ([v_1]_{\mathcal{B}_2}|[v_2]_{\mathcal{B}_2}\ldots|[v_n]_{\mathcal{B}_2})$$
+es decir,
+$$B_1 = B_2 P_{\mathcal{B}_1\to\mathcal{B}_2}$$
+
+Como nos interesa una forma fácil de calcular $P_{\mathcal{B}_1\to\mathcal{B}_2}$, podemos despejarla de la expresión anterior, luego tenemos $P_{\mathcal{B}_1\to\mathcal{B}_2} = B_2^{-1} B_1$.
+
+El método práctico para calcular esta matriz de cambio de base, por tanto, será usar Gauss-Jordan, comenzando por la matriz $(B_2|B_1)$ hasta dejarla en la forma $(I_n|A)$. En ese momento, en la derecha, tendremos $A=P_{\mathcal{B}_1\to\mathcal{B}_2}$.
+
+Una vez que tenemos determinada la matriz $A = P_{\mathcal{B}_1\to\mathcal{B}_2}$ que nos proporciona el cambio de base entre $\mathcal{B}_1$ y $\mathcal{B}_2$, el cambio inverso, es decir, entre $\mathcal{B}_2$ y $\mathcal{B}_1$, tiene como matriz asociada $A^{-1}$. Recordemos que la inversa de una matriz $A$ se puede calcular mediante el método de Gauss-Jordan, comenzando por $(A|I_n)$ y reduciéndola a la forma $(I_n|A^{-1})$.
+
+__Caso particular: Cambio de base a y desde la base canónica__
+
+Supongamos que una de las bases, por ejemplo $\mathcal{B}_2 = \mathcal{C}$ es la base canónica. La matriz que forman sus vectores por columna en este caso sería $B_2 = I_n$, la identidad.
+
+Aplicando lo desarrollado, tendríamos que la matriz de cambio de base de $\mathcal{B}_1$ a la canónica es:
+$P_{\mathcal{B}_1\to\mathcal{C}} = P_{\mathcal{B}_1\to\mathcal{B}_2} = B_2^{-1} B_1 = I_n B_1 = B_1$
+
+Y entonces $P_{\mathcal{C}\to\mathcal{B}_1} = P_{\mathcal{B}_2\to\mathcal{B}_1} = B_1^{-1} B_2 = B_1^{-1} I_n = B_1^{-1}$
+
+__Ejemplo__
+
+Consideremos dos bases:
+```{r}
+glue::glue(
+  "$$",
+  "\\mathcal{B}_{1} = ",
+  "\\left\\{[vectors_to_latex(B1)]\\right\\}",
+  "$$",
+  .open = "[", .close = "]"
+) %>% 
+  cat()
+
+glue::glue(
+  "$$",
+  "\\mathcal{B}_{2} = ",
+  "\\left\\{[vectors_to_latex(B2)]\\right\\}",
+  "$$",
+  .open = "[", .close = "]"
+) %>% 
+  cat()
+
+```
+
+Vamos a hallar la matriz del cambio de base entre ambas bases, en ambos sentidos.
+
+Comenzamos por hallar la matriz $A$ de cambio de base de $\mathcal{B}_1$ a $\mathcal{B}_2$.
+
+Construimos las matrices que tienen los vectores de $\mathcal{B}_1$ y $\mathcal{B}_2$ por columnas:
+```{r}
+glue_latex(
+  "B_1 = ",
+  "[glue_matrices(B1, latex = TRUE)]"
+) %>% 
+  cat()
+
+glue_latex(
+  "B_2 = ",
+  "[glue_matrices(B2, latex = TRUE)]"
+) %>% 
+  cat()
+```
+
+Como se ha mencionado antes, para hallar $A$, podemos hacer Gauss-Jordan sobre $(B_2|B_1)$ hasta llegar a $(I_n|A)$:
+```{r}
+P <- gauss_elimination(B2, B1, 
+                       jordan = TRUE, diag1 = TRUE)
+glue_latex(
+  "[glue_matrices(B2, B1, latex = TRUE)]",
+  "\\sim",
+  "[glue_matrices(P$splits, latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+
+Luego 
+```{r}
+glue_latex(
+  "P_{\\mathcal{B}_1\\to\\mathcal{B}_2} = ",
+  "[glue_matrices(P$splits[[2]], latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+
+Para el camino contrario, pasar de coordenadas en $\mathcal{B}_2$ a coordenadas en $\mathcal{B}_1$, hacemos la inversa de la matriz anterior (aunque podríamos haber aplicado el mismo razonamiento inicial):
+```{r}
+A <- P$splits[[2]]
+I <- eye(n)
+R <- gauss_elimination(A, I, 
+                       jordan = TRUE, diag1 = TRUE)
+glue_latex(
+  "[glue_matrices(A, I, latex = TRUE, fractions = TRUE)]",
+  "\\sim",
+  "[glue_matrices(R$splits, latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+
+De esta forma 
+```{r}
+invA <- R$splits[[2]]
+glue_latex(
+  "P_{\\mathcal{B}_2\\to\\mathcal{B}_1} = ",
+  "[glue_matrices(R$splits[[2]], latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+
+Para completar el ejemplo, vemos el cambio de base entre $\mathcal{B}_1$ y $\mathcal{C}$:
+```{r}
+glue_latex(
+  "P_{\\mathcal{B}_1\\to\\mathcal{C}} = B_1 = ",
+  "[glue_matrices(B1, latex = TRUE)]"
+) %>% 
+  cat()
+```
+
+Y entre $\mathcal{C}$ y $\mathcal{B}_1$ (calculando la inversa de $B_1$ usando Gauss-Jordan):
+```{r}
+glue_latex(
+  "P_{\\mathcal{C}\\to\\mathcal{B}_1} = B_1^{-1} = ",
+  "[glue_matrices(solve(B1), latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
