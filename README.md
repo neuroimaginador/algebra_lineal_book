@@ -3,3 +3,6 @@ En este libro vamos a recopilar algunas de las preguntas y dudas más frecuentes
 No pretende ser un libro de teoría exhaustivo, con demostraciones de teoremas, sino que pretende complementar a ese tipo de manuales.
 
 Cada capítulo incluye preguntas y sus respuestas acerca de aquellos procedimientos más usuales relacionados con el tema correspondiente.
+
+Enlace:
+[Preguntas y respuestas de Álgebra Lineal](https://algebra-lineal.netlify.app)
