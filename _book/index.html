@@ -97,13 +97,21 @@
 <li class="chapter" data-level="3.3" data-path="apli.html"><a href="apli.html#caracterización-de-la-inyectividad"><i class="fa fa-check"></i><b>3.3</b> Caracterización de la inyectividad</a></li>
 <li class="chapter" data-level="3.4" data-path="apli.html"><a href="apli.html#cómo-calcular-el-subespacio-imagen-de-una-aplicación-lineal"><i class="fa fa-check"></i><b>3.4</b> Cómo calcular el subespacio imagen de una aplicación lineal</a></li>
 <li class="chapter" data-level="3.5" data-path="apli.html"><a href="apli.html#caracterización-de-la-sobreyectividad"><i class="fa fa-check"></i><b>3.5</b> Caracterización de la sobreyectividad</a></li>
-<li class="chapter" data-level="3.6" data-path="apli.html"><a href="apli.html#a-qué-se-llama-rango-y-nulidad-de-la-aplicación-lineal"><i class="fa fa-check"></i><b>3.6</b> A qué se llama rango y nulidad de la aplicación lineal</a></li>
-<li class="chapter" data-level="3.7" data-path="apli.html"><a href="apli.html#comprobación-del-teorema-de-la-dimensión-1"><i class="fa fa-check"></i><b>3.7</b> Comprobación del teorema de la dimensión</a></li>
+<li class="chapter" data-level="3.6" data-path="apli.html"><a href="apli.html#cómo-determinar-la-imagen-de-un-subespacio-vectorial"><i class="fa fa-check"></i><b>3.6</b> Cómo determinar la imagen de un subespacio vectorial</a></li>
+<li class="chapter" data-level="3.7" data-path="apli.html"><a href="apli.html#a-qué-se-llama-rango-y-nulidad-de-la-aplicación-lineal"><i class="fa fa-check"></i><b>3.7</b> A qué se llama rango y nulidad de la aplicación lineal</a></li>
+<li class="chapter" data-level="3.8" data-path="apli.html"><a href="apli.html#comprobación-del-teorema-de-la-dimensión-1"><i class="fa fa-check"></i><b>3.8</b> Comprobación del teorema de la dimensión</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="diagonalización.html"><a href="diagonalización.html"><i class="fa fa-check"></i><b>4</b> Diagonalización</a></li>
 <li class="chapter" data-level="5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html"><i class="fa fa-check"></i><b>5</b> Espacios Euclídeos</a></li>
+<li class="chapter" data-level="6" data-path="problems.html"><a href="problems.html"><i class="fa fa-check"></i><b>6</b> Problemas Resueltos</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="problems.html"><a href="problems.html#prob-ev"><i class="fa fa-check"></i><b>6.1</b> Espacios Vectoriales</a></li>
+<li class="chapter" data-level="6.2" data-path="problems.html"><a href="problems.html#prob-apli"><i class="fa fa-check"></i><b>6.2</b> Aplicaciones lineales</a></li>
+<li class="chapter" data-level="6.3" data-path="problems.html"><a href="problems.html#prob-diag"><i class="fa fa-check"></i><b>6.3</b> Diagonalización</a></li>
+<li class="chapter" data-level="6.4" data-path="problems.html"><a href="problems.html#prob-espeuclideo"><i class="fa fa-check"></i><b>6.4</b> Espacios Euclídeos</a></li>
+</ul></li>
 <li class="divider"></li>
-<li><a href="https://dominlopez.netlify.app" target="blank">Domingo López</a></li>
+<li><a href="https://dominlopez.netlify.app" target="blank">Escrito por Domingo López</a></li>
 
 </ul>
 
@@ -133,6 +141,7 @@
 <p>No pretende ser un libro de teoría exhaustivo, con demostraciones de teoremas, sino que pretende complementar a ese tipo de manuales.</p>
 <p>Cada capítulo incluye preguntas y sus respuestas acerca de aquellos procedimientos más usuales relacionados con el tema correspondiente.</p>
 <p>La idea de uso de este <em>libro</em> es que se pueda navegar libremente, yendo a aquellas preguntas sobre las que se tenga dudas, ya que en su respuesta se incluirán enlaces a todos los contenidos y procedimientos necesarios para poder resolver dicha cuestión.</p>
+<p>Además, incluimos un <a href="problems.html#problems">último capítulo</a> con problemas resueltos, siguiendo las indicaciones dadas en los capítulos correspondientes.</p>
 
 </div>
             </section>
@@ -185,26 +194,13 @@ gitbook.start({
 },
 "download": ["Algebra_Lineal.pdf", "Algebra_Lineal.epub"],
 "toc": {
-"collapse": "subsection"
+"collapse": "section",
+"scroll_highlight": true
 }
 });
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

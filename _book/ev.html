@@ -97,13 +97,21 @@
 <li class="chapter" data-level="3.3" data-path="apli.html"><a href="apli.html#caracterización-de-la-inyectividad"><i class="fa fa-check"></i><b>3.3</b> Caracterización de la inyectividad</a></li>
 <li class="chapter" data-level="3.4" data-path="apli.html"><a href="apli.html#cómo-calcular-el-subespacio-imagen-de-una-aplicación-lineal"><i class="fa fa-check"></i><b>3.4</b> Cómo calcular el subespacio imagen de una aplicación lineal</a></li>
 <li class="chapter" data-level="3.5" data-path="apli.html"><a href="apli.html#caracterización-de-la-sobreyectividad"><i class="fa fa-check"></i><b>3.5</b> Caracterización de la sobreyectividad</a></li>
-<li class="chapter" data-level="3.6" data-path="apli.html"><a href="apli.html#a-qué-se-llama-rango-y-nulidad-de-la-aplicación-lineal"><i class="fa fa-check"></i><b>3.6</b> A qué se llama rango y nulidad de la aplicación lineal</a></li>
-<li class="chapter" data-level="3.7" data-path="apli.html"><a href="apli.html#comprobación-del-teorema-de-la-dimensión-1"><i class="fa fa-check"></i><b>3.7</b> Comprobación del teorema de la dimensión</a></li>
+<li class="chapter" data-level="3.6" data-path="apli.html"><a href="apli.html#cómo-determinar-la-imagen-de-un-subespacio-vectorial"><i class="fa fa-check"></i><b>3.6</b> Cómo determinar la imagen de un subespacio vectorial</a></li>
+<li class="chapter" data-level="3.7" data-path="apli.html"><a href="apli.html#a-qué-se-llama-rango-y-nulidad-de-la-aplicación-lineal"><i class="fa fa-check"></i><b>3.7</b> A qué se llama rango y nulidad de la aplicación lineal</a></li>
+<li class="chapter" data-level="3.8" data-path="apli.html"><a href="apli.html#comprobación-del-teorema-de-la-dimensión-1"><i class="fa fa-check"></i><b>3.8</b> Comprobación del teorema de la dimensión</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="diagonalización.html"><a href="diagonalización.html"><i class="fa fa-check"></i><b>4</b> Diagonalización</a></li>
 <li class="chapter" data-level="5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html"><i class="fa fa-check"></i><b>5</b> Espacios Euclídeos</a></li>
+<li class="chapter" data-level="6" data-path="problems.html"><a href="problems.html"><i class="fa fa-check"></i><b>6</b> Problemas Resueltos</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="problems.html"><a href="problems.html#prob-ev"><i class="fa fa-check"></i><b>6.1</b> Espacios Vectoriales</a></li>
+<li class="chapter" data-level="6.2" data-path="problems.html"><a href="problems.html#prob-apli"><i class="fa fa-check"></i><b>6.2</b> Aplicaciones lineales</a></li>
+<li class="chapter" data-level="6.3" data-path="problems.html"><a href="problems.html#prob-diag"><i class="fa fa-check"></i><b>6.3</b> Diagonalización</a></li>
+<li class="chapter" data-level="6.4" data-path="problems.html"><a href="problems.html#prob-espeuclideo"><i class="fa fa-check"></i><b>6.4</b> Espacios Euclídeos</a></li>
+</ul></li>
 <li class="divider"></li>
-<li><a href="https://dominlopez.netlify.app" target="blank">Domingo López</a></li>
+<li><a href="https://dominlopez.netlify.app" target="blank">Escrito por Domingo López</a></li>
 
 </ul>
 
@@ -155,7 +163,7 @@ es un vector de <span class="math inline">\(V\)</span>.</p>
 entonces el sistema de los <span class="math inline">\(v_i\)</span> será independiente si necesariamente todos los <span class="math inline">\(\alpha_i\)</span> valen 0.</p>
 <p>Evidentemente, cualquier sistema de vectores que incluya al vector 0 no es linealmente independiente.</p>
 <p><strong>Ejemplo</strong></p>
-<p>Consideremos el sistema de vectores <span class="math inline">\(\left\{\left(\begin{array}{c} 2\\ 1\\ -2\\ -1 \end{array}\right) , \left(\begin{array}{c} 1\\ 0\\ 1\\ 0 \end{array}\right) , \left(\begin{array}{c} 4\\ 3\\ -8\\ -3 \end{array}\right) \right\}\)</span>.</p>
+<p>Consideremos el sistema de vectores <span class="math inline">\(\left\{\left( \begin{array}{c@{}} 2\\ 1\\ -2\\ -1 \end{array} \right) , \left( \begin{array}{c@{}} 1\\ 0\\ 1\\ 0 \end{array} \right) , \left( \begin{array}{c@{}} 4\\ 3\\ -8\\ -3 \end{array} \right) \right\}\)</span>.</p>
 <p>¿Cómo podemos saber si es linealmente independiente?</p>
 <p>Comenzamos por ver que no está el vector 0. Estudiemos entonces qué pasa si escribimos una combinación lineal de los tres vectores igualada a cero:
 <span class="math display">\[\alpha_{1}\left(\begin{array}{c}
@@ -212,7 +220,7 @@ entonces el sistema de los <span class="math inline">\(v_i\)</span> será indepe
 \sim\left(
 \begin{array}{ccc|c}
 2 &amp; 1 &amp; 4 &amp; 0\\
-0 &amp; -1/2 &amp; 1 &amp; 0\\
+0 &amp; - \frac{1}{2} &amp; 1 &amp; 0\\
 0 &amp; 0 &amp; 0 &amp; 0\\
 0 &amp; 0 &amp; 0 &amp; 0
 \end{array}
@@ -227,7 +235,7 @@ entonces el sistema de los <span class="math inline">\(v_i\)</span> será indepe
 <p>Es decir, si yo voy dando valores a unos escalares <span class="math inline">\(\alpha_1,\ldots,\alpha_n\)</span>, entonces el vector <span class="math inline">\(\alpha_1v_1+\ldots+\alpha_nv_n\)</span> es combinación lineal de los de <span class="math inline">\(\mathcal{S}\)</span>, luego pertenece al subespacio generado por éste.</p>
 <p>Denotamos como <span class="math inline">\(\mathcal{L}(\mathcal{S})\)</span> al subsepacio generado por <span class="math inline">\(\mathcal{S}\)</span>.</p>
 <p><strong>Ejemplo</strong></p>
-<p>Consideremos el sistema de vectores <span class="math inline">\(\mathcal{S} = \left\{\left(\begin{array}{c} 2\\ 1\\ -2\\ -1 \end{array}\right) , \left(\begin{array}{c} 1\\ 0\\ 1\\ 0 \end{array}\right) \right\}\)</span>.</p>
+<p>Consideremos el sistema de vectores <span class="math inline">\(\mathcal{S} = \left\{\left( \begin{array}{c@{}} 2\\ 1\\ -2\\ -1 \end{array} \right) , \left( \begin{array}{c@{}} 1\\ 0\\ 1\\ 0 \end{array} \right) \right\}\)</span>.</p>
 <p>Entonces
 <span class="math display">\[\mathcal{L}(\mathcal{S}) = \left\{\alpha_{1}\left(\begin{array}{c}
 2\\
@@ -279,7 +287,41 @@ entonces el sistema de los <span class="math inline">\(v_i\)</span> será indepe
 </ul>
 <p>Dado un sistema de vectores <span class="math inline">\(S\)</span> que se sepa que es sistema generador de un espacio o de un subespacio, la mejor estrategia es utilizar transformaciones elementales sobre <span class="math inline">\(S\)</span> para eliminar aquellos vectores que sean combinaciones lineales de los demás.</p>
 <p><strong>Ejemplo</strong></p>
-<p>Consideremos el sistema de vectores <span class="math inline">\(\mathcal{S} = \left\{\left(\begin{array}{c} -1\\ 2\\ -1\\ -1 \end{array}\right) , \left(\begin{array}{c} -2\\ -1\\ -1\\ -1 \end{array}\right) , \left(\begin{array}{c} -2\\ -2\\ -1\\ 2 \end{array}\right) , \left(\begin{array}{c} -5\\ -1\\ -3\\ 0 \end{array}\right) \right\}\)</span>. Vamos a encontrar un sistema de vectores que sea base de <span class="math inline">\(\mathcal{L}(S)\)</span>. Para ellos, vamos a eliminar de <span class="math inline">\(S\)</span> aquellos vectores que sean combinaciones lineales de los demás.</p>
+<p>Consideremos el sistema de vectores
+<span class="math display">\[\mathcal{S} = \left\{\left(
+\begin{array}{c@{}}
+-1\\
+2\\
+-1\\
+-1
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+-2\\
+-1\\
+-1\\
+-1
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+-2\\
+-2\\
+-1\\
+2
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+-5\\
+-1\\
+-3\\
+0
+\end{array}
+\right)
+\right\}\]</span>
+Vamos a encontrar un sistema de vectores que sea base de <span class="math inline">\(\mathcal{L}(S)\)</span>. Para ellos, vamos a eliminar de <span class="math inline">\(S\)</span> aquellos vectores que sean combinaciones lineales de los demás.</p>
 <p>Esa tarea es justo la que realiza el método de Gauss con las filas de una matriz, al ponerla en forma escalonada. Si aplicamos Gauss a una matriz, las filas que acaban siendo de ceros son las que originalmente eran combinación lineal de las demás.</p>
 <p>Por tanto, nos aprovechamos de esta propiedad para eliminar vectores linealmente dependientes. Vamos a construir la matriz <span class="math inline">\(M\)</span> resultado de poner los vectores de <span class="math inline">\(S\)</span> por filas (primer vector en primera fila, segundo en segunda fila, etc.).
 <span class="math display">\[M = \left(
@@ -304,7 +346,7 @@ entonces el sistema de los <span class="math inline">\(v_i\)</span> será indepe
 \begin{array}{cccc@{}}
 -1 &amp; 2 &amp; -1 &amp; -1\\
 0 &amp; -5 &amp; 1 &amp; 1\\
-0 &amp; 0 &amp; -1/5 &amp; 14/5\\
+0 &amp; 0 &amp; - \frac{1}{5} &amp; \frac{14}{5}\\
 0 &amp; 0 &amp; 0 &amp; 0
 \end{array}
 \right)
@@ -312,24 +354,30 @@ entonces el sistema de los <span class="math inline">\(v_i\)</span> será indepe
 <p>Como se puede ver, tenemos que la última fila es de ceros. Por tanto, el vector original del que procede esa fila es linealmente dependiente del resto de vectores de <span class="math inline">\(S\)</span>.</p>
 <p>Si hubiéramos tenido que intercambiar filas en algún momento, habría que llevar cuenta de cada intercambio para saber a qué vector original se corresponden aquellas filas que valen 0.</p>
 <p>Por tanto, la base del subespacio generado por <span class="math inline">\(S\)</span>, que consiste en únicamente los vectores linealmente independientes de <span class="math inline">\(S\)</span>, es:
-<span class="math display">\[\mathcal{B}_{\mathcal{L}(\mathcal{S})} = \left\{\left(\begin{array}{c}
+<span class="math display">\[\mathcal{B}_{\mathcal{L}(\mathcal{S})} = \left\{\left(
+\begin{array}{c@{}}
 -1\\
 2\\
 -1\\
 -1
-\end{array}\right)
-, \left(\begin{array}{c}
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
 -2\\
 -1\\
 -1\\
 -1
-\end{array}\right)
-, \left(\begin{array}{c}
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
 -2\\
 -2\\
 -1\\
 2
-\end{array}\right)
+\end{array}
+\right)
 \right\}\]</span></p>
 </div>
 <div id="base" class="section level2" number="2.5">
@@ -388,7 +436,7 @@ t
 0
 \end{array}\right)
 {}\]</span></p>
-<p>Es decir, <span class="math inline">\(\mathcal{S} = \left\{\left(\begin{array}{c} -1\\ 2\\ -1\\ -1 \end{array}\right) , \left(\begin{array}{c} -2\\ -1\\ -1\\ -1 \end{array}\right) , \left(\begin{array}{c} -2\\ -2\\ -1\\ 2 \end{array}\right) , \left(\begin{array}{c} -5\\ -1\\ -3\\ 0 \end{array}\right) \right\}\)</span> es un sistema generador del subespacio <span class="math inline">\(U\)</span>. Este proceso no nos asegura que sean vectores linealmente independientes, así que no podemos decir, de momento, que sea una base de <span class="math inline">\(U\)</span>.</p>
+<p>Es decir, <span class="math inline">\(\mathcal{S} = \left\{\left( \begin{array}{c@{}} -1\\ 2\\ -1\\ -1 \end{array} \right) , \left( \begin{array}{c@{}} -2\\ -1\\ -1\\ -1 \end{array} \right) , \left( \begin{array}{c@{}} -2\\ -2\\ -1\\ 2 \end{array} \right) , \left( \begin{array}{c@{}} -5\\ -1\\ -3\\ 0 \end{array} \right) \right\}\)</span> es un sistema generador del subespacio <span class="math inline">\(U\)</span>. Este proceso no nos asegura que sean vectores linealmente independientes, así que no podemos decir, de momento, que sea una base de <span class="math inline">\(U\)</span>.</p>
 <p>A partir de aquí, basta aplicar lo descrito en <a href="ev.html#sistgenabase">la sección sobre cómo extraer una base a partir de un sistema generador</a>.</p>
 </div>
 <div id="partiendo-de-las-ecuaciones-cartesianas" class="section level3" number="2.5.2">
@@ -535,12 +583,14 @@ t
 \end{array}\right)
 {}\]</span></p>
 <p>Por tanto, una base de <span class="math inline">\(U\cap W\)</span> será:
-<span class="math display">\[\mathcal{B}_{U\cap W} = \left\{\left(\begin{array}{c}
+<span class="math display">\[\mathcal{B}_{U\cap W} = \left\{\left(
+\begin{array}{c@{}}
 0\\
 1\\
 -3\\
 1
-\end{array}\right)
+\end{array}
+\right)
 \right\}\]</span></p>
 <p>Y, así, <span class="math inline">\(\mathrm{dim}(U\cap W) = 1\)</span>.</p>
 </div>
@@ -578,96 +628,124 @@ t
 3x+ z+ 3t &amp; = &amp; 0\\
 \end{array}\right\}\]</span></p>
 <p>Podemos aplicar la <a href="ev.html#base">técnica para conseguir una base a partir de las ecuaciones cartesianas</a>, y llegamos a las siguientes bases:
-<span class="math display">\[\mathcal{B}_{U} = \left\{\left(\begin{array}{c}
+<span class="math display">\[\mathcal{B}_{U} = \left\{\left(
+\begin{array}{c@{}}
 0\\
 0\\
 1\\
 0
-\end{array}\right)
-, \left(\begin{array}{c}
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
 0\\
 1\\
 0\\
 1
-\end{array}\right)
+\end{array}
+\right)
 \right\}\]</span></p>
-<p><span class="math display">\[\mathcal{B}_{W} = \left\{\left(\begin{array}{c}
+<p><span class="math display">\[\mathcal{B}_{W} = \left\{\left(
+\begin{array}{c@{}}
 0\\
 1\\
 0\\
 0
-\end{array}\right)
-, \left(\begin{array}{c}
--1/3\\
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+- \frac{1}{3}\\
 0\\
 1\\
 0
-\end{array}\right)
-, \left(\begin{array}{c}
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
 -1\\
 0\\
 0\\
 1
-\end{array}\right)
+\end{array}
+\right)
 \right\}\]</span></p>
 <p>Ahora, tomando
-<span class="math display">\[\mathcal{G} = \mathcal{B}_{U} \cup \mathcal{B}_{W}\left\{\left(\begin{array}{c}
+<span class="math display">\[\mathcal{G} = \mathcal{B}_{U} \cup \mathcal{B}_{W}\left\{\left(
+\begin{array}{c@{}}
 0\\
 0\\
 1\\
 0
-\end{array}\right)
-, \left(\begin{array}{c}
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
 0\\
 1\\
 0\\
 1
-\end{array}\right)
-, \left(\begin{array}{c}
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
 0\\
 1\\
 0\\
 0
-\end{array}\right)
-, \left(\begin{array}{c}
--1/3\\
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+- \frac{1}{3}\\
 0\\
 1\\
 0
-\end{array}\right)
-, \left(\begin{array}{c}
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
 -1\\
 0\\
 0\\
 1
-\end{array}\right)
+\end{array}
+\right)
 \right\}\]</span>
 que es un sistema generador de la suma, podemos construir una base de <span class="math inline">\(U+W\)</span> <a href="ev.html#sistgenabase">eliminando los vectores de <span class="math inline">\(\mathcal{G}\)</span> que sean combinaciones lineales de los demás</a>, lo cual requiere usar el método de Gauss para obtener la forma escalonada reducida de ese sistema de vectores.</p>
 <p>De esta forma, encontramos una base de <span class="math inline">\(U+W\)</span>:
-<span class="math display">\[\mathcal{B}_{U + W} = \left\{\left(\begin{array}{c}
+<span class="math display">\[\mathcal{B}_{U + W} = \left\{\left(
+\begin{array}{c@{}}
 0\\
 1\\
 0\\
 1
-\end{array}\right)
-, \left(\begin{array}{c}
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
 0\\
 1\\
 0\\
 0
-\end{array}\right)
-, \left(\begin{array}{c}
--1/3\\
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+- \frac{1}{3}\\
 0\\
 1\\
 0
-\end{array}\right)
-, \left(\begin{array}{c}
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
 -1\\
 0\\
 0\\
 1
-\end{array}\right)
+\end{array}
+\right)
 \right\}\]</span></p>
 <p>Y, así, tenemos que <span class="math inline">\(\mathrm{dim}(U+W) = 4\)</span>.</p>
 </div>
@@ -697,18 +775,22 @@ que es un sistema generador de la suma, podemos construir una base de <span clas
 <p>Tomamos entonces, para formar la base de <span class="math inline">\(W\)</span>, aquellos vectores de la base canónica que <strong>no</strong> tengan un 1 en esas posiciones. Los vectores así determinados nos dan la base de <span class="math inline">\(W\)</span>, el subespacio suplementario, pues nos aseguramos las dos propiedades mencionadas más arriba.</p>
 <p><strong>Ejemplo</strong></p>
 <p>Consideremos el subespacio <span class="math inline">\(U\)</span> cuya base es:
-<span class="math display">\[\mathcal{B}_U = \left\{\left(\begin{array}{c}
+<span class="math display">\[\mathcal{B}_U = \left\{\left(
+\begin{array}{c@{}}
 2\\
 0\\
 1\\
 -1
-\end{array}\right)
-, \left(\begin{array}{c}
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
 1\\
 -1\\
 0\\
 1
-\end{array}\right)
+\end{array}
+\right)
 \right\}\]</span></p>
 <p>Si no tuviéramos su base, sino que <span class="math inline">\(U\)</span> viene dado de otra forma, <a href="ev.html#base">ya sabemos cómo encontrar la base</a>.</p>
 <p>Ponemos los vectores de la base de <span class="math inline">\(U\)</span> en <em>filas</em> y aplicamos el método de Gauss (o Gauss-Jordan) para encontrar la forma escalonada de la matriz:
@@ -721,50 +803,62 @@ que es un sistema generador de la suma, podemos construir una base de <span clas
 \sim\left(
 \begin{array}{cccc@{}}
 2 &amp; 0 &amp; 1 &amp; -1\\
-0 &amp; -1 &amp; -1/2 &amp; 3/2
+0 &amp; -1 &amp; - \frac{1}{2} &amp; \frac{3}{2}
 \end{array}
 \right)
 \]</span></p>
 <p>Al inspeccionar la matriz escalonada, podemos ver que sus pivotes (primer elemento no nulo de cada fila) están en las columnas <span class="math inline">\(\{1, 2\}\)</span>.</p>
 <p>Consideramos la base canónica
-<span class="math display">\[\mathcal{C} = \{e_i\} = \left\{\left(\begin{array}{c}
+<span class="math display">\[\mathcal{C} = \{e_i\} = \left\{\left(
+\begin{array}{c@{}}
 1\\
 0\\
 0\\
 0
-\end{array}\right)
-, \left(\begin{array}{c}
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
 0\\
 1\\
 0\\
 0
-\end{array}\right)
-, \left(\begin{array}{c}
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
 0\\
 0\\
 1\\
 0
-\end{array}\right)
-, \left(\begin{array}{c}
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
 0\\
 0\\
 0\\
 1
-\end{array}\right)
+\end{array}
+\right)
 \right\}\]</span></p>
 <p>Nos vamos a quedar con aquellos vectores de <span class="math inline">\(\mathcal{C}\)</span> que no tengan un 1 en las posiciones de los pivotes (<span class="math inline">\(\{1, 2\}\)</span>). De esta forma, lo que tenemos es una base de <span class="math inline">\(W\)</span>, el subespacio suplementario de <span class="math inline">\(U\)</span>:
-<span class="math display">\[\mathcal{B}_W = \left\{\left(\begin{array}{c}
+<span class="math display">\[\mathcal{B}_W = \left\{\left(
+\begin{array}{c@{}}
 0\\
 0\\
 1\\
 0
-\end{array}\right)
-, \left(\begin{array}{c}
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
 0\\
 0\\
 0\\
 1
-\end{array}\right)
+\end{array}
+\right)
 \right\}\]</span></p>
 </div>
 <div id="coord" class="section level2" number="2.12">
@@ -781,35 +875,43 @@ que es un sistema generador de la suma, podemos construir una base de <span clas
 \end{array}
 \right)_{\mathcal{B}}\]</span></p>
 <p>Cuando la base <span class="math inline">\(\mathcal{B}\)</span> es la canónica, no es necesario indicar el nombre de la base con respecto a la cual tomamos las coordenadas, a menos que lleve a confusión.</p>
-<p>Dado un vector con sus coordenadas en la base canónica, ¿cómo puedo saber sus coordenadas en otra base <span class="math inline">\(\mathcal{B}\)</span>? Tenemos dos vías, una que esploramos aquí y otra que veremos en <a href="ev.html#cambiobase">la sección siguiente</a>.</p>
+<p>Dado un vector con sus coordenadas en la base canónica, ¿cómo puedo saber sus coordenadas en otra base <span class="math inline">\(\mathcal{B}\)</span>? Tenemos dos vías, una que exploramos aquí y otra que veremos en <a href="ev.html#cambiobase">la sección siguiente</a>.</p>
 <p>El determinar las coordenadas de un vector en una base distinta de la canónica es realmente equivalente a la resolución de un sistema de ecuaciones lineales, donde la matriz de coeficientes es la formada por los vectores de la nueva base <em>por columnas</em>.</p>
 <p>Lo vemos directamente con un ejemplo.</p>
 <p><strong>Ejemplo</strong></p>
 <p>Consideremos el vector <span class="math inline">\(v\)</span> dado por sus coordenadas en la base canónica <span class="math inline">\(\left(\begin{array}{c} -2\\ -5\\ 6\\ -2 \end{array}\right)\)</span>. Consideremos también la base:</p>
-<p><span class="math display">\[\mathcal{B}_{1} = \left\{\left(\begin{array}{c}
+<p><span class="math display">\[\mathcal{B}_{1} = \left\{\left(
+\begin{array}{c@{}}
 0\\
 -1\\
 1\\
 -1
-\end{array}\right)
-, \left(\begin{array}{c}
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
 -1\\
 1\\
 0\\
 -1
-\end{array}\right)
-, \left(\begin{array}{c}
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
 0\\
 0\\
 1\\
 -1
-\end{array}\right)
-, \left(\begin{array}{c}
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
 1\\
 1\\
 -1\\
 -1
-\end{array}\right)
+\end{array}
+\right)
 \right\}\]</span></p>
 <p>Unos escalares <span class="math inline">\(a, b, c, d\)</span> serán las coordenadas de <span class="math inline">\(v\)</span> en la base <span class="math inline">\(\mathcal{B}_1\)</span> si se verifica:</p>
 <p><span class="math display">\[\left(\begin{array}{c}
@@ -889,69 +991,85 @@ a_{n,i}
 <!-- Esto nos da una serie de $n$ sistemas de ecuaciones, y, si consideramos su matriz de coeficientes, resulta ser que son los vectores $v_i'$ de $\mathcal{B}_2$ puestos por columnas, mientras que el primer término, en este caso, es el vector $i$-ésimo de $\mathcal{B}_1$ puesto también en columna. -->
 <p>Llamemos <span class="math inline">\(B_1 = (v_1|v_2|\ldots|v_n)\)</span> y <span class="math inline">\(B_2 = (v_1&#39;|v_2&#39;|\ldots|v_n&#39;)\)</span> a las dos matrices que resultan de poner los vectores de las dos bases que tenemos, en forma de columna.</p>
 <p>Entonces, resulta que la combinación lineal de más arriba que relaciona un <span class="math inline">\(v_i\)</span> con los vectores de <span class="math inline">\(\mathcal{B}_2\)</span> mediante sus coordenadas se puede reescribir como:
-<span class="math display">\[v_i = B_2 [v_i]_{\mathcal{B}_2}\]</span></p>
+<span class="math display">\[v_i = B_2\ [v_i]_{\mathcal{B}_2}\]</span></p>
 <p>Si vamos concatenando los <span class="math inline">\(v_i\)</span> en la izquierda, hasta formar la matriz <span class="math inline">\(B_1\)</span>, en la derecha debemos ir haciendo lo mismo con sus coordenadas en la base <span class="math inline">\(\mathcal{B}_2\)</span>, y entonces tenemos:
 <span class="math display">\[(v_1|v_2|\ldots|v_n) = B_2\  ([v_1]_{\mathcal{B}_2}|[v_2]_{\mathcal{B}_2}\ldots|[v_n]_{\mathcal{B}_2})\]</span>
 es decir,
-<span class="math display">\[B_1 = B_2 P_{\mathcal{B}_1\to\mathcal{B}_2}\]</span></p>
-<p>Como nos interesa una forma fácil de calcular <span class="math inline">\(P_{\mathcal{B}_1\to\mathcal{B}_2}\)</span>, podemos despejarla de la expresión anterior, luego tenemos <span class="math inline">\(P_{\mathcal{B}_1\to\mathcal{B}_2} = B_2^{-1} B_1\)</span>.</p>
+<span class="math display">\[B_1 = B_2\ P_{\mathcal{B}_1\to\mathcal{B}_2}\]</span></p>
+<p>Como nos interesa una forma fácil de calcular <span class="math inline">\(P_{\mathcal{B}_1\to\mathcal{B}_2}\)</span>, podemos despejarla de la expresión anterior, luego tenemos <span class="math inline">\(P_{\mathcal{B}_1\to\mathcal{B}_2} = B_2^{-1}\ B_1\)</span>.</p>
 <p>El método práctico para calcular esta matriz de cambio de base, por tanto, será usar Gauss-Jordan, comenzando por la matriz <span class="math inline">\((B_2|B_1)\)</span> hasta dejarla en la forma <span class="math inline">\((I_n|A)\)</span>. En ese momento, en la derecha, tendremos <span class="math inline">\(A=P_{\mathcal{B}_1\to\mathcal{B}_2}\)</span>.</p>
 <p>Una vez que tenemos determinada la matriz <span class="math inline">\(A = P_{\mathcal{B}_1\to\mathcal{B}_2}\)</span> que nos proporciona el cambio de base entre <span class="math inline">\(\mathcal{B}_1\)</span> y <span class="math inline">\(\mathcal{B}_2\)</span>, el cambio inverso, es decir, entre <span class="math inline">\(\mathcal{B}_2\)</span> y <span class="math inline">\(\mathcal{B}_1\)</span>, tiene como matriz asociada <span class="math inline">\(A^{-1}\)</span>. Recordemos que la inversa de una matriz <span class="math inline">\(A\)</span> se puede calcular mediante el método de Gauss-Jordan, comenzando por <span class="math inline">\((A|I_n)\)</span> y reduciéndola a la forma <span class="math inline">\((I_n|A^{-1})\)</span>.</p>
 <p><strong>Caso particular: Cambio de base a y desde la base canónica</strong></p>
 <p>Supongamos que una de las bases, por ejemplo <span class="math inline">\(\mathcal{B}_2 = \mathcal{C}\)</span> es la base canónica. La matriz que forman sus vectores por columna en este caso sería <span class="math inline">\(B_2 = I_n\)</span>, la identidad.</p>
 <p>Aplicando lo desarrollado, tendríamos que la matriz de cambio de base de <span class="math inline">\(\mathcal{B}_1\)</span> a la canónica es:
-<span class="math inline">\(P_{\mathcal{B}_1\to\mathcal{C}} = P_{\mathcal{B}_1\to\mathcal{B}_2} = B_2^{-1} B_1 = I_n B_1 = B_1\)</span></p>
-<p>Y entonces <span class="math inline">\(P_{\mathcal{C}\to\mathcal{B}_1} = P_{\mathcal{B}_2\to\mathcal{B}_1} = B_1^{-1} B_2 = B_1^{-1} I_n = B_1^{-1}\)</span></p>
+<span class="math inline">\(P_{\mathcal{B}_1\to\mathcal{C}} = P_{\mathcal{B}_1\to\mathcal{B}_2} = B_2^{-1}\ B_1 = I_n \ B_1 = B_1\)</span>.</p>
+<p>Y entonces <span class="math inline">\(P_{\mathcal{C}\to\mathcal{B}_1} = P_{\mathcal{B}_2\to\mathcal{B}_1} = B_1^{-1}\ B_2 = B_1^{-1}\ I_n = B_1^{-1}\)</span>.</p>
 <p><strong>Ejemplo</strong></p>
 <p>Consideremos dos bases:
-<span class="math display">\[\mathcal{B}_{1} = \left\{\left(\begin{array}{c}
+<span class="math display">\[\mathcal{B}_{1} = \left\{\left(
+\begin{array}{c@{}}
 0\\
 -1\\
 1\\
 -1
-\end{array}\right)
-, \left(\begin{array}{c}
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
 -1\\
 1\\
 0\\
 -1
-\end{array}\right)
-, \left(\begin{array}{c}
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
 0\\
 0\\
 1\\
 -1
-\end{array}\right)
-, \left(\begin{array}{c}
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
 1\\
 1\\
 -1\\
 -1
-\end{array}\right)
-\right\}\]</span><span class="math display">\[\mathcal{B}_{2} = \left\{\left(\begin{array}{c}
+\end{array}
+\right)
+\right\}\]</span><span class="math display">\[\mathcal{B}_{2} = \left\{\left(
+\begin{array}{c@{}}
 0\\
 2\\
 0\\
 0
-\end{array}\right)
-, \left(\begin{array}{c}
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
 2\\
 2\\
 0\\
 0
-\end{array}\right)
-, \left(\begin{array}{c}
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
 2\\
 2\\
 2\\
 2
-\end{array}\right)
-, \left(\begin{array}{c}
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
 1\\
 1\\
 0\\
 2
-\end{array}\right)
+\end{array}
+\right)
 \right\}\]</span></p>
 <p>Vamos a hallar la matriz del cambio de base entre ambas bases, en ambos sentidos.</p>
 <p>Comenzamos por hallar la matriz <span class="math inline">\(A\)</span> de cambio de base de <span class="math inline">\(\mathcal{B}_1\)</span> a <span class="math inline">\(\mathcal{B}_2\)</span>.</p>
@@ -984,48 +1102,48 @@ es decir,
 \right)
 \sim\left(
 \begin{array}{cccc|cccc}
-1 &amp; 0 &amp; 0 &amp; 0 &amp; -1/2 &amp; 1 &amp; 0 &amp; 0\\
-0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; -1/4 &amp; 0 &amp; 1\\
-0 &amp; 0 &amp; 1 &amp; 0 &amp; 1/2 &amp; 0 &amp; 1/2 &amp; -1/2\\
-0 &amp; 0 &amp; 0 &amp; 1 &amp; -1 &amp; -1/2 &amp; -1 &amp; 0
+1 &amp; 0 &amp; 0 &amp; 0 &amp; - \frac{1}{2} &amp; 1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; - \frac{1}{4} &amp; 0 &amp; 1\\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; \frac{1}{2} &amp; 0 &amp; \frac{1}{2} &amp; - \frac{1}{2}\\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; -1 &amp; - \frac{1}{2} &amp; -1 &amp; 0
 \end{array}
 \right)
 \]</span></p>
 <p>Luego
 <span class="math display">\[P_{\mathcal{B}_1\to\mathcal{B}_2} = \left(
 \begin{array}{cccc@{}}
--1/2 &amp; 1 &amp; 0 &amp; 0\\
-0 &amp; -1/4 &amp; 0 &amp; 1\\
-1/2 &amp; 0 &amp; 1/2 &amp; -1/2\\
--1 &amp; -1/2 &amp; -1 &amp; 0
+- \frac{1}{2} &amp; 1 &amp; 0 &amp; 0\\
+0 &amp; - \frac{1}{4} &amp; 0 &amp; 1\\
+\frac{1}{2} &amp; 0 &amp; \frac{1}{2} &amp; - \frac{1}{2}\\
+-1 &amp; - \frac{1}{2} &amp; -1 &amp; 0
 \end{array}
 \right)
 \]</span></p>
 <p>Para el camino contrario, pasar de coordenadas en <span class="math inline">\(\mathcal{B}_2\)</span> a coordenadas en <span class="math inline">\(\mathcal{B}_1\)</span>, hacemos la inversa de la matriz anterior (aunque podríamos haber aplicado el mismo razonamiento inicial):
 <span class="math display">\[\left(
 \begin{array}{cccc|cccc}
--1/2 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0\\
-0 &amp; -1/4 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
-1/2 &amp; 0 &amp; 1/2 &amp; -1/2 &amp; 0 &amp; 0 &amp; 1 &amp; 0\\
--1 &amp; -1/2 &amp; -1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1
+- \frac{1}{2} &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; - \frac{1}{4} &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
+\frac{1}{2} &amp; 0 &amp; \frac{1}{2} &amp; - \frac{1}{2} &amp; 0 &amp; 0 &amp; 1 &amp; 0\\
+-1 &amp; - \frac{1}{2} &amp; -1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1
 \end{array}
 \right)
 \sim\left(
 \begin{array}{cccc|cccc}
-1 &amp; 0 &amp; 0 &amp; 0 &amp; -2 &amp; -8/3 &amp; -16/3 &amp; -8/3\\
-0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; -4/3 &amp; -8/3 &amp; -4/3\\
-0 &amp; 0 &amp; 1 &amp; 0 &amp; 2 &amp; 10/3 &amp; 20/3 &amp; 7/3\\
-0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 2/3 &amp; -2/3 &amp; -1/3
+1 &amp; 0 &amp; 0 &amp; 0 &amp; -2 &amp; - \frac{8}{3} &amp; - \frac{16}{3} &amp; - \frac{8}{3}\\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; - \frac{4}{3} &amp; - \frac{8}{3} &amp; - \frac{4}{3}\\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 2 &amp; \frac{10}{3} &amp; \frac{20}{3} &amp; \frac{7}{3}\\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; \frac{2}{3} &amp; - \frac{2}{3} &amp; - \frac{1}{3}
 \end{array}
 \right)
 \]</span></p>
 <p>De esta forma
 <span class="math display">\[P_{\mathcal{B}_2\to\mathcal{B}_1} = \left(
 \begin{array}{cccc@{}}
--2 &amp; -8/3 &amp; -16/3 &amp; -8/3\\
-0 &amp; -4/3 &amp; -8/3 &amp; -4/3\\
-2 &amp; 10/3 &amp; 20/3 &amp; 7/3\\
-0 &amp; 2/3 &amp; -2/3 &amp; -1/3
+-2 &amp; - \frac{8}{3} &amp; - \frac{16}{3} &amp; - \frac{8}{3}\\
+0 &amp; - \frac{4}{3} &amp; - \frac{8}{3} &amp; - \frac{4}{3}\\
+2 &amp; \frac{10}{3} &amp; \frac{20}{3} &amp; \frac{7}{3}\\
+0 &amp; \frac{2}{3} &amp; - \frac{2}{3} &amp; - \frac{1}{3}
 \end{array}
 \right)
 \]</span></p>
@@ -1042,10 +1160,10 @@ es decir,
 <p>Y entre <span class="math inline">\(\mathcal{C}\)</span> y <span class="math inline">\(\mathcal{B}_1\)</span> (calculando la inversa de <span class="math inline">\(B_1\)</span> usando Gauss-Jordan):
 <span class="math display">\[P_{\mathcal{C}\to\mathcal{B}_1} = B_1^{-1} = \left(
 \begin{array}{cccc@{}}
--1/3 &amp; -1 &amp; -2/3 &amp; -2/3\\
--2/3 &amp; 0 &amp; -1/3 &amp; -1/3\\
-2/3 &amp; 1 &amp; 4/3 &amp; 1/3\\
-1/3 &amp; 0 &amp; -1/3 &amp; -1/3
+- \frac{1}{3} &amp; -1 &amp; - \frac{2}{3} &amp; - \frac{2}{3}\\
+- \frac{2}{3} &amp; 0 &amp; - \frac{1}{3} &amp; - \frac{1}{3}\\
+\frac{2}{3} &amp; 1 &amp; \frac{4}{3} &amp; \frac{1}{3}\\
+\frac{1}{3} &amp; 0 &amp; - \frac{1}{3} &amp; - \frac{1}{3}
 \end{array}
 \right)
 \]</span></p>
@@ -1102,7 +1220,8 @@ gitbook.start({
 },
 "download": ["Algebra_Lineal.pdf", "Algebra_Lineal.epub"],
 "toc": {
-"collapse": "subsection"
+"collapse": "section",
+"scroll_highlight": true
 }
 });
 });

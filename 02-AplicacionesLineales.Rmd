@@ -10,6 +10,8 @@
 
 ## Caracterización de la sobreyectividad
 
+## Cómo determinar la imagen de un subespacio vectorial
+
 ## A qué se llama rango y nulidad de la aplicación lineal
 
 ## Comprobación del teorema de la dimensión

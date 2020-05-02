@@ -27,6 +27,8 @@ Cada capítulo incluye preguntas y sus respuestas acerca de aquellos procedimien
 
 La idea de uso de este _libro_ es que se pueda navegar libremente, yendo a aquellas preguntas sobre las que se tenga dudas, ya que en su respuesta se incluirán enlaces a todos los contenidos y procedimientos necesarios para poder resolver dicha cuestión.
 
+Además, incluimos un [último capítulo](#problems) con problemas resueltos, siguiendo las indicaciones dadas en los capítulos correspondientes.
+
 ```{r}
 library(stringr)
 library(tidyverse)

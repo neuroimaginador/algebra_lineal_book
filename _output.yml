@@ -2,6 +2,8 @@ bookdown::gitbook:
   css: style.css
   config:
     toc:
+      collapse: section
+      scroll_highlight: yes
       before: |
         <li><a href="./">Preguntas y respuestas de Álgebra Lineal</a></li>
       after: |
@@ -16,3 +18,12 @@ bookdown::pdf_book:
 bookdown::epub_book: default
 bookdown::html_book:
   theme: paper
+  config:
+    toc:
+      collapse: section
+      scroll_highlight: yes
+      before: |
+        <li><a href="./">Preguntas y respuestas de Álgebra Lineal</a></li>
+      after: |
+        <li><a href="https://dominlopez.netlify.app" target="blank">Escrito por Domingo López</a></li>
+    download: ["pdf", "epub"]
