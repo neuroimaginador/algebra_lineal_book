@@ -34,7 +34,9 @@ Entonces a $(V, +, \cdot)$ se de denomina espacio vectorial, y a los elementos d
 
 En este documento, nos referiremos normalmente a resultados sobre espacios vectoriales denominados _de dimensión finita_. Este concepto lo hablaremos más adelante.
 
-__Ejemplo__
+---
+
+__Ejemplo__ 
 ```{r}
 vec <- rVector(n)
 vec1 <- rVector(n)
@@ -44,18 +46,40 @@ sistema <- cbind(vec, vec1, vec2)
 
 $V=\mathbb{R}^{`r n`}$ es un espacio vectorial y `r glue_matrices(vec, latex = TRUE, ldeco = "$\\left(", rdeco = "\\right)$")` es un vector de $V$.
 
-## Qué es un subespacio vectorial
+---
+
+__¿Qué preguntas vamos a responder en este capítulo?__
+
+- [¿Qué es un subespacio vectorial?](#subesp)
+- [¿Qué es un sistema de vectores linealmente independiente?](#indep)
+- [¿Qué es un sistema generador y el subespacio generado por un conjunto de vectores?](#gen)
+- [¿Cómo extraemos una base a partir de un sistema generador de un (sub)espacio vectorial?](#sistgenabase)
+- [¿Cómo encontrar la base (y la dimensión) para un subespacio vectorial?](#base)
+- [¿Cómo convertir entre ecuaciones cartesianas y paramétricas de un subespacio vectorial?](#param2cartesian)
+- [¿Cómo hallar la intersección de dos subespacios vectoriales?](#interseccion)
+- [¿Es la unión de subespacios un subespacio?](#union)
+- [¿Cómo hallar la suma de dos subespacios vectoriales?](#suma)
+- [¿Qué dice el teorema de la dimensión?](#th-dim)
+- [¿Cómo calcular el subespacio suplementario de uno dado?](#supl)
+- [¿Cómo calcular las coordenadas de un vector con respecto a una base dada?](#coord)
+- [¿Cómo calcular la matriz de cambio de base entre dos bases de un mismo espacio vectorial?](#cambiobase)
+
+## Qué es un subespacio vectorial {#subesp}
 \chaptermark{Subespacio Vectorial}
 
 Un subconjunto de $U\subset V$ es un __subespacio vectorial__ de $V$ si la restricción de las operaciones suma y producto por un escalar a ese conjunto son operaciones cerradas.
 
 Eso equivale a decir que la suma de dos vectores cualesquiera de $U$ debe estar en $U$, y si multplicamos por un escalar un vector de $U$, el producto vuelve a estar en $U$.
 
+---
+
 __Ejemplo__
 
 $U = \left\{`r paste0(to_latex(generic_vector))`\in\mathbb{R}^{`r n`}: x + y - z = 0\right\}$ es un subespacio de $V=\mathbb{R}^{`r n`}$.
 
-## Qué es un sistema de vectores linealmente independiente
+---
+
+## Qué es un sistema de vectores linealmente independiente {#indep}
 \chaptermark{Independencia lineal}
 
 Supongamos un conjunto de vectores $\{v_1,\ldots,v_n\}$. Este conjunto es __linealmente independiente__ si ninguno de los vectores se puede poner como combinación lineal de los demás vectores.
@@ -65,6 +89,8 @@ $$\alpha_1 v_1 + \ldots + \alpha_n v_n = 0$$
 entonces el sistema de los $v_i$ será independiente si necesariamente todos los $\alpha_i$ valen 0.
 
 Evidentemente, cualquier sistema de vectores que incluya al vector 0 no es linealmente independiente.
+
+---
 
 __Ejemplo__
 
@@ -120,7 +146,9 @@ En este caso, tenemos 2 filas no nulas y 3 incógnitas. Por lo anterior, el sist
 
 Si hubiéramos llegado a 3 ecuaciones no nulas, entonces estaríamos en la situación de un sistema compatible determinado, luego la única solución es la nula. Por lo anterior, el sistema sería linealmente independiente.
 
-## Qué es un sistema generador y el subespacio generado por un conjunto de vectores
+---
+
+## Qué es un sistema generador y el subespacio generado por un conjunto de vectores {#gen}
 \chaptermark{Sistema generador} 
 
 Consideramos un sistema de vectores $\mathcal{S} = \{v_1,\ldots,v_n\}$. El __subespacio generado__ por $\mathcal{S}$ es el conjunto de vectores que se calcula como combinaciones lineales de los de $\mathcal{S}$.
@@ -128,6 +156,8 @@ Consideramos un sistema de vectores $\mathcal{S} = \{v_1,\ldots,v_n\}$. El __sub
 Es decir, si yo voy dando valores a unos escalares $\alpha_1,\ldots,\alpha_n$, entonces el vector $\alpha_1v_1+\ldots+\alpha_nv_n$ es combinación lineal de los de $\mathcal{S}$, luego pertenece al subespacio generado por éste.
 
 Denotamos como $\mathcal{L}(\mathcal{S})$ al subsepacio generado por $\mathcal{S}$.
+
+---
 
 __Ejemplo__
 
@@ -158,6 +188,7 @@ glue_latex(
 )
 ```
 
+---
 
 ## Cómo extraemos una base a partir de un sistema generador de un (sub)espacio vectorial {#sistgenabase}
 \chaptermark{Bases}
@@ -178,6 +209,8 @@ Aparte, hay dos propiedades más que relacionan las bases y las propiedades de s
 - Todo sistema generador de ese espacio debe tener, al menos, $n$ elementos.
 
 Dado un sistema de vectores $S$ que se sepa que es sistema generador de un espacio o de un subespacio, la mejor estrategia es utilizar transformaciones elementales sobre $S$ para eliminar aquellos vectores que sean combinaciones lineales de los demás.
+
+---
 
 __Ejemplo__
 
@@ -227,6 +260,8 @@ glue_latex(
   cat()
 ```
 
+---
+
 ## Cómo encontrar la base (y la dimensión) para un subespacio vectorial {#base}
 \chaptermark{Bases de subespacios}
 
@@ -239,6 +274,8 @@ Sin embargo, existen otras formas en las que podemos definir un subespacio vecto
 La primera forma escrita en que podemos definir un subespacio vectorial es mediante sus ecuaciones paramétricas, que nos indican cómo determinar las diversas componentes de cada vector ($x,y,\ldots$) a partir de unos parámetros libres $\alpha_1,\ldots,\alpha_n$.
 
 Realmente esto es equivalente a escribir un vector genérico $v$ como combinación lineal de otros vectores. Esos otros vectores que forman la combinación lineal son, por tanto, un sistema generador del subespacio que queremos definir. Usando lo explicado en la [sección correspondiente](#sistgenabase), obtendríamos la base deseada.
+
+---
 
 __Ejemplo__
 
@@ -275,6 +312,8 @@ Es decir, $\mathcal{S} = \left\{`r vectors_to_latex(S)`\right\}$ es un sistema g
 
 A partir de aquí, basta aplicar lo descrito en [la sección sobre cómo extraer una base a partir de un sistema generador](#sistgenabase).
 
+---
+
 ### Partiendo de las ecuaciones cartesianas
 
 Un subespacio vectorial puede venir definido mediante unas expresiones cartesianas que relacionan las componentes $x,y,\ldots$ entre sí.
@@ -282,6 +321,8 @@ Un subespacio vectorial puede venir definido mediante unas expresiones cartesian
 Esas expresiones cartesianas realmente expresan un sistema de ecuaciones homogéneo cuyo conjunto solución es el propio subespacio que buscamos.
 
 Por tanto, la forma de proceder es tomar las ecuaciones cartesianas, formar el sistema, y resolverlo. Para ello, haciendo Gauss, pasamos a forma escalonada o escalonada reducida y desde esa forma, calculamos las expresiones paramétricas del conjunto solución y aplicamos lo explicado en la sección anterior.
+
+---
 
 __Ejemplo__
 
@@ -331,6 +372,8 @@ Podemos fijarnos que, en este ejemplo, ya los dos vectores son linealmente indep
 
 Luego, además, podemos saber que la dimensión de $U$ es $\mathrm{dim}(U) = 2$.
 
+---
+
 ## Cómo convertir entre ecuaciones cartesianas y paramétricas de un subespacio vectorial {#param2cartesian}
 \chaptermark{Ecuaciones cartesianas y paramétricas}
 
@@ -347,6 +390,8 @@ Se toma uno de los parámetros, y se despeja de alguna de las ecuaciones en las 
 Con el nuevo sistema de ecuaciones, repetimos el proceso anterior: seleccionar un parámetro, despejarlo de una ecuación y sustituirlo en las demás, eliminando la ecuación de la que se ha despejado.
 
 Repetimos todo el proceso hasta que no queden parámetros que eliminar.
+
+---
 
 __Ejemplo__
 
@@ -415,6 +460,8 @@ glue_latex(
 ```
 que es la expresión en cartesianas del espacio $U$.
 
+---
+
 ## Cómo hallar la intersección de dos subespacios vectoriales {#interseccion}
 \chaptermark{Intersección de subespacios}
 
@@ -427,6 +474,8 @@ Conviene tener ambos subespacios expresados en forma de ecuaciones cartesianas. 
 Si un vector $v$ pertenece a la intersección, entonces verifica tanto las ecuaciones paramétricas de $U$ como las de $W$. Por tanto, podemos construir un sistema de ecuaciones con todas las ecuaciones de $U$ y de $W$, y la intersección $U\cap W$ será el conjunto solución de este sistema homogéneo _ampliado_.
 
 A partir de ese sistema, ya hemos explicado [cómo encontrar la base](#base) del subespacio intersección.
+
+---
 
 __Ejemplo__
 
@@ -534,8 +583,9 @@ glue::glue(
 
 Y, así, $\mathrm{dim}(U\cap W) = `r ncol(b_Intersect)`$.
 
+---
 
-## ¿Es la unión de subespacios un subespacio?
+## ¿Es la unión de subespacios un subespacio? {#union}
 \chaptermark{Unión de subespacios}
 
 En general, no. La única forma en que la unión de dos subespacios sea también un subespacio es que sean iguales o que, al menos, uno de ellos sea el espacio $\{0\}$ o el total, $V$.
@@ -552,6 +602,8 @@ El resultado teórico esencial es el siguiente:
 > Si $\mathcal{B}_U$ y $\mathcal{B}_W$ son bases de $U$ y $W$ respectivamente, entonces $\mathcal{G} = \mathcal{B}_U \cup \mathcal{B}_W$ es un sistema generador de $U+W$.
 
 Por tanto, teniendo bases de $U$ y de $W$, lo primero será unirlas para obtener un sistema generador de la suma. Después, usaremos la [técnica para conseguir una base de un subespacio a partir de un sistema generador](#sistgenabase).
+
+---
 
 __Ejemplo__
 
@@ -634,12 +686,16 @@ glue::glue(
 
 Y, así, tenemos que $\mathrm{dim}(U+W) = `r ncol(b_Sum)`$.
 
-## Comprobación del teorema de la dimensión
+---
+
+## Qué dice el teorema de la dimensión {#th-dim}
 \chaptermark{Teorema de la dimensión}
 
 Hay un resultado teórico que relaciona las dimensiones de dos subespacios $U$ y $W$ con las de su intersección y su suma:
 
 > $\mathrm{dim}(U+W) = \mathrm{dim}(U) + \mathrm{dim}(W) - \mathrm{dim}(U\cap W)$
+
+---
 
 __Ejemplo__
 
@@ -650,7 +706,9 @@ $$\begin{array}{ccccccc}
 `r dim_Sum` & = & `r dim_U` & + & `r dim_W` & - & `r dim_Intersect` \\
 \end{array}$$
 
-## Cómo calcular el subespacio suplementario de uno dado
+---
+
+## Cómo calcular el subespacio suplementario de uno dado {#supl}
 \chaptermark{Subespacio suplementario}
 
 Como hemos comentado antes, el subespacio suplementario de un subespacio $U$ es aquel $W$ que verifica:
@@ -666,6 +724,7 @@ Una vez que tenemos la forma escalonada reducida, nos fijamos en qué posiciones
 
 Tomamos entonces, para formar la base de $W$, aquellos vectores de la base canónica que __no__ tengan un 1 en esas posiciones. Los vectores así determinados nos dan la base de $W$, el subespacio suplementario, pues nos aseguramos las dos propiedades mencionadas más arriba.
 
+---
 
 __Ejemplo__
 
@@ -745,7 +804,7 @@ glue_latex(
   cat()
 ```
 
-
+---
 
 ## Cómo calcular las coordenadas de un vector con respecto a una base dada {#coord}
 \chaptermark{Coordenadas}
@@ -771,6 +830,8 @@ Dado un vector con sus coordenadas en la base canónica, ¿cómo puedo saber sus
 El determinar las coordenadas de un vector en una base distinta de la canónica es realmente equivalente a la resolución de un sistema de ecuaciones lineales, donde la matriz de coeficientes es la formada por los vectores de la nueva base _por columnas_. 
 
 Lo vemos directamente con un ejemplo.
+
+---
 
 __Ejemplo__
 
@@ -858,6 +919,7 @@ glue_latex(
   cat()
 ```
 
+---
 
 ## Cómo calcular la matriz de cambio de base entre dos bases de un mismo espacio vectorial {#cambiobase}
 \chaptermark{Matriz de cambio de base}
@@ -887,8 +949,6 @@ a_{n,i}
 Según el resultado anterior, la matriz de cambio de base $A=P_{\mathcal{B}_1 \to \mathcal{B}_2}$ tendrá por columnas estas coordenadas previamente calculadas:
 $$A = ([v_1]_{\mathcal{B}_2}|\ldots|[v_n]_{\mathcal{B}_2})$$
 
-<!-- Esto nos da una serie de $n$ sistemas de ecuaciones, y, si consideramos su matriz de coeficientes, resulta ser que son los vectores $v_i'$ de $\mathcal{B}_2$ puestos por columnas, mientras que el primer término, en este caso, es el vector $i$-ésimo de $\mathcal{B}_1$ puesto también en columna. -->
-
 Llamemos $B_1 = (v_1|v_2|\ldots|v_n)$ y $B_2 = (v_1'|v_2'|\ldots|v_n')$ a las dos matrices que resultan de poner los vectores de las dos bases que tenemos, en forma de columna.
 
 Entonces, resulta que la combinación lineal de más arriba que relaciona un $v_i$ con los vectores de $\mathcal{B}_2$ mediante sus coordenadas se puede reescribir como:
@@ -913,6 +973,8 @@ Aplicando lo desarrollado, tendríamos que la matriz de cambio de base de $\math
 $P_{\mathcal{B}_1\to\mathcal{C}} = P_{\mathcal{B}_1\to\mathcal{B}_2} = B_2^{-1}\ B_1 = I_n \ B_1 = B_1$.
 
 Y entonces $P_{\mathcal{C}\to\mathcal{B}_1} = P_{\mathcal{B}_2\to\mathcal{B}_1} = B_1^{-1}\ B_2 = B_1^{-1}\ I_n = B_1^{-1}$.
+
+---
 
 __Ejemplo__
 
@@ -1019,3 +1081,5 @@ glue_latex(
 ) %>% 
   cat()
 ```
+
+---

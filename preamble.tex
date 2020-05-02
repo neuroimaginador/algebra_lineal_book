@@ -12,3 +12,20 @@
   \usepackage[spanish,es-tabla]{babel}
 \fi
 \usepackage{fancyhdr}
+
+\usepackage[skins]{tcolorbox}
+
+\newtcolorbox{myframe}[2][]{%
+  enhanced,colback=white,colframe=black,coltitle=black,
+  sharp corners,boxrule=0.4pt,
+  fonttitle=\itshape,
+  attach boxed title to top left={yshift=-0.3\baselineskip-0.4pt,xshift=2mm},
+  boxed title style={tile,size=minimal,left=0.5mm,right=0.5mm,
+    colback=white,before upper=\strut},
+  title=#2,#1
+}
+
+\newcommand{\ejemplo}{1}{\begin{myframe}{__Ejemplo__}
+#1
+\end{myframe}
+}
