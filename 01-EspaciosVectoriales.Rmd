@@ -193,7 +193,7 @@ glue_latex(
 ## Cómo extraemos una base a partir de un sistema generador de un (sub)espacio vectorial {#sistgenabase}
 \chaptermark{Bases}
 
-Para cualquier espacio vectorial, o subespacio, una __base__ es un sistema de vectores que lo genera (mediante combinaciones lineales, como hemos visto antes) y que es linealmente independiente.
+Para cualquier espacio vectorial, o subespacio, una __base__ es un sistema de vectores que [lo genera](#gen) (mediante combinaciones lineales, como hemos visto antes) y que es [linealmente independiente](#indep).
 
 La __base canónica__ $\mathcal{C}$ en un espacio $\mathbb{R}^n$ es la dada por los vectores $e_i$ ($i = 1,\ldots,n$), donde $e_i$ es el vector que tiene todas sus componentes a 0 menos la $i$-ésima que vale 1.
 

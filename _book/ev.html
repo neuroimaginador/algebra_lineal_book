@@ -92,14 +92,16 @@
 </ul></li>
 <li class="chapter" data-level="3" data-path="apli.html"><a href="apli.html"><i class="fa fa-check"></i><b>3</b> Aplicaciones lineales</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="apli.html"><a href="apli.html#cuál-es-la-matriz-asociada-a-una-aplicación-lineal-en-unas-bases-dadas"><i class="fa fa-check"></i><b>3.1</b> Cuál es la matriz asociada a una aplicación lineal en unas bases dadas</a></li>
-<li class="chapter" data-level="3.2" data-path="apli.html"><a href="apli.html#cómo-determinar-el-núcleo-de-una-aplicación-lineal"><i class="fa fa-check"></i><b>3.2</b> Cómo determinar el núcleo de una aplicación lineal</a></li>
-<li class="chapter" data-level="3.3" data-path="apli.html"><a href="apli.html#caracterización-de-la-inyectividad"><i class="fa fa-check"></i><b>3.3</b> Caracterización de la inyectividad</a></li>
-<li class="chapter" data-level="3.4" data-path="apli.html"><a href="apli.html#cómo-calcular-el-subespacio-imagen-de-una-aplicación-lineal"><i class="fa fa-check"></i><b>3.4</b> Cómo calcular el subespacio imagen de una aplicación lineal</a></li>
-<li class="chapter" data-level="3.5" data-path="apli.html"><a href="apli.html#caracterización-de-la-sobreyectividad"><i class="fa fa-check"></i><b>3.5</b> Caracterización de la sobreyectividad</a></li>
-<li class="chapter" data-level="3.6" data-path="apli.html"><a href="apli.html#cómo-determinar-la-imagen-de-un-subespacio-vectorial"><i class="fa fa-check"></i><b>3.6</b> Cómo determinar la imagen de un subespacio vectorial</a></li>
-<li class="chapter" data-level="3.7" data-path="apli.html"><a href="apli.html#a-qué-se-llama-rango-y-nulidad-de-la-aplicación-lineal"><i class="fa fa-check"></i><b>3.7</b> A qué se llama rango y nulidad de la aplicación lineal</a></li>
-<li class="chapter" data-level="3.8" data-path="apli.html"><a href="apli.html#comprobación-del-teorema-de-la-dimensión"><i class="fa fa-check"></i><b>3.8</b> Comprobación del teorema de la dimensión</a></li>
+<li class="chapter" data-level="3.1" data-path="apli.html"><a href="apli.html#qué-propiedades-básicas-tienen-las-aplicaciones-lineales"><i class="fa fa-check"></i><b>3.1</b> Qué propiedades básicas tienen las aplicaciones lineales</a></li>
+<li class="chapter" data-level="3.2" data-path="apli.html"><a href="apli.html#matriz-apli"><i class="fa fa-check"></i><b>3.2</b> Cuál es la matriz asociada a una aplicación lineal en unas bases dadas</a></li>
+<li class="chapter" data-level="3.3" data-path="apli.html"><a href="apli.html#nucleo"><i class="fa fa-check"></i><b>3.3</b> Cómo determinar el núcleo de una aplicación lineal</a></li>
+<li class="chapter" data-level="3.4" data-path="apli.html"><a href="apli.html#inyectividad"><i class="fa fa-check"></i><b>3.4</b> Cómo caracterizar la inyectividad</a></li>
+<li class="chapter" data-level="3.5" data-path="apli.html"><a href="apli.html#imagen"><i class="fa fa-check"></i><b>3.5</b> Cómo calcular el subespacio imagen de una aplicación lineal</a></li>
+<li class="chapter" data-level="3.6" data-path="apli.html"><a href="apli.html#sobrey"><i class="fa fa-check"></i><b>3.6</b> Cómo caracterizar la sobreyectividad</a></li>
+<li class="chapter" data-level="3.7" data-path="apli.html"><a href="apli.html#isomorfismo"><i class="fa fa-check"></i><b>3.7</b> Qué es un isomorfismo</a></li>
+<li class="chapter" data-level="3.8" data-path="apli.html"><a href="apli.html#imagenU"><i class="fa fa-check"></i><b>3.8</b> Cómo determinar la imagen de un subespacio vectorial</a></li>
+<li class="chapter" data-level="3.9" data-path="apli.html"><a href="apli.html#rango-nulidad"><i class="fa fa-check"></i><b>3.9</b> A qué se llama rango y nulidad de la aplicación lineal</a></li>
+<li class="chapter" data-level="3.10" data-path="apli.html"><a href="apli.html#th-dim-nucleo"><i class="fa fa-check"></i><b>3.10</b> Qué dice el teorema de la dimensión para núcleo e imagen</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="diagonalización.html"><a href="diagonalización.html"><i class="fa fa-check"></i><b>4</b> Diagonalización</a></li>
 <li class="chapter" data-level="5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html"><i class="fa fa-check"></i><b>5</b> Espacios Euclídeos</a></li>
@@ -297,7 +299,7 @@ entonces el sistema de los <span class="math inline">\(v_i\)</span> será indepe
 </div>
 <div id="sistgenabase" class="section level2" number="2.4">
 <h2 number="2.4"><span class="header-section-number">2.4</span> Cómo extraemos una base a partir de un sistema generador de un (sub)espacio vectorial</h2>
-<p>Para cualquier espacio vectorial, o subespacio, una <strong>base</strong> es un sistema de vectores que lo genera (mediante combinaciones lineales, como hemos visto antes) y que es linealmente independiente.</p>
+<p>Para cualquier espacio vectorial, o subespacio, una <strong>base</strong> es un sistema de vectores que <a href="ev.html#gen">lo genera</a> (mediante combinaciones lineales, como hemos visto antes) y que es <a href="ev.html#indep">linealmente independiente</a>.</p>
 <p>La <strong>base canónica</strong> <span class="math inline">\(\mathcal{C}\)</span> en un espacio <span class="math inline">\(\mathbb{R}^n\)</span> es la dada por los vectores <span class="math inline">\(e_i\)</span> (<span class="math inline">\(i = 1,\ldots,n\)</span>), donde <span class="math inline">\(e_i\)</span> es el vector que tiene todas sus componentes a 0 menos la <span class="math inline">\(i\)</span>-ésima que vale 1.</p>
 <p>Si tenemos un sistema generador de un (sub)espacio vectorial, siempre podremos encontrar una base, gracias al siguiente resultado:</p>
 <blockquote>

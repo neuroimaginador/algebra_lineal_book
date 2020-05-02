@@ -92,14 +92,17 @@
 </ul></li>
 <li class="chapter" data-level="3" data-path="apli.html"><a href="apli.html"><i class="fa fa-check"></i><b>3</b> Aplicaciones lineales</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="apli.html"><a href="apli.html#cuál-es-la-matriz-asociada-a-una-aplicación-lineal-en-unas-bases-dadas"><i class="fa fa-check"></i><b>3.1</b> Cuál es la matriz asociada a una aplicación lineal en unas bases dadas</a></li>
-<li class="chapter" data-level="3.2" data-path="apli.html"><a href="apli.html#cómo-determinar-el-núcleo-de-una-aplicación-lineal"><i class="fa fa-check"></i><b>3.2</b> Cómo determinar el núcleo de una aplicación lineal</a></li>
-<li class="chapter" data-level="3.3" data-path="apli.html"><a href="apli.html#caracterización-de-la-inyectividad"><i class="fa fa-check"></i><b>3.3</b> Caracterización de la inyectividad</a></li>
-<li class="chapter" data-level="3.4" data-path="apli.html"><a href="apli.html#cómo-calcular-el-subespacio-imagen-de-una-aplicación-lineal"><i class="fa fa-check"></i><b>3.4</b> Cómo calcular el subespacio imagen de una aplicación lineal</a></li>
-<li class="chapter" data-level="3.5" data-path="apli.html"><a href="apli.html#caracterización-de-la-sobreyectividad"><i class="fa fa-check"></i><b>3.5</b> Caracterización de la sobreyectividad</a></li>
-<li class="chapter" data-level="3.6" data-path="apli.html"><a href="apli.html#cómo-determinar-la-imagen-de-un-subespacio-vectorial"><i class="fa fa-check"></i><b>3.6</b> Cómo determinar la imagen de un subespacio vectorial</a></li>
-<li class="chapter" data-level="3.7" data-path="apli.html"><a href="apli.html#a-qué-se-llama-rango-y-nulidad-de-la-aplicación-lineal"><i class="fa fa-check"></i><b>3.7</b> A qué se llama rango y nulidad de la aplicación lineal</a></li>
-<li class="chapter" data-level="3.8" data-path="apli.html"><a href="apli.html#comprobación-del-teorema-de-la-dimensión"><i class="fa fa-check"></i><b>3.8</b> Comprobación del teorema de la dimensión</a></li>
+<li class="chapter" data-level="3.1" data-path="apli.html"><a href="apli.html#qué-propiedades-básicas-tienen-las-aplicaciones-lineales"><i class="fa fa-check"></i><b>3.1</b> Qué propiedades básicas tienen las aplicaciones lineales</a></li>
+<li class="chapter" data-level="3.2" data-path="apli.html"><a href="apli.html#matriz-apli"><i class="fa fa-check"></i><b>3.2</b> Cuál es la matriz asociada a una aplicación lineal en unas bases dadas</a></li>
+<li class="chapter" data-level="3.3" data-path="apli.html"><a href="apli.html#cambiobase-apli"><i class="fa fa-check"></i><b>3.3</b> Cómo influye un cambio de base en la matriz asociada a una aplicación lineal</a></li>
+<li class="chapter" data-level="3.4" data-path="apli.html"><a href="apli.html#nucleo"><i class="fa fa-check"></i><b>3.4</b> Cómo determinar el núcleo de una aplicación lineal</a></li>
+<li class="chapter" data-level="3.5" data-path="apli.html"><a href="apli.html#inyectividad"><i class="fa fa-check"></i><b>3.5</b> Cómo caracterizar la inyectividad</a></li>
+<li class="chapter" data-level="3.6" data-path="apli.html"><a href="apli.html#imagen"><i class="fa fa-check"></i><b>3.6</b> Cómo calcular el subespacio imagen de una aplicación lineal</a></li>
+<li class="chapter" data-level="3.7" data-path="apli.html"><a href="apli.html#sobrey"><i class="fa fa-check"></i><b>3.7</b> Cómo caracterizar la sobreyectividad</a></li>
+<li class="chapter" data-level="3.8" data-path="apli.html"><a href="apli.html#isomorfismo"><i class="fa fa-check"></i><b>3.8</b> Qué es un isomorfismo</a></li>
+<li class="chapter" data-level="3.9" data-path="apli.html"><a href="apli.html#imagenU"><i class="fa fa-check"></i><b>3.9</b> Cómo determinar la imagen de un subespacio vectorial</a></li>
+<li class="chapter" data-level="3.10" data-path="apli.html"><a href="apli.html#rango-nulidad"><i class="fa fa-check"></i><b>3.10</b> A qué se llama rango y nulidad de la aplicación lineal</a></li>
+<li class="chapter" data-level="3.11" data-path="apli.html"><a href="apli.html#th-dim-nucleo"><i class="fa fa-check"></i><b>3.11</b> Qué dice el teorema de la dimensión para núcleo e imagen</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="diagonalización.html"><a href="diagonalización.html"><i class="fa fa-check"></i><b>4</b> Diagonalización</a></li>
 <li class="chapter" data-level="5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html"><i class="fa fa-check"></i><b>5</b> Espacios Euclídeos</a></li>
@@ -132,29 +135,147 @@
             <section class="normal" id="section-">
 <div id="apli" class="section level1" number="3">
 <h1 number="3"><span class="header-section-number">3</span> Aplicaciones lineales</h1>
-<div id="cuál-es-la-matriz-asociada-a-una-aplicación-lineal-en-unas-bases-dadas" class="section level2" number="3.1">
-<h2 number="3.1"><span class="header-section-number">3.1</span> Cuál es la matriz asociada a una aplicación lineal en unas bases dadas</h2>
+<p>Consideremos dos <a href="ev.html#ev">espacios vectoriales</a> <span class="math inline">\(V\)</span> y <span class="math inline">\(W\)</span> sobre el mismo cuerpo <span class="math inline">\(\mathbb{K}\)</span>, y una aplicación <span class="math inline">\(f:V\to W\)</span> entre ellos.</p>
+<p>Diremos que <span class="math inline">\(f\)</span> es una <strong>aplicación lineal</strong> si verifica las siguientes dos condiciones:</p>
+<ul>
+<li><span class="math inline">\(f(v_1 + v_2) = f(v_1) + f(v_2)\)</span> para todo <span class="math inline">\(v_1, v_2\in V\)</span>.</li>
+<li><span class="math inline">\(f(c\cdot v) = c\cdot f(v)\)</span> para todo <span class="math inline">\(c\in\mathbb{K},\,v\in V\)</span>.</li>
+</ul>
+<hr />
+<p><strong>Ejemplo</strong></p>
+<p>Existen muchos ejemplos de aplicaciones lineales:</p>
+<ul>
+<li>La aplicación 0, la identidad… son aplicaciones lineales de forma trivial.</li>
+<li>Las rotaciones de vectores en <span class="math inline">\(\mathbb{R}^n\)</span> son aplicaciones lineales.</li>
+<li>Sobre el espacio vectorial <span class="math inline">\(\mathcal{C}([a, b])\)</span> de funciones continuas y derivables en un intervalo <span class="math inline">\([a, b]\)</span>, tanto el operador derivada <span class="math inline">\(f\to f&#39;\)</span> como el operador integral <span class="math inline">\(f \to \int_a^b f\)</span>, son aplicaciones lineales.</li>
+</ul>
+<hr />
+<p><strong>¿Qué preguntas vamos a responder en este capítulo?</strong></p>
+<ul>
+<li><a href="#prop-apli">¿Qué propiedades básicas tienen las aplicaciones lineales?</a></li>
+<li><a href="apli.html#matriz-apli">¿Cuál es la matriz asociada a una aplicación lineal en unas bases dadas?</a></li>
+<li><a href="apli.html#cambiobase-apli">¿Cómo influye un cambio de base en la matriz asociada a una aplicación lineal?</a></li>
+<li><a href="apli.html#nucleo">¿Cómo determinar el núcleo de una aplicación lineal?</a></li>
+<li><a href="apli.html#inyectividad">¿Cómo podemos caracterizar la inyectividad?</a></li>
+<li><a href="apli.html#imagen">¿Cómo calcular el subespacio imagen de una aplicación lineal?</a></li>
+<li><a href="apli.html#sobrey">¿Cómo podemos caracterizar la sobreyectividad?</a></li>
+<li><a href="apli.html#isomorfismo">¿Qué es un isomorfismo?</a></li>
+<li><a href="apli.html#imagenU">¿Cómo determinar la imagen de un subespacio vectorial?</a></li>
+<li><a href="apli.html#rango-nulidad">¿A qué se llama rango y nulidad de la aplicación lineal?</a></li>
+<li><a href="apli.html#th-dim-nucleo">¿Qué dice el teorema de la dimensión para núcleo e imagen?</a></li>
+</ul>
+<div id="qué-propiedades-básicas-tienen-las-aplicaciones-lineales" class="section level2" number="3.1">
+<h2 number="3.1"><span class="header-section-number">3.1</span> Qué propiedades básicas tienen las aplicaciones lineales</h2>
+<p>Vamos a revisar aquí algunas de las propiedades básicas de las aplicaciones lineales entre espacios vectoriales.</p>
+<p>Consideremos una aplicación lineal <span class="math inline">\(f:V\to W\)</span>.</p>
+<blockquote>
+<ul>
+<li><span class="math inline">\(f(0_V) = 0_W\)</span></li>
+<li><span class="math inline">\(f(-v) = -f(v),\quad v\in V\)</span></li>
+<li><span class="math inline">\(f(v_1 - v_2) = f(v_1) - f(v_2),\quad v_1, v_2\in V\)</span></li>
+<li><span class="math inline">\(f(\alpha_1 v_1 + \ldots \alpha_n v_n) = \alpha_1 f(v_1) + \ldots + \alpha_n f(v_n),\quad \alpha_i\in\mathbb{K},v_i\in V\)</span></li>
+</ul>
+</blockquote>
+<p>Además:</p>
+<blockquote>
+<ul>
+<li>Si <span class="math inline">\(U\)</span> es un <a href="ev.html#subesp">subespacio</a> de <span class="math inline">\(V\)</span>, entonces <span class="math inline">\(f(U)\)</span> es un subespacio de <span class="math inline">\(W\)</span>. Análogamente, si <span class="math inline">\(S\)</span> es subespacio de <span class="math inline">\(W\)</span>, su preimagen <span class="math inline">\(f^{-1}(S)\)</span> es también un subespacio de <span class="math inline">\(V\)</span>.</li>
+<li>Si <span class="math inline">\(\mathcal{G} = \{u_1,\ldots,u_m\}\)</span> es un <a href="ev.html#gen">sistema generador</a> de un subespacio <span class="math inline">\(U\)</span> de <span class="math inline">\(V\)</span>, entonces <span class="math inline">\(f(\mathcal{G}) = \{f(u_1),\ldots,f(u_m)\}\)</span> es un sistema generador de <span class="math inline">\(f(U)\)</span>.</li>
+</ul>
+</blockquote>
 </div>
-<div id="cómo-determinar-el-núcleo-de-una-aplicación-lineal" class="section level2" number="3.2">
-<h2 number="3.2"><span class="header-section-number">3.2</span> Cómo determinar el núcleo de una aplicación lineal</h2>
+<div id="matriz-apli" class="section level2" number="3.2">
+<h2 number="3.2"><span class="header-section-number">3.2</span> Cuál es la matriz asociada a una aplicación lineal en unas bases dadas</h2>
+<blockquote>
+<p>Si tenemos una matriz <span class="math inline">\(A\in \mathcal{M}_{mn}(\mathbb{R})\)</span>, podemos definir una aplicación lineal <span class="math inline">\(f_A\)</span> entre <span class="math inline">\(\mathbb{R}^n\)</span> y <span class="math inline">\(\mathbb{R}^m\)</span> de la forma:
+<span class="math display">\[f_A(v) = A\cdot v,\quad v\in\mathbb{R}^n\]</span></p>
+</blockquote>
+<p>En este resultado, podemos cambiar el cuerpo <span class="math inline">\(\mathbb{R}\)</span> de los números reales por cualquier otro cuerpo.</p>
+<p>Este resultado nos habla de una forma de construir aplicaciones lineales, mediante el producto por una matriz que tenga las dimensiones adecuadas.</p>
+<p>Un resultado más interesante es el siguiente, que nos dice que TODA aplicación lineal viene definida por el producto con una matriz:</p>
+<blockquote>
+<p>Sea <span class="math inline">\(f:V\to W\)</span> una aplicación lineal. Fijemos dos bases <span class="math inline">\(\mathcal{B}_V\)</span> y <span class="math inline">\(\mathcal{B}_W\)</span> en dichos espacios, respectivamente. Entonces existe una matriz <span class="math inline">\(A\in\mathcal{M}_{mn}(\mathbb{R})\)</span> tal que si <span class="math inline">\(w = f(v)\)</span> entonces <span class="math inline">\([w]_{\mathcal{B}_W} = A\cdot [v]_{\mathcal{B}_V}\)</span> para todo <span class="math inline">\(v\in V\)</span>.</p>
+</blockquote>
+<p>Esto significa que, fijando las bases, podemos encontrar una matriz <span class="math inline">\(A\)</span> de forma que para calcular la imagen de un vector <span class="math inline">\(v\in V\)</span>, basta con tomar sus <a href="ev.html#coord">coordenadas</a> en la base <span class="math inline">\(\mathcal{B}_V\)</span>, que representamos por <span class="math inline">\([v]_{\mathcal{B}_V}\)</span>, y multiplicarlas por <span class="math inline">\(A\)</span>, para obtener las coordenadas de <span class="math inline">\(f(v)\)</span> en la base correspondiente del <em>codominio</em> <span class="math inline">\(W\)</span>, las cuales se denotan por <span class="math inline">\([f(v)]_{\mathcal{B}_W}\)</span>.</p>
+<p>A la matriz <span class="math inline">\(A\)</span> que nos proporciona este resultado la llamamos <strong>matriz asociada</strong> a <span class="math inline">\(f\)</span> en las <a href="ev.html#base">bases</a> <span class="math inline">\(\mathcal{B}_V\)</span> y <span class="math inline">\(\mathcal{B}_W\)</span>.</p>
+<p>Hay que notar que la matriz <span class="math inline">\(A\)</span> está determinada siempre y cuando fijemos las dos bases antes dichas.</p>
+<p>Pero, ¿cómo determinamos la matriz <span class="math inline">\(A\)</span>?</p>
+<p>Necesitamos fijar las dos bases de antemano:
+<span class="math display">\[\mathcal{B}_V = \{v_1,\ldots,v_n\}\]</span>
+<span class="math display">\[\mathcal{B}_W = \{w_1,\ldots,w_m\}\]</span></p>
+<p>El procedimiento general para construir la matriz <span class="math inline">\(A\)</span> es el que sigue. Para determinar la columna <span class="math inline">\(j\)</span>-ésima de <span class="math inline">\(A\)</span>:</p>
+<ul>
+<li>Tomamos el vector <span class="math inline">\(j\)</span>-ésimo de la base de <span class="math inline">\(V\)</span>: <span class="math inline">\(v_j\)</span>.</li>
+<li>Calculamos su imagen <span class="math inline">\(y_j = f(v_j)\)</span>.</li>
+<li>Calculamos las coordenadas de <span class="math inline">\(y_j\)</span> en la base <span class="math inline">\(\mathcal{B}_W\)</span>.
+<span class="math display">\[[y_j]_{\mathcal{B}_W} = \left(
+\begin{array}{c}
+a_{1, j}\\
+a_{2, j}\\
+\vdots\\
+a_{m, j}
+\end{array}
+\right) \Leftrightarrow
+y_j = a_{1,j} w_1 + a_{2,j}w_2 + \ldots + a_{m, j} w_m\]</span></li>
+<li>Esas coordenadas son la columna <span class="math inline">\(j\)</span> de la matriz <span class="math inline">\(A\)</span>.</li>
+</ul>
+<hr />
+<p><strong>Ejemplo</strong></p>
+<hr />
 </div>
-<div id="caracterización-de-la-inyectividad" class="section level2" number="3.3">
-<h2 number="3.3"><span class="header-section-number">3.3</span> Caracterización de la inyectividad</h2>
+<div id="cambiobase-apli" class="section level2" number="3.3">
+<h2 number="3.3"><span class="header-section-number">3.3</span> Cómo influye un cambio de base en la matriz asociada a una aplicación lineal</h2>
+<hr />
+<p><strong>Ejemplo</strong></p>
+<hr />
 </div>
-<div id="cómo-calcular-el-subespacio-imagen-de-una-aplicación-lineal" class="section level2" number="3.4">
-<h2 number="3.4"><span class="header-section-number">3.4</span> Cómo calcular el subespacio imagen de una aplicación lineal</h2>
+<div id="nucleo" class="section level2" number="3.4">
+<h2 number="3.4"><span class="header-section-number">3.4</span> Cómo determinar el núcleo de una aplicación lineal</h2>
+<hr />
+<p><strong>Ejemplo</strong></p>
+<hr />
 </div>
-<div id="caracterización-de-la-sobreyectividad" class="section level2" number="3.5">
-<h2 number="3.5"><span class="header-section-number">3.5</span> Caracterización de la sobreyectividad</h2>
+<div id="inyectividad" class="section level2" number="3.5">
+<h2 number="3.5"><span class="header-section-number">3.5</span> Cómo caracterizar la inyectividad</h2>
+<hr />
+<p><strong>Ejemplo</strong></p>
+<hr />
 </div>
-<div id="cómo-determinar-la-imagen-de-un-subespacio-vectorial" class="section level2" number="3.6">
-<h2 number="3.6"><span class="header-section-number">3.6</span> Cómo determinar la imagen de un subespacio vectorial</h2>
+<div id="imagen" class="section level2" number="3.6">
+<h2 number="3.6"><span class="header-section-number">3.6</span> Cómo calcular el subespacio imagen de una aplicación lineal</h2>
+<hr />
+<p><strong>Ejemplo</strong></p>
+<hr />
 </div>
-<div id="a-qué-se-llama-rango-y-nulidad-de-la-aplicación-lineal" class="section level2" number="3.7">
-<h2 number="3.7"><span class="header-section-number">3.7</span> A qué se llama rango y nulidad de la aplicación lineal</h2>
+<div id="sobrey" class="section level2" number="3.7">
+<h2 number="3.7"><span class="header-section-number">3.7</span> Cómo caracterizar la sobreyectividad</h2>
+<hr />
+<p><strong>Ejemplo</strong></p>
+<hr />
 </div>
-<div id="comprobación-del-teorema-de-la-dimensión" class="section level2" number="3.8">
-<h2 number="3.8"><span class="header-section-number">3.8</span> Comprobación del teorema de la dimensión</h2>
+<div id="isomorfismo" class="section level2" number="3.8">
+<h2 number="3.8"><span class="header-section-number">3.8</span> Qué es un isomorfismo</h2>
+<hr />
+<p><strong>Ejemplo</strong></p>
+<hr />
+</div>
+<div id="imagenU" class="section level2" number="3.9">
+<h2 number="3.9"><span class="header-section-number">3.9</span> Cómo determinar la imagen de un subespacio vectorial</h2>
+<hr />
+<p><strong>Ejemplo</strong></p>
+<hr />
+</div>
+<div id="rango-nulidad" class="section level2" number="3.10">
+<h2 number="3.10"><span class="header-section-number">3.10</span> A qué se llama rango y nulidad de la aplicación lineal</h2>
+<hr />
+<p><strong>Ejemplo</strong></p>
+<hr />
+</div>
+<div id="th-dim-nucleo" class="section level2" number="3.11">
+<h2 number="3.11"><span class="header-section-number">3.11</span> Qué dice el teorema de la dimensión para núcleo e imagen</h2>
+<hr />
+<p><strong>Ejemplo</strong></p>
+<hr />
 
 </div>
 </div>

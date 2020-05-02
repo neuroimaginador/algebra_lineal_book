@@ -1,18 +1,178 @@
 # Aplicaciones lineales {#apli}
 
-## Cuál es la matriz asociada a una aplicación lineal en unas bases dadas
+```{r echo = FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      results = "asis",
+                      message = FALSE,
+                      warning = FALSE)
 
-## Cómo determinar el núcleo de una aplicación lineal
+set.seed(1234)
+``` 
 
-## Caracterización de la inyectividad
+Consideremos dos [espacios vectoriales](#ev) $V$ y $W$ sobre el mismo cuerpo $\mathbb{K}$, y una aplicación $f:V\to W$ entre ellos.
 
-## Cómo calcular el subespacio imagen de una aplicación lineal
+Diremos que $f$ es una __aplicación lineal__ si verifica las siguientes dos condiciones:
 
-## Caracterización de la sobreyectividad
+- $f(v_1 + v_2) = f(v_1) + f(v_2)$ para todo $v_1, v_2\in V$.
+- $f(c\cdot v) = c\cdot f(v)$ para todo $c\in\mathbb{K},\,v\in V$.
 
-## Cómo determinar la imagen de un subespacio vectorial
+---
 
-## A qué se llama rango y nulidad de la aplicación lineal
+__Ejemplo__
 
-## Comprobación del teorema de la dimensión
+Existen muchos ejemplos de aplicaciones lineales:
 
+- La aplicación 0, la identidad... son aplicaciones lineales de forma trivial.
+- Las rotaciones de vectores en $\mathbb{R}^n$ son aplicaciones lineales.
+- Sobre el espacio vectorial $\mathcal{C}([a, b])$ de funciones continuas y derivables en un intervalo $[a, b]$, tanto el operador derivada $f\to f'$ como el operador integral $f \to \int_a^b f$, son aplicaciones lineales.
+
+---
+
+__¿Qué preguntas vamos a responder en este capítulo?__
+
+- [¿Qué propiedades básicas tienen las aplicaciones lineales?](#prop-apli)
+- [¿Cuál es la matriz asociada a una aplicación lineal en unas bases dadas?](#matriz-apli)
+- [¿Cómo influye un cambio de base en la matriz asociada a una aplicación lineal?](#cambiobase-apli)
+- [¿Cómo determinar el núcleo de una aplicación lineal?](#nucleo) 
+- [¿Cómo podemos caracterizar la inyectividad?](#inyectividad)
+- [¿Cómo calcular el subespacio imagen de una aplicación lineal?](#imagen)
+- [¿Cómo podemos caracterizar la sobreyectividad?](#sobrey)
+- [¿Qué es un isomorfismo?](#isomorfismo)
+- [¿Cómo determinar la imagen de un subespacio vectorial?](#imagenU)
+- [¿A qué se llama rango y nulidad de la aplicación lineal?](#rango-nulidad)
+- [¿Qué dice el teorema de la dimensión para núcleo e imagen?](#th-dim-nucleo)
+
+## Qué propiedades básicas tienen las aplicaciones lineales
+
+Vamos a revisar aquí algunas de las propiedades básicas de las aplicaciones lineales entre espacios vectoriales. 
+
+Consideremos una aplicación lineal $f:V\to W$.
+
+> - $f(0_V) = 0_W$
+- $f(-v) = -f(v),\quad v\in V$
+- $f(v_1 - v_2) = f(v_1) - f(v_2),\quad v_1, v_2\in V$
+- $f(\alpha_1 v_1 + \ldots \alpha_n v_n) = \alpha_1 f(v_1) + \ldots + \alpha_n f(v_n),\quad \alpha_i\in\mathbb{K},v_i\in V$
+
+Además:
+
+> - Si $U$ es un [subespacio](#subesp) de $V$, entonces $f(U)$ es un subespacio de $W$. Análogamente, si $S$ es subespacio de $W$, su preimagen $f^{-1}(S)$ es también un subespacio de $V$.
+- Si $\mathcal{G} = \{u_1,\ldots,u_m\}$ es un [sistema generador](#gen) de un subespacio $U$ de $V$, entonces $f(\mathcal{G}) = \{f(u_1),\ldots,f(u_m)\}$ es un sistema generador de $f(U)$.
+
+## Cuál es la matriz asociada a una aplicación lineal en unas bases dadas {#matriz-apli}
+
+> Si tenemos una matriz $A\in \mathcal{M}_{mn}(\mathbb{R})$, podemos definir una aplicación lineal $f_A$ entre $\mathbb{R}^n$ y $\mathbb{R}^m$ de la forma:
+$$f_A(v) = A\cdot v,\quad v\in\mathbb{R}^n$$
+
+En este resultado, podemos cambiar el cuerpo $\mathbb{R}$ de los números reales por cualquier otro cuerpo.
+
+Este resultado nos habla de una forma de construir aplicaciones lineales, mediante el producto por una matriz que tenga las dimensiones adecuadas.
+
+Un resultado más interesante es el siguiente, que nos dice que TODA aplicación lineal viene definida por el producto con una matriz:
+
+> Sea $f:V\to W$ una aplicación lineal. Fijemos dos bases $\mathcal{B}_V$ y $\mathcal{B}_W$ en dichos espacios, respectivamente. Entonces existe una matriz $A\in\mathcal{M}_{mn}(\mathbb{R})$ tal que si $w = f(v)$ entonces $[w]_{\mathcal{B}_W} = A\cdot [v]_{\mathcal{B}_V}$ para todo $v\in V$.
+
+Esto significa que, fijando las bases, podemos encontrar una matriz $A$ de forma que para calcular la imagen de un vector $v\in V$, basta con tomar sus [coordenadas](#coord) en la base $\mathcal{B}_V$, que representamos por $[v]_{\mathcal{B}_V}$, y multiplicarlas por $A$, para obtener las coordenadas de $f(v)$ en la base correspondiente del _codominio_ $W$, las cuales se denotan por $[f(v)]_{\mathcal{B}_W}$.
+
+A la matriz $A$ que nos proporciona este resultado la llamamos __matriz asociada__ a $f$ en las [bases](#base) $\mathcal{B}_V$ y $\mathcal{B}_W$.
+
+Hay que notar que la matriz $A$ está determinada siempre y cuando fijemos las dos bases antes dichas.
+
+Pero, ¿cómo determinamos la matriz $A$?
+
+Necesitamos fijar las dos bases de antemano:
+$$\mathcal{B}_V = \{v_1,\ldots,v_n\}$$
+$$\mathcal{B}_W = \{w_1,\ldots,w_m\}$$
+
+El procedimiento general para construir la matriz $A$ es el que sigue. Para determinar la columna $j$-ésima de $A$:
+
+- Tomamos el vector $j$-ésimo de la base de $V$: $v_j$.
+- Calculamos su imagen $y_j = f(v_j)$.
+- Calculamos las coordenadas de $y_j$ en la base $\mathcal{B}_W$. 
+$$[y_j]_{\mathcal{B}_W} = \left(
+\begin{array}{c}
+a_{1, j}\\
+a_{2, j}\\
+\vdots\\
+a_{m, j}
+\end{array}
+\right) \Leftrightarrow
+y_j = a_{1,j} w_1 + a_{2,j}w_2 + \ldots + a_{m, j} w_m$$
+- Esas coordenadas son la columna $j$ de la matriz $A$.
+
+---
+
+__Ejemplo__
+
+---
+
+## Cómo influye un cambio de base en la matriz asociada a una aplicación lineal {#cambiobase-apli}
+
+---
+
+__Ejemplo__
+
+---
+
+## Cómo determinar el núcleo de una aplicación lineal {#nucleo}
+
+---
+
+__Ejemplo__
+
+---
+
+## Cómo caracterizar la inyectividad {#inyectividad}
+
+---
+
+__Ejemplo__
+
+---
+
+## Cómo calcular el subespacio imagen de una aplicación lineal {#imagen}
+
+---
+
+__Ejemplo__
+
+---
+
+## Cómo caracterizar la sobreyectividad {#sobrey}
+
+---
+
+__Ejemplo__
+
+---
+
+## Qué es un isomorfismo {#isomorfismo}
+
+---
+
+__Ejemplo__
+
+---
+
+## Cómo determinar la imagen de un subespacio vectorial {#imagenU}
+
+---
+
+__Ejemplo__
+
+---
+
+## A qué se llama rango y nulidad de la aplicación lineal {#rango-nulidad}
+
+---
+
+__Ejemplo__
+
+---
+
+## Qué dice el teorema de la dimensión para núcleo e imagen {#th-dim-nucleo}
+
+---
+
+__Ejemplo__
+
+---
