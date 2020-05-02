@@ -21,21 +21,28 @@ n <- 4#sample(4:5, size = 1)
 # Definición de dos subespacios U y W
 ## Dimensiones
 n_U <- sample(1:(n - 2), size = 1)
-n_W <- sample(1:(n - n_U), size = 1)
+# n_W <- sample(1:(n - n_U), size = 1)
 ## Matrices aleatorias para sus cartesianas
 A_U <- rMatrix(n = n_U, m = n, values = -1:3)
-A_W <- rMatrix(n = n_W, m = n, values = -1:3)
+# A_W <- rMatrix(n = n_W, m = n, values = -1:3)
 
 eqns_U <- write_system(A_U, b = matlab::zeros(c(nrow(A_U), 1))) %>%   str_flatten(", ")
 
-eqns_W <- write_system(A_W, b = matlab::zeros(c(nrow(A_W), 1))) %>%   str_flatten(", ")
+# eqns_W <- write_system(A_W, b = matlab::zeros(c(nrow(A_W), 1))) %>%   str_flatten(", ")
+
+vec0 <- matlab::zeros(c(n, 1))
 
 # Hallar una base de U y W
 genU <- solve_homogeneous(A_U)
 bU <- linearly_independents(genU)
 dim_U <- ncol(bU)
 
-genW <- solve_homogeneous(A_W)
+scalars <- rVector(n = dim_U)
+genW <- cbind(bU %*% scalars, rMatrix(n, m = 1))
+A_W <- parametric_to_cartesian(genW)$A %>% 
+  remove_fraction()
+
+# genW <- solve_homogeneous(A_W)
 bW <- linearly_independents(genW)
 dim_W <- ncol(bW)
 
@@ -104,7 +111,8 @@ glue::glue("$$W = \\left\\{",
 a. Hallar la dimensión y una base de $U$ y de $W$.
 b. Hallar la dimensión y una base de $U\cap W$ y de $U+W$.
 c. Comprobar el teorema de la dimensión.
-d. Consideremos el vector $v$ dado por sus coordenadas en la base canónica \( `r glue::glue("{to_latex(v)}")` \). Consideremos también la base:
+d. Encontrar el subespacio suplementario de $U$.
+e. Consideremos el vector $v$ dado por sus coordenadas en la base canónica \( `r glue::glue("{to_latex(v)}")` \). Consideremos también la base:
 
 ```{r}
 glue::glue(
@@ -119,12 +127,12 @@ glue::glue(
 
 Encontrar las coordenadas de $v$ en la nueva base.
 
-e. Encontrar las matrices de cambio de base entre $\mathcal{B}_1$ y $\mathcal{C}$ (en ambos sentidos), siendo $\mathcal{C}$ la base canónica.
+f. Encontrar las matrices de cambio de base entre $\mathcal{B}_1$ y $\mathcal{C}$ (en ambos sentidos), siendo $\mathcal{C}$ la base canónica.
 
 __Solución__
 
 
-a. 
+a. Para encontrar unas bases de $U$ y de $W$ podemos seguir las indicaciones sobre [cómo encontrar un sistema generador y una base a partir de la descripción de un subespacio](#base).
 
 En el caso del subsepacio $U$, el sistema homogéneo dado por su ecuaciones cartesianas es:
 
@@ -149,7 +157,7 @@ glue::glue(
   cat()
 ```
 
-Por tanto, una base de $U$ será:
+De estas paramétricas podemos [extraer un sistema generador](#base) y, [a partir de él, la base de $U$](#sistgenabase):
 ```{r}
 glue::glue(
   "$$",
@@ -163,7 +171,7 @@ glue::glue(
 
 Y, así, $\mathrm{dim}(U) = `r ncol(bU)`$.
 
-En el caso del subsepacio $W$, el sistema homogéneo dado por su ecuaciones cartesianas es:
+Repetimos todo el proceso para el subespacio $W$. Tomamos su sistema homogéneo asociado:
 
 ```{r}
 glue::glue("$$\\left\\{",
@@ -173,15 +181,17 @@ glue::glue("$$\\left\\{",
   cat()
 ```
 
-Este sistema, resuelto por Gauss, nos da las siguientes expresiones paramétricas:
+Lo resolvemos por Gauss para obtener las ecuaciones paramétricas del conjunto solución:
 ```{r}
 params <- c("\\alpha", "\\beta", "\\delta", "\\gamma")
-glue::glue(
-  "$$",
+PW <- gauss_elimination(A_W, matlab::zeros(nrow(A_W), 1))
+glue_latex(
+  "[glue_matrices(A_W, matlab::zeros(nrow(A_W), 1), latex = TRUE, fractions = TRUE)]",
+  "\\sim",
+  "[glue_matrices(PW$splits, latex = TRUE, fractions = TRUE)]",
+  "\\Rightarrow\\quad\\ ",
   "[to_latex(generic_vector)] = ",
-  "[write_linear_combination(genW, vars = params)]",
-  "$$",
-  .open = "[", .close = "]"
+  "[write_linear_combination(genW, vars = params)]"
 ) %>% 
   cat()
 ```
@@ -200,9 +210,7 @@ glue::glue(
 
 Y, así, $\mathrm{dim}(W) = `r ncol(bW)`$.
 
-b. 
-
-El subespacio intersección $U\cap W$ es el conjunto de vectores que verifican tanto las ecuaciones cartesianas de $U$ como las de $W$. Es decir, son el conjunto solución del sistema homogéneo:
+b. El subespacio intersección $U\cap W$ es [el conjunto de vectores que verifican tanto las ecuaciones cartesianas de $U$ como las de $W$](#interseccion). Es decir, son el conjunto solución del sistema homogéneo:
 ```{r}
 glue::glue("$$\\left\\{",
            "[str_flatten(write_system(A_Intersect, b = zeros(n, 1), latex = TRUE))]",
@@ -264,7 +272,7 @@ glue::glue(
 
 Y, así, $\mathrm{dim}(U\cap W) = `r ncol(b_Intersect)`$.
 
-Para la suma $U+W$, sabemos que $\mathcal{B}_U\cup\mathcal{B}_W$ es un sistema generador:
+Para la suma $U+W$, [sabemos que $\mathcal{B}_U\cup\mathcal{B}_W$ es un sistema generador](#suma):
 
 ```{r}
 glue::glue(
@@ -277,7 +285,7 @@ glue::glue(
   cat()
 ```
 
-Basta con usar eliminación gaussiana en ese conjunto de vectores para eliminar aquellos que sean linealmente dependientes.
+Basta con usar eliminación gaussiana en ese conjunto de vectores para [eliminar aquellos que sean linealmente dependientes](#sistgenabase).
 ```{r}
 
 s <- gauss_elimination(t(cbind(bU, bW)))
@@ -285,8 +293,9 @@ s <- gauss_elimination(t(cbind(bU, bW)))
 cat("$$", to_latex(cbind(t(cbind(bU, bW))), fractions = TRUE), "\\sim", to_latex(cbind(s$U), fractions = TRUE), "$$")
 ```
 
+Aquellas filas que hayan acabado siendo enteras de ceros, se corresponden con vectores que originalmente eran dependientes linealmente de los demás.
 
-Por tanto, una base de $U+W$ será:
+Por tanto, eliminándolos, tenemos una base de $U+W$:
 ```{r}
 glue::glue(
   "$$",
@@ -300,30 +309,71 @@ glue::glue(
 
 Y, así, $\mathrm{dim}(U+W) = `r ncol(b_Sum)`$.
 
-c.
-
-```{r}
-si <- "{\\color{blue} SI}"
-no <- "{\\color{red} NO}"
-```
-
-
-Podemos comprobar el teorema de la dimensión:
+c. Podemos comprobar [el teorema de la dimensión](#th-dim):
 
 $$\begin{array}{ccccccc}
 \mathrm{dim}(U+W) & = & \mathrm{dim}(U) & + & \mathrm{dim}(W) & - & \mathrm{dim}(U\cap V) \\
 `r dim_Sum` & = & `r dim_U` & + & `r dim_W` & - & `r dim_Intersect` \\
 \end{array}$$
 
+d. Calculemos [el espacio suplementario de $U$](#supl).
 
-d.
+Tomamos una base de $U$, como la calculada antes, y le aplicamos Gauss para obtener un sistema de vectores en forma escalonada.
+
+```{r}
+PU <- gauss_elimination(t(bU), jordan = TRUE)
+M <- PU$U
+# Pivotes
+  if (nrow(M) == 1) {
+
+    pivots_idx <- which(M != 0)[1]
+    params_idx <- setdiff(seq(ncol(M)),
+                          pivots_idx)
+
+  } else {
+
+    pivots_idx <- apply(M, 1, function(r) which(r != 0)[1])
+    pivots_idx_final <- pivots_idx[!is.na(pivots_idx)]
+
+    params_idx <- setdiff(seq(ncol(M)), pivots_idx_final)
+
+  }
+
+# Canónica
+C <- eye(n)
+
+# Solo aquellos vectores de los que no tienen 1 
+# en las posiciones de los pivotes
+b_suplU <- matrix(C[, -pivots_idx], nrow = n)
+```
+
+```{r}
+glue_latex(
+  "[glue_matrices(t(bU), latex = TRUE, fractions = TRUE)]",
+  "\\sim",
+  "[glue_matrices(PU$splits, latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+
+Siguiendo las instrucciones de la [sección acerca del espacio suplementario](#supl), vamos a fijarnos en qué columnas están los pivotes: \(\{ `r str_flatten(pivots_idx, ", ")` \}\). 
+
+De la base canónica $\mathcal{C}$ eliminamos aquellos vectores que tienen un 1 en las mismas posiciones que los pivotes. Lo que nos quede, ésa es la base del espacio suplementario de $U$:
+```{r}
+glue_latex(
+  "\\mathcal{B}_{\\mathrm{supl}} =",
+  "\\left\\{",
+  "[vectors_to_latex(b_suplU)]",
+  "\\right\\}"
+) %>% cat()
+```
 
 ```{r}
 params <- letters[seq(ncol(B1))]
 str <- c("$", str_flatten(params, ", "), "$") %>% str_flatten()
 ```
 
-Unos escalares `r str` serán las coordenadas de $v$ en la base $\mathcal{B}_1$ si se verifica:
+e. Unos escalares `r str` serán [las coordenadas de $v$ en la base $\mathcal{B}_1$ si se verifica](#coord):
 
 \small
 ```{r}
@@ -352,9 +402,7 @@ glue::glue(
   cat()
 ```
 
-e.
-
-El procedimiento para construir la matriz de cambio de base de una base $\mathcal{B}$ a otra $\mathcal{B}'$ es el siguiente:
+f. El procedimiento para construir la [matriz de cambio de base](#cambiobase) de una base $\mathcal{B}$ a otra $\mathcal{B}'$ es el siguiente:
 
 - Calcular las coordenadas de cada vector en $\mathcal{B}$ en la base $\mathcal{B}'$. Eso supone la resolución de $n$ sistemas de ecuaciones lineales, y el procedimiento es igual que el visto en la sección anterior.
 - Construir la matriz poniendo, en forma de columna, las coordenadas calculadas: la primera columna se corresponde con las calculadas para el primer vector de $\mathcal{B}$, la segunda columna, para las del segundo, etc.
@@ -372,59 +420,7 @@ glue::glue(
   cat()
 ```
 
-La matriz del cambio de base inverso la vamos a calcular de la siguiente forma:
-
-Calcular las coordenadas de cada vector de la base $\mathcal{C}$ en la base $\mathcal{B}_1$ y formar la matriz por columnas.
-
-```{r}
-# Base canónica
-C <- eye(n)
-```
-
-Calculamos las coordenadas de cada vector de $\mathcal{C}$ en la nueva base:
-
-\small
-
-```{r}
-vars <- params[seq(ncol(B1))]
-# Por cada vector:
-for (i in seq(ncol(C))) {
-  
-  vars_i <- paste0(vars, "_{", i, "}")
-  mvars <- matrix(vars_i, ncol = 1)
-
-  if (i == 1) {
-    
-    all_vars <- mvars
-
-  } else {
-    
-    all_vars <- cbind(all_vars, mvars)
-
-  }
-  
-  im <- matrix(C[, i], ncol = 1)
-
-  # Escribimos lo que significan coordenadas
-  # y expresamos en sistema de ecuaciones
-  str <- glue::glue("$$[to_latex(im)] = ",
-                    "[write_linear_combination(B1, vars = vars_i)] = ",
-                    "\\left([write_system(B1, latex = TRUE, fractions = TRUE, vars = vars_i, format = 'c') %>% str_flatten('')]\\right)$$",
-                    .open = "[", .close = "]")
-  
-  cat(str) 
-  
-}
-```
-\normalsize
-
-Si se resuelve cada uno de los sistemas de ecuaciones que aparecen, nos queda:
-```{r}
-glue::glue("$$P_{\\mathcal{C}\\to\\mathcal{B}_1} = [to_latex(all_vars)] = [to_latex(P$splits[[2]], fractions = TRUE)]$$",
-           .open = "[", .close = "]") %>% cat()
-```
-
-La otra forma de obtener la matriz de cambio de base de $\mathcal{C}$ a $\mathcal{B}_1$ es buscando la inversa de la de $\mathcal{B}_1$ a $\mathcal{C}$.
+La matriz del cambio de base opuesto la vamos a calcular [buscando la matriz inversa](#cambiobase) de la de $\mathcal{B}_1$ a $\mathcal{C}$.
 
 Para ello, se puede usar la eliminación de Gauss-Jordan:
 ```{r}
@@ -449,7 +445,6 @@ glue::glue(
 ) %>% 
   cat()
 ```
-la misma que se obtuvo por el primer método.
 
 
 ## Aplicaciones lineales {#prob-apli}

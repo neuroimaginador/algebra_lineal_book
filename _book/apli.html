@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-05-01" />
+<meta name="date" content="2020-05-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -72,9 +72,9 @@
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
 <li class="chapter" data-level="2" data-path="ev.html"><a href="ev.html"><i class="fa fa-check"></i><b>2</b> Espacios Vectoriales</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="ev.html"><a href="ev.html#qué-es-un-subespacio-vectorial"><i class="fa fa-check"></i><b>2.1</b> Qué es un subespacio vectorial</a></li>
-<li class="chapter" data-level="2.2" data-path="ev.html"><a href="ev.html#qué-es-un-sistema-de-vectores-linealmente-independiente"><i class="fa fa-check"></i><b>2.2</b> Qué es un sistema de vectores linealmente independiente</a></li>
-<li class="chapter" data-level="2.3" data-path="ev.html"><a href="ev.html#qué-es-un-sistema-generador-y-el-subespacio-generado-por-un-conjunto-de-vectores"><i class="fa fa-check"></i><b>2.3</b> Qué es un sistema generador y el subespacio generado por un conjunto de vectores</a></li>
+<li class="chapter" data-level="2.1" data-path="ev.html"><a href="ev.html#subesp"><i class="fa fa-check"></i><b>2.1</b> Qué es un subespacio vectorial</a></li>
+<li class="chapter" data-level="2.2" data-path="ev.html"><a href="ev.html#indep"><i class="fa fa-check"></i><b>2.2</b> Qué es un sistema de vectores linealmente independiente</a></li>
+<li class="chapter" data-level="2.3" data-path="ev.html"><a href="ev.html#gen"><i class="fa fa-check"></i><b>2.3</b> Qué es un sistema generador y el subespacio generado por un conjunto de vectores</a></li>
 <li class="chapter" data-level="2.4" data-path="ev.html"><a href="ev.html#sistgenabase"><i class="fa fa-check"></i><b>2.4</b> Cómo extraemos una base a partir de un sistema generador de un (sub)espacio vectorial</a></li>
 <li class="chapter" data-level="2.5" data-path="ev.html"><a href="ev.html#base"><i class="fa fa-check"></i><b>2.5</b> Cómo encontrar la base (y la dimensión) para un subespacio vectorial</a>
 <ul>
@@ -83,10 +83,10 @@
 </ul></li>
 <li class="chapter" data-level="2.6" data-path="ev.html"><a href="ev.html#param2cartesian"><i class="fa fa-check"></i><b>2.6</b> Cómo convertir entre ecuaciones cartesianas y paramétricas de un subespacio vectorial</a></li>
 <li class="chapter" data-level="2.7" data-path="ev.html"><a href="ev.html#interseccion"><i class="fa fa-check"></i><b>2.7</b> Cómo hallar la intersección de dos subespacios vectoriales</a></li>
-<li class="chapter" data-level="2.8" data-path="ev.html"><a href="ev.html#es-la-unión-de-subespacios-un-subespacio"><i class="fa fa-check"></i><b>2.8</b> ¿Es la unión de subespacios un subespacio?</a></li>
+<li class="chapter" data-level="2.8" data-path="ev.html"><a href="ev.html#union"><i class="fa fa-check"></i><b>2.8</b> ¿Es la unión de subespacios un subespacio?</a></li>
 <li class="chapter" data-level="2.9" data-path="ev.html"><a href="ev.html#suma"><i class="fa fa-check"></i><b>2.9</b> Cómo hallar la suma de dos subespacios vectoriales</a></li>
-<li class="chapter" data-level="2.10" data-path="ev.html"><a href="ev.html#comprobación-del-teorema-de-la-dimensión"><i class="fa fa-check"></i><b>2.10</b> Comprobación del teorema de la dimensión</a></li>
-<li class="chapter" data-level="2.11" data-path="ev.html"><a href="ev.html#cómo-calcular-el-subespacio-suplementario-de-uno-dado"><i class="fa fa-check"></i><b>2.11</b> Cómo calcular el subespacio suplementario de uno dado</a></li>
+<li class="chapter" data-level="2.10" data-path="ev.html"><a href="ev.html#th-dim"><i class="fa fa-check"></i><b>2.10</b> Qué dice el teorema de la dimensión</a></li>
+<li class="chapter" data-level="2.11" data-path="ev.html"><a href="ev.html#supl"><i class="fa fa-check"></i><b>2.11</b> Cómo calcular el subespacio suplementario de uno dado</a></li>
 <li class="chapter" data-level="2.12" data-path="ev.html"><a href="ev.html#coord"><i class="fa fa-check"></i><b>2.12</b> Cómo calcular las coordenadas de un vector con respecto a una base dada</a></li>
 <li class="chapter" data-level="2.13" data-path="ev.html"><a href="ev.html#cambiobase"><i class="fa fa-check"></i><b>2.13</b> Cómo calcular la matriz de cambio de base entre dos bases de un mismo espacio vectorial</a></li>
 </ul></li>
@@ -99,7 +99,7 @@
 <li class="chapter" data-level="3.5" data-path="apli.html"><a href="apli.html#caracterización-de-la-sobreyectividad"><i class="fa fa-check"></i><b>3.5</b> Caracterización de la sobreyectividad</a></li>
 <li class="chapter" data-level="3.6" data-path="apli.html"><a href="apli.html#cómo-determinar-la-imagen-de-un-subespacio-vectorial"><i class="fa fa-check"></i><b>3.6</b> Cómo determinar la imagen de un subespacio vectorial</a></li>
 <li class="chapter" data-level="3.7" data-path="apli.html"><a href="apli.html#a-qué-se-llama-rango-y-nulidad-de-la-aplicación-lineal"><i class="fa fa-check"></i><b>3.7</b> A qué se llama rango y nulidad de la aplicación lineal</a></li>
-<li class="chapter" data-level="3.8" data-path="apli.html"><a href="apli.html#comprobación-del-teorema-de-la-dimensión-1"><i class="fa fa-check"></i><b>3.8</b> Comprobación del teorema de la dimensión</a></li>
+<li class="chapter" data-level="3.8" data-path="apli.html"><a href="apli.html#comprobación-del-teorema-de-la-dimensión"><i class="fa fa-check"></i><b>3.8</b> Comprobación del teorema de la dimensión</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="diagonalización.html"><a href="diagonalización.html"><i class="fa fa-check"></i><b>4</b> Diagonalización</a></li>
 <li class="chapter" data-level="5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html"><i class="fa fa-check"></i><b>5</b> Espacios Euclídeos</a></li>
@@ -153,7 +153,7 @@
 <div id="a-qué-se-llama-rango-y-nulidad-de-la-aplicación-lineal" class="section level2" number="3.7">
 <h2 number="3.7"><span class="header-section-number">3.7</span> A qué se llama rango y nulidad de la aplicación lineal</h2>
 </div>
-<div id="comprobación-del-teorema-de-la-dimensión-1" class="section level2" number="3.8">
+<div id="comprobación-del-teorema-de-la-dimensión" class="section level2" number="3.8">
 <h2 number="3.8"><span class="header-section-number">3.8</span> Comprobación del teorema de la dimensión</h2>
 
 </div>
