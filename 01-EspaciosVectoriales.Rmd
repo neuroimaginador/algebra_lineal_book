@@ -20,15 +20,15 @@ generic_vector <- matrix(unknowns, ncol = 1)
 
 <!-- You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods). -->
 
-Supongamos un cuerpo $\mathcal{K}$ (generalmente $\mathcal{K} = \mathbb{R}$). Consideremos un conjunto $V$ dotado de dos operaciones:
+Supongamos un cuerpo $\mathbb{K}$ (generalmente $\mathbb{K} = \mathbb{R}$). Consideremos un conjunto $V$ dotado de dos operaciones:
 
 - Una operación interna, la _suma_, de forma que si $u,v\in V$ entonces su suma es $u+v\in V$.
-- Una operación externa, _producto por un escalar_ de $\mathcal{K}$: si $c\in \mathcal{K}$ y $v\in V$, su producto es $c \cdot v \in V$.
+- Una operación externa, _producto por un escalar_ de $\mathbb{K}$: si $c\in \mathbb{K}$ y $v\in V$, su producto es $c \cdot v \in V$.
 
 Si:
 
-- $V$ con la operación es grupo abeliano.
-- El producto por un escalar verifica las propiedades distributiva ($(c+d)\cdot v = c\cdot v + d\cdot v$ y $c\cdot (u+v) = c\cdot u + c\cdot v$, para $c,d\in\mathcal{K},u,v\in V$), pseudoasociativa ($c(dv) = (cd)v$ para $c,d\in\mathcal{K},v\in V$) y existencia de neutro ($1\cdot v = v$ para todo $v\in V$).
+- $V$ con la operación $+$ es grupo abeliano.
+- El producto por un escalar verifica las propiedades distributiva ($(c+d)\cdot v = c\cdot v + d\cdot v$ y $c\cdot (u+v) = c\cdot u + c\cdot v$, para $c,d\in\mathbb{K},\,u,v\in V$), pseudoasociativa ($c\cdot(d\cdot v) = (c\cdot  d)\cdot v$ para $c,d\in\mathbb{K},\,v\in V$) y existencia de neutro ($1\in\mathbb{K}$, tal que $1\cdot v = v$ para todo $v\in V$).
 
 Entonces a $(V, +, \cdot)$ se de denomina espacio vectorial, y a los elementos de $V$, vectores.
 

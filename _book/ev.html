@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-05-01" />
+<meta name="date" content="2020-05-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -133,15 +133,15 @@
 <div id="ev" class="section level1" number="2">
 <h1 number="2"><span class="header-section-number">2</span> Espacios Vectoriales</h1>
 <!-- You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods). -->
-<p>Supongamos un cuerpo <span class="math inline">\(\mathcal{K}\)</span> (generalmente <span class="math inline">\(\mathcal{K} = \mathbb{R}\)</span>). Consideremos un conjunto <span class="math inline">\(V\)</span> dotado de dos operaciones:</p>
+<p>Supongamos un cuerpo <span class="math inline">\(\mathbb{K}\)</span> (generalmente <span class="math inline">\(\mathbb{K} = \mathbb{R}\)</span>). Consideremos un conjunto <span class="math inline">\(V\)</span> dotado de dos operaciones:</p>
 <ul>
 <li>Una operación interna, la <em>suma</em>, de forma que si <span class="math inline">\(u,v\in V\)</span> entonces su suma es <span class="math inline">\(u+v\in V\)</span>.</li>
-<li>Una operación externa, <em>producto por un escalar</em> de <span class="math inline">\(\mathcal{K}\)</span>: si <span class="math inline">\(c\in \mathcal{K}\)</span> y <span class="math inline">\(v\in V\)</span>, su producto es <span class="math inline">\(c \cdot v \in V\)</span>.</li>
+<li>Una operación externa, <em>producto por un escalar</em> de <span class="math inline">\(\mathbb{K}\)</span>: si <span class="math inline">\(c\in \mathbb{K}\)</span> y <span class="math inline">\(v\in V\)</span>, su producto es <span class="math inline">\(c \cdot v \in V\)</span>.</li>
 </ul>
 <p>Si:</p>
 <ul>
-<li><span class="math inline">\(V\)</span> con la operación es grupo abeliano.</li>
-<li>El producto por un escalar verifica las propiedades distributiva (<span class="math inline">\((c+d)\cdot v = c\cdot v + d\cdot v\)</span> y <span class="math inline">\(c\cdot (u+v) = c\cdot u + c\cdot v\)</span>, para <span class="math inline">\(c,d\in\mathcal{K},u,v\in V\)</span>), pseudoasociativa (<span class="math inline">\(c(dv) = (cd)v\)</span> para <span class="math inline">\(c,d\in\mathcal{K},v\in V\)</span>) y existencia de neutro (<span class="math inline">\(1\cdot v = v\)</span> para todo <span class="math inline">\(v\in V\)</span>).</li>
+<li><span class="math inline">\(V\)</span> con la operación <span class="math inline">\(+\)</span> es grupo abeliano.</li>
+<li>El producto por un escalar verifica las propiedades distributiva (<span class="math inline">\((c+d)\cdot v = c\cdot v + d\cdot v\)</span> y <span class="math inline">\(c\cdot (u+v) = c\cdot u + c\cdot v\)</span>, para <span class="math inline">\(c,d\in\mathbb{K},\,u,v\in V\)</span>), pseudoasociativa (<span class="math inline">\(c\cdot(d\cdot v) = (c\cdot d)\cdot v\)</span> para <span class="math inline">\(c,d\in\mathbb{K},\,v\in V\)</span>) y existencia de neutro (<span class="math inline">\(1\in\mathbb{K}\)</span>, tal que <span class="math inline">\(1\cdot v = v\)</span> para todo <span class="math inline">\(v\in V\)</span>).</li>
 </ul>
 <p>Entonces a <span class="math inline">\((V, +, \cdot)\)</span> se de denomina espacio vectorial, y a los elementos de <span class="math inline">\(V\)</span>, vectores.</p>
 <p>En este documento, nos referiremos normalmente a resultados sobre espacios vectoriales denominados <em>de dimensión finita</em>. Este concepto lo hablaremos más adelante.</p>

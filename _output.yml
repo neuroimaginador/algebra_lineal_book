@@ -26,4 +26,4 @@ bookdown::html_book:
         <li><a href="./">Preguntas y respuestas de Álgebra Lineal</a></li>
       after: |
         <li><a href="https://dominlopez.netlify.app" target="blank">Escrito por Domingo López</a></li>
-    download: ["pdf", "epub"]
+    download: "epub"
