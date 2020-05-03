@@ -96,9 +96,9 @@
 <li class="chapter" data-level="3.2" data-path="apli.html"><a href="apli.html#matriz-apli"><i class="fa fa-check"></i><b>3.2</b> Cuál es la matriz asociada a una aplicación lineal en unas bases dadas</a></li>
 <li class="chapter" data-level="3.3" data-path="apli.html"><a href="apli.html#cambiobase-apli"><i class="fa fa-check"></i><b>3.3</b> Cómo influye un cambio de base en la matriz asociada a una aplicación lineal</a></li>
 <li class="chapter" data-level="3.4" data-path="apli.html"><a href="apli.html#nucleo"><i class="fa fa-check"></i><b>3.4</b> Qué es y cómo determinar el núcleo de una aplicación lineal</a></li>
-<li class="chapter" data-level="3.5" data-path="apli.html"><a href="apli.html#inyectividad"><i class="fa fa-check"></i><b>3.5</b> Cómo caracterizar la inyectividad</a></li>
+<li class="chapter" data-level="3.5" data-path="apli.html"><a href="apli.html#inyectividad"><i class="fa fa-check"></i><b>3.5</b> Cómo podemos identificar una aplicación lineal inyectiva</a></li>
 <li class="chapter" data-level="3.6" data-path="apli.html"><a href="apli.html#imagen"><i class="fa fa-check"></i><b>3.6</b> Cómo calcular el subespacio imagen de una aplicación lineal</a></li>
-<li class="chapter" data-level="3.7" data-path="apli.html"><a href="apli.html#sobrey"><i class="fa fa-check"></i><b>3.7</b> Cómo caracterizar la sobreyectividad</a></li>
+<li class="chapter" data-level="3.7" data-path="apli.html"><a href="apli.html#sobrey"><i class="fa fa-check"></i><b>3.7</b> Cómo identificar si una aplicación lineal es sobreyectiva</a></li>
 <li class="chapter" data-level="3.8" data-path="apli.html"><a href="apli.html#isomorfismo"><i class="fa fa-check"></i><b>3.8</b> Qué es un isomorfismo</a></li>
 <li class="chapter" data-level="3.9" data-path="apli.html"><a href="apli.html#imagenU"><i class="fa fa-check"></i><b>3.9</b> Cómo determinar la imagen de un subespacio vectorial</a></li>
 <li class="chapter" data-level="3.10" data-path="apli.html"><a href="apli.html#rango-nulidad"><i class="fa fa-check"></i><b>3.10</b> A qué se llama rango y nulidad de la aplicación lineal</a></li>
@@ -141,6 +141,7 @@
 <li><span class="math inline">\(f(v_1 + v_2) = f(v_1) + f(v_2)\)</span> para todo <span class="math inline">\(v_1, v_2\in V\)</span>.</li>
 <li><span class="math inline">\(f(c\cdot v) = c\cdot f(v)\)</span> para todo <span class="math inline">\(c\in\mathbb{K},\,v\in V\)</span>.</li>
 </ul>
+<p>Una aplicación lineal cuyo dominio y codominio sean iguales (<span class="math inline">\(V = W\)</span>) se llama <strong>endomorfismo</strong>.</p>
 <hr />
 <p><strong>Ejemplo</strong></p>
 <p>Existen muchos ejemplos de aplicaciones lineales:</p>
@@ -555,7 +556,7 @@ z
 <hr />
 </div>
 <div id="inyectividad" class="section level2" number="3.5">
-<h2 number="3.5"><span class="header-section-number">3.5</span> Cómo caracterizar la inyectividad</h2>
+<h2 number="3.5"><span class="header-section-number">3.5</span> Cómo podemos identificar una aplicación lineal inyectiva</h2>
 <p>Recordemos que una aplicación <span class="math inline">\(f:X\to Y\)</span> es <strong>inyectiva</strong> si y sólo si <span class="math inline">\(f(x_1)\ne f(x_2)\)</span> siempre que <span class="math inline">\(x_1\ne x_2\)</span>, con <span class="math inline">\(x_1, x_2\in X\)</span>.</p>
 <p>Hay una forma de caracterizar las aplicaciones lineales inyectivas:</p>
 <blockquote>
@@ -566,6 +567,13 @@ z
 <p>Si la aplicación lineal <span class="math inline">\(f:V\to W\)</span> es inyectiva, entonces se verifica que <span class="math inline">\(\mathrm{dim}(V)\le\mathrm{dim}(W)\)</span>.</p>
 </blockquote>
 <p>El recíproco no es cierto, no siempre que tengamos <span class="math inline">\(\mathrm{dim}(V)\le\mathrm{dim}(W)\)</span> la aplicación puede ser inyectiva. Por ejemplo, la aplicación cero <span class="math inline">\(0:\mathbb{R}^2\to\mathbb{R}^3\)</span>, que asocia a todo vector el vector 0 del codominio, no puede ser inyectiva, a pesar de que la dimensión del dominio es menor que la del codominio.</p>
+<p>Podemos decir todavía algún resultado teórico que nos proporciona más información acerca de cómo identificar aplicaciones lineales inyectivas:</p>
+<blockquote>
+<p>Una aplicación <span class="math inline">\(f:V\to W\)</span> es inyectiva si, y sólo si, la imagen de todo <a href="ev.html#indep">sistema linealmente independiente</a> es también un sistema linealmente independiente.</p>
+</blockquote>
+<blockquote>
+<p>Si <span class="math inline">\(V\)</span> es de dimensión finita, entonces la aplicación lineal <span class="math inline">\(f:V\to W\)</span> es inyectiva si, y sólo si, <span class="math inline">\(\mathrm{dim}(V) = \mathrm{dim}(\mathrm{Im}\ f)\)</span></p>
+</blockquote>
 <hr />
 <p><strong>Ejemplo</strong></p>
 <p>En el ejemplo de <a href="apli.html#nucleo">la sección anterior</a>, tenemos que <span class="math inline">\(\mathrm{dim}(\mathrm{Ker}\ f) = 1\)</span>, luego <span class="math inline">\(f\)</span> <strong>no es inyectiva</strong>, ya que en ese caso debería ser <span class="math inline">\(\mathrm{dim}(\mathrm{Ker}\ f) = 0\)</span>.</p>
@@ -592,22 +600,185 @@ z
 x+ 3y\\
 2x+ 4z\\
 \end{array}\right)\]</span></p>
+<p>Podemos estudiar su núcleo para comprobar si es inyectiva:
+<span class="math display">\[\mathrm{Ker}\ g =\left\{\left(\begin{array}{c}
+x\\
+y\\
+z
+\end{array}\right)
+\in\mathbb{R}^{3}:\begin{array}{ccr}
+2x-y &amp; = &amp; 0\\
+x+ 3y &amp; = &amp; 0\\
+2x+ 4z &amp; = &amp; 0\\
+\end{array}\right\}\]</span></p>
+<p>Resolvemos el sistema homogéneo para llegar a que
+<span class="math display">\[\left\{\begin{array}{rrrcr}
+2x &amp; -y &amp;  &amp; = &amp; 0\\
+x &amp; + 3y &amp;  &amp; = &amp; 0\\
+2x &amp;  &amp; + 4z &amp; = &amp; 0\\
+\end{array}\right.\Rightarrow\left(\begin{array}{c}
+x\\
+y\\
+z
+\end{array}\right)
+ = \left(\begin{array}{c}
+0\\
+0\\
+0
+\end{array}\right)
+\]</span></p>
+<p>Luego <span class="math inline">\(\mathrm{Ker}\ g=\{0\}\)</span>, y así <span class="math inline">\(g\)</span> es inyectiva.</p>
 <hr />
 </div>
 <div id="imagen" class="section level2" number="3.6">
 <h2 number="3.6"><span class="header-section-number">3.6</span> Cómo calcular el subespacio imagen de una aplicación lineal</h2>
+<p>Llamamos <strong>imagen de la aplicación lineal <span class="math inline">\(f:V\to W\)</span></strong> a:
+<span class="math display">\[\mathrm{Im}\ f = \{w\in W: \text{existe }v\in V \text{ con }f(v) = w\} = f(V)\]</span></p>
+<p>Análogamente a lo que pasaba con <a href="apli.html#nucleo">el núcleo de una aplicación lineal</a>, tenemos:</p>
+<blockquote>
+<p>Si <span class="math inline">\(f:V\to W\)</span> es una aplicación lineal, entonces <span class="math inline">\(\mathrm{Im}\ f\)</span> es un subespacio vectorial de <span class="math inline">\(W\)</span>.</p>
+</blockquote>
+<p>Por tanto, podemos estudiarlo con todas las <a href="ev.html#ev">herramientas que conocemos</a>.</p>
+<p>¿Cómo calculamos <span class="math inline">\(\mathrm{Im}\ f\)</span>?</p>
+<p><a href="apli.html#prop-apli">Recordemos</a> que si <span class="math inline">\(\mathcal{G}\)</span> es un <a href="ev.html#gen">sistema generador</a> de un subespacio <span class="math inline">\(U\)</span> de <span class="math inline">\(V\)</span>, entonces <span class="math inline">\(f(\mathcal{G})\)</span> es un sistema generador de <span class="math inline">\(f(U)\)</span>.</p>
+<p>En concreto, tomando una base <span class="math inline">\(\mathcal{B}\)</span> de <span class="math inline">\(V\)</span>, su imagen <span class="math inline">\(f(\mathcal{B})\)</span> es un sistema generador de <span class="math inline">\(\mathrm{Im}\ f\)</span>. Basta, por tanto, aplicar <span class="math inline">\(f\)</span> a cada vector de <span class="math inline">\(\mathcal{B}\)</span> y con eso construimos un sistema generador del que podemos <a href="#sisgenabase">eliminar los vectores linealmente dependientes para obtener una base</a> de <span class="math inline">\(\mathrm{Im}\ f\)</span>.</p>
+<p>En consecuencia:</p>
+<blockquote>
+<p>Sea <span class="math inline">\(f\)</span> una aplicación lineal entre dos espacios <span class="math inline">\(V\)</span> y <span class="math inline">\(W\)</span>, y sea <span class="math inline">\(A\)</span> la matriz asociada a <span class="math inline">\(f\)</span>, una vez que hemos fijado dos bases en <span class="math inline">\(V\)</span> y <span class="math inline">\(W\)</span>. Entonces <span class="math inline">\(\mathrm{Im}\ f\)</span> es el subespacio de <span class="math inline">\(W\)</span> generado por los vectores columna que forman la matriz <span class="math inline">\(A\)</span>.</p>
+</blockquote>
 <hr />
 <p><strong>Ejemplo</strong></p>
+<p>Vamos a estudiar la imagen de las dos aplicaciones <span class="math inline">\(f\)</span> y <span class="math inline">\(g\)</span> del <a href="apli.html#inyectividad">ejemplo anterior</a>.</p>
+<p>Para <span class="math inline">\(f\)</span>, tenemos que <span class="math inline">\(\mathrm{Im}\ f\)</span> está generado por los vectores columnas de la matriz <span class="math inline">\(A\)</span>, luego un sistema generador de <span class="math inline">\(\mathrm{Im}\ f\)</span> será:
+<span class="math display">\[\mathcal{G}_{\mathrm{Im}\ f} = \left\{\left(
+\begin{array}{c@{}}
+1\\
+1\\
+2
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+1\\
+-2\\
+-1
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+1\\
+0\\
+1
+\end{array}
+\right)
+\right\}\]</span></p>
+<p>A partir de él, <a href="#sisgenabase">eliminando los vectores que sean linealmente dependientes</a>, encontramos una base de <span class="math inline">\(\mathrm{Im}\ f\)</span>:
+<span class="math display">\[\mathcal{B}_{\mathrm{Im}\ f} = \left\{\left(
+\begin{array}{c@{}}
+1\\
+1\\
+2
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+1\\
+-2\\
+-1
+\end{array}
+\right)
+\right\}\]</span></p>
+<p>Luego <span class="math inline">\(\mathrm{dim}(\mathrm{Im}\ f) = 2\)</span>.</p>
+<p>Vayamos ahora con la aplicación <span class="math inline">\(g\)</span>. Con el mismo razonamiento, sabemos que
+<span class="math display">\[\mathcal{G}_{\mathrm{Im}\ g} = \left\{\left(
+\begin{array}{c@{}}
+2\\
+1\\
+2
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+-1\\
+3\\
+0
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+0\\
+0\\
+4
+\end{array}
+\right)
+\right\}\]</span>
+es un sistema generador de <span class="math inline">\(\mathrm{Im}\ g\)</span>.</p>
+<p>Igual que antes, podemos encontrar una base de <span class="math inline">\(\mathrm{Im}\ g\)</span>:
+<span class="math display">\[\mathcal{B}_{\mathrm{Im}\ g} = \left\{\left(
+\begin{array}{c@{}}
+2\\
+1\\
+2
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+-1\\
+3\\
+0
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+0\\
+0\\
+4
+\end{array}
+\right)
+\right\}\]</span></p>
+<p>Entonces <span class="math inline">\(\mathrm{dim}(\mathrm{Im}\ g) = 3\)</span>. Esto nos dice que <span class="math inline">\(\mathrm{Im}\ g = W\)</span>.</p>
 <hr />
 </div>
 <div id="sobrey" class="section level2" number="3.7">
-<h2 number="3.7"><span class="header-section-number">3.7</span> Cómo caracterizar la sobreyectividad</h2>
+<h2 number="3.7"><span class="header-section-number">3.7</span> Cómo identificar si una aplicación lineal es sobreyectiva</h2>
+<p>Recordemos que una aplicación <span class="math inline">\(f:X\to Y\)</span> se dice <strong>sobreyectiva</strong> si, para cada <span class="math inline">\(y\in Y\)</span>, existe un <span class="math inline">\(x\in X\)</span> tal que <span class="math inline">\(f(x) = y\)</span>, es decir, si <span class="math inline">\(f(X) = Y\)</span>.</p>
+<p>En cuanto a aplicaciones lineales, tenemos el siguiente resultado, consecuencia de lo anterior:</p>
+<blockquote>
+<p>La aplicación lineal <span class="math inline">\(f:V\to W\)</span> es sobreyectiva si <span class="math inline">\(f(V) = \mathrm{Im}\ f = W\)</span>, y esto es equivalente a decir que <span class="math inline">\(\mathrm{dim}(\mathrm{Im}\ f) = \mathrm{dim}(W)\)</span>.</p>
+</blockquote>
+<p>Una propiedad adicional, con relación a las dimensiones de <span class="math inline">\(V\)</span> y de <span class="math inline">\(W\)</span>:</p>
+<blockquote>
+<p>Si la aplicación lineal <span class="math inline">\(f:V\to W\)</span> es sobreyectiva, entonces <span class="math inline">\(\mathrm{dim}(V)\ge\mathrm{dim}(W)\)</span>.</p>
+</blockquote>
 <hr />
 <p><strong>Ejemplo</strong></p>
+<p>En el <a href="apli.html#imagen">ejemplo anterior</a>, estudiamos las imágenes de las aplicaciones <span class="math inline">\(f\)</span> y <span class="math inline">\(g\)</span> de los ejemplos.</p>
+<p>Si aplicamos el resultado teórico de antes, llegamos a que:</p>
+<ul>
+<li><span class="math inline">\(f\)</span> no es sobreyectiva, pues <span class="math inline">\(\mathrm{dim}(\mathrm{Im}\ f) = 2 \ne 3 = \mathrm{dim}(W)\)</span>.</li>
+<li><span class="math inline">\(g\)</span> sí es sobreyectiva, pues<span class="math inline">\(\mathrm{dim}(\mathrm{Im}\ g) = 3 = \mathrm{dim}(W)\)</span>.</li>
+</ul>
 <hr />
 </div>
 <div id="isomorfismo" class="section level2" number="3.8">
 <h2 number="3.8"><span class="header-section-number">3.8</span> Qué es un isomorfismo</h2>
+<p>Un <strong>isomorfismo</strong> es una aplicación lineal <a href="#inyectiva">inyectiva</a> y <a href="apli.html#sobrey">sobreyectiva</a>.</p>
+<p>Un <strong>automorfismo</strong> es un isomorfismo donde dominio y codominio son el mismo espacio <span class="math inline">\(V\)</span>.</p>
+<p><strong>Algunas propiedades básicas de los isomorfismo</strong></p>
+<blockquote>
+<ul>
+<li>La composición de isomorfismos es un isomorfismo.</li>
+<li>La aplicación inversa de un isomorfismo es también un isomorfismo</li>
+</ul>
+</blockquote>
+<p>Cuando, además, estamos hablando de espacios de dimensión finita, tenemos los siguientes resultados:</p>
+<blockquote>
+<ul>
+<li>Una aplicación lineal <span class="math inline">\(f:V\to W\)</span> es un isomorfismo si, y sólo si, <span class="math inline">\(\mathrm{dim}(V) = \mathrm{dim}(W)\)</span>.</li>
+<li>Una aplicación <span class="math inline">\(f:V\to W\)</span> es un <em>automorfismo</em> si, y sólo si, o bien es inyectiva o bien es sobreyectiva.</li>
+</ul>
+</blockquote>
+<p>Este último resultado nos dice que en un <em>endomorfismo</em>, basta con ver si la aplicación es <a href="apli.html#inyectividad">inyectiva</a> o <a href="apli.html#sobrey">sobreyectiva</a> para tener que es un isomorfismo.</p>
 <hr />
 <p><strong>Ejemplo</strong></p>
 <hr />

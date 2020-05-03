@@ -16,6 +16,8 @@ Diremos que $f$ es una __aplicación lineal__ si verifica las siguientes dos con
 - $f(v_1 + v_2) = f(v_1) + f(v_2)$ para todo $v_1, v_2\in V$.
 - $f(c\cdot v) = c\cdot f(v)$ para todo $c\in\mathbb{K},\,v\in V$.
 
+Una aplicación lineal cuyo dominio y codominio sean iguales ($V = W$) se llama __endomorfismo__.
+
 ---
 
 __Ejemplo__
@@ -483,7 +485,7 @@ if (dimKer > 0) {
 
 ---
 
-## Cómo caracterizar la inyectividad {#inyectividad}
+## Cómo podemos identificar una aplicación lineal inyectiva {#inyectividad}
 
 Recordemos que una aplicación $f:X\to Y$ es __inyectiva__ si y sólo si $f(x_1)\ne f(x_2)$ siempre que $x_1\ne x_2$, con $x_1, x_2\in X$.
 
@@ -496,6 +498,12 @@ Un resultado interesante nos presenta una relación entre la inyectividad de $f$
 > Si la aplicación lineal $f:V\to W$ es inyectiva, entonces se verifica que $\mathrm{dim}(V)\le\mathrm{dim}(W)$.
 
 El recíproco no es cierto, no siempre que tengamos $\mathrm{dim}(V)\le\mathrm{dim}(W)$ la aplicación puede ser inyectiva. Por ejemplo, la aplicación cero $0:\mathbb{R}^2\to\mathbb{R}^3$, que asocia a todo vector el vector 0 del codominio, no puede ser inyectiva, a pesar de que la dimensión del dominio es menor que la del codominio.
+
+Podemos decir todavía algún resultado teórico que nos proporciona más información acerca de cómo identificar aplicaciones lineales inyectivas:
+
+> Una aplicación $f:V\to W$ es inyectiva si, y sólo si, la imagen de todo [sistema linealmente independiente](#indep) es también un sistema linealmente independiente.
+
+> Si $V$ es de dimensión finita, entonces la aplicación lineal $f:V\to W$ es inyectiva si, y sólo si, $\mathrm{dim}(V) = \mathrm{dim}(\mathrm{Im}\ f)$
 
 ---
 
@@ -518,26 +526,152 @@ glue_latex(
   cat()
 ```
 
+Podemos estudiar su núcleo para comprobar si es inyectiva:
+```{r}
+glue_latex(
+  "\\mathrm{Ker}\\ g =",
+  "\\left\\{",
+  "[to_latex(generic_vector_V)]\\in\\mathbb{R}^{[n]}:",
+  "[write_system(Ag, matlab::zeros(nrow(Ag), 1), latex = TRUE, format = 'c')]",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+
+Resolvemos el sistema homogéneo para llegar a que
+```{r}
+glue_latex(
+  "\\left\\{[write_system(Ag, matlab::zeros(nrow(Ag), 1), latex = TRUE)]\\right.",
+  "\\Rightarrow",
+  "[to_latex(generic_vector_V)] = [to_latex(matlab::zeros(n, 1))]"
+) %>% 
+  cat()
+```
+
+Luego $\mathrm{Ker}\ g=\{0\}$, y así $g$ es inyectiva.
 
 ---
 
 ## Cómo calcular el subespacio imagen de una aplicación lineal {#imagen}
 
+Llamamos __imagen de la aplicación lineal $f:V\to W$__ a:
+$$\mathrm{Im}\ f = \{w\in W: \text{existe }v\in V \text{ con }f(v) = w\} = f(V)$$
+
+Análogamente a lo que pasaba con [el núcleo de una aplicación lineal](#nucleo), tenemos:
+
+> Si $f:V\to W$ es una aplicación lineal, entonces $\mathrm{Im}\ f$ es un subespacio vectorial de $W$.
+
+Por tanto, podemos estudiarlo con todas las [herramientas que conocemos](#ev).
+
+¿Cómo calculamos $\mathrm{Im}\ f$?
+
+[Recordemos](#prop-apli) que si $\mathcal{G}$ es un [sistema generador](#gen) de un subespacio  $U$ de $V$, entonces $f(\mathcal{G})$ es un sistema generador de $f(U)$.
+
+En concreto, tomando una base $\mathcal{B}$ de $V$, su imagen $f(\mathcal{B})$ es un sistema generador de $\mathrm{Im}\ f$. Basta, por tanto, aplicar $f$ a cada vector de $\mathcal{B}$ y con eso construimos un sistema generador del que podemos [eliminar los vectores linealmente dependientes para obtener una base](#sisgenabase) de $\mathrm{Im}\ f$.
+
+En consecuencia:
+
+> Sea $f$ una aplicación lineal entre dos espacios $V$ y $W$, y sea $A$ la matriz asociada a $f$, una vez que hemos fijado dos bases en $V$ y $W$. Entonces $\mathrm{Im}\ f$ es el subespacio de $W$ generado por los vectores columna que forman la matriz $A$.
+
 ---
 
 __Ejemplo__
 
+Vamos a estudiar la imagen de las dos aplicaciones $f$ y $g$ del [ejemplo anterior](#inyectividad).
+
+Para $f$, tenemos que $\mathrm{Im}\ f$ está generado por los vectores columnas de la matriz $A$, luego un sistema generador de $\mathrm{Im}\ f$ será:
+```{r}
+glue_latex(
+  "\\mathcal{G}_{\\mathrm{Im}\\ f} = ",
+  "\\left\\{",
+  "[vectors_to_latex(A)]",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+
+A partir de él, [eliminando los vectores que sean linealmente dependientes](#sisgenabase), encontramos una base de $\mathrm{Im}\ f$:
+```{r}
+bImf <- linearly_independents(A)
+glue_latex(
+  "\\mathcal{B}_{\\mathrm{Im}\\ f} = ",
+  "\\left\\{[vectors_to_latex(bImf)]\\right\\}"
+) %>% 
+  cat()
+```
+
+Luego  \(\mathrm{dim}(\mathrm{Im}\ f) = `r ncol(bImf)`\).
+
+Vayamos ahora con la aplicación $g$. Con el mismo razonamiento, sabemos que
+```{r}
+glue_latex(
+  "\\mathcal{G}_{\\mathrm{Im}\\ g} = ",
+  "\\left\\{",
+  "[vectors_to_latex(Ag)]",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+es un sistema generador de $\mathrm{Im}\ g$.
+
+Igual que antes, podemos encontrar una base de $\mathrm{Im}\ g$:
+```{r}
+bImg <- linearly_independents(Ag)
+glue_latex(
+  "\\mathcal{B}_{\\mathrm{Im}\\ g} = ",
+  "\\left\\{",
+  "[vectors_to_latex(bImg)]",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+
+Entonces \(\mathrm{dim}(\mathrm{Im}\ g) = `r ncol(bImg)`\). Esto nos dice que $\mathrm{Im}\ g = W$.
+
 ---
 
-## Cómo caracterizar la sobreyectividad {#sobrey}
+## Cómo identificar si una aplicación lineal es sobreyectiva {#sobrey}
+
+Recordemos que una aplicación $f:X\to Y$ se dice __sobreyectiva__ si, para cada $y\in Y$, existe un $x\in X$ tal que $f(x) = y$, es decir, si $f(X) = Y$.
+
+En cuanto a aplicaciones lineales, tenemos el siguiente resultado, consecuencia de lo anterior:
+
+> La aplicación lineal $f:V\to W$ es sobreyectiva si $f(V) = \mathrm{Im}\ f = W$, y esto es equivalente a decir que $\mathrm{dim}(\mathrm{Im}\ f) = \mathrm{dim}(W)$.
+
+Una propiedad adicional, con relación a las dimensiones de $V$ y de $W$:
+
+> Si la aplicación lineal $f:V\to W$ es sobreyectiva, entonces $\mathrm{dim}(V)\ge\mathrm{dim}(W)$.
 
 ---
 
 __Ejemplo__
+
+En el [ejemplo anterior](#imagen), estudiamos las imágenes de las aplicaciones $f$ y $g$ de los ejemplos.
+
+Si aplicamos el resultado teórico de antes, llegamos a que:
+
+- $f$ no es sobreyectiva, pues \(\mathrm{dim}(\mathrm{Im}\ f) = `r ncol(bImf)` \ne `r m` = \mathrm{dim}(W)\).
+- $g$ sí es sobreyectiva, pues\(\mathrm{dim}(\mathrm{Im}\ g) = `r ncol(bImg)` = \mathrm{dim}(W)\).
 
 ---
 
 ## Qué es un isomorfismo {#isomorfismo}
+
+Un __isomorfismo__ es una aplicación lineal [inyectiva](#inyectiva) y [sobreyectiva](#sobrey).
+
+Un __automorfismo__ es un isomorfismo donde dominio y codominio son el mismo espacio $V$.
+
+__Algunas propiedades básicas de los isomorfismo__
+
+> - La composición de isomorfismos es un isomorfismo.
+- La aplicación inversa de un isomorfismo es también un isomorfismo
+
+Cuando, además, estamos hablando de espacios de dimensión finita, tenemos los siguientes resultados:
+
+> - Una aplicación lineal $f:V\to W$ es un isomorfismo si, y sólo si, $\mathrm{dim}(V) = \mathrm{dim}(W)$.
+- Una aplicación $f:V\to W$ es un _automorfismo_ si, y sólo si, o bien es inyectiva o bien es sobreyectiva.
+
+Este último resultado nos dice que en un _endomorfismo_, basta con ver si la aplicación es [inyectiva](#inyectividad) o [sobreyectiva](#sobrey) para tener que es un isomorfismo.
 
 ---
 
