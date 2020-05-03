@@ -42,7 +42,7 @@ __¿Qué preguntas vamos a responder en este capítulo?__
 - [¿A qué se llama rango y nulidad de la aplicación lineal?](#rango-nulidad)
 - [¿Qué dice el teorema de la dimensión para núcleo e imagen?](#th-dim-nucleo)
 
-## Qué propiedades básicas tienen las aplicaciones lineales
+## Qué propiedades básicas tienen las aplicaciones lineales {#prop-apli}
 
 Vamos a revisar aquí algunas de las propiedades básicas de las aplicaciones lineales entre espacios vectoriales. 
 
@@ -57,6 +57,10 @@ Además:
 
 > - Si $U$ es un [subespacio](#subesp) de $V$, entonces $f(U)$ es un subespacio de $W$. Análogamente, si $S$ es subespacio de $W$, su preimagen $f^{-1}(S)$ es también un subespacio de $V$.
 - Si $\mathcal{G} = \{u_1,\ldots,u_m\}$ es un [sistema generador](#gen) de un subespacio $U$ de $V$, entonces $f(\mathcal{G}) = \{f(u_1),\ldots,f(u_m)\}$ es un sistema generador de $f(U)$.
+
+Y, por último,
+
+> Si $f:V \to W$ y $g:W \to U$ son dos aplicaciones lineales, entonces su composición $g \circ f :V \to U$ también es una aplicación lineal.
 
 ## Cuál es la matriz asociada a una aplicación lineal en unas bases dadas {#matriz-apli}
 
@@ -99,33 +103,421 @@ a_{m, j}
 y_j = a_{1,j} w_1 + a_{2,j}w_2 + \ldots + a_{m, j} w_m$$
 - Esas coordenadas son la columna $j$ de la matriz $A$.
 
+Vamos a pasar todo esto a notación matricial, para encontrar una forma cómoda de resolver este problema.
+
+Llamemos $B_2$ a la matriz formada, por columnas, por las coordenadas de los vectores de $\mathcal{B}_W$ en la base canónica: $B_2 = \left(w_1|w_2|\ldots|w_m\right)$.
+
+Llamamos $Y = \left(y_1|y_2|\ldots|y_n\right) = \left(f(v_1)|f(v_2)|\ldots|f(v_n)\right)$.
+
+Entonces, la expresión anterior se puede escribir matricialmente como $Y = B_2\cdot A$, siendo $A$ la matriz asociada a la aplicación lineal. Por tanto, podemos despejar $A = B_2^{-1} Y$.
+
+Por tanto, para calcular $A$ de forma directa, podemos realizar Gauss-Jordan partiendo de $(B_2 | Y )$ hasta lograr $(I_m | A)$.
+
+__Caso particular: Base canónica en $V$ y $W$__
+
+En este caso, la matriz asociada a la aplicación lineal es $A = Y = \left(f(v_1)|f(v_2)|\ldots|f(v_n)\right)$, puesto que los vectores de la base canónica puestos por columnas forman la matriz identidad.
+
+De hecho, en la situación de la base canónica, lo más rápido es fijarse en los coeficientes de cada una de las variables $x,y,z,\ldots$ o $x_1,x_2,\ldots$, según sea el caso, y ponerlos por columnas. Así, para formar la matriz $A$ asociada a la aplicación lineal, tomaríamos como primera columna los coeficientes de la $x$, en la segunda, los coeficientes de la $y$, y así sucesivamente con el resto de variables.
+
 ---
 
 __Ejemplo__
+
+```{r, results = "asis"}
+unknowns <- c("x", "y", "z", "t")
+dimV <- sample(3:4, size = 1)
+n <- dimV
+dimW <- sample(2:3, size = 1)
+m <- dimW
+
+A <- rMatrix(n = dimW, m = dimV)
+
+str0 <- to_latex(matrix(unknowns[seq(dimV)], ncol = 1))
+
+str <- write_system(A, latex = TRUE, format = "c")
+```
+
+Consideremos la aplicación $f:V=\mathbb{R}^{`r dimV`}\to W=\mathbb{R}^{`r dimW`}$ dada por:
+
+```{r results="asis"}
+cat("$$f", str0, " = \\left(", str, "\\right)$$")
+```
+
+Como hemos visto, para encontrar su matriz asociada en las bases canónicas de $v$ y $W$, basta con mirar los coeficientes de $x,y,\ldots$, y ponerlos por columnas:
+
+```{r}
+cat("$$A = ", to_latex(A), "$$")
+```
+
+Esto significa que si tenemos un vector $v\in V$ expresado en coordenadas en la base canónica, entonces $f(v) = A\ v$, también expresado en las coordenadas canónicas de $W$.
+
+```{r}
+repeat {
+  
+  B1 <- rMatrix(n = n, m = n * 4, values = -1:1)
+  B1 <- linearly_independents(B1)
+
+  if (ncol(B1) == n) break
+  
+}
+
+repeat {
+  
+  B2 <- rMatrix(n = m, m = m * 4, values = 0:2)
+  B2 <- linearly_independents(B2)
+
+  if (ncol(B2) == m) break
+  
+}
+```
+
+
+Consideremos ahora dos bases distintas de la canónica tanto en $V$ como $W$:
+
+```{r}
+glue::glue(
+  "$$",
+  "\\mathcal{B}_{1} = \\{v_i\\} = ",
+  "\\left\\{[vectors_to_latex(B1)]\\right\\}",
+  "$$",
+  .open = "[", .close = "]"
+) %>% 
+  cat()
+
+glue::glue(
+  "$$",
+  "\\mathcal{B}_{2} = \\{w_i\\} = ",
+  "\\left\\{[vectors_to_latex(B2)]\\right\\}",
+  "$$",
+  .open = "[", .close = "]"
+) %>% 
+  cat()
+
+```
+
+Vamos a calcular la matriz $A'$ asociada a $f$ en estas dos bases. Debemos calcular:
+
+$$Y= (f(v_1)|\ldots|f(v_n))$$
+$$B_2 = (w_1|\ldots|w_m)$$
+
+Aplicando $f$ sucesivamente a los vectores de $\mathcal{B}_1$, tenemos que 
+```{r}
+glue_latex(
+  "Y = ",
+  "[glue_matrices(A %*% B1, latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+y
+```{r}
+glue_latex(
+  "B_2 = ",
+  "[glue_matrices(B2, latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+
+Luego podemos obtener $A'$ como $B_2^{-1} Y$, que resolvemos por Gauss-Jordan:
+```{r}
+Y <- A %*% B1
+PAB <- gauss_elimination(B2, Y, diag1 = TRUE, jordan = TRUE)
+glue_latex(
+  "[glue_matrices(B2, Y, latex = TRUE, fractions = TRUE)]",
+  "\\sim",
+  "[glue_matrices(PAB$splits, latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+Y de aquí que la nueva matriz, asociada a $f$ en las nuevas bases, sea:
+```{r}
+glue_latex(
+  "A' = ",
+  "[glue_matrices(PAB$splits[[2]], latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+
 
 ---
 
 ## Cómo influye un cambio de base en la matriz asociada a una aplicación lineal {#cambiobase-apli}
 
+Supongamos que tenemos una aplicación lineal $f:V\to W$ y que tenemos prefijadas unas bases $\mathcal{B}_V$ y $\mathcal{B}_W$ y, por tanto, tenemos determinada la matriz $A$, asociada a $f$ en esas bases.
+
+Consideremos unas nuevas bases $\mathcal{B}'_V$ y $\mathcal{B}'_W$ y nos preguntamos cuál será la matriz $A'$ asociada a $f$ en dichas bases.
+
+Para saber hallar $A'$, nos basamos en dos resultados teóricos.
+
+El primero de ellos nos relaciona los [cambios de base](#cambiobase) con las aplicaciones lineales:
+
+> Un __cambio de base__ entre dos bases $\mathcal{B}_V$ y $\mathcal{B}'_V$ en un espacio vectorial $V$ se corresponde con la aplicación lineal __identidad__ $\mathrm{id}_V:V \to V$, donde en el dominio hemos considerado la base $\mathcal{B}_V$ y en el codominio la base $\mathcal{B}'_V$. Además, la matriz asociada a $\mathrm{id}_V$ en esta situación es justo la del cambio de base $P_{\mathcal{B}_V \to \mathcal{B}'_V}$.
+
+Es decir, podemos considerar que un cambio de base no es más que la aplicación de la función identidad en el espacio vectorial, donde en dominio y codominio hemos considerado bases distintas.
+
+El otro resultado teórico nos relaciona la composición de aplicaciones lineales (que [es de nuevo una aplicación lineal](#prop-apli)) con sus matrices asociadas:
+
+> Si $f: V \to W$ y $g:W \to U$ son dos aplicaciones lineales, con matrices asociadas $A_f$ y $A_g$, respectivamente, habiendo fijado bases en $V$, $W$ y $U$, entonces la aplicación lineal composición de $f$ y $g$, $g\circ f:V\to U$, tiene como matriz asociada a $A_{g \circ f} = A_g \cdot A_f$.
+
+Luego si componemos dos aplicaciones lineales, _habiendo fijado bases en cada caso_, la matriz asociada a la composición es el producto de las matrices individuales.
+
+Con estos dos resultados, ya estamos en condiciones de estudiar cómo influye un cambio de base en la matriz de la aplicación lineal.
+
+Veamos el siguiente esquema, donde denotamos $V_{\mathcal{B}}$ que estamos considerando la base $\mathcal{B}$ en el espacio $V$:
+$$
+\begin{array}{ccccccc}
+V_{\mathcal{B}'_V} &
+\xrightarrow{\mathrm{id}_V} & V_{\mathcal{B}_V} & \xrightarrow{f} & W_{\mathcal{B}_W} & \xrightarrow{\mathrm{id}_W} & W_{\mathcal{B}'_W} \\
+ & P_{\mathcal{B}'_V \to \mathcal{B}_V} & & A & & P_{\mathcal{B}_W \to \mathcal{B}'_W} & \\
+\end{array}
+$$
+
+Llamemos, por comodidad, $P = P_{\mathcal{B}'_V \to \mathcal{B}_V}$ y $Q = P_{\mathcal{B}_W \to \mathcal{B}'_W}$. Recordemos que tanto $P$ como $Q$ se pueden calcular [de forma sencilla](#cambiobase).
+
+De esta forma, vemos que si fijamos las nuevas bases, entonces la aplicación $f$ resultante equivale a la $f$ anterior, a la que precedemos y sucedemos con la aplicación identidad dentro de $V$ y $W$, respectivamente, puesto que $f = \mathrm{id}_W\circ f \circ \mathrm{id}_V$.
+
+Teniendo en cuenta los resultados teóricos anteriores, esto quiere decir que $A' = Q\ A\ P$.
+
 ---
 
 __Ejemplo__
 
+```{r}
+repeat {
+  
+  B1p <- rMatrix(n = n, m = n * 4, values = -1:1)
+  B1p <- linearly_independents(B1p)
+
+  if (ncol(B1p) == n) break
+  
+}
+
+repeat {
+  
+  B2p <- rMatrix(n = m, m = m * 4, values = 0:2)
+  B2p <- linearly_independents(B2p)
+
+  if (ncol(B2p) == m) break
+  
+}
+```
+
+Continuemos con el ejemplo de [la sección anterior](#matriz-apli). Sabemos que la aplicación $f$ allí definida tenía por matriz asociada:
+```{r}
+newA <- PAB$splits[[2]]
+glue_latex(
+  "A = ",
+  "[glue_matrices(newA, latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+
+Consideremos ahora dos bases distintas tanto en $V$ como $W$:
+```{r}
+glue::glue(
+  "$$",
+  "\\mathcal{B}'_{1} =",
+  "\\left\\{[vectors_to_latex(B1p)]\\right\\}",
+  "$$",
+  .open = "[", .close = "]"
+) %>% 
+  cat()
+
+glue::glue(
+  "$$",
+  "\\mathcal{B}'_{2} =",
+  "\\left\\{[vectors_to_latex(B2p)]\\right\\}",
+  "$$",
+  .open = "[", .close = "]"
+) %>% 
+  cat()
+
+```
+
+Vamos a aplicar lo anterior para encontrar la matriz $A'$ asociada a $f$ en las nuevas bases.
+
+Para ello, sabemos que $A' = Q\ A\ P$, donde $P$ es la matriz de cambio de base de $\mathcal{B}'_1$ a $\mathcal{B}_1$ y $Q$ es el cambio de $\mathcal{B}_2$ a $\mathcal{B}'_2$.
+
+Si llamamos $B_1$, $B'_1$, $B_2$ y $B'_2$ a las matrices que resultan de poner por columnas los vectores de $\mathcal{B}_1$, $\mathcal{B}'_1$, $\mathcal{B}_2$ y $\mathcal{B}'_2$, respectivamente, podemos calcular $P$ y $Q$ de la siguiente manera, según [ya hemos visto](#cambiobase):
+$$P = B_1^{-1}\ B'_1,\quad\quad Q = {B'_2}^{-1}\ B_2$$
+
+Hacemos Gauss-Jordan partiendo de $(B_1 | B'_1)$ hasta llegar a $(I_n | P)$, y partiendo de $(B'_2 | B_2)$ hasta $(I_m | Q)$, obteniendo:
+```{r}
+gP <- gauss_elimination(B1, B1p, 
+                        diag1 = TRUE, jordan = TRUE)
+gP <- gP$splits[[2]]
+gQ <- gauss_elimination(B2p, B2, 
+                        diag1 = TRUE, jordan = TRUE)
+gQ <- gQ$splits[[2]]
+glue_latex(
+  "P = ",
+  "[glue_matrices(gP, latex = TRUE, fractions = TRUE)],",
+  "\\quad\\quad",
+  "\\ Q = ",
+  "[glue_matrices(gQ, latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+
+De ahí:
+```{r}
+glue_latex(
+  "A' = Q\\ A\\ P = ",
+  "[glue_matrices(gQ, latex = TRUE, fractions = TRUE)]",
+  "[glue_matrices(newA, latex = TRUE, fractions = TRUE)]",
+  "[glue_matrices(gP, latex = TRUE, fractions = TRUE)] = ",
+  "[glue_matrices(gQ %*% newA %*% gP, latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+
+
 ---
 
-## Cómo determinar el núcleo de una aplicación lineal {#nucleo}
+## Qué es y cómo determinar el núcleo de una aplicación lineal {#nucleo}
+
+Llamamos __núcleo__ de una aplicación lineal $f:V \to W$, y lo denotamos por $\mathrm{Ker}\ f$,  al conjunto de aquellos vectores $v\in V$ tales que $f(v) = 0_W$:
+$$\mathrm{Ker}\ f = \{v\in V:f(v) = 0_W\}$$
+
+El primer resultado teórico interesante es:
+
+> $\mathrm{Ker}\ f \ne\varnothing$, puesto que, al menos, $0_V\in\mathrm{Ker}\ f$, como [hemos visto antes](#prop-apli).
+
+Podemos decir todavía más:
+
+> Dada una aplicación lineal $f:V\to W$, su núcleo $\mathrm{Ker}\ f$ es un subespacio vectorial de $V$.
+
+Por tanto, para operar con el núcleo, podemos hacerlo como hemos visto en [el capítulo acerca de espacios vectoriales](#ev): podemos calcular [un sistema generador](#gen), [determinar una base y su dimensión](#base).
+
+¿Qué relación tiene el núcleo de $f$ con su matriz asociada?
+
+Supongamos que fijamos las bases en $V$ y $W$ y que la matriz asociada a $f$ en esas bases es $A$. 
+
+Entonces, si $v\in V$ está en el núcleo, será que $f(v) = 0_W$, luego las coordenadas de $f(v)$ en la base de $W$ son todas cero: $[f(v)]_{\mathcal{B}_W} = 0$. 
+
+Pero como conocemos la matriz asociada a $f$, entonces sabemos que $[f(v)]_{\mathcal{B}_W} = A\ [v]_{\mathcal{B}_V}$.
+
+En resumen, $v\in\mathrm{Ker}\ f$ si, y sólo si $A\ [v]_{\mathcal{B}_V} = 0$, es decir, si y sólo si las coordenadas de $v$ son solución del sistema de ecuaciones lineales homogéneo $Ax = 0$.
+
+> $\mathrm{Ker}\ f$ coincide con el subespacio de las soluciones del sistema $Ax = 0$.
+
+Esto también implica que __las ecuaciones cartesianas de $\mathrm{Ker}\ f$ son $Ax = 0$__. Por tanto, podemos aplicar [lo que ya hemos visto](#base) para calcular una base del núcleo de $f$.
 
 ---
 
 __Ejemplo__
+
+Seguimos con el ejemplo de la aplicación $f:V=\mathbb{R}^{`r dimV`}\to W=\mathbb{R}^{`r dimW`}$ dada por:
+
+```{r results="asis"}
+cat("$$f", str0, " = \\left(", str, "\\right)$$")
+```
+
+Como hemos visto, su matriz asociada es:
+
+```{r}
+cat("$$A = ", to_latex(A), "$$")
+```
+
+Usamos esa matriz $A$ para construir el sistema homogéneo:
+```{r}
+glue_latex(
+  "[write_system(A, matlab::zeros(nrow(A), 1), latex = TRUE)]"
+) %>% 
+  cat()
+```
+que se corresponde con las ecuaciones cartesianas de $\mathrm{Ker}\ f$ (podíamos haber hecho directamente $f(v) = 0$ usando la definición de $f$).
+
+Usaremos [lo que hemos visto ya](#base) para convertir esas ecuaciones a forma paramétrica (usando eliminación Gaussiana), y así conseguir un sistema generador y [una base](#sisgenabase):
+```{r}
+genKer <- solve_homogeneous(A)
+bKer <- linearly_independents(genKer)
+dimKer <- ncol(bKer)
+generic_vector_V <- matrix(unknowns[1:n], ncol = 1)
+params <- c("\\alpha", "\\beta", "\\gamma", "\\delta")
+
+if (dimKer > 0) {
+  
+glue_latex(
+  "[write_system(A, matlab::zeros(nrow(A), 1), latex = TRUE)]",
+  "\\Leftrightarrow",
+  "\\ [to_latex(generic_vector_V)] = ",
+  "[write_linear_combination(genKer, vars = params)]"
+) %>% 
+  cat()
+  
+} else {
+  
+  glue_latex(
+  "[write_system(A, matlab::zeros(nrow(A), 1), latex = TRUE)]",
+  "\\Leftrightarrow",
+  "\\ [to_latex(generic_vector_V)] = ",
+  "[to_latex(matlab::zeros(nrow(A), 1))]"
+) %>% 
+  cat()
+
+}
+```
+
+Luego
+```{r}
+if (dimKer > 0) {
+  
+  glue_latex(
+    "\\mathcal{B}_{\\mathrm{Ker}\\ f} = ",
+    "\\left\\{",
+    "[vectors_to_latex(bKer)]",
+    "\\right\\}"
+  ) %>% 
+    cat()
+  
+} else {
+  
+  glue_latex(
+    "\\mathrm{Ker}\\ f = \\{0\\}"
+  ) %>% 
+    cat()
+  
+}
+```
+
 
 ---
 
 ## Cómo caracterizar la inyectividad {#inyectividad}
 
+Recordemos que una aplicación $f:X\to Y$ es __inyectiva__ si y sólo si $f(x_1)\ne f(x_2)$ siempre que $x_1\ne x_2$, con $x_1, x_2\in X$.
+
+Hay una forma de caracterizar las aplicaciones lineales inyectivas:
+
+> La aplicación lineal $f:V\to W$ es inyectiva si, y sólo si, $\mathrm{Ker}\ f = \{0\}$, es decir, si y sólo si $\mathrm{dim}(\mathrm{Ker}\ f) = 0$.
+
+Un resultado interesante nos presenta una relación entre la inyectividad de $f$ y las dimensiones de los espacios $V$ y $W$:
+
+> Si la aplicación lineal $f:V\to W$ es inyectiva, entonces se verifica que $\mathrm{dim}(V)\le\mathrm{dim}(W)$.
+
+El recíproco no es cierto, no siempre que tengamos $\mathrm{dim}(V)\le\mathrm{dim}(W)$ la aplicación puede ser inyectiva. Por ejemplo, la aplicación cero $0:\mathbb{R}^2\to\mathbb{R}^3$, que asocia a todo vector el vector 0 del codominio, no puede ser inyectiva, a pesar de que la dimensión del dominio es menor que la del codominio.
+
 ---
 
 __Ejemplo__
+
+En el ejemplo de [la sección anterior](#nucleo), tenemos que $\mathrm{dim}(\mathrm{Ker}\ f) = 1$, luego $f$ __no es inyectiva__, ya que en ese caso debería ser $\mathrm{dim}(\mathrm{Ker}\ f) = 0$. 
+
+```{r}
+Ag <- rMatrix(n = n, m = n, sdd = TRUE)
+```
+
+Consideremos otra aplicación $g:\mathbb{R}^{`r dimV`}\to \mathbb{R}^{`r dimV`}$ dada por:
+```{r}
+glue_latex(
+  "g [to_latex(generic_vector_V)] = ",
+  "[glue_matrices(Ag, latex = TRUE, fractions = TRUE)]",
+  "\\ [to_latex(generic_vector_V)] = ",
+  "\\left([write_system(Ag, latex = TRUE, format = 'c')]\\right)"
+) %>% 
+  cat()
+```
+
 
 ---
 
