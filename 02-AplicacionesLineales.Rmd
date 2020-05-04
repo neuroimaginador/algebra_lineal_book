@@ -708,7 +708,7 @@ AU <- parametric_to_cartesian(U)$A
 glue_latex(
   "U = \\left\\{",
   "[to_latex(generic_vector_V)]\\in\\mathbb{R}^{[n]}:",
-  "[write_system(AU, matlab::zeros(nrow(AU), 1), latex = TRUE, fractions = TRUE, format = 'c')]",
+  "[write_system(fractional(AU), matlab::zeros(nrow(AU), 1), latex = TRUE, fractions = TRUE, format = 'c')]",
   "\\right\\}"
 ) %>% 
   cat()

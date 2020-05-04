@@ -421,8 +421,8 @@ params <- c("\\alpha", "\\beta", "\\gamma", "\\delta")
 
 for (p in seq_along(L$eq_idx[-1])) {
   
-  par <- fractional(L$splits[[p]][[1]])
-  eqs <- fractional(L$splits[[p]][[2]])
+  par <- L$splits[[p]][[1]]
+  eqs <- L$splits[[p]][[2]]
   
   str_p <- (write_system(par, fractions = TRUE,
                        format = 'c', 

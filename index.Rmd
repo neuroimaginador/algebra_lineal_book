@@ -1,5 +1,5 @@
 --- 
-title: "Álgebra Lineal"
+title: "Preguntas y respuestas de Álgebra Lineal"
 author: "Domingo López"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -7,7 +7,7 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
+description: "En este libro vamos a recopilar algunas de las preguntas y dudas más frecuentes en los temas de Álgebra Lineal, con ejemplos resueltos, y acompañados de la teoría necesaria para comprender los resultados."
 ---
 ```{r echo = FALSE}
 knitr::opts_chunk$set(echo = FALSE,
