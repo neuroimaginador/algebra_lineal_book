@@ -449,6 +449,267 @@ glue::glue(
 
 ## Aplicaciones lineales {#prob-apli}
 
+```{r, results = "asis"}
+unknowns <- c("x", "y", "z", "t")
+n <- dimV <- sample(3:4, size = 1)
+m <- dimW <- sample(2:3, size = 1)
+
+A <- rMatrix(n = dimW, m = dimV)
+
+str0 <- to_latex(matrix(unknowns[seq(dimV)], ncol = 1))
+
+str <- write_system(A, latex = TRUE, format = "c")
+
+repeat {
+  
+  B1 <- rMatrix(n = n, m = n * 4, values = -2:1)
+  B1 <- linearly_independents(B1)
+
+  if (ncol(B1) == n) break
+  
+}
+
+repeat {
+  
+  B2 <- rMatrix(n = m, m = m * 4, values = 0:2)
+  B2 <- linearly_independents(B2)
+
+  if (ncol(B2) == m) break
+  
+}
+
+gen_vector_V <- matrix(get_unknowns(m = n, 
+                                    latex = TRUE), 
+                       ncol = 1)
+```
+
+
+__Ejercicio__
+
+Consideremos la aplicación $f:V=\mathbb{R}^{`r dimV`}\to W=\mathbb{R}^{`r dimW`}$ dada por:
+
+```{r results="asis"}
+cat("$$f", str0, " = \\left(", str, "\\right)$$")
+```
+
+a. Encontrar la matriz asociada a $f$ en las bases canónicas y en las bases:
+```{r}
+glue_latex(
+  "\\mathcal{B}_{1} = \\{v_i\\} = ",
+  "\\left\\{[vectors_to_latex(B1)]\\right\\}"
+) %>% 
+  cat()
+
+glue_latex(
+  "\\mathcal{B}_{2} = \\{w_i\\} = ",
+  "\\left\\{[vectors_to_latex(B2)]\\right\\}"
+) %>% 
+  cat()
+```
+
+b. Dar una base y la dimensión del núcleo y de la imagen de $f$.
+
+c. Identificar si $f$ es inyectiva o sobreyectiva.
+
+d. Comprobar el teorema de la dimensión de rango y nulidad.
+
+e. Calcular una base de $f(U)$, donde $U$ es el subespacio de $V$ dado por:
+```{r}
+U <- rMatrix(n = n, m = 2)
+AU <- parametric_to_cartesian(U)$A
+glue_latex(
+  "U = \\left\\{",
+  "[to_latex(generic_vector_V)]\\in\\mathbb{R}^{[n]}:",
+  "[write_system(AU, matlab::zeros(nrow(AU), 1), latex = TRUE, fractions = TRUE, format = 'c')]",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+
+
+__Solución__
+
+a. Para hallar la [matriz asociada](#matriz-apli) a la aplicación $f$ en las bases canónicas, basta con mirar los coeficientes de las variables $x,y,\ldots$ en la expresión de $f$ y ponerlos por columnas. De esta forma:
+```{r}
+glue_latex(
+  "A =",
+  "[glue_matrices(A, latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+
+Para calcular la matriz $A'$ asociada a $f$ [con respecto a las nuevas bases](#cambiobase-apli), tenemos dos opciones:
+
+1. Calcular la imagen de los vectores de $\mathcal{B}_1$ y encontrar sus coordenadas con respecto a la base $\mathcal{B}_2$, y ponerlas por columnas.
+2. Calcular las matrices $P$ y $Q$, de [cambio de base](#cambiobase) desde la canónica en $V$ y en $W$ a $\mathcal{B}_1$ y $\mathcal{B}_2$, respectivamente, y usarlas para calcular $A' = Q^{-1}\ A\ P$.
+
+Ambos caminos son completamente equivalentes y, de hecho, uno se deduce del otro. Por tanto, en cada situación debemos ver cuál de los dos nos puede resultar más sencillo.
+
+En este caso, optamos por el [camino 1](#matriz-apli).
+
+Llamemos $Y = (f(v_1)|f(v_2)|\ldots|f(v_n))$ a la matriz que tiene por columnas las imágenes de los vectores de $\mathcal{B}_1$ mediante $f$:
+```{r}
+Y <- A %*% B1
+glue_latex(
+  "Y = ",
+  "[glue_matrices(Y, latex = TRUE, fractions = TRUE)]"
+)
+```
+y $B_2 = (w_1|w_2|\ldots|w_m)$ a la matriz que tiene por columnas los vectores de $\mathcal{B}_2$.
+
+Entonces $A' = B_2^{-1}\ Y$, que podemos calcular mediante Gauss-Jordan, partiendo de $(B_2|Y)$ y llegando a $(I_m|A')$:
+```{r}
+Ap <- gauss_elimination(B2, Y, jordan = TRUE, diag1 = TRUE)
+glue_latex(
+  "[glue_matrices(B2, Y, latex = TRUE, fractions = TRUE)]",
+  "\\sim",
+  "[glue_matrices(Ap$splits, latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+
+Luego 
+```{r}
+glue_latex(
+  "A' =",
+  "[glue_matrices(Ap$splits[[2]], latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+
+b. Comenzamos por estudiar el [núcleo](#nucleo) de $f$.
+
+Sabemos que el núcleo $\mathrm{Ker}\ f$ es el conjunto de vectores $v\in V$ tal que $f(v) = 0$, y que eso coincide con el conjunto de soluciones del sistema de ecuaciones homogéneo cuya matriz de coeficientes es $A$.
+
+Todo esto se resume en que las ecuaciones cartesianas de $\mathrm{Ker}\ f$ son aquellas cuya matriz de coeficientes es $A$:
+```{r}
+glue_latex(
+  "\\mathrm{Ker}\\ f =",
+  "\\left\\{",
+  "[to_latex(gen_vector_V)]\\in V:",
+  "[write_system(A, matlab::zeros(m, 1), latex = TRUE, format = 'c')]",
+  "\\right\\}"
+)
+```
+
+Resolvemos este sistema por Gauss para [encontrar las ecuaciones paramétricas](#base) y, a partir de ahí, una [base](#sisgenabase) del núcleo:
+```{r}
+zeros_vec <- matlab::zeros(m, 1)
+gauss_Ker <- gauss_elimination(A, zeros_vec, jordan = TRUE)
+glue_latex(
+  "[glue_matrices(A, zeros_vec, latex = TRUE, fractions = TRUE)]",
+  "\\sim",
+  "[glue_matrices(gauss_Ker$splits, latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+Luego nos quedan las siguientes ecuaciones paramétricas para $\mathrm{Ker}\ f$:
+```{r}
+genKer <- solve_homogeneous(A)
+params <- c("\\alpha", "\\beta", "\\gamma", "\\delta")
+glue_latex(
+  "[to_latex(gen_vector_V)] =",
+  "[write_linear_combination(genKer, vars = params)]"
+) %>% 
+  cat()
+```
+
+Entonces la base del núcleo de $f$ es:
+```{r}
+glue_latex(
+  "\\mathcal{B}_{\\mathrm{Ker}\\ f} = ",
+  "\\left\\{",
+  "[vectors_to_latex(genKer)]",
+  "\\right\\}"
+)
+```
+y \(\mathrm{dim}(\mathrm{Ker}\ f) = `r ncol(genKer)`\).
+
+Con respecto a la imagen de $f$, hemos de recordar que [$\mathrm{Im}\ f$ es el subespacio de $W$ generado por los vectores que forman las columnas de la matriz asociada $A$](#imagen).
+
+Por tanto, un [sistema generador](#gen) de $\mathrm{Im}\ f$ será:
+```{r}
+glue_latex(
+  "\\mathcal{G} =",
+  "\\left\\{",
+  "[vectors_to_latex(A)]",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+
+Desde este sistema generador, [eliminamos los vectores linealmente dependientes](#sisgenabase) para obtener una base de $\mathrm{Im}\ f$. Usamos Gauss con los vectores de $\mathcal{G}$ por _filas_, y eliminamos aquellos que, al final, se hayan convertido en filas de ceros:
+```{r}
+gauss_Im <- gauss_elimination(t(A))
+glue_latex(
+  "[glue_matrices(t(A), latex = TRUE, fractions = TRUE)]",
+  "\\sim",
+  "[glue_matrices(gauss_Im$splits[[1]], latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+
+Luego
+```{r}
+bImf <- linearly_independents(A)
+glue_latex(
+  "\\mathcal{B}_{\\mathrm{Im}\\ f} =",
+  "\\left\\{[vectors_to_latex(bImf)]\\right\\}"
+)
+```
+y \(\mathrm{dim}(\mathrm{Im}\ f) = `r ncol(bImf)`\).
+
+c. Para determinar si $f$ es [inyectiva](#inyectividad) o [sobreyectiva](#sobrey), nos fijaremos en las dimensiones de su núcleo y de su imagen:
+
+- $f$ será inyectiva si y solo si se cumple $\mathrm{dim}(\mathrm{Ker}\ f) = 0$. Pero sabemos que \(\mathrm{dim}(\mathrm{Ker}\ f) = `r ncol(genKer)`\), luego $f$ no es inyectiva.
+- $f$ será sobreyectiva si y solo si se cumple que \(\mathrm{dim}(\mathrm{Im}\ f) = \mathrm{dim}(W) = \mathrm{dim}(\mathbb{R}^{`r m`})\), y esto sí se cumple, como hemos visto en el apartado anterior,luego $f$ es sobreyectiva.
+
+d. El [teorema de la dimensión para núcleo e imagen](@th-dim-nucleo) dice que $\mathrm{dim}(V) = \mathrm{dim}(\mathrm{Ker}\ f) + \mathrm{dim}(\mathrm{Im}\ f)$. Lo podemos comprobar fácilmente:
+$$\begin{array}{ccccc}
+\mathrm{dim}(\mathbb{R}^{`r n`}) & = & \mathrm{dim}(\mathrm{Ker}\ f) & + & \mathrm{dim}(\mathrm{Im}\ f) \\
+`r n` & = & `r ncol(genKer)` & + & `r ncol(bImf)` \\
+\end{array}$$
+
+e. Dado el subespacio $U$, debemos encontrar un sistema de vectores $\mathcal{G}$ que [lo genere](#gen), calcular su imagen $f(\mathcal{G})$, y eso será un sistema generador de $f(U)$. A partir de ahí, podemos [extraer una base](#sisgenabase) de $f(U)$.
+
+Para calcular un sistema generador de $U$, pasamos sus [ecuaciones cartesianas](#base) a paramétricas, usando métodos Gaussianos:
+```{r}
+glue_latex(
+  "\\left\\{[write_system(AU, matlab::zeros(nrow(AU), 1))]\\right.",
+  "\\Rightarrow",
+  "[to_latex(gen_vector_V)] = [write_linear_combination(U, vars = params)]"
+)
+```
+
+De aquí podemos determinar una base de $U$, si eliminamos sus vectores linealmente dependientes:
+```{r}
+bU <- linearly_independents(U)
+glue_latex(
+  "\\mathcal{B}_U = \\left\\{",
+  "[vectors_to_latex(bU)]",
+  "\\right\\}"
+)
+```
+
+Ahora procedemos a calcular $f(\mathcal{B}_U)$:
+```{r}
+fbU <- A %*% bU
+glue_latex(
+  "f(\\mathcal{B}_U) = \\left\\{",
+  "[vectors_to_latex(fbU)]",
+  "\\right\\}"
+)
+```
+que es un sistema generador de $f(U)$. Eliminamos los vectores linealmente dependientes (en este caso es sencillo) para obtener una base de $f(U)$:
+```{r}
+glue_latex(
+  "\\mathcal{B}_{f(U)} =",
+  "\\left\\{[vectors_to_latex(fbU)]\\right\\}"
+)
+```
+y así \(\mathrm{dim}(f(U)) = `r ncol(fbU)`\).
+
+
 ## Diagonalización {#prob-diag}
 
 ## Espacios Euclídeos {#prob-espeuclideo}
