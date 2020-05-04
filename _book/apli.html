@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-05-03" />
+<meta name="date" content="2020-05-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -156,10 +156,10 @@
 <li><a href="apli.html#prop-apli">¿Qué propiedades básicas tienen las aplicaciones lineales?</a></li>
 <li><a href="apli.html#matriz-apli">¿Cuál es la matriz asociada a una aplicación lineal en unas bases dadas?</a></li>
 <li><a href="apli.html#cambiobase-apli">¿Cómo influye un cambio de base en la matriz asociada a una aplicación lineal?</a></li>
-<li><a href="apli.html#nucleo">¿Cómo determinar el núcleo de una aplicación lineal?</a></li>
-<li><a href="apli.html#inyectividad">¿Cómo podemos caracterizar la inyectividad?</a></li>
+<li><a href="apli.html#nucleo">¿Qué es y cómo determinar el núcleo de una aplicación lineal?</a></li>
+<li><a href="apli.html#inyectividad">¿Cómo podemos identificar una aplicación lineal inyectiva?</a></li>
 <li><a href="apli.html#imagen">¿Cómo calcular el subespacio imagen de una aplicación lineal?</a></li>
-<li><a href="apli.html#sobrey">¿Cómo podemos caracterizar la sobreyectividad?</a></li>
+<li><a href="apli.html#sobrey">¿Cómo identificar si una aplicación lineal es sobreyectiva?</a></li>
 <li><a href="apli.html#isomorfismo">¿Qué es un isomorfismo?</a></li>
 <li><a href="apli.html#imagenU">¿Cómo determinar la imagen de un subespacio vectorial?</a></li>
 <li><a href="apli.html#rango-nulidad">¿A qué se llama rango y nulidad de la aplicación lineal?</a></li>
@@ -372,6 +372,10 @@ V_{\mathcal{B}&#39;_V} &amp;
 <p>Llamemos, por comodidad, <span class="math inline">\(P = P_{\mathcal{B}&#39;_V \to \mathcal{B}_V}\)</span> y <span class="math inline">\(Q = P_{\mathcal{B}_W \to \mathcal{B}&#39;_W}\)</span>. Recordemos que tanto <span class="math inline">\(P\)</span> como <span class="math inline">\(Q\)</span> se pueden calcular <a href="ev.html#cambiobase">de forma sencilla</a>.</p>
 <p>De esta forma, vemos que si fijamos las nuevas bases, entonces la aplicación <span class="math inline">\(f\)</span> resultante equivale a la <span class="math inline">\(f\)</span> anterior, a la que precedemos y sucedemos con la aplicación identidad dentro de <span class="math inline">\(V\)</span> y <span class="math inline">\(W\)</span>, respectivamente, puesto que <span class="math inline">\(f = \mathrm{id}_W\circ f \circ \mathrm{id}_V\)</span>.</p>
 <p>Teniendo en cuenta los resultados teóricos anteriores, esto quiere decir que <span class="math inline">\(A&#39; = Q\ A\ P\)</span>.</p>
+<p>Como consecuencia, tenemos además que</p>
+<blockquote>
+<p>Todas las matrices asociadas a una misma aplicación lineal <span class="math inline">\(f\)</span> en distintas bases son equivalentes.</p>
+</blockquote>
 <hr />
 <p><strong>Ejemplo</strong></p>
 <p>Continuemos con el ejemplo de <a href="apli.html#matriz-apli">la sección anterior</a>. Sabemos que la aplicación <span class="math inline">\(f\)</span> allí definida tenía por matriz asociada:
@@ -756,7 +760,7 @@ es un sistema generador de <span class="math inline">\(\mathrm{Im}\ g\)</span>.<
 <p>Si aplicamos el resultado teórico de antes, llegamos a que:</p>
 <ul>
 <li><span class="math inline">\(f\)</span> no es sobreyectiva, pues <span class="math inline">\(\mathrm{dim}(\mathrm{Im}\ f) = 2 \ne 3 = \mathrm{dim}(W)\)</span>.</li>
-<li><span class="math inline">\(g\)</span> sí es sobreyectiva, pues<span class="math inline">\(\mathrm{dim}(\mathrm{Im}\ g) = 3 = \mathrm{dim}(W)\)</span>.</li>
+<li><span class="math inline">\(g\)</span> sí es sobreyectiva, pues <span class="math inline">\(\mathrm{dim}(\mathrm{Im}\ g) = 3 = \mathrm{dim}(W)\)</span>.</li>
 </ul>
 <hr />
 </div>
@@ -764,7 +768,7 @@ es un sistema generador de <span class="math inline">\(\mathrm{Im}\ g\)</span>.<
 <h2 number="3.8"><span class="header-section-number">3.8</span> Qué es un isomorfismo</h2>
 <p>Un <strong>isomorfismo</strong> es una aplicación lineal <a href="#inyectiva">inyectiva</a> y <a href="apli.html#sobrey">sobreyectiva</a>.</p>
 <p>Un <strong>automorfismo</strong> es un isomorfismo donde dominio y codominio son el mismo espacio <span class="math inline">\(V\)</span>.</p>
-<p><strong>Algunas propiedades básicas de los isomorfismo</strong></p>
+<p><strong>Algunas propiedades básicas de los isomorfismos</strong></p>
 <blockquote>
 <ul>
 <li>La composición de isomorfismos es un isomorfismo.</li>
@@ -775,30 +779,156 @@ es un sistema generador de <span class="math inline">\(\mathrm{Im}\ g\)</span>.<
 <blockquote>
 <ul>
 <li>Una aplicación lineal <span class="math inline">\(f:V\to W\)</span> es un isomorfismo si, y sólo si, <span class="math inline">\(\mathrm{dim}(V) = \mathrm{dim}(W)\)</span>.</li>
-<li>Una aplicación <span class="math inline">\(f:V\to W\)</span> es un <em>automorfismo</em> si, y sólo si, o bien es inyectiva o bien es sobreyectiva.</li>
+<li>Una aplicación <span class="math inline">\(f:V\to V\)</span> es un <em>automorfismo</em> si, y sólo si, o bien es inyectiva o bien es sobreyectiva.</li>
 </ul>
 </blockquote>
 <p>Este último resultado nos dice que en un <em>endomorfismo</em>, basta con ver si la aplicación es <a href="apli.html#inyectividad">inyectiva</a> o <a href="apli.html#sobrey">sobreyectiva</a> para tener que es un isomorfismo.</p>
 <hr />
 <p><strong>Ejemplo</strong></p>
+<p>Si miramos las aplicaciones <span class="math inline">\(f\)</span> y <span class="math inline">\(g\)</span> de <a href="apli.html#nucleo">las secciones anteriores</a>, entonces podemos confirmar que <span class="math inline">\(g\)</span> es un automorfismo, mientras que <span class="math inline">\(f\)</span> no lo es, ya que no es ni inyectiva ni sobreyectiva.</p>
 <hr />
 </div>
 <div id="imagenU" class="section level2" number="3.9">
 <h2 number="3.9"><span class="header-section-number">3.9</span> Cómo determinar la imagen de un subespacio vectorial</h2>
+<p>Este problema es realmente un <em>caso particular</em> de <a href="apli.html#imagen">cómo calcular la imagen de una aplicación lineal</a>.</p>
+<p>Tanto en esa sección como en la de <a href="apli.html#prop-apli">propiedades</a>, vimos que si <span class="math inline">\(U\)</span> es un <a href="ev.html#gen">subespacio vectorial generado</a> por los vectores de <span class="math inline">\(\mathcal{G}=\{u_1,\ldots,u_k\}\)</span>, entonces <span class="math inline">\(f(\mathcal{G}) = \{f(u_1),\ldots,f(u_k)\}\)</span> es un sistema generador de <span class="math inline">\(f(U)\)</span>.</p>
+<p>Por tanto, si deseamos calcular la imagen de un subespacio <span class="math inline">\(U\)</span>, los pasos a seguir serán:</p>
+<ul>
+<li>A partir de sus ecuaciones (si se dan), <a href="ev.html#base">encontrar un sistema generador o una base</a> de <span class="math inline">\(U\)</span>.</li>
+<li>Calcular la imagen, mediante la aplicación <span class="math inline">\(f\)</span>, de los vectores de la base de <span class="math inline">\(U\)</span>. Por <a href="apli.html#prop-apli">lo anterior</a>, esto es un sistema generador de <span class="math inline">\(f(U)\)</span>.</li>
+<li><a href="#sisgenabase">Eliminar los vectores linealmente dependientes</a> de ese sistema generador, para obtener una base de <span class="math inline">\(f(U)\)</span>.</li>
+</ul>
 <hr />
 <p><strong>Ejemplo</strong></p>
+<p>Consideremos el subespacio <span class="math inline">\(U\)</span> dado por
+<span class="math display">\[U = \left\{\left(\begin{array}{c}
+x\\
+y\\
+z
+\end{array}\right)
+\in\mathbb{R}^{3}:\begin{array}{ccr}
+-x-0.5y+ z &amp; = &amp; 0\\
+\end{array}\right\}\]</span></p>
+<p>Queremos calcular <span class="math inline">\(f(U)\)</span> y <span class="math inline">\(g(U)\)</span>, siendo <span class="math inline">\(f\)</span> y <span class="math inline">\(g\)</span> las de <a href="apli.html#nucleo">los ejemplos anteriores</a>.</p>
+<p>El primer paso es <a href="ev.html#base">calcular una base</a> de <span class="math inline">\(U\)</span>. Para ello, pasamos las ecuaciones cartesianas de <span class="math inline">\(U\)</span> a paramétricas, que nos dan un sistema generador, resolviendo el sistema de ecuaciones por Gauss. A partir del sistema generador, ya podríamos proceder, o podemos calcular una base de <span class="math inline">\(U\)</span>.</p>
+<p>En nuestro caso,
+<span class="math display">\[\mathcal{B}_U = \left\{\left(
+\begin{array}{c@{}}
+-2\\
+2\\
+-1
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+1\\
+0\\
+1
+\end{array}
+\right)
+\right\}\]</span></p>
+<p>Comenzamos por calcular <span class="math inline">\(f(U)\)</span>. Debemos calcular la imagen de los vectores de la base de <span class="math inline">\(U\)</span> con la aplicación <span class="math inline">\(f\)</span>:
+<span class="math display">\[f(\mathcal{B}_U) = \left\{\left(
+\begin{array}{c@{}}
+-1\\
+-6\\
+-7
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+2\\
+1\\
+3
+\end{array}
+\right)
+\right\}\]</span></p>
+<p>Si <a href="#sisgenabase">eliminamos los vectores linealmente dependientes</a> de <span class="math inline">\(f(\mathcal{B}_U)\)</span>, nos queda una base de <span class="math inline">\(f(U)\)</span>:
+<span class="math display">\[\mathcal{B}_{f(U)} = \left\{\left(
+\begin{array}{c@{}}
+-1\\
+-6\\
+-7
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+2\\
+1\\
+3
+\end{array}
+\right)
+\right\}\]</span></p>
+<p>Repetimos el proceso con la aplicación <span class="math inline">\(g\)</span>. Calculamos:
+<span class="math display">\[g(\mathcal{B}_U) = \left\{\left(
+\begin{array}{c@{}}
+-6\\
+4\\
+-8
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+2\\
+1\\
+6
+\end{array}
+\right)
+\right\}\]</span></p>
+<p>Como sabemos que <span class="math inline">\(g\)</span> es un <a href="apli.html#isomorfismo">isomorfismo</a>, sabemos que la imagen de un sistema linealmente independiente es también un sistema linealmente independiente. Luego <span class="math inline">\(\mathcal{B}_{g(U)} = g(\mathcal{B}_U)\)</span>. Si no recordáramos este resultado, deberíamos intentar eliminar los vectores linealmente dependientes en <span class="math inline">\(g(U)\)</span> para así obtener la base.</p>
 <hr />
 </div>
 <div id="rango-nulidad" class="section level2" number="3.10">
 <h2 number="3.10"><span class="header-section-number">3.10</span> A qué se llama rango y nulidad de la aplicación lineal</h2>
+<p>Se llama <strong>rango</strong> de una aplicación lineal <span class="math inline">\(f:V\to W\)</span> a la dimensión de la <a href="apli.html#imagen">imagen</a> de <span class="math inline">\(f\)</span>: <span class="math inline">\(\mathrm{rg}(f) = \mathrm{dim}(\mathrm{Im}\ f)\)</span>.</p>
+<p>Se llama <strong>nulidad</strong> de una aplicación lineal <span class="math inline">\(f:V\to W\)</span> a la dimensión del <a href="apli.html#nucleo">núcleo</a> de <span class="math inline">\(f\)</span>: <span class="math inline">\(\mathrm{nul}(f) = \mathrm{dim}(\mathrm{Ker}\ f)\)</span>.</p>
+<p>De forma análoga, se pueden definir rango y nulidad para <strong>matrices</strong>, puesto que tenemos <a href="#matrix-apli">una importante relación entre matrices y aplicaciones lineales</a>.</p>
+<p>Dada una matriz <span class="math inline">\(A\)</span>, su <strong>rango</strong> <span class="math inline">\(\mathrm{rg}(A)\)</span> es la dimensión del subespacio generado por los vectores que forman sus columnas, y su <strong>nulidad</strong> <span class="math inline">\(\mathrm{nul}(A)\)</span> es la dimensión del subespacio vectorial de las soluciones del sistema de ecuaciones lineales <span class="math inline">\(A\ v = 0\)</span>.</p>
+<p>Un resultado importante, debido a que <a href="apli.html#cambiobase-apli">todas las matrices asociadas a una misma aplicación lineal son equivalentes</a>, es que todas tienen el mismo rango y la misma nulidad, y coinciden con el ranog y nulidad de <span class="math inline">\(f\)</span>.</p>
+<p>Por tanto, para calcular rango y nulidad de <span class="math inline">\(f\)</span>, bastará con estudiar el rango y nulidad de cualquiera de sus expresiones matriciales en unas bases fijadas de <span class="math inline">\(V\)</span> y <span class="math inline">\(W\)</span>.</p>
 <hr />
 <p><strong>Ejemplo</strong></p>
+<p>Vamos a calcular el rango y la nulidad de las aplicaciones <span class="math inline">\(f\)</span> y <span class="math inline">\(g\)</span> que estamos estudiando en los <a href="apli.html#nucleo">ejemplos anteriores</a>.</p>
+<p>El caso fácil es el de <span class="math inline">\(g\)</span>, que era un <a href="apli.html#isomorfismo">isomorfismo</a>. Luego:</p>
+<ul>
+<li><span class="math inline">\(\mathrm{nul}(g) = \mathrm{dim}(\mathrm{Ker}\ g) = \mathrm{dim}(\{0\}) = 0\)</span>, por ser <span class="math inline">\(g\)</span> <a href="apli.html#inyectividad">inyectiva</a>.</li>
+<li><span class="math inline">\(\mathrm{rg}(g) = \mathrm{dim}(\mathrm{Im}\ g) = \mathrm{dim}(W) = 3\)</span>, por ser <span class="math inline">\(g\)</span> <a href="apli.html#sobrey">sobreyectiva</a>.</li>
+</ul>
+<p>Y lo mismo se aplica para sus matrices asociadas.</p>
+<p>En cuanto a <span class="math inline">\(f\)</span>, recopilando la información que tenemos:</p>
+<ul>
+<li>Su nulidad es la dimensión de su <a href="apli.html#nucleo">núcleo</a>: <span class="math inline">\(\mathrm{nul}(f) = \mathrm{dim}(\mathrm{Ker}\ f) = 1\)</span>.</li>
+<li>Su rango es la dimensión de su <a href="apli.html#imagen">imagen</a>: <span class="math inline">\(\mathrm{rg}(f) = \mathrm{dim}(\mathrm{Im}\ f) = 2\)</span></li>
+</ul>
 <hr />
 </div>
 <div id="th-dim-nucleo" class="section level2" number="3.11">
 <h2 number="3.11"><span class="header-section-number">3.11</span> Qué dice el teorema de la dimensión para núcleo e imagen</h2>
+<p>El resultado teórico que nos relaciona las dimensiones de <a href="apli.html#nucleo">núcleo</a> e <a href="apli.html#imagen">imagen</a> de una aplicación lineal <span class="math inline">\(f:V\to W\)</span>, es decir, su nulidad y su rango, es el siguiente:</p>
+<blockquote>
+<p>Si <span class="math inline">\(f:V\to W\)</span> es una aplicación lineal, entonces
+<span class="math display">\[\mathrm{dim}(V) = \mathrm{dim}(\mathrm{Ker}\ f) + \mathrm{dim}(\mathrm{Im}\ f) = \mathrm{nul}(f) + \mathrm{rg}(f)\]</span></p>
+</blockquote>
+<p>Este resultado, reescrito en términos matriciales, queda como:</p>
+<blockquote>
+<p>Si <span class="math inline">\(A\)</span> es una matriz con <span class="math inline">\(m\)</span> filas y <span class="math inline">\(n\)</span> columnas, entonces
+<span class="math display">\[n = \mathrm{nul}(A) + \mathrm{rg}(A)\]</span></p>
+</blockquote>
 <hr />
 <p><strong>Ejemplo</strong></p>
+<p>Vamos a <em>comprobar</em> el teorema de la dimensión para las aplicaciones lineales <span class="math inline">\(f\)</span> y <span class="math inline">\(g\)</span> de <a href="apli.html#nucleo">los ejemplos anteriores</a>.</p>
+<ul>
+<li><p>Para <span class="math inline">\(f\)</span>:
+<span class="math display">\[\begin{array}{ccccc}
+\mathrm{dim}(\mathbb{R}^{3}) &amp; = &amp; \mathrm{dim}(\mathrm{Ker}\ f) &amp; + &amp; \mathrm{dim}(\mathrm{Im}\ f) \\
+3 &amp; = &amp; 1 &amp; + &amp; 2 \\
+\end{array}\]</span></p></li>
+<li><p>Para <span class="math inline">\(g\)</span>:
+<span class="math display">\[\begin{array}{ccccc}
+\mathrm{dim}(\mathbb{R}^{3}) &amp; = &amp; \mathrm{dim}(\mathrm{Ker}\ g) &amp; + &amp; \mathrm{dim}(\mathrm{Im}\ g) \\
+3 &amp; = &amp; 0 &amp; + &amp; 3 \\
+\end{array}\]</span></p></li>
+</ul>
 <hr />
 
 </div>

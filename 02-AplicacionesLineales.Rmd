@@ -35,10 +35,10 @@ __¿Qué preguntas vamos a responder en este capítulo?__
 - [¿Qué propiedades básicas tienen las aplicaciones lineales?](#prop-apli)
 - [¿Cuál es la matriz asociada a una aplicación lineal en unas bases dadas?](#matriz-apli)
 - [¿Cómo influye un cambio de base en la matriz asociada a una aplicación lineal?](#cambiobase-apli)
-- [¿Cómo determinar el núcleo de una aplicación lineal?](#nucleo) 
-- [¿Cómo podemos caracterizar la inyectividad?](#inyectividad)
+- [¿Qué es y cómo determinar el núcleo de una aplicación lineal?](#nucleo) 
+- [¿Cómo podemos identificar una aplicación lineal inyectiva?](#inyectividad)
 - [¿Cómo calcular el subespacio imagen de una aplicación lineal?](#imagen)
-- [¿Cómo podemos caracterizar la sobreyectividad?](#sobrey)
+- [¿Cómo identificar si una aplicación lineal es sobreyectiva?](#sobrey)
 - [¿Qué es un isomorfismo?](#isomorfismo)
 - [¿Cómo determinar la imagen de un subespacio vectorial?](#imagenU)
 - [¿A qué se llama rango y nulidad de la aplicación lineal?](#rango-nulidad)
@@ -278,6 +278,10 @@ Llamemos, por comodidad, $P = P_{\mathcal{B}'_V \to \mathcal{B}_V}$ y $Q = P_{\m
 De esta forma, vemos que si fijamos las nuevas bases, entonces la aplicación $f$ resultante equivale a la $f$ anterior, a la que precedemos y sucedemos con la aplicación identidad dentro de $V$ y $W$, respectivamente, puesto que $f = \mathrm{id}_W\circ f \circ \mathrm{id}_V$.
 
 Teniendo en cuenta los resultados teóricos anteriores, esto quiere decir que $A' = Q\ A\ P$.
+
+Como consecuencia, tenemos además que
+
+> Todas las matrices asociadas a una misma aplicación lineal $f$ en distintas bases son equivalentes.
 
 ---
 
@@ -651,7 +655,7 @@ En el [ejemplo anterior](#imagen), estudiamos las imágenes de las aplicaciones 
 Si aplicamos el resultado teórico de antes, llegamos a que:
 
 - $f$ no es sobreyectiva, pues \(\mathrm{dim}(\mathrm{Im}\ f) = `r ncol(bImf)` \ne `r m` = \mathrm{dim}(W)\).
-- $g$ sí es sobreyectiva, pues\(\mathrm{dim}(\mathrm{Im}\ g) = `r ncol(bImg)` = \mathrm{dim}(W)\).
+- $g$ sí es sobreyectiva, pues \(\mathrm{dim}(\mathrm{Im}\ g) = `r ncol(bImg)` = \mathrm{dim}(W)\).
 
 ---
 
@@ -661,7 +665,7 @@ Un __isomorfismo__ es una aplicación lineal [inyectiva](#inyectiva) y [sobreyec
 
 Un __automorfismo__ es un isomorfismo donde dominio y codominio son el mismo espacio $V$.
 
-__Algunas propiedades básicas de los isomorfismo__
+__Algunas propiedades básicas de los isomorfismos__
 
 > - La composición de isomorfismos es un isomorfismo.
 - La aplicación inversa de un isomorfismo es también un isomorfismo
@@ -669,7 +673,7 @@ __Algunas propiedades básicas de los isomorfismo__
 Cuando, además, estamos hablando de espacios de dimensión finita, tenemos los siguientes resultados:
 
 > - Una aplicación lineal $f:V\to W$ es un isomorfismo si, y sólo si, $\mathrm{dim}(V) = \mathrm{dim}(W)$.
-- Una aplicación $f:V\to W$ es un _automorfismo_ si, y sólo si, o bien es inyectiva o bien es sobreyectiva.
+- Una aplicación $f:V\to V$ es un _automorfismo_ si, y sólo si, o bien es inyectiva o bien es sobreyectiva.
 
 Este último resultado nos dice que en un _endomorfismo_, basta con ver si la aplicación es [inyectiva](#inyectividad) o [sobreyectiva](#sobrey) para tener que es un isomorfismo.
 
@@ -677,28 +681,150 @@ Este último resultado nos dice que en un _endomorfismo_, basta con ver si la ap
 
 __Ejemplo__
 
+Si miramos las aplicaciones $f$ y $g$ de [las secciones anteriores](#nucleo), entonces podemos confirmar que $g$ es un automorfismo, mientras que $f$ no lo es, ya que no es ni inyectiva ni sobreyectiva.
+
 ---
 
 ## Cómo determinar la imagen de un subespacio vectorial {#imagenU}
 
+Este problema es realmente un _caso particular_ de [cómo calcular la imagen de una aplicación lineal](#imagen).
+
+Tanto en esa sección como en la de [propiedades](#prop-apli), vimos que si $U$ es un [subespacio vectorial generado](#gen) por los vectores de $\mathcal{G}=\{u_1,\ldots,u_k\}$, entonces $f(\mathcal{G}) = \{f(u_1),\ldots,f(u_k)\}$ es un sistema generador de $f(U)$.
+
+Por tanto, si deseamos calcular la imagen de un subespacio $U$, los pasos a seguir serán:
+
+- A partir de sus ecuaciones (si se dan), [encontrar un sistema generador o una base](#base) de $U$.
+- Calcular la imagen, mediante la aplicación $f$, de los vectores de la base de $U$. Por [lo anterior](#prop-apli), esto es un sistema generador de $f(U)$.
+- [Eliminar los vectores linealmente dependientes](#sisgenabase) de ese sistema generador, para obtener una base de $f(U)$.
+
 ---
 
 __Ejemplo__
+
+Consideremos el subespacio $U$ dado por
+```{r}
+U <- rMatrix(n = n, m = 2)
+AU <- parametric_to_cartesian(U)$A
+glue_latex(
+  "U = \\left\\{",
+  "[to_latex(generic_vector_V)]\\in\\mathbb{R}^{[n]}:",
+  "[write_system(AU, matlab::zeros(nrow(AU), 1), latex = TRUE, fractions = TRUE, format = 'c')]",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+
+Queremos calcular $f(U)$ y $g(U)$, siendo $f$ y $g$ las de [los ejemplos anteriores](#nucleo).
+
+El primer paso es [calcular una base](#base) de $U$. Para ello, pasamos las ecuaciones cartesianas de $U$ a paramétricas, que nos dan un sistema generador, resolviendo el sistema de ecuaciones por Gauss. A partir del sistema generador, ya podríamos proceder, o podemos calcular una base de $U$.
+
+En nuestro caso,
+```{r}
+glue_latex(
+  "\\mathcal{B}_U = \\left\\{",
+  "[vectors_to_latex(U)]",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+
+Comenzamos por calcular $f(U)$. Debemos calcular la imagen de los vectores de la base de $U$ con la aplicación $f$:
+```{r}
+glue_latex(
+  "f(\\mathcal{B}_U) = \\left\\{",
+  "[vectors_to_latex(A %*% U)]",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+
+Si [eliminamos los vectores linealmente dependientes](#sisgenabase) de $f(\mathcal{B}_U)$, nos queda una base de $f(U)$:
+```{r}
+bfU <- linearly_independents(A %*% U)
+glue_latex(
+  "\\mathcal{B}_{f(U)} = \\left\\{",
+  "[vectors_to_latex(bfU)]",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+
+Repetimos el proceso con la aplicación $g$. Calculamos:
+```{r}
+glue_latex(
+  "g(\\mathcal{B}_U) = \\left\\{",
+  "[vectors_to_latex(Ag %*% U)]",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+
+Como sabemos que $g$ es un [isomorfismo](#isomorfismo), sabemos que la imagen de un sistema linealmente independiente es también un sistema linealmente independiente. Luego $\mathcal{B}_{g(U)} = g(\mathcal{B}_U)$. Si no recordáramos este resultado, deberíamos intentar eliminar los vectores linealmente dependientes en $g(U)$ para así obtener la base.
 
 ---
 
 ## A qué se llama rango y nulidad de la aplicación lineal {#rango-nulidad}
 
+Se llama __rango__ de una aplicación lineal $f:V\to W$ a la dimensión de la [imagen](#imagen) de $f$: $\mathrm{rg}(f) = \mathrm{dim}(\mathrm{Im}\ f)$.
+
+Se llama __nulidad__ de una aplicación lineal $f:V\to W$ a la dimensión del [núcleo](#nucleo) de $f$: $\mathrm{nul}(f) = \mathrm{dim}(\mathrm{Ker}\ f)$.
+
+De forma análoga, se pueden definir rango y nulidad para __matrices__, puesto que tenemos [una importante relación entre matrices y aplicaciones lineales](#matrix-apli).
+
+Dada una matriz $A$, su __rango__ $\mathrm{rg}(A)$ es la dimensión del subespacio generado por los vectores que forman sus columnas, y su __nulidad__ $\mathrm{nul}(A)$ es la dimensión del subespacio vectorial de las soluciones del sistema de ecuaciones lineales $A\ v = 0$.
+
+Un resultado importante, debido a que [todas las matrices asociadas a una misma aplicación lineal son equivalentes](#cambiobase-apli), es que todas tienen el mismo rango y la misma nulidad, y coinciden con el ranog y nulidad de $f$.
+
+Por tanto, para calcular rango y nulidad de $f$, bastará con estudiar el rango y nulidad de cualquiera de sus expresiones matriciales en unas bases fijadas de $V$ y $W$.
+
 ---
 
 __Ejemplo__
+
+Vamos a calcular el rango y la nulidad de las aplicaciones $f$ y $g$ que estamos estudiando en los [ejemplos anteriores](#nucleo).
+
+El caso fácil es el de $g$, que era un [isomorfismo](#isomorfismo). Luego:
+
+- $\mathrm{nul}(g) = \mathrm{dim}(\mathrm{Ker}\ g) = \mathrm{dim}(\{0\}) = 0$, por ser $g$ [inyectiva](#inyectividad).
+- $\mathrm{rg}(g) = \mathrm{dim}(\mathrm{Im}\ g) = \mathrm{dim}(W) = 3$, por ser $g$ [sobreyectiva](#sobrey).
+
+Y lo mismo se aplica para sus matrices asociadas.
+
+En cuanto a $f$, recopilando la información que tenemos:
+
+- Su nulidad es la dimensión de su [núcleo](#nucleo): \(\mathrm{nul}(f) = \mathrm{dim}(\mathrm{Ker}\ f) = `r ncol(bKer)`\).
+- Su rango es la dimensión de su [imagen](#imagen): \(\mathrm{rg}(f) = \mathrm{dim}(\mathrm{Im}\ f) = `r ncol(bImf)`\)
 
 ---
 
 ## Qué dice el teorema de la dimensión para núcleo e imagen {#th-dim-nucleo}
 
+El resultado teórico que nos relaciona las dimensiones de [núcleo](#nucleo) e [imagen](#imagen) de una aplicación lineal $f:V\to W$, es decir, su nulidad y su rango, es el siguiente:
+
+> Si $f:V\to W$ es una aplicación lineal, entonces
+$$\mathrm{dim}(V) = \mathrm{dim}(\mathrm{Ker}\ f) + \mathrm{dim}(\mathrm{Im}\ f) = \mathrm{nul}(f) + \mathrm{rg}(f)$$
+
+Este resultado, reescrito en términos matriciales, queda como:
+
+> Si $A$ es una matriz con $m$ filas y $n$ columnas, entonces
+$$n = \mathrm{nul}(A) + \mathrm{rg}(A)$$
+
 ---
 
 __Ejemplo__
+
+Vamos a _comprobar_ el teorema de la dimensión para las aplicaciones lineales $f$ y $g$ de [los ejemplos anteriores](#nucleo).
+
+- Para $f$:
+$$\begin{array}{ccccc}
+\mathrm{dim}(\mathbb{R}^{`r n`}) & = & \mathrm{dim}(\mathrm{Ker}\ f) & + & \mathrm{dim}(\mathrm{Im}\ f) \\
+`r n` & = & `r ncol(bKer)` & + & `r ncol(bImf)` \\
+\end{array}$$
+
+- Para $g$:
+$$\begin{array}{ccccc}
+\mathrm{dim}(\mathbb{R}^{`r n`}) & = & \mathrm{dim}(\mathrm{Ker}\ g) & + & \mathrm{dim}(\mathrm{Im}\ g) \\
+`r n` & = & 0 & + & `r n` \\
+\end{array}$$
 
 ---
