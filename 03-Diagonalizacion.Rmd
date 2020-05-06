@@ -1,2 +1,65 @@
 # Diagonalización
 
+- Qué son matrices semejantes y qué relación tienen con las aplicaciones lineales
+
+- Qué es el proceso de diagonalizar una matriz o un endomorfismo
+
+
+---
+
+__Ejemplo__
+
+---
+
+__¿Qué preguntas vamos a responder en este capítulo?__
+
+-
+-
+-
+
+## Qué son los autovalores de un endomorfismo y de una matriz
+
+- Definición para endomorfismo y para matriz asociada
+- Matrices semejantes: da igual la base de V, todas las matrices de $f$ son semejantes.
+- Motivación y definición de polinomio característico.
+
+---
+
+__Ejemplo__
+
+---
+
+
+## Cómo calculamos los autovectores asociados a un autovalor
+
+- Subespacio asociado como solución de sistema homogéneo
+
+---
+
+__Ejemplo__
+
+---
+
+## Cómo sabemos si un endomorfismo o una matriz es diagonalizable
+
+- Definición de multiplicidades (algebraica y geométrica)
+- Criterio de igualdad de multiplicidades
+- Criterios derivados
+
+---
+
+__Ejemplo__
+
+---
+
+## Para qué podemos utilizar el Teorema de Cayley-Hamilton
+
+- Enunciado del teorema
+- Aplicación para la inversa
+- Aplicación para hallar potencia de $A$.
+
+---
+
+__Ejemplo__
+
+---

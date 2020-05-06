@@ -69,7 +69,7 @@ __¿Qué preguntas vamos a responder en este capítulo?__
 
 Un subconjunto de $U\subset V$ es un __subespacio vectorial__ de $V$ si la restricción de las operaciones suma y producto por un escalar a ese conjunto son operaciones cerradas.
 
-Eso equivale a decir que la suma de dos vectores cualesquiera de $U$ debe estar en $U$, y si multplicamos por un escalar un vector de $U$, el producto vuelve a estar en $U$.
+Eso equivale a decir que la suma de dos vectores cualesquiera de $U$ debe estar en $U$, y si multiplicamos por un escalar un vector de $U$, el producto vuelve a estar en $U$.
 
 ---
 
