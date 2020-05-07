@@ -38,6 +38,7 @@ library(matlab)
 library(matlib)
 library(pracma)
 library(numericoUMA)
+# library(Ryacas)
 
 glue_latex <- function(...) {
   

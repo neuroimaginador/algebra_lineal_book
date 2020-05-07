@@ -1,58 +1,488 @@
 # Diagonalización
 
-- Qué son matrices semejantes y qué relación tienen con las aplicaciones lineales
+```{r echo = FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      results = "asis",
+                      message = FALSE,
+                      warning = FALSE)
 
-- Qué es el proceso de diagonalizar una matriz o un endomorfismo
+set.seed(1234)
+``` 
 
+En este capítulo nos vamos a centrar en el estudio de _endomorfismos_, es decir, de aplicaciones lineales $f:V\to V$ donde el dominio y el codominio son el mismo [espacio vectorial](#ev) sobre un cuerpo $\mathbb{K}$ (generalmente $\mathbb{K} = \mathbb{R}$ o $\mathbb{K} = \mathbb{C}$).
+
+Una de las propiedades que hemos estudiado es que si tenemos una base $\mathcal{B}$ fija en $V$, entonces [podemos encontrar una matriz](#matriz-apli) $A$, asociada a $f$, tal que podemos expresar las [coordenadas](#coord) de $f(v)$ en dicha base como $A\ v$, sea cual sea $v\in V$.
+
+¿Qué ocurre si fijamos otra base distinta $\mathcal{B}'$ en $V$?
+
+En ese caso, la matriz asociada al endomorfismo $f$ será $A' = P^{-1}\ A\ P$, donde $P$ es la [matriz de cambio de base](#cambiobase) de $\mathcal{B'}$ a $\mathcal{B}$.
+
+Esta relación especial entre $A$ y $A'$ tiene nombre: son _matrices semejantes_. Dos matrices $A,A'\in\mathcal{M}_n(\mathbb{K})$ se dicen __semejantes__ si existe $P\in\mathcal{M}_n(\mathbb{K})$ regular tal que $A'=P^{-1}\ A\ P$.
+
+Esto tiene implicaciones como que los cálculos que podamos necesitar hacer con un endomorfismo, como calcular su núcleo y su imagen, o los que veremos en este tema, lo podemos hacer con cualquiera de sus matrices asociadas, respecto a diferentes bases, ya que son todas semejantes.
+
+Sin embargo, para ciertas operaciones, podremos necesitar tener una matriz asociada a $f$ lo más simple posible. ¿Qué entendemos por una matriz simple? Una matriz diagonal. 
+
+La diagonalización es el proceso por el cual pretendemos encontrar una base $\mathcal{B}$ de $V$ tal que la matriz asociada a un endomorfismo $f$ sea diagonal.
+
+No todos los endomorfismos serán __diagonalizables__, así que veremos cuándo podremos asegurar que sí lo son, y el mecanismo para encontrar la forma diagonal de la matriz asociada al endomorfismo.
+
+__Nota__: A menudo, abusaremos de la notación y usaremos indistintamente $v$ para designar a un vector o a sus coordenadas con respecto a la base canónica.
 
 ---
 
+```{r}
+# Dimensión del problema
+n <- dim <- 3
+
+# Autovalores para crear una matriz
+lambdas <- sample(setdiff(-1:2, 0), 
+                  size = dim - 1, 
+                  replace = TRUE) %>% 
+  sort()
+lambdas <- c(lambdas, lambdas[dim - 1])
+D <- diag(lambdas)
+
+# Matriz de paso aleatoria
+# Vamos a exigir que si los 3 autovalores son diferentes,
+# entonces P sea regular.
+# Si el determinante es no nulo, será diagonalizable
+repeat {
+  
+  P <- rMatrix(n = dim, values = -2:3)
+  
+  if (det(P) != 0) break
+  
+}
+
+# Calculamos A = inv(P)AP
+s <- gauss_elimination(P, D %*% P, 
+                       diag1 = TRUE, 
+                       jordan = TRUE)
+A <- s$splits[[2]] %>% remove_fraction(byrow = FALSE)
+
+# Polinomio característico
+p <- charpoly(A)
+p[abs(p) < 1.e-7] <- 0
+# Raíces del polinomio característico
+# Autovalores con multiplicidad
+lambdas2 <- polyroots(p)
+p_latex <- poly2latex(p, var = "\\lambda")
+
+multiplicidad_algebraica <- lambdas2$mult
+autovalores <- round(lambdas2$root)
+
+o <- order(abs(autovalores))
+autovalores <- autovalores[o]
+multiplicidad_algebraica <- multiplicidad_algebraica[o]
+
+D <- diag(rep(autovalores, times = multiplicidad_algebraica))
+
+# Por cada autovalor, sacamos una base del subsepacio asociado
+gen <- list()
+for (L in autovalores) {
+
+  B <- A - L * eye(dim)
+  B[abs(B) < 1.e-7] <- 0
+  gen <- append(gen, list(solve_homogeneous(B)))
+  
+}
+
+b_eigenvectors <- do.call(cbind, gen)
+# foo <- lapply(gen, vectors_to_latex) %>% lapply(cat)
+# glue_matrices(gen) %>% cat()
+
+# Miramos las multiplicidades geométricas
+multiplicidad_geometrica <- sapply(gen, ncol)
+
+# Si coinciden las multiplicidades algebraica y geométrica
+# es diagonalizable
+diagonalizable <- all(multiplicidad_algebraica == multiplicidad_geometrica)
+
+if (diagonalizable) {
+  
+  P2 <- do.call(cbind, gen)
+  
+  # glue_matrices(P2, fractions = TRUE, 
+  #               ldeco = "P = \n") %>% 
+  #   cat()
+  # cat("\n")
+  # glue_matrices(solve(P2) %*% A %*% P2, 
+  #               ldeco = "D = \n") %>% 
+  #   cat()
+  
+}
+```
+
 __Ejemplo__
+
+Consideremos el siguiente  endomorfismo \(f:\mathbb{R}^{`r n`}\to\mathbb{R}^{`r n`}\), dado por 
+```{r}
+glue_latex(
+  "f[to_latex(generic_vector(n))] = ",
+  "\\left([write_system(A, latex = TRUE, format = 'c')]\\right)"
+)
+```
+
+Es claro que su matriz asociada en la base canónica es:
+```{r}
+glue_latex(
+  "A = [glue_matrices(A, latex = TRUE, fractions = TRUE)]"
+)
+```
+
+
+Si consideramos la siguiente base:
+```{r}
+glue_latex(
+  "\\mathcal{B} = \\left\\{",
+  "[vectors_to_latex(b_eigenvectors)]",
+  "\\right\\}"
+)
+```
+entonces la matriz de cambio de $\mathcal{B}$ a la canónica $\mathcal{C}$ es:
+```{r}
+glue_latex(
+  "P = [glue_matrices(P2, latex = TRUE, fractions = TRUE)]"
+)
+```
+y la matriz asociada a $f$ en la nueva base es:
+```{r}
+glue_latex(
+  "\\begin{array}{rcl}",
+  "A' & = & [glue_matrices(P2, latex = TRUE, fractions = TRUE)]^{-1}\\ [glue_matrices(A, latex = TRUE, fractions = TRUE)]\\ [glue_matrices(P2, latex = TRUE, fractions = TRUE)] = \\\\",
+  " & = & [glue_matrices(D, latex = TRUE, fractions = TRUE)]",
+  "\\end{array}"
+)
+```
+
+En este capítulo, veremos el método para hallar esa descomposición, la base y la matriz diagonal.
+
 
 ---
 
 __¿Qué preguntas vamos a responder en este capítulo?__
 
--
--
--
+- [¿Qué son los autovalores de un endomorfismo y de una matriz?](#eigenvalue)
+- [¿Cómo calculamos los autovectores asociados a un autovalor?](#eigenspace)
+- [¿Cómo sabemos si un endomorfismo o una matriz es diagonalizable?](#diagonalizable)
+- [¿Para qué podemos utilizar el Teorema de Cayley-Hamilton?](#th-cayley)
 
-## Qué son los autovalores de un endomorfismo y de una matriz
+## Qué son los autovalores de un endomorfismo y de una matriz {#eigenvalue}
 
-- Definición para endomorfismo y para matriz asociada
-- Matrices semejantes: da igual la base de V, todas las matrices de $f$ son semejantes.
-- Motivación y definición de polinomio característico.
+Consideremos un endomorfismo $f:V\to V$. Diremos que un valor $\lambda\in\mathbb{K}$ es un __autovalor__ (o __valor propio__) de $f$ si existe un vector no nulo $v\in V$ tal que $f(v) = \lambda\ v$. A ese $v$ se le denomina __autovector__ (o __vector propio__) asociado a $\lambda$.
+
+__Nota__: Eliminamos la posibilidad de que $v$ sea nulo en la definición, porque [sabemos que $f(0) = 0$](#prop-apli) en cualquier aplicación lineal, así que no nos proporcionaría información alguna.
+
+Intuitivamente, un _autovector_ $v$ es un vector no nulo que, al aplicarle $f$, su imagen $f(v)$ es proporcional a él mismo, y la constante de proporcionalidad es el _autovalor_ $\lambda$.
+
+Si consideramos una matriz $A$ asociada a $f$, la condición $f(v) = \lambda\ v$ se puede reescribir como $A\ v = \lambda\ v$.
+
+Podemos generalizar entonces esta definición a matrices cuadradas: Un escalar $\lambda$ se llama __autovalor__ o __valor propio__ de una matriz $A\in\mathcal{M}_n(\mathbb{K})$ si existe $v\in\mathbb{K}^{n}$ no nulo, llamado __autovector__ o __vector propio__ asociado a $\lambda$, tal que $A\ v = \lambda\ v$.
+
+Nos falta comprobar si hay alguna incoherencia en las definiciones: si distintas matrices asociadas a un mismo endomorfismo tuvieran distintos _autovalores_, eso sería un problema de la definición. Sin embargo, el siguiente resultado nos asegura que esto no puede ser así:
+
+> Si dos matrices $A$ y $A'$ son _semejantes_, entonces tienen los mismos autovalores.
+
+Podemos decir entonces que:
+
+> Si $\lambda$ es un autovalor de $f$, entonces lo es de cualquiera de sus matrices asociadas en diferentes bases, y esto es debido a su relación de _semejanza_.
+
+Esto significa que si queremos calcular los autovalores de un endomorfismo $f$, basta con calcularlos para cualquiera de sus matrices asociadas, en particular para su matriz asociada en la [base canónica](#base), la más sencilla de encontrar.
+
+__¿Cómo podemos encontrar los autovalores de un endomorfismo o de su matriz asociada?__
+
+Para encontrar los autovalores de un endomorfismo, siempre partiremos de una matriz asociada al mismo. Por tanto, explicaremos cómo calcular los autovalores de una matriz cuadrada, y eso nos bastará para encontrar los del endomorfismo, por lo comentado anteriormente.
+
+La condición para ser $\lambda\in\mathbb{K}$ un autovalor es que exista $v\in V$ tal que $A\ v = \lambda\ v$.
+
+Esto es equivalente a $A\ v - \lambda v = 0$, es decir, $A\ v - \lambda\ I\ v = 0$, siendo $I$ la matriz identidad del mismo tamaño que $v$. En forma compacta, podemos decir que $\lambda$ es autovalor de $A$ si existe $v$ tal que $(A-\lambda\ I)\ v = 0$.
+
+Es decir, $v$ debe ser solución del siguiente sistema homogéneo: $(A-\lambda\ I)\ x = 0$.
+
+Recordemos que un sistema homogéneo tiene siempre solución. Estamos interesados en soluciones distintas del vector 0, puesto que hemos impuesto en la definición de _autovector_ que sea un vector no nulo.
+
+¿Qué condición tenemos para saber que un sistema homogéneo es compatible indeterminado? Pues que la matriz de coeficientes del sistema sea _singular_, es decir, tenga determinante igual a 0.
+
+En este caso, la matriz de coeficientes del sistema es $A-\lambda\ I$, así que tendremos soluciones distinta de la trivial si $\mathrm{det}(A-\lambda\ I) = 0$.
+
+Hay que notar que la expresión $\mathrm{det}(A-\lambda\ I)$ depende de $\lambda$, así que realmente estamos buscando __los valores de $\lambda$ que hacen que $\mathrm{det}(A-\lambda\ I) = 0$__.
+
+Llamamos __polinomio característico__ de la matriz $A$ a $p(\lambda) = \mathrm{det}(A-\lambda\ I)$, y __ecuación característica__ a $\mathrm{det}(A-\lambda\ I) = 0$.
+
+Por tanto, __los autovalores de una matriz $A$ son__ soluciones a la ecuación característica, es decir, __las raíces del polinomio característico__.
 
 ---
 
 __Ejemplo__
 
+Vamos a calcular los autovalores del endomorfismo \(f:\mathbb{R}^{`r n`}\to\mathbb{R}^{`r n`}\), dado por 
+```{r}
+glue_latex(
+  "f[to_latex(generic_vector(n))] = ",
+  "\\left([write_system(A, latex = TRUE, format = 'c')]\\right)"
+)
+```
+del ejemplo anterior.
+
+Sabemos que su matriz asociada en la base canónica es:
+```{r}
+glue_latex(
+  "A = [glue_matrices(A, latex = TRUE, fractions = TRUE)]"
+)
+```
+
+Definimos entonces el polinomio característico como:
+```{r}
+A_lambdaI <- to_fraction(A, latex = TRUE)
+for (i in seq(nrow(A))) {
+  
+  if (A[i, i] != 0) {
+    
+    A_lambdaI[i, i] <- paste0(A_lambdaI[i, i], "-\\lambda")
+    
+  } else {
+    
+    A_lambdaI[i, i] <- "-\\lambda"
+    
+  }
+  
+}
+glue_latex(
+  "\\begin{array}{rcl}",
+  "p(\\lambda) & = & \\mathrm{det}(A - \\lambda\\ I) = \\\\",
+  " & = & \\mathrm{det}\\left(",
+  "[glue_matrices(A, latex = TRUE, fractions = TRUE)] - \\lambda [glue_matrices(eye(n), latex = TRUE)]",
+  "\\right) = \\\\",
+  " & = & \\mathrm{det}[glue_matrices(A_lambdaI, latex = TRUE)]",
+  "\\end{array}"
+)
+```
+
+Si desarrollamos el determinante, nos queda como _polinomio característico_:
+```{r}
+glue_latex(
+  "p(\\lambda) = [p_latex]"
+)
+```
+
+Igualándolo a 0, tenemos la ecuación característica \(`r p_latex` = 0\), que podemos resolver (generalmente se podrá factorizar de forma simple o usando Ruffini) y nos quedan las siguientes soluciones: \(\lambda = `r str_flatten(autovalores, ", ")`\). Esta última solución es raíz doble, ya que:
+```{r}
+terms <- -autovalores %>% to_fraction(latex = TRUE)
+terms[autovalores < 0] <- paste0("+", terms[autovalores < 0])
+terms <- paste0("(\\lambda ", terms, ")")
+powers <- paste0("^{", multiplicidad_algebraica, "}")
+powers[multiplicidad_algebraica == 1] <- "" 
+factorization <- glue::glue("{terms}{powers}") %>% 
+  stringr::str_flatten("\\cdot ")
+glue_latex(
+  "p(\\lambda) = [factorization]"
+)
+```
+
+
+Por tanto, \(\lambda = `r str_flatten(autovalores, ", ")`\) son autovalores de la matriz $A$ y del endomorfismo $f$.
+
 ---
 
+## Cómo calculamos los autovectores asociados a un autovalor {#eigenspace}
 
-## Cómo calculamos los autovectores asociados a un autovalor
+[Acabamos de ver](#eigenvalue) que los autovectores asociados a un autovalor $\lambda$ son soluciones no triviales del sistema homogéneo $(A-\lambda\ I)x = 0$.
 
-- Subespacio asociado como solución de sistema homogéneo
+También sabemos que las soluciones de un sistema homogéneo forman un subespacio vectorial. Por tanto, __el conjunto de autovectores asociado a un autovalor $\lambda$ es un subespacio vectorial que llamamos subespacio asociado al autovalor $\lambda$__. Generalmente, denotaremos $U_{\lambda}$ al subespacio asociado al autovalor $\lambda$.
+
+En ocasiones, se denomina __subespacio invariante por $f$__ a $U_{\lambda}$, puesto que $f(U_{\lambda}) \subseteq U_{\lambda}$.
+
+Como con cualquier subespacio vectorial, para tener perfectamente determinado a $U_{\lambda}$ nos basta con dar una base suya que, evidentemente, estará formada por autovectores asociados a $\lambda$.
+
+En este caso, podemos [partir de las ecuaciones cartesianas](#base) de $U_{\lambda}$, que son el sistema $(A-\lambda\ I)\ x = 0$, y encontrar una base suya, como ya hemos visto en el capítulo de [espacios vectoriales](#ev).
 
 ---
 
 __Ejemplo__
 
+Retomamos el endomorfismo $f$ de los ejemplos anteriores. Calculemos los subespacios asociados a los distintos autovalores:
+
+```{r}
+for (av_idx in seq_along(autovalores)) {
+  
+  av <- autovalores[av_idx]
+  
+  cat("- Para el autovalor \\(\\lambda = ", av, "\\):\n")
+  
+  B <- A - av * eye(n)
+  B[abs(B) < 1.e-7] <- 0
+  
+  av_str <- -av %>% to_fraction(latex = TRUE)
+  if (av < 0) {
+    
+    av_str <- paste0("+ ", av_str)
+    
+  }
+  
+  glue_latex(
+    "(A [av_str] I)[to_latex(generic_vector(n))] = 0",
+    "\\Leftrightarrow",
+    "[glue_matrices(B, latex = TRUE, fractions = TRUE)][to_latex(generic_vector(n))] = 0",
+    "\\Leftrightarrow",
+    "\\left\\{[write_system(B, zero_vector(n), latex = TRUE, fractions = TRUE)]\\right."
+  ) %>% 
+    cat()
+  
+  cat("\n\n")
+  
+  cat("Resolvemos este sistema por Gauss-Jordan, encontrando la forma paramétrica de su conjunto solución, que es \\(U_{", av, "}\\):\n")
+  
+  params <- c("\\alpha", "\\beta", "\\gamma", "\\delta")
+  s <- gauss_elimination(B, zero_vector(n), jordan = TRUE)
+  
+  glue_latex(
+    "[glue_matrices(B, zero_vector(n), latex = TRUE, fractions = TRUE)]",
+    "\\sim",
+    "[glue_matrices(s$splits, latex = TRUE, fractions = TRUE)]",
+    "\\Rightarrow",
+    "[to_latex(generic_vector(n))] = [write_linear_combination(gen[[av_idx]], vars = params)]"
+  ) %>% 
+    cat()
+  
+  cat("\n\n")
+  
+  cat("De aquí que una base de \\(U_{", av, "}\\) sea:\n")
+  
+  glue_latex(
+    "\\mathcal{B}_{U_{[av]}} = ",
+    "\\left\\{[vectors_to_latex(gen[[av_idx]])]\\right\\}"
+  ) %>% 
+    cat()
+  
+}
+
+```
+
+Los vectores de las bases encontradas, así como cualquiera de sus múltiplos, son autvectores asociados al correpondiente autovalor $\lambda$.
+
 ---
 
-## Cómo sabemos si un endomorfismo o una matriz es diagonalizable
+## Cómo sabemos si un endomorfismo o una matriz es diagonalizable {#diagonalizable}
 
-- Definición de multiplicidades (algebraica y geométrica)
-- Criterio de igualdad de multiplicidades
-- Criterios derivados
+Una vez que sabemos cómo [hallar los autovalores](#eigenvalue) y [los autovectores](#eigenspace) de una matriz y de un endomorfismo, vamos a plantearnos cómo utilizarlos para saber si podemos encontrar una base $\mathcal{B}$ del espacio $V$ tal que la matriz asociada al endomorfismo $f$ es diagonal. Es decir, nos planteamos el estudio de si __$f$ es diagonalizable__.
+
+El principal resultado teórico que necesitamos es el siguiente:
+
+> Un endomorfismo $f:V\to V$ es _diagonalizable_ si y sólo si existe una base $\mathcal{B}$ de $V$ formada únicamente por autovectores de $f$. En ese caso, la [matriz asociada](#matriz-apli) $D$ en esa base es diagonal y tiene en su diagonal principal los autovalores de $f$. Además, la [matriz de cambio de base](#cambiobase) $P_{\mathcal{B}\to\mathcal{C}}$ (formada por los vectores de $\mathcal{B}$ por columnas) verifica:
+$$P_{\mathcal{B}\to\mathcal{C}}^{-1}\ A\ P_{\mathcal{B}\to\mathcal{C}} = D$$
+o, equivalentemente,
+$$A = P_{\mathcal{C}\to\mathcal{B}}^{-1}\ D\ P_{\mathcal{C}\to\mathcal{B}}$$
+
+Este resultado proporciona mucha información: nos dice que para que sea diagonalizable un endomorfismo (o una matriz), necesitamos una base de $V$ formada por únicamente autovectores, y que la matriz diagonal asociada tendrá a los autovalores en la diagonal principal.
+
+Nos preguntamos entonces bajo qué condiciones podemos asegurar que tenemos una base de $V$ formada enteramente por autovectores.
+
+El siguiente resultado es de gran ayuda:
+
+> Autovectores asociados a distintos autovalores son linealmente independientes.
+
+Supongamos que llamamos $\lambda_1,\ldots,\lambda_k$ a los autovalores de un endomorfismo o de una matriz, y $U_{\lambda_1},\ldots,U_{\lambda_k}$ a los subespacios asociados a los autovalores. Supongamos que todos los $\lambda_i$ son distintos unos de otros. 
+
+El resultado anterior me asegura que si $i\ne j$, entonces los vectores de las bases de $U_{\lambda_i}$ y de $U_{\lambda_j}$ son linealmente independientes. 
+
+Llamamos $\mathcal{B} = \mathcal{B}_{U_{\lambda_1}}\cup \ldots\cup\mathcal{B}_{U_{\lambda_k}}$, es un sistema [linealmente independiente](#indep) por lo que acabamos de comentar. Si, además, $\mathcal{B}$ tuviera $n$ elementos, puesto que $\mathrm{dim}(V) = n$, entonces $\mathcal{B}$ sería una [base](#base) de $V$ (recordemos que una base es un sistema linealmente independiente con tantos elementos como la dimensión del espacio vectorial).
+
+Por tanto, si unimos todas las bases de los subespacios asociados a los autovalores, y tenemos tantos elementos como la dimensión del espacio $V$, entonces se verifica todo lo anterior: el endomorfismo (y sus matrices asociadas) son diagonalizables. Esto es así porque entonces se verificaría:
+$$V = U_{\lambda_1} + \ldots + U_{\lambda_k}$$
+
+La primera consecuencia de esto es:
+
+> Si una matriz o un endomorfismo tienen exactamente $n$ autovalores distintos, entonces es diagonalizable.
+
+Esto es así porque cada uno de los $n$ autovalores tendría un subespacio asociado cuya base es linealmente independiente de la base de los demás subespacios. Esto solo podría suceder si cada una de las $n$ bases $\mathcal{B}_{U_{\lambda_i}}$, ($i = 1,\ldots,n$) solo tiene un elemento, es decir, si $\mathrm{dim}(U_{\lambda_i}) = 1$ para todo $i=1,\ldots,n$. Si no fuera así, acabaríamos con más de $n$ vectores linealmente independientes en $V$, lo cual es imposible.
+
+Entonces $\mathcal{B}$, definida como la unión de las bases mencionadas, tiene exactamente $n$ elementos. Esto nos demuestra que la matriz o el endomorfismo con $n$ autovalores distintos es diagonalizable.
+
+Pero ¿qué pasa cuando no tenemos $n$ autovalores distintos?
+
+Es de gran importancia conocer, para todo $i = 1,\ldots,k$, la dimensión del subespacio asociado al autovalor $\lambda_i$. Llamaremos __multiplicidad geométrica del autovalor $\lambda$__ a $\mathrm{m_g}(\lambda) = \mathrm{dim}(U_{\lambda_i})$.
+
+Se tiene el siguiente resultado:
+
+> Para todo autovalor $\lambda$ de un endomorfismo o de una matriz, se tiene que $$1\le\mathrm{m_g}(\lambda)\le\mathrm{m_a}(\lambda)$$
+donde $\mathrm{m_g}(\lambda)$ es su multiplicidad geométrica y $\mathrm{m_a}(\lambda)$ es la __multiplicidad algebraica de $\lambda$__, es decir, su multiplicidad como raíz del [polinomio característico](#eigenvalue).
+
+Es decir, la _multiplicidad geométrica_ siempre es mayor o igual que 1 (indicando que el subespacio $U_{\lambda}$ no es el trivial $\{0\}$), y menor que la _multiplicidad algebraica_.
+
+Un corolario de todos los resultados anteriores es:
+
+> Si, para todo autovalor $\lambda$ de un endomorfismo o de una matriz cuadrada, se tiene que $\mathrm{m_g}(\lambda) = \mathrm{m_a}(\lambda)$, entonces es diagonalizable. Y el recíproco es también cierto.
+
+Aquí tenemos un criterio sencillo para determinar si un endomorfismo o una matriz son diagonalizables:
+
+- Si tenemos $n$ autovalores distintos, entonces es diagonalizable.
+- Si tenemos menos de $n$ autovalores distintos, debemos comprobar que las multiplicidades geométricas de __todos__ los autovalores coincidan con sus multiplicidades algebraicas.
+
+En ambos casos, la [base](#base) de $V$ definida por $\mathcal{B} = \mathcal{B_{U_{\lambda_1}}}\cup\ldots\cup\mathcal{B_{U_{\lambda_k}}}$ es una base formada por autovectores y la matriz asociada al endomorfismo $f$ en dicha base es diagonal con los autovalores en la diagonal principal (repetidos según su multiplicidad).
+
+Si $P$ es la [matriz de paso](#cambiobase) de $\mathcal{B}$ a la canónica $\mathcal{C}$, entonces la [expresión matricial del endomorfismo $f$ en dicha base $\mathcal{B}$](#cambiobase-apli) es $D = P^{-1}\ A\ P$.
 
 ---
 
 __Ejemplo__
 
+Consideramos el endomorfismo $f$ de los ejemplos anteriores. Si tenemos en cuenta lo que se ha determinado de sus [autovalores](#eigenvalue) y de los [subespacios asociados](#eigenspace), tenemos la siguiente tabla resumen:
+
+```{r}
+L <- as.matrix(lambdas2[o, ])
+multi_table2 <- rbind(c("\\text{Autovalor}", "\\text{Mult. Algebraica}"), L)
+multi_table2 <- cbind(multi_table2, 
+c("\\text{Mult. Geométrica}", sapply(gen, ncol)))
+```
+
+$$ `r glue_matrices(multi_table2, 
+                  latex = TRUE, 
+                  ldeco = "", rdeco = "")` $$
+                  
+Con esto, queda demostrado que el endomorfismo $f$ __`r ifelse(diagonalizable, "sí", "no")`__ es diagonalizable.
+
+```{r}
+if (diagonalizable) {
+  
+  cat("Además, la base $\\mathcal{B}$ de autovectores es:\n")
+  
+  subspaces <- paste0("\\mathcal{B}_{", autovalores, "}") %>% 
+    str_flatten("\\cup\\ ")
+  
+  glue_latex(
+    "\\mathcal{B} = [subspaces] = \\left\\{[vectors_to_latex(b_eigenvectors)]\\right\\}"
+  ) %>% cat()
+  
+  cat("\n\n")
+  
+  cat("La matriz de cambio de base de $\\mathcal{B}$ a $\\mathcal{C}$ es la que tiene los elementos de $\\mathcal{B}$ por columnas:\n")
+  
+  glue_latex(
+    "P = [glue_matrices(b_eigenvectors, latex = TRUE, fractions = TRUE)]"
+  ) %>% 
+    cat()
+  
+  cat("\n\n")
+  
+  cat("Y la matriz diagonal es la que tiene los autovalores en la diagonal, que se calucla como:\n")
+  
+  glue_latex(
+    "\\begin{array}{rcl}",
+    "D & = & P^{-1}\\ A\\ P = \\\\",
+    " & = & [glue_matrices(b_eigenvectors, latex = TRUE, fractions = TRUE)]^{-1}[glue_matrices(A, latex = TRUE, fractions = TRUE)][glue_matrices(b_eigenvectors, latex = TRUE, fractions = TRUE)]\\\\",
+    " & = & [glue_matrices(D, latex = TRUE, fractions = TRUE)]",
+    "\\end{array}"
+  ) %>% 
+    cat()
+  
+}
+```
+
+
 ---
 
-## Para qué podemos utilizar el Teorema de Cayley-Hamilton
+## Para qué podemos utilizar el Teorema de Cayley-Hamilton {#th-cayley}
 
 - Enunciado del teorema
 - Aplicación para la inversa

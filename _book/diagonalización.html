@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-05-06" />
+<meta name="date" content="2020-05-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -106,10 +106,10 @@
 </ul></li>
 <li class="chapter" data-level="4" data-path="diagonalización.html"><a href="diagonalización.html"><i class="fa fa-check"></i><b>4</b> Diagonalización</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="diagonalización.html"><a href="diagonalización.html#qué-son-los-autovalores-de-un-endomorfismo-y-de-una-matriz"><i class="fa fa-check"></i><b>4.1</b> Qué son los autovalores de un endomorfismo y de una matriz</a></li>
-<li class="chapter" data-level="4.2" data-path="diagonalización.html"><a href="diagonalización.html#cómo-calculamos-los-autovectores-asociados-a-un-autovalor"><i class="fa fa-check"></i><b>4.2</b> Cómo calculamos los autovectores asociados a un autovalor</a></li>
-<li class="chapter" data-level="4.3" data-path="diagonalización.html"><a href="diagonalización.html#cómo-sabemos-si-un-endomorfismo-o-una-matriz-es-diagonalizable"><i class="fa fa-check"></i><b>4.3</b> Cómo sabemos si un endomorfismo o una matriz es diagonalizable</a></li>
-<li class="chapter" data-level="4.4" data-path="diagonalización.html"><a href="diagonalización.html#para-qué-podemos-utilizar-el-teorema-de-cayley-hamilton"><i class="fa fa-check"></i><b>4.4</b> Para qué podemos utilizar el Teorema de Cayley-Hamilton</a></li>
+<li class="chapter" data-level="4.1" data-path="diagonalización.html"><a href="diagonalización.html#eigenvalue"><i class="fa fa-check"></i><b>4.1</b> Qué son los autovalores de un endomorfismo y de una matriz</a></li>
+<li class="chapter" data-level="4.2" data-path="diagonalización.html"><a href="diagonalización.html#eigenspace"><i class="fa fa-check"></i><b>4.2</b> Cómo calculamos los autovectores asociados a un autovalor</a></li>
+<li class="chapter" data-level="4.3" data-path="diagonalización.html"><a href="diagonalización.html#diagonalizable"><i class="fa fa-check"></i><b>4.3</b> Cómo sabemos si un endomorfismo o una matriz es diagonalizable</a></li>
+<li class="chapter" data-level="4.4" data-path="diagonalización.html"><a href="diagonalización.html#th-cayley"><i class="fa fa-check"></i><b>4.4</b> Para qué podemos utilizar el Teorema de Cayley-Hamilton</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html"><i class="fa fa-check"></i><b>5</b> Espacios Euclídeos</a></li>
 <li class="chapter" data-level="6" data-path="problems.html"><a href="problems.html"><i class="fa fa-check"></i><b>6</b> Problemas Resueltos</a>
@@ -141,51 +141,452 @@
             <section class="normal" id="section-">
 <div id="diagonalización" class="section level1" number="4">
 <h1 number="4"><span class="header-section-number">4</span> Diagonalización</h1>
-<ul>
-<li><p>Qué son matrices semejantes y qué relación tienen con las aplicaciones lineales</p></li>
-<li><p>Qué es el proceso de diagonalizar una matriz o un endomorfismo</p></li>
-</ul>
+<p>En este capítulo nos vamos a centrar en el estudio de <em>endomorfismos</em>, es decir, de aplicaciones lineales <span class="math inline">\(f:V\to V\)</span> donde el dominio y el codominio son el mismo <a href="ev.html#ev">espacio vectorial</a> sobre un cuerpo <span class="math inline">\(\mathbb{K}\)</span> (generalmente <span class="math inline">\(\mathbb{K} = \mathbb{R}\)</span> o <span class="math inline">\(\mathbb{K} = \mathbb{C}\)</span>).</p>
+<p>Una de las propiedades que hemos estudiado es que si tenemos una base <span class="math inline">\(\mathcal{B}\)</span> fija en <span class="math inline">\(V\)</span>, entonces <a href="apli.html#matriz-apli">podemos encontrar una matriz</a> <span class="math inline">\(A\)</span>, asociada a <span class="math inline">\(f\)</span>, tal que podemos expresar las <a href="ev.html#coord">coordenadas</a> de <span class="math inline">\(f(v)\)</span> en dicha base como <span class="math inline">\(A\ v\)</span>, sea cual sea <span class="math inline">\(v\in V\)</span>.</p>
+<p>¿Qué ocurre si fijamos otra base distinta <span class="math inline">\(\mathcal{B}&#39;\)</span> en <span class="math inline">\(V\)</span>?</p>
+<p>En ese caso, la matriz asociada al endomorfismo <span class="math inline">\(f\)</span> será <span class="math inline">\(A&#39; = P^{-1}\ A\ P\)</span>, donde <span class="math inline">\(P\)</span> es la <a href="ev.html#cambiobase">matriz de cambio de base</a> de <span class="math inline">\(\mathcal{B&#39;}\)</span> a <span class="math inline">\(\mathcal{B}\)</span>.</p>
+<p>Esta relación especial entre <span class="math inline">\(A\)</span> y <span class="math inline">\(A&#39;\)</span> tiene nombre: son <em>matrices semejantes</em>. Dos matrices <span class="math inline">\(A,A&#39;\in\mathcal{M}_n(\mathbb{K})\)</span> se dicen <strong>semejantes</strong> si existe <span class="math inline">\(P\in\mathcal{M}_n(\mathbb{K})\)</span> regular tal que <span class="math inline">\(A&#39;=P^{-1}\ A\ P\)</span>.</p>
+<p>Esto tiene implicaciones como que los cálculos que podamos necesitar hacer con un endomorfismo, como calcular su núcleo y su imagen, o los que veremos en este tema, lo podemos hacer con cualquiera de sus matrices asociadas, respecto a diferentes bases, ya que son todas semejantes.</p>
+<p>Sin embargo, para ciertas operaciones, podremos necesitar tener una matriz asociada a <span class="math inline">\(f\)</span> lo más simple posible. ¿Qué entendemos por una matriz simple? Una matriz diagonal.</p>
+<p>La diagonalización es el proceso por el cual pretendemos encontrar una base <span class="math inline">\(\mathcal{B}\)</span> de <span class="math inline">\(V\)</span> tal que la matriz asociada a un endomorfismo <span class="math inline">\(f\)</span> sea diagonal.</p>
+<p>No todos los endomorfismos serán <strong>diagonalizables</strong>, así que veremos cuándo podremos asegurar que sí lo son, y el mecanismo para encontrar la forma diagonal de la matriz asociada al endomorfismo.</p>
+<p><strong>Nota</strong>: A menudo, abusaremos de la notación y usaremos indistintamente <span class="math inline">\(v\)</span> para designar a un vector o a sus coordenadas con respecto a la base canónica.</p>
 <hr />
 <p><strong>Ejemplo</strong></p>
+<p>Consideremos el siguiente endomorfismo <span class="math inline">\(f:\mathbb{R}^{3}\to\mathbb{R}^{3}\)</span>, dado por
+<span class="math display">\[f\left(\begin{array}{c}
+x\\
+y\\
+z
+\end{array}\right)
+ = \left(\begin{array}{c}
+9x+ 6y+ 6z\\
+-2x+ y-2z\\
+-10x-10y-7z\\
+\end{array}\right)\]</span></p>
+<p>Es claro que su matriz asociada en la base canónica es:
+<span class="math display">\[A = \left(
+\begin{array}{ccc@{}}
+9 &amp; 6 &amp; 6\\
+-2 &amp; 1 &amp; -2\\
+-10 &amp; -10 &amp; -7
+\end{array}
+\right)
+\]</span></p>
+<p>Si consideramos la siguiente base:
+<span class="math display">\[\mathcal{B} = \left\{\left(
+\begin{array}{c@{}}
+- \frac{3}{5}\\
+\frac{1}{5}\\
+1
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+-1\\
+1\\
+0
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+-1\\
+0\\
+1
+\end{array}
+\right)
+\right\}\]</span>
+entonces la matriz de cambio de <span class="math inline">\(\mathcal{B}\)</span> a la canónica <span class="math inline">\(\mathcal{C}\)</span> es:
+<span class="math display">\[P = \left(
+\begin{array}{ccc@{}}
+- \frac{3}{5} &amp; -1 &amp; -1\\
+\frac{1}{5} &amp; 1 &amp; 0\\
+1 &amp; 0 &amp; 1
+\end{array}
+\right)
+\]</span>
+y la matriz asociada a <span class="math inline">\(f\)</span> en la nueva base es:
+<span class="math display">\[\begin{array}{rcl}A&#39; &amp; = &amp; \left(
+\begin{array}{ccc@{}}
+- \frac{3}{5} &amp; -1 &amp; -1\\
+\frac{1}{5} &amp; 1 &amp; 0\\
+1 &amp; 0 &amp; 1
+\end{array}
+\right)
+^{-1}\ \left(
+\begin{array}{ccc@{}}
+9 &amp; 6 &amp; 6\\
+-2 &amp; 1 &amp; -2\\
+-10 &amp; -10 &amp; -7
+\end{array}
+\right)
+\ \left(
+\begin{array}{ccc@{}}
+- \frac{3}{5} &amp; -1 &amp; -1\\
+\frac{1}{5} &amp; 1 &amp; 0\\
+1 &amp; 0 &amp; 1
+\end{array}
+\right)
+ = \\ &amp; = &amp; \left(
+\begin{array}{ccc@{}}
+-3 &amp; 0 &amp; 0\\
+0 &amp; 3 &amp; 0\\
+0 &amp; 0 &amp; 3
+\end{array}
+\right)
+\end{array}\]</span></p>
+<p>En este capítulo, veremos el método para hallar esa descomposición, la base y la matriz diagonal.</p>
 <hr />
 <p><strong>¿Qué preguntas vamos a responder en este capítulo?</strong></p>
 <ul>
-<li></li>
-<li></li>
-<li></li>
+<li><a href="diagonalización.html#eigenvalue">¿Qué son los autovalores de un endomorfismo y de una matriz?</a></li>
+<li><a href="diagonalización.html#eigenspace">¿Cómo calculamos los autovectores asociados a un autovalor?</a></li>
+<li><a href="diagonalización.html#diagonalizable">¿Cómo sabemos si un endomorfismo o una matriz es diagonalizable?</a></li>
+<li><a href="diagonalización.html#th-cayley">¿Para qué podemos utilizar el Teorema de Cayley-Hamilton?</a></li>
 </ul>
-<div id="qué-son-los-autovalores-de-un-endomorfismo-y-de-una-matriz" class="section level2" number="4.1">
+<div id="eigenvalue" class="section level2" number="4.1">
 <h2 number="4.1"><span class="header-section-number">4.1</span> Qué son los autovalores de un endomorfismo y de una matriz</h2>
-<ul>
-<li>Definición para endomorfismo y para matriz asociada</li>
-<li>Matrices semejantes: da igual la base de V, todas las matrices de <span class="math inline">\(f\)</span> son semejantes.</li>
-<li>Motivación y definición de polinomio característico.</li>
-</ul>
+<p>Consideremos un endomorfismo <span class="math inline">\(f:V\to V\)</span>. Diremos que un valor <span class="math inline">\(\lambda\in\mathbb{K}\)</span> es un <strong>autovalor</strong> (o <strong>valor propio</strong>) de <span class="math inline">\(f\)</span> si existe un vector no nulo <span class="math inline">\(v\in V\)</span> tal que <span class="math inline">\(f(v) = \lambda\ v\)</span>. A ese <span class="math inline">\(v\)</span> se le denomina <strong>autovector</strong> (o <strong>vector propio</strong>) asociado a <span class="math inline">\(\lambda\)</span>.</p>
+<p><strong>Nota</strong>: Eliminamos la posibilidad de que <span class="math inline">\(v\)</span> sea nulo en la definición, porque <a href="apli.html#prop-apli">sabemos que <span class="math inline">\(f(0) = 0\)</span></a> en cualquier aplicación lineal, así que no nos proporcionaría información alguna.</p>
+<p>Intuitivamente, un <em>autovector</em> <span class="math inline">\(v\)</span> es un vector no nulo que, al aplicarle <span class="math inline">\(f\)</span>, su imagen <span class="math inline">\(f(v)\)</span> es proporcional a él mismo, y la constante de proporcionalidad es el <em>autovalor</em> <span class="math inline">\(\lambda\)</span>.</p>
+<p>Si consideramos una matriz <span class="math inline">\(A\)</span> asociada a <span class="math inline">\(f\)</span>, la condición <span class="math inline">\(f(v) = \lambda\ v\)</span> se puede reescribir como <span class="math inline">\(A\ v = \lambda\ v\)</span>.</p>
+<p>Podemos generalizar entonces esta definición a matrices cuadradas: Un escalar <span class="math inline">\(\lambda\)</span> se llama <strong>autovalor</strong> o <strong>valor propio</strong> de una matriz <span class="math inline">\(A\in\mathcal{M}_n(\mathbb{K})\)</span> si existe <span class="math inline">\(v\in\mathbb{K}^{n}\)</span> no nulo, llamado <strong>autovector</strong> o <strong>vector propio</strong> asociado a <span class="math inline">\(\lambda\)</span>, tal que <span class="math inline">\(A\ v = \lambda\ v\)</span>.</p>
+<p>Nos falta comprobar si hay alguna incoherencia en las definiciones: si distintas matrices asociadas a un mismo endomorfismo tuvieran distintos <em>autovalores</em>, eso sería un problema de la definición. Sin embargo, el siguiente resultado nos asegura que esto no puede ser así:</p>
+<blockquote>
+<p>Si dos matrices <span class="math inline">\(A\)</span> y <span class="math inline">\(A&#39;\)</span> son <em>semejantes</em>, entonces tienen los mismos autovalores.</p>
+</blockquote>
+<p>Podemos decir entonces que:</p>
+<blockquote>
+<p>Si <span class="math inline">\(\lambda\)</span> es un autovalor de <span class="math inline">\(f\)</span>, entonces lo es de cualquiera de sus matrices asociadas en diferentes bases, y esto es debido a su relación de <em>semejanza</em>.</p>
+</blockquote>
+<p>Esto significa que si queremos calcular los autovalores de un endomorfismo <span class="math inline">\(f\)</span>, basta con calcularlos para cualquiera de sus matrices asociadas, en particular para su matriz asociada en la <a href="ev.html#base">base canónica</a>, la más sencilla de encontrar.</p>
+<p><strong>¿Cómo podemos encontrar los autovalores de un endomorfismo o de su matriz asociada?</strong></p>
+<p>Para encontrar los autovalores de un endomorfismo, siempre partiremos de una matriz asociada al mismo. Por tanto, explicaremos cómo calcular los autovalores de una matriz cuadrada, y eso nos bastará para encontrar los del endomorfismo, por lo comentado anteriormente.</p>
+<p>La condición para ser <span class="math inline">\(\lambda\in\mathbb{K}\)</span> un autovalor es que exista <span class="math inline">\(v\in V\)</span> tal que <span class="math inline">\(A\ v = \lambda\ v\)</span>.</p>
+<p>Esto es equivalente a <span class="math inline">\(A\ v - \lambda v = 0\)</span>, es decir, <span class="math inline">\(A\ v - \lambda\ I\ v = 0\)</span>, siendo <span class="math inline">\(I\)</span> la matriz identidad del mismo tamaño que <span class="math inline">\(v\)</span>. En forma compacta, podemos decir que <span class="math inline">\(\lambda\)</span> es autovalor de <span class="math inline">\(A\)</span> si existe <span class="math inline">\(v\)</span> tal que <span class="math inline">\((A-\lambda\ I)\ v = 0\)</span>.</p>
+<p>Es decir, <span class="math inline">\(v\)</span> debe ser solución del siguiente sistema homogéneo: <span class="math inline">\((A-\lambda\ I)\ x = 0\)</span>.</p>
+<p>Recordemos que un sistema homogéneo tiene siempre solución. Estamos interesados en soluciones distintas del vector 0, puesto que hemos impuesto en la definición de <em>autovector</em> que sea un vector no nulo.</p>
+<p>¿Qué condición tenemos para saber que un sistema homogéneo es compatible indeterminado? Pues que la matriz de coeficientes del sistema sea <em>singular</em>, es decir, tenga determinante igual a 0.</p>
+<p>En este caso, la matriz de coeficientes del sistema es <span class="math inline">\(A-\lambda\ I\)</span>, así que tendremos soluciones distinta de la trivial si <span class="math inline">\(\mathrm{det}(A-\lambda\ I) = 0\)</span>.</p>
+<p>Hay que notar que la expresión <span class="math inline">\(\mathrm{det}(A-\lambda\ I)\)</span> depende de <span class="math inline">\(\lambda\)</span>, así que realmente estamos buscando <strong>los valores de <span class="math inline">\(\lambda\)</span> que hacen que <span class="math inline">\(\mathrm{det}(A-\lambda\ I) = 0\)</span></strong>.</p>
+<p>Llamamos <strong>polinomio característico</strong> de la matriz <span class="math inline">\(A\)</span> a <span class="math inline">\(p(\lambda) = \mathrm{det}(A-\lambda\ I)\)</span>, y <strong>ecuación característica</strong> a <span class="math inline">\(\mathrm{det}(A-\lambda\ I) = 0\)</span>.</p>
+<p>Por tanto, <strong>los autovalores de una matriz <span class="math inline">\(A\)</span> son</strong> soluciones a la ecuación característica, es decir, <strong>las raíces del polinomio característico</strong>.</p>
 <hr />
 <p><strong>Ejemplo</strong></p>
+<p>Vamos a calcular los autovalores del endomorfismo <span class="math inline">\(f:\mathbb{R}^{3}\to\mathbb{R}^{3}\)</span>, dado por
+<span class="math display">\[f\left(\begin{array}{c}
+x\\
+y\\
+z
+\end{array}\right)
+ = \left(\begin{array}{c}
+9x+ 6y+ 6z\\
+-2x+ y-2z\\
+-10x-10y-7z\\
+\end{array}\right)\]</span>
+del ejemplo anterior.</p>
+<p>Sabemos que su matriz asociada en la base canónica es:
+<span class="math display">\[A = \left(
+\begin{array}{ccc@{}}
+9 &amp; 6 &amp; 6\\
+-2 &amp; 1 &amp; -2\\
+-10 &amp; -10 &amp; -7
+\end{array}
+\right)
+\]</span></p>
+<p>Definimos entonces el polinomio característico como:
+<span class="math display">\[\begin{array}{rcl}p(\lambda) &amp; = &amp; \mathrm{det}(A - \lambda\ I) = \\ &amp; = &amp; \mathrm{det}\left(\left(
+\begin{array}{ccc@{}}
+9 &amp; 6 &amp; 6\\
+-2 &amp; 1 &amp; -2\\
+-10 &amp; -10 &amp; -7
+\end{array}
+\right)
+ - \lambda \left(
+\begin{array}{ccc@{}}
+1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 1
+\end{array}
+\right)
+\right) = \\ &amp; = &amp; \mathrm{det}\left(
+\begin{array}{ccc@{}}
+9-\lambda &amp; 6 &amp; 6\\
+-2 &amp; 1-\lambda &amp; -2\\
+-10 &amp; -10 &amp; -7-\lambda
+\end{array}
+\right)
+\end{array}\]</span></p>
+<p>Si desarrollamos el determinante, nos queda como <em>polinomio característico</em>:
+<span class="math display">\[p(\lambda) = \lambda^{3}-3\lambda^{2}-9\lambda+27\]</span></p>
+<p>Igualándolo a 0, tenemos la ecuación característica <span class="math inline">\(\lambda^{3}-3\lambda^{2}-9\lambda+27 = 0\)</span>, que podemos resolver (generalmente se podrá factorizar de forma simple o usando Ruffini) y nos quedan las siguientes soluciones: <span class="math inline">\(\lambda = -3, 3\)</span>. Esta última solución es raíz doble, ya que:
+<span class="math display">\[p(\lambda) = (\lambda +3)\cdot (\lambda -3)^{2}\]</span></p>
+<p>Por tanto, <span class="math inline">\(\lambda = -3, 3\)</span> son autovalores de la matriz <span class="math inline">\(A\)</span> y del endomorfismo <span class="math inline">\(f\)</span>.</p>
 <hr />
 </div>
-<div id="cómo-calculamos-los-autovectores-asociados-a-un-autovalor" class="section level2" number="4.2">
+<div id="eigenspace" class="section level2" number="4.2">
 <h2 number="4.2"><span class="header-section-number">4.2</span> Cómo calculamos los autovectores asociados a un autovalor</h2>
-<ul>
-<li>Subespacio asociado como solución de sistema homogéneo</li>
-</ul>
+<p><a href="diagonalización.html#eigenvalue">Acabamos de ver</a> que los autovectores asociados a un autovalor <span class="math inline">\(\lambda\)</span> son soluciones no triviales del sistema homogéneo <span class="math inline">\((A-\lambda\ I)x = 0\)</span>.</p>
+<p>También sabemos que las soluciones de un sistema homogéneo forman un subespacio vectorial. Por tanto, <strong>el conjunto de autovectores asociado a un autovalor <span class="math inline">\(\lambda\)</span> es un subespacio vectorial que llamamos subespacio asociado al autovalor <span class="math inline">\(\lambda\)</span></strong>. Generalmente, denotaremos <span class="math inline">\(U_{\lambda}\)</span> al subespacio asociado al autovalor <span class="math inline">\(\lambda\)</span>.</p>
+<p>En ocasiones, se denomina <strong>subespacio invariante por <span class="math inline">\(f\)</span></strong> a <span class="math inline">\(U_{\lambda}\)</span>, puesto que <span class="math inline">\(f(U_{\lambda}) \subseteq U_{\lambda}\)</span>.</p>
+<p>Como con cualquier subespacio vectorial, para tener perfectamente determinado a <span class="math inline">\(U_{\lambda}\)</span> nos basta con dar una base suya que, evidentemente, estará formada por autovectores asociados a <span class="math inline">\(\lambda\)</span>.</p>
+<p>En este caso, podemos <a href="ev.html#base">partir de las ecuaciones cartesianas</a> de <span class="math inline">\(U_{\lambda}\)</span>, que son el sistema <span class="math inline">\((A-\lambda\ I)\ x = 0\)</span>, y encontrar una base suya, como ya hemos visto en el capítulo de <a href="ev.html#ev">espacios vectoriales</a>.</p>
 <hr />
 <p><strong>Ejemplo</strong></p>
+<p>Retomamos el endomorfismo <span class="math inline">\(f\)</span> de los ejemplos anteriores. Calculemos los subespacios asociados a los distintos autovalores:</p>
+<ul>
+<li>Para el autovalor <span class="math inline">\(\lambda = -3\)</span>:
+<span class="math display">\[(A + 3 I)\left(\begin{array}{c}
+x\\
+y\\
+z
+\end{array}\right)
+ = 0\Leftrightarrow\left(
+\begin{array}{ccc@{}}
+12 &amp; 6 &amp; 6\\
+-2 &amp; 4 &amp; -2\\
+-10 &amp; -10 &amp; -4
+\end{array}
+\right)
+\left(\begin{array}{c}
+x\\
+y\\
+z
+\end{array}\right)
+ = 0\Leftrightarrow\left\{\begin{array}{rrrcr}
+12x &amp; + 6y &amp; + 6z &amp; = &amp; 0\\
+-2x &amp; + 4y &amp; -2z &amp; = &amp; 0\\
+-10x &amp; -10y &amp; -4z &amp; = &amp; 0\\
+\end{array}\right.\]</span></li>
+</ul>
+<p>Resolvemos este sistema por Gauss-Jordan, encontrando la forma paramétrica de su conjunto solución, que es <span class="math inline">\(U_{ -3 }\)</span>:
+<span class="math display">\[\left(
+\begin{array}{ccc|c}
+12 &amp; 6 &amp; 6 &amp; 0\\
+-2 &amp; 4 &amp; -2 &amp; 0\\
+-10 &amp; -10 &amp; -4 &amp; 0
+\end{array}
+\right)
+\sim\left(
+\begin{array}{ccc|c}
+12 &amp; 0 &amp; \frac{36}{5} &amp; 0\\
+0 &amp; 5 &amp; -1 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 0
+\end{array}
+\right)
+\Rightarrow\left(\begin{array}{c}
+x\\
+y\\
+z
+\end{array}\right)
+ = \alpha\left(\begin{array}{c}
+- \frac{3}{5}\\
+\frac{1}{5}\\
+1
+\end{array}\right)
+{}\]</span></p>
+<p>De aquí que una base de <span class="math inline">\(U_{ -3 }\)</span> sea:
+<span class="math display">\[\mathcal{B}_{U_{-3}} = \left\{\left(
+\begin{array}{c@{}}
+- \frac{3}{5}\\
+\frac{1}{5}\\
+1
+\end{array}
+\right)
+\right\}\]</span>- Para el autovalor <span class="math inline">\(\lambda = 3\)</span>:
+<span class="math display">\[(A -3 I)\left(\begin{array}{c}
+x\\
+y\\
+z
+\end{array}\right)
+ = 0\Leftrightarrow\left(
+\begin{array}{ccc@{}}
+6 &amp; 6 &amp; 6\\
+-2 &amp; -2 &amp; -2\\
+-10 &amp; -10 &amp; -10
+\end{array}
+\right)
+\left(\begin{array}{c}
+x\\
+y\\
+z
+\end{array}\right)
+ = 0\Leftrightarrow\left\{\begin{array}{rrrcr}
+6x &amp; + 6y &amp; + 6z &amp; = &amp; 0\\
+-2x &amp; -2y &amp; -2z &amp; = &amp; 0\\
+-10x &amp; -10y &amp; -10z &amp; = &amp; 0\\
+\end{array}\right.\]</span></p>
+<p>Resolvemos este sistema por Gauss-Jordan, encontrando la forma paramétrica de su conjunto solución, que es <span class="math inline">\(U_{ 3 }\)</span>:
+<span class="math display">\[\left(
+\begin{array}{ccc|c}
+6 &amp; 6 &amp; 6 &amp; 0\\
+-2 &amp; -2 &amp; -2 &amp; 0\\
+-10 &amp; -10 &amp; -10 &amp; 0
+\end{array}
+\right)
+\sim\left(
+\begin{array}{ccc|c}
+6 &amp; 6 &amp; 6 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 0
+\end{array}
+\right)
+\Rightarrow\left(\begin{array}{c}
+x\\
+y\\
+z
+\end{array}\right)
+ = \alpha\left(\begin{array}{c}
+-1\\
+1\\
+0
+\end{array}\right)
+{}+\beta\left(\begin{array}{c}
+-1\\
+0\\
+1
+\end{array}\right)
+{}\]</span></p>
+<p>De aquí que una base de <span class="math inline">\(U_{ 3 }\)</span> sea:
+<span class="math display">\[\mathcal{B}_{U_{3}} = \left\{\left(
+\begin{array}{c@{}}
+-1\\
+1\\
+0
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+-1\\
+0\\
+1
+\end{array}
+\right)
+\right\}\]</span></p>
+<p>Los vectores de las bases encontradas, así como cualquiera de sus múltiplos, son autvectores asociados al correpondiente autovalor <span class="math inline">\(\lambda\)</span>.</p>
 <hr />
 </div>
-<div id="cómo-sabemos-si-un-endomorfismo-o-una-matriz-es-diagonalizable" class="section level2" number="4.3">
+<div id="diagonalizable" class="section level2" number="4.3">
 <h2 number="4.3"><span class="header-section-number">4.3</span> Cómo sabemos si un endomorfismo o una matriz es diagonalizable</h2>
+<p>Una vez que sabemos cómo <a href="diagonalización.html#eigenvalue">hallar los autovalores</a> y <a href="diagonalización.html#eigenspace">los autovectores</a> de una matriz y de un endomorfismo, vamos a plantearnos cómo utilizarlos para saber si podemos encontrar una base <span class="math inline">\(\mathcal{B}\)</span> del espacio <span class="math inline">\(V\)</span> tal que la matriz asociada al endomorfismo <span class="math inline">\(f\)</span> es diagonal. Es decir, nos planteamos el estudio de si <strong><span class="math inline">\(f\)</span> es diagonalizable</strong>.</p>
+<p>El principal resultado teórico que necesitamos es el siguiente:</p>
+<blockquote>
+<p>Un endomorfismo <span class="math inline">\(f:V\to V\)</span> es <em>diagonalizable</em> si y sólo si existe una base <span class="math inline">\(\mathcal{B}\)</span> de <span class="math inline">\(V\)</span> formada únicamente por autovectores de <span class="math inline">\(f\)</span>. En ese caso, la <a href="apli.html#matriz-apli">matriz asociada</a> <span class="math inline">\(D\)</span> en esa base es diagonal y tiene en su diagonal principal los autovalores de <span class="math inline">\(f\)</span>. Además, la <a href="ev.html#cambiobase">matriz de cambio de base</a> <span class="math inline">\(P_{\mathcal{B}\to\mathcal{C}}\)</span> (formada por los vectores de <span class="math inline">\(\mathcal{B}\)</span> por columnas) verifica:
+<span class="math display">\[P_{\mathcal{B}\to\mathcal{C}}^{-1}\ A\ P_{\mathcal{B}\to\mathcal{C}} = D\]</span>
+o, equivalentemente,
+<span class="math display">\[A = P_{\mathcal{C}\to\mathcal{B}}^{-1}\ D\ P_{\mathcal{C}\to\mathcal{B}}\]</span></p>
+</blockquote>
+<p>Este resultado proporciona mucha información: nos dice que para que sea diagonalizable un endomorfismo (o una matriz), necesitamos una base de <span class="math inline">\(V\)</span> formada por únicamente autovectores, y que la matriz diagonal asociada tendrá a los autovalores en la diagonal principal.</p>
+<p>Nos preguntamos entonces bajo qué condiciones podemos asegurar que tenemos una base de <span class="math inline">\(V\)</span> formada enteramente por autovectores.</p>
+<p>El siguiente resultado es de gran ayuda:</p>
+<blockquote>
+<p>Autovectores asociados a distintos autovalores son linealmente independientes.</p>
+</blockquote>
+<p>Supongamos que llamamos <span class="math inline">\(\lambda_1,\ldots,\lambda_k\)</span> a los autovalores de un endomorfismo o de una matriz, y <span class="math inline">\(U_{\lambda_1},\ldots,U_{\lambda_k}\)</span> a los subespacios asociados a los autovalores. Supongamos que todos los <span class="math inline">\(\lambda_i\)</span> son distintos unos de otros.</p>
+<p>El resultado anterior me asegura que si <span class="math inline">\(i\ne j\)</span>, entonces los vectores de las bases de <span class="math inline">\(U_{\lambda_i}\)</span> y de <span class="math inline">\(U_{\lambda_j}\)</span> son linealmente independientes.</p>
+<p>Llamamos <span class="math inline">\(\mathcal{B} = \mathcal{B}_{U_{\lambda_1}}\cup \ldots\cup\mathcal{B}_{U_{\lambda_k}}\)</span>, es un sistema <a href="ev.html#indep">linealmente independiente</a> por lo que acabamos de comentar. Si, además, <span class="math inline">\(\mathcal{B}\)</span> tuviera <span class="math inline">\(n\)</span> elementos, puesto que <span class="math inline">\(\mathrm{dim}(V) = n\)</span>, entonces <span class="math inline">\(\mathcal{B}\)</span> sería una <a href="ev.html#base">base</a> de <span class="math inline">\(V\)</span> (recordemos que una base es un sistema linealmente independiente con tantos elementos como la dimensión del espacio vectorial).</p>
+<p>Por tanto, si unimos todas las bases de los subespacios asociados a los autovalores, y tenemos tantos elementos como la dimensión del espacio <span class="math inline">\(V\)</span>, entonces se verifica todo lo anterior: el endomorfismo (y sus matrices asociadas) son diagonalizables. Esto es así porque entonces se verificaría:
+<span class="math display">\[V = U_{\lambda_1} + \ldots + U_{\lambda_k}\]</span></p>
+<p>La primera consecuencia de esto es:</p>
+<blockquote>
+<p>Si una matriz o un endomorfismo tienen exactamente <span class="math inline">\(n\)</span> autovalores distintos, entonces es diagonalizable.</p>
+</blockquote>
+<p>Esto es así porque cada uno de los <span class="math inline">\(n\)</span> autovalores tendría un subespacio asociado cuya base es linealmente independiente de la base de los demás subespacios. Esto solo podría suceder si cada una de las <span class="math inline">\(n\)</span> bases <span class="math inline">\(\mathcal{B}_{U_{\lambda_i}}\)</span>, (<span class="math inline">\(i = 1,\ldots,n\)</span>) solo tiene un elemento, es decir, si <span class="math inline">\(\mathrm{dim}(U_{\lambda_i}) = 1\)</span> para todo <span class="math inline">\(i=1,\ldots,n\)</span>. Si no fuera así, acabaríamos con más de <span class="math inline">\(n\)</span> vectores linealmente independientes en <span class="math inline">\(V\)</span>, lo cual es imposible.</p>
+<p>Entonces <span class="math inline">\(\mathcal{B}\)</span>, definida como la unión de las bases mencionadas, tiene exactamente <span class="math inline">\(n\)</span> elementos. Esto nos demuestra que la matriz o el endomorfismo con <span class="math inline">\(n\)</span> autovalores distintos es diagonalizable.</p>
+<p>Pero ¿qué pasa cuando no tenemos <span class="math inline">\(n\)</span> autovalores distintos?</p>
+<p>Es de gran importancia conocer, para todo <span class="math inline">\(i = 1,\ldots,k\)</span>, la dimensión del subespacio asociado al autovalor <span class="math inline">\(\lambda_i\)</span>. Llamaremos <strong>multiplicidad geométrica del autovalor <span class="math inline">\(\lambda\)</span></strong> a <span class="math inline">\(\mathrm{m_g}(\lambda) = \mathrm{dim}(U_{\lambda_i})\)</span>.</p>
+<p>Se tiene el siguiente resultado:</p>
+<blockquote>
+<p>Para todo autovalor <span class="math inline">\(\lambda\)</span> de un endomorfismo o de una matriz, se tiene que <span class="math display">\[1\le\mathrm{m_g}(\lambda)\le\mathrm{m_a}(\lambda)\]</span>
+donde <span class="math inline">\(\mathrm{m_g}(\lambda)\)</span> es su multiplicidad geométrica y <span class="math inline">\(\mathrm{m_a}(\lambda)\)</span> es la <strong>multiplicidad algebraica de <span class="math inline">\(\lambda\)</span></strong>, es decir, su multiplicidad como raíz del <a href="diagonalización.html#eigenvalue">polinomio característico</a>.</p>
+</blockquote>
+<p>Es decir, la <em>multiplicidad geométrica</em> siempre es mayor o igual que 1 (indicando que el subespacio <span class="math inline">\(U_{\lambda}\)</span> no es el trivial <span class="math inline">\(\{0\}\)</span>), y menor que la <em>multiplicidad algebraica</em>.</p>
+<p>Un corolario de todos los resultados anteriores es:</p>
+<blockquote>
+<p>Si, para todo autovalor <span class="math inline">\(\lambda\)</span> de un endomorfismo o de una matriz cuadrada, se tiene que <span class="math inline">\(\mathrm{m_g}(\lambda) = \mathrm{m_a}(\lambda)\)</span>, entonces es diagonalizable. Y el recíproco es también cierto.</p>
+</blockquote>
+<p>Aquí tenemos un criterio sencillo para determinar si un endomorfismo o una matriz son diagonalizables:</p>
 <ul>
-<li>Definición de multiplicidades (algebraica y geométrica)</li>
-<li>Criterio de igualdad de multiplicidades</li>
-<li>Criterios derivados</li>
+<li>Si tenemos <span class="math inline">\(n\)</span> autovalores distintos, entonces es diagonalizable.</li>
+<li>Si tenemos menos de <span class="math inline">\(n\)</span> autovalores distintos, debemos comprobar que las multiplicidades geométricas de <strong>todos</strong> los autovalores coincidan con sus multiplicidades algebraicas.</li>
 </ul>
+<p>En ambos casos, la <a href="ev.html#base">base</a> de <span class="math inline">\(V\)</span> definida por <span class="math inline">\(\mathcal{B} = \mathcal{B_{U_{\lambda_1}}}\cup\ldots\cup\mathcal{B_{U_{\lambda_k}}}\)</span> es una base formada por autovectores y la matriz asociada al endomorfismo <span class="math inline">\(f\)</span> en dicha base es diagonal con los autovalores en la diagonal principal (repetidos según su multiplicidad).</p>
+<p>Si <span class="math inline">\(P\)</span> es la <a href="ev.html#cambiobase">matriz de paso</a> de <span class="math inline">\(\mathcal{B}\)</span> a la canónica <span class="math inline">\(\mathcal{C}\)</span>, entonces la <a href="apli.html#cambiobase-apli">expresión matricial del endomorfismo <span class="math inline">\(f\)</span> en dicha base <span class="math inline">\(\mathcal{B}\)</span></a> es <span class="math inline">\(D = P^{-1}\ A\ P\)</span>.</p>
 <hr />
 <p><strong>Ejemplo</strong></p>
+<p>Consideramos el endomorfismo <span class="math inline">\(f\)</span> de los ejemplos anteriores. Si tenemos en cuenta lo que se ha determinado de sus <a href="diagonalización.html#eigenvalue">autovalores</a> y de los <a href="diagonalización.html#eigenspace">subespacios asociados</a>, tenemos la siguiente tabla resumen:</p>
+<p><span class="math display">\[ \begin{array}{ccc@{}}
+\text{Autovalor} &amp; \text{Mult. Algebraica} &amp; \text{Mult. Geométrica}\\
+-3 &amp; 1 &amp; 1\\
+3 &amp; 2 &amp; 2
+\end{array}
+ \]</span></p>
+<p>Con esto, queda demostrado que el endomorfismo <span class="math inline">\(f\)</span> <strong>sí</strong> es diagonalizable.</p>
+<p>Además, la base <span class="math inline">\(\mathcal{B}\)</span> de autovectores es:
+<span class="math display">\[\mathcal{B} = \mathcal{B}_{-3}\cup\ \mathcal{B}_{3} = \left\{\left(
+\begin{array}{c@{}}
+- \frac{3}{5}\\
+\frac{1}{5}\\
+1
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+-1\\
+1\\
+0
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+-1\\
+0\\
+1
+\end{array}
+\right)
+\right\}\]</span></p>
+<p>La matriz de cambio de base de <span class="math inline">\(\mathcal{B}\)</span> a <span class="math inline">\(\mathcal{C}\)</span> es la que tiene los elementos de <span class="math inline">\(\mathcal{B}\)</span> por columnas:
+<span class="math display">\[P = \left(
+\begin{array}{ccc@{}}
+- \frac{3}{5} &amp; -1 &amp; -1\\
+\frac{1}{5} &amp; 1 &amp; 0\\
+1 &amp; 0 &amp; 1
+\end{array}
+\right)
+\]</span></p>
+<p>Y la matriz diagonal es la que tiene los autovalores en la diagonal, que se calucla como:
+<span class="math display">\[\begin{array}{rcl}D &amp; = &amp; P^{-1}\ A\ P = \\ &amp; = &amp; \left(
+\begin{array}{ccc@{}}
+- \frac{3}{5} &amp; -1 &amp; -1\\
+\frac{1}{5} &amp; 1 &amp; 0\\
+1 &amp; 0 &amp; 1
+\end{array}
+\right)
+^{-1}\left(
+\begin{array}{ccc@{}}
+9 &amp; 6 &amp; 6\\
+-2 &amp; 1 &amp; -2\\
+-10 &amp; -10 &amp; -7
+\end{array}
+\right)
+\left(
+\begin{array}{ccc@{}}
+- \frac{3}{5} &amp; -1 &amp; -1\\
+\frac{1}{5} &amp; 1 &amp; 0\\
+1 &amp; 0 &amp; 1
+\end{array}
+\right)
+\\ &amp; = &amp; \left(
+\begin{array}{ccc@{}}
+-3 &amp; 0 &amp; 0\\
+0 &amp; 3 &amp; 0\\
+0 &amp; 0 &amp; 3
+\end{array}
+\right)
+\end{array}\]</span></p>
 <hr />
 </div>
-<div id="para-qué-podemos-utilizar-el-teorema-de-cayley-hamilton" class="section level2" number="4.4">
+<div id="th-cayley" class="section level2" number="4.4">
 <h2 number="4.4"><span class="header-section-number">4.4</span> Para qué podemos utilizar el Teorema de Cayley-Hamilton</h2>
 <ul>
 <li>Enunciado del teorema</li>

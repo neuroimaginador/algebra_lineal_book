@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-05-04" />
+<meta name="date" content="2020-05-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -104,7 +104,13 @@
 <li class="chapter" data-level="3.10" data-path="apli.html"><a href="apli.html#rango-nulidad"><i class="fa fa-check"></i><b>3.10</b> A qué se llama rango y nulidad de la aplicación lineal</a></li>
 <li class="chapter" data-level="3.11" data-path="apli.html"><a href="apli.html#th-dim-nucleo"><i class="fa fa-check"></i><b>3.11</b> Qué dice el teorema de la dimensión para núcleo e imagen</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="diagonalización.html"><a href="diagonalización.html"><i class="fa fa-check"></i><b>4</b> Diagonalización</a></li>
+<li class="chapter" data-level="4" data-path="diagonalización.html"><a href="diagonalización.html"><i class="fa fa-check"></i><b>4</b> Diagonalización</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="diagonalización.html"><a href="diagonalización.html#eigenvalue"><i class="fa fa-check"></i><b>4.1</b> Qué son los autovalores de un endomorfismo y de una matriz</a></li>
+<li class="chapter" data-level="4.2" data-path="diagonalización.html"><a href="diagonalización.html#eigenspace"><i class="fa fa-check"></i><b>4.2</b> Cómo calculamos los autovectores asociados a un autovalor</a></li>
+<li class="chapter" data-level="4.3" data-path="diagonalización.html"><a href="diagonalización.html#diagonalizable"><i class="fa fa-check"></i><b>4.3</b> Cómo sabemos si un endomorfismo o una matriz es diagonalizable</a></li>
+<li class="chapter" data-level="4.4" data-path="diagonalización.html"><a href="diagonalización.html#th-cayley"><i class="fa fa-check"></i><b>4.4</b> Para qué podemos utilizar el Teorema de Cayley-Hamilton</a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html"><i class="fa fa-check"></i><b>5</b> Espacios Euclídeos</a></li>
 <li class="chapter" data-level="6" data-path="problems.html"><a href="problems.html"><i class="fa fa-check"></i><b>6</b> Problemas Resueltos</a>
 <ul>
@@ -156,8 +162,8 @@ z\\
 t
 \end{array}\right)
  \in\mathbb{R}^{4}:\begin{array}{ccr}
-3x+ 4y &amp; = &amp; 0\\
-9x+ 4z+ 4t &amp; = &amp; 0\\
+3x+ 9z+ 4t &amp; = &amp; 0\\
+4x+ 4t &amp; = &amp; 0\\
 \end{array}\right\}\]</span></p>
 <ol style="list-style-type: lower-alpha">
 <li>Hallar la dimensión y una base de <span class="math inline">\(U\)</span> y de <span class="math inline">\(W\)</span>.</li>
@@ -266,20 +272,20 @@ t
 <p>Y, así, <span class="math inline">\(\mathrm{dim}(U) = 3\)</span>.</p>
 <p>Repetimos todo el proceso para el subespacio <span class="math inline">\(W\)</span>. Tomamos su sistema homogéneo asociado:</p>
 <p><span class="math display">\[\left\{\begin{array}{rrrrcr}
-3x &amp; + 4y &amp;  &amp;  &amp; = &amp; 0\\
-9x &amp;  &amp; + 4z &amp; + 4t &amp; = &amp; 0\\
+3x &amp;  &amp; + 9z &amp; + 4t &amp; = &amp; 0\\
+4x &amp;  &amp;  &amp; + 4t &amp; = &amp; 0\\
 \end{array}\right.\]</span></p>
 <p>Lo resolvemos por Gauss para obtener las ecuaciones paramétricas del conjunto solución:
 <span class="math display">\[\left(
 \begin{array}{cccc|c}
-3 &amp; 4 &amp; 0 &amp; 0 &amp; 0\\
-9 &amp; 0 &amp; 4 &amp; 4 &amp; 0
+3 &amp; 0 &amp; 9 &amp; 4 &amp; 0\\
+4 &amp; 0 &amp; 0 &amp; 4 &amp; 0
 \end{array}
 \right)
 \sim\left(
 \begin{array}{cccc|c}
-3 &amp; 4 &amp; 0 &amp; 0 &amp; 0\\
-0 &amp; -12 &amp; 4 &amp; 4 &amp; 0
+3 &amp; 0 &amp; 9 &amp; 4 &amp; 0\\
+0 &amp; 0 &amp; -12 &amp; - \frac{4}{3} &amp; 0
 \end{array}
 \right)
 \Rightarrow\quad\ \left(\begin{array}{c}
@@ -324,8 +330,8 @@ t
 <li>El subespacio intersección <span class="math inline">\(U\cap W\)</span> es <a href="ev.html#interseccion">el conjunto de vectores que verifican tanto las ecuaciones cartesianas de <span class="math inline">\(U\)</span> como las de <span class="math inline">\(W\)</span></a>. Es decir, son el conjunto solución del sistema homogéneo:
 <span class="math display">\[\left\{\begin{array}{rrrrcr}
 3x &amp; + y &amp; -z &amp; + 2t &amp; = &amp; 0\\
-3x &amp; + 4y &amp;  &amp;  &amp; = &amp; 0\\
-9x &amp;  &amp; + 4z &amp; + 4t &amp; = &amp; 0\\
+3x &amp;  &amp; + 9z &amp; + 4t &amp; = &amp; 0\\
+4x &amp;  &amp;  &amp; + 4t &amp; = &amp; 0\\
 \end{array}\right.\]</span></li>
 </ol>
 <p>Este sistema, resuelto por Gauss, nos da las siguientes expresiones paramétricas:
@@ -336,18 +342,18 @@ z\\
 t
 \end{array}\right)
  = \alpha\left(\begin{array}{c}
-- \frac{2}{3}\\
-\frac{1}{2}\\
-\frac{1}{2}\\
+-1\\
+\frac{8}{9}\\
+- \frac{1}{9}\\
 1
 \end{array}\right)
 {}\]</span></p>
 <p>Por tanto, una base de <span class="math inline">\(U\cap W\)</span> será:
 <span class="math display">\[\mathcal{B}_{U\cap W} = \left\{\left(
 \begin{array}{c@{}}
-- \frac{2}{3}\\
-\frac{1}{2}\\
-\frac{1}{2}\\
+-1\\
+\frac{8}{9}\\
+- \frac{1}{9}\\
 1
 \end{array}
 \right)
