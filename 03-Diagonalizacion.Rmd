@@ -465,7 +465,7 @@ if (diagonalizable) {
   
   cat("\n\n")
   
-  cat("Y la matriz diagonal es la que tiene los autovalores en la diagonal, que se calucla como:\n")
+  cat("Y la matriz diagonal es la que tiene los autovalores en la diagonal, que se calcula como:\n")
   
   glue_latex(
     "\\begin{array}{rcl}",
@@ -484,12 +484,280 @@ if (diagonalizable) {
 
 ## Para qué podemos utilizar el Teorema de Cayley-Hamilton {#th-cayley}
 
-- Enunciado del teorema
-- Aplicación para la inversa
-- Aplicación para hallar potencia de $A$.
+El __Teorema de Cayley-Hamilton__ nos dice que:
+
+> Toda matriz cuadrada $A$ verifica su ecuación característica, es decir, si $p(\lambda)$ es el polinomio característico de $A$, entonces $p(A) = 0$.
+
+Supongamos que el [polinomio característico](#eigenvalue) de una matriz $A$ es $$p(\lambda) = c_n\lambda^n+\ldots+c_1\lambda+c_0$$
+
+El teorema nos dice que $A$ hace cero su polinomio característico:
+$$p(A) = c_n A^n + \ldots + c_1 A + c_0 I = 0$$
+donde $A^k$ representa el producto de $A$ por sí misma $k$ veces.
+
+__¿Qué utilidades tiene este teorema?__
+
+Supongamos que el término independiente del polinomio característico, $c_0$ es no nulo (esto equivale a que 0 no sea un autovalor, lo cual es también equivalente a que $A$ sea regular). Si de la igualdad superior despejamos la identidad, $I$, nos queda lo siguiente:
+$$
+\begin{array}{rcl}
+I & = & -\dfrac{1}{c_0}\left(c_nA^n+\ldots+c_1A\right) = \\
+  & = & -\dfrac{1}{c_0}\left(c_nA^{n-1}+\ldots+c_1\ I\right)\ A
+\end{array}
+$$
+
+De aquí deducimos que 
+$$A^{-1} = -\dfrac{1}{c_0}\left(c_nA^{n-1}+\ldots+c_1\ I\right)$$
+
+Por tanto, __el teorema de Cayley-Hamilton nos da una forma de calcular la inversa de una matriz cuadrada $A$, únicamente a partir de sumas de potencias de la matriz__.
+
+Esta misma estrategia nos proporciona un __método para calcular potencias de la matriz $A$__, reduciendo el problema a potencias de $A$ de grado menor que el tamaño de la propia matriz.
+
+Si, de la igualdad del teorema, despejamos el término $A^n$, nos queda
+$$A^n = -\frac{1}{c_n}\left(-c_{n-1}A^{n-1}-\ldots-c_1 A- c_0 I\right)$$
+
+A partir de $A^n$, siendo $n$ el número de filas o columnas de la matriz $A$, todas sus potencias se pueden poner como suma de potencias de $A$ de grado menor estrictamente que $n$:
+$$
+\begin{array}{rcl}
+A^{n+1} & = & A\cdot A^n = \\
+ & = & A \cdot \left(-\frac{1}{c_n}\left(-c_{n-1}A^{n-1}-\ldots-c_1 A- c_0 I\right)\right) = \\
+& = & -\frac{1}{c_n}\left(-c_{n-1}A^n-\ldots-c_1 A^2- c_0 A\right) = \\
+ & = & -\frac{1}{c_n}\left(-c_{n-1}\left(-\frac{1}{c_n}\left(-c_{n-1}A^{n-1}-\ldots-c_1 A- c_0 I\right)\right)-\ldots-c_1 A^2- c_0 A\right) = \\
+ & = & ...\\
+\end{array}
+ $$
+
+Siguiendo con este patrón, se puede poner cualquier potencia $A^m$, con $m\ge n$, como suma de $A,A^2,\ldots,A^{n-1}$.
 
 ---
 
 __Ejemplo__
 
----
+Vamos a considerar la matriz 
+```{r}
+glue_latex(
+  "A = [glue_matrices(A, latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+asociada al endomorfismo $f$ de los ejemplos anteriores.
+
+Vamos a calcular $A^{-1}$, $A^4$ y $A^5$ usando el Teorema de Cayley-Hamilton.
+
+Conocemos su [polinomio característico](#eigenvalue):
+```{r}
+glue_latex(
+  "p(\\lambda) = [p_latex]"
+)
+```
+
+El teorema nos proporciona la siguiente igualdad:
+```{r}
+pA <- poly2latex(p, var = "A", is_matrix = TRUE)
+glue_latex(
+  "p(A) = [pA] = 0"
+) %>% 
+  cat()
+```
+
+Despejando la identidad, nos queda:
+```{r}
+p_inv <- -p[-length(p)] / (p[length(p)])
+p_dec <- p
+p_dec[length(p)] <- 0
+p_indep <- p[length(p)]
+
+glue_latex(
+  "\\begin{array}{rcl}",
+  "\\displaystyle I & = & [to_fraction(1 / p_indep, latex = TRUE)] \\left([poly2latex(p_dec, var = 'A', is_matrix = TRUE)]\\right) = \\\\",
+  " & = & \\left([poly2latex(p_inv, var = 'A', is_matrix = TRUE)]\\right)\\ A",
+  "\\end{array}"
+) %>% 
+  cat()
+```
+
+Luego
+```{r}
+
+matrices <- list(eye(n))
+    
+for (i in seq(n - 1)) {
+  tmp <- A %*% matrices[[1]]
+  tmp[abs(tmp) < 1.e-7] <- 0
+  
+  matrices <- append(list(tmp), 
+                     matrices)
+  
+}
+
+inversa <- reduce2(.x = matrices, 
+                   .y = p_inv, 
+                   .f = function(ac, x, y) 
+                     ac + x * y, 
+                   .init = 0)
+
+p_inv_str <- to_fraction(p_inv, latex = TRUE)
+p_inv_str[p_inv > 0] <- paste0("+", p_inv_str[p_inv > 0])
+str <- c()
+for (i in seq(n)) {
+  
+  str <- c(str,
+           glue::glue(
+             "{p_inv_str[i]}{glue_matrices(matrices[[i]], latex = TRUE, fractions = TRUE)}"
+           )
+  )
+  
+}
+
+str <- str_flatten(str)
+
+glue_latex(
+  "\\begin{array}{rcl}",
+  "A^{-1} & = & [poly2latex(p_inv, var = 'A', is_matrix = TRUE)] =\\\\",
+  " & = & [str] =\\\\",
+  " & = & [glue_matrices(inversa, latex = TRUE, fractions = TRUE)]",
+  "\\end{array}"
+) %>% cat()
+```
+
+Vamos ahora a calcular $A^4$ y $A^5$ como suma de potencias de $A$ de grado menor que su tamaño, es decir, potencias de $A$ de grado menor que \(`r n`\).
+
+En todos los casos, tenemos que partir de despejar el término \(A^{`r n`}\) de la igualdad que nos proporciona el Teorema de Cayley-Hamilton:
+```{r}
+p_power <- -p[-1] / p[1]
+glue_latex(
+  "A^{[n]} = [poly2latex(p_power, var = 'A', is_matrix = TRUE)]"
+) %>% 
+  cat()
+```
+
+Para $A^4$, tenemos:
+```{r}
+p_4 <- c(p_power, 0)
+glue_latex(
+  "A^4 = A\\cdot A^3 = A \\left([poly2latex(p_power, var = 'A', is_matrix = TRUE)]\\right) = [poly2latex(p_4, var = 'A', is_matrix = TRUE)]"
+) %>% 
+  cat()
+```
+
+Si queremos dejarlo como suma de potencias de $A$ de grado menor que \(`r n`\), debemos sustituir aquí \(A^{`r n`}\) por la expresión que hemos despejado hace un momento.
+
+```{r}
+p_4_part <- p_4[-1]
+
+p_4_red <- p_4[1] * p_power + p_4_part
+
+p_4_red_str <- to_fraction(p_4_red, latex = TRUE)
+pos <- setdiff(which(p_4_red > 0), 1)
+p_4_red_str[pos] <- paste0("+", p_4_red_str[pos])
+str2 <- c()
+for (i in seq(n)) {
+  
+  if (p_4_red[i] != 0) {
+    
+    str2 <- c(str2,
+              glue::glue(
+                "{p_4_red_str[i]}{glue_matrices(matrices[[i]], latex = TRUE, fractions = TRUE)}"
+              )
+    )
+    
+  }
+  
+}
+
+str2 <- str_flatten(str2)
+
+potencia <- reduce2(.x = matrices, 
+                   .y = p_4_red, 
+                   .f = function(ac, x, y) 
+                     ac + x * y, 
+                   .init = 0)
+
+
+str <- c(
+  glue::glue(
+    "{to_fraction(p_4[1], latex = TRUE)} \\left( {poly2latex(p_power, var = 'A', is_matrix = TRUE)} \\right)"
+  ),
+  ifelse(p_4[2] > 0, "+", ""),
+  glue::glue(
+    "{poly2latex(p_4_part, var = 'A', is_matrix = TRUE)}"
+  )
+) %>% str_flatten()
+
+glue_latex(
+  "\\begin{array}{rcl}",
+  "A^4 & = & [str] = \\\\",
+  " & = & [poly2latex(p_4_red, var = 'A', is_matrix = TRUE)] = \\\\",
+  " & = & [str2] = \\\\",
+  " & = & [glue_matrices(potencia, latex = TRUE, fractions = TRUE)]",  
+  "\\end{array}"
+  )
+
+cat("\n")
+```
+
+Evidentemente, podríamos haber hecho el cálculo bien directamente bien haciendo $A^4 = A^2\cdot A^2$, pero esa forma no está expresada como suma de potencias de grado menor que $n$.
+
+Repetimos el proceso para calcular $A^5$.
+```{r}
+p_5 <- c(p_4_red, 0)
+glue_latex(
+  "A^5 = A\\cdot A^4 = A \\left([poly2latex(p_4_red, var = 'A', is_matrix = TRUE)]\\right) = [poly2latex(p_5, var = 'A', is_matrix = TRUE)]"
+) %>% 
+  cat()
+```
+
+Sustituimos de nuevo \(A^{`r n`}\) por su expresión:
+```{r}
+p_5_part <- p_5[-1]
+
+p_5_red <- p_5[1] * p_power + p_5_part
+
+p_5_red_str <- to_fraction(p_5_red, latex = TRUE)
+pos <- setdiff(which(p_5_red > 0), 1)
+p_5_red_str[pos] <- paste0("+", p_5_red_str[pos])
+str2 <- c()
+for (i in seq(n)) {
+  
+  if (p_5_red[i] != 0) {
+    
+    str2 <- c(str2,
+              glue::glue(
+                "{p_5_red_str[i]}{glue_matrices(matrices[[i]], latex = TRUE, fractions = TRUE)}"
+              )
+    )
+    
+  }
+  
+}
+
+str2 <- str_flatten(str2)
+
+potencia <- reduce2(.x = matrices, 
+                   .y = p_5_red, 
+                   .f = function(ac, x, y) 
+                     ac + x * y, 
+                   .init = 0)
+
+potencia[abs(potencia - round(potencia)) < 1.e-7] <- round(potencia[abs(potencia - round(potencia)) < 1.e-7])
+
+
+str <- c(
+  glue::glue(
+    "{to_fraction(p_5[1], latex = TRUE)} \\left( {poly2latex(p_power, var = 'A', is_matrix = TRUE)} \\right)"
+  ),
+  ifelse(p_5[2] > 0, "+", ""),
+  glue::glue(
+    "{poly2latex(p_5_part, var = 'A', is_matrix = TRUE)}"
+  )
+) %>% str_flatten()
+
+glue_latex(
+  "\\begin{array}{rcl}",
+  "A^5 & = & [str] = \\\\",
+  " & = & [poly2latex(p_5_red, var = 'A', is_matrix = TRUE)] = \\\\",
+  " & = & [str2] = \\\\",
+  " & = & [glue_matrices(potencia, latex = TRUE, fractions = TRUE)]",  
+  "\\end{array}"
+  )
+
+cat("\n")
+```

@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-05-07" />
+<meta name="date" content="2020-05-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -554,7 +554,7 @@ donde <span class="math inline">\(\mathrm{m_g}(\lambda)\)</span> es su multiplic
 \end{array}
 \right)
 \]</span></p>
-<p>Y la matriz diagonal es la que tiene los autovalores en la diagonal, que se calucla como:
+<p>Y la matriz diagonal es la que tiene los autovalores en la diagonal, que se calcula como:
 <span class="math display">\[\begin{array}{rcl}D &amp; = &amp; P^{-1}\ A\ P = \\ &amp; = &amp; \left(
 \begin{array}{ccc@{}}
 - \frac{3}{5} &amp; -1 &amp; -1\\
@@ -588,14 +588,149 @@ donde <span class="math inline">\(\mathrm{m_g}(\lambda)\)</span> es su multiplic
 </div>
 <div id="th-cayley" class="section level2" number="4.4">
 <h2 number="4.4"><span class="header-section-number">4.4</span> Para qué podemos utilizar el Teorema de Cayley-Hamilton</h2>
-<ul>
-<li>Enunciado del teorema</li>
-<li>Aplicación para la inversa</li>
-<li>Aplicación para hallar potencia de <span class="math inline">\(A\)</span>.</li>
-</ul>
+<p>El <strong>Teorema de Cayley-Hamilton</strong> nos dice que:</p>
+<blockquote>
+<p>Toda matriz cuadrada <span class="math inline">\(A\)</span> verifica su ecuación característica, es decir, si <span class="math inline">\(p(\lambda)\)</span> es el polinomio característico de <span class="math inline">\(A\)</span>, entonces <span class="math inline">\(p(A) = 0\)</span>.</p>
+</blockquote>
+<p>Supongamos que el <a href="diagonalización.html#eigenvalue">polinomio característico</a> de una matriz <span class="math inline">\(A\)</span> es <span class="math display">\[p(\lambda) = c_n\lambda^n+\ldots+c_1\lambda+c_0\]</span></p>
+<p>El teorema nos dice que <span class="math inline">\(A\)</span> hace cero su polinomio característico:
+<span class="math display">\[p(A) = c_n A^n + \ldots + c_1 A + c_0 I = 0\]</span>
+donde <span class="math inline">\(A^k\)</span> representa el producto de <span class="math inline">\(A\)</span> por sí misma <span class="math inline">\(k\)</span> veces.</p>
+<p><strong>¿Qué utilidades tiene este teorema?</strong></p>
+<p>Supongamos que el término independiente del polinomio característico, <span class="math inline">\(c_0\)</span> es no nulo (esto equivale a que 0 no sea un autovalor, lo cual es también equivalente a que <span class="math inline">\(A\)</span> sea regular). Si de la igualdad superior despejamos la identidad, <span class="math inline">\(I\)</span>, nos queda lo siguiente:
+<span class="math display">\[
+\begin{array}{rcl}
+I &amp; = &amp; -\dfrac{1}{c_0}\left(c_nA^n+\ldots+c_1A\right) = \\
+  &amp; = &amp; -\dfrac{1}{c_0}\left(c_nA^{n-1}+\ldots+c_1\ I\right)\ A
+\end{array}
+\]</span></p>
+<p>De aquí deducimos que
+<span class="math display">\[A^{-1} = -\dfrac{1}{c_0}\left(c_nA^{n-1}+\ldots+c_1\ I\right)\]</span></p>
+<p>Por tanto, <strong>el teorema de Cayley-Hamilton nos da una forma de calcular la inversa de una matriz cuadrada <span class="math inline">\(A\)</span>, únicamente a partir de sumas de potencias de la matriz</strong>.</p>
+<p>Esta misma estrategia nos proporciona un <strong>método para calcular potencias de la matriz <span class="math inline">\(A\)</span></strong>, reduciendo el problema a potencias de <span class="math inline">\(A\)</span> de grado menor que el tamaño de la propia matriz.</p>
+<p>Si, de la igualdad del teorema, despejamos el término <span class="math inline">\(A^n\)</span>, nos queda
+<span class="math display">\[A^n = -\frac{1}{c_n}\left(-c_{n-1}A^{n-1}-\ldots-c_1 A- c_0 I\right)\]</span></p>
+<p>A partir de <span class="math inline">\(A^n\)</span>, siendo <span class="math inline">\(n\)</span> el número de filas o columnas de la matriz <span class="math inline">\(A\)</span>, todas sus potencias se pueden poner como suma de potencias de <span class="math inline">\(A\)</span> de grado menor estrictamente que <span class="math inline">\(n\)</span>:
+<span class="math display">\[
+\begin{array}{rcl}
+A^{n+1} &amp; = &amp; A\cdot A^n = \\
+ &amp; = &amp; A \cdot \left(-\frac{1}{c_n}\left(-c_{n-1}A^{n-1}-\ldots-c_1 A- c_0 I\right)\right) = \\
+&amp; = &amp; -\frac{1}{c_n}\left(-c_{n-1}A^n-\ldots-c_1 A^2- c_0 A\right) = \\
+ &amp; = &amp; -\frac{1}{c_n}\left(-c_{n-1}\left(-\frac{1}{c_n}\left(-c_{n-1}A^{n-1}-\ldots-c_1 A- c_0 I\right)\right)-\ldots-c_1 A^2- c_0 A\right) = \\
+ &amp; = &amp; ...\\
+\end{array}
+ \]</span></p>
+<p>Siguiendo con este patrón, se puede poner cualquier potencia <span class="math inline">\(A^m\)</span>, con <span class="math inline">\(m\ge n\)</span>, como suma de <span class="math inline">\(A,A^2,\ldots,A^{n-1}\)</span>.</p>
 <hr />
 <p><strong>Ejemplo</strong></p>
-<hr />
+<p>Vamos a considerar la matriz
+<span class="math display">\[A = \left(
+\begin{array}{ccc@{}}
+9 &amp; 6 &amp; 6\\
+-2 &amp; 1 &amp; -2\\
+-10 &amp; -10 &amp; -7
+\end{array}
+\right)
+\]</span>
+asociada al endomorfismo <span class="math inline">\(f\)</span> de los ejemplos anteriores.</p>
+<p>Vamos a calcular <span class="math inline">\(A^{-1}\)</span>, <span class="math inline">\(A^4\)</span> y <span class="math inline">\(A^5\)</span> usando el Teorema de Cayley-Hamilton.</p>
+<p>Conocemos su <a href="diagonalización.html#eigenvalue">polinomio característico</a>:
+<span class="math display">\[p(\lambda) = \lambda^{3}-3\lambda^{2}-9\lambda+27\]</span></p>
+<p>El teorema nos proporciona la siguiente igualdad:
+<span class="math display">\[p(A) = A^{3}-3A^{2}-9A+27I = 0\]</span></p>
+<p>Despejando la identidad, nos queda:
+<span class="math display">\[\begin{array}{rcl}\displaystyle I &amp; = &amp; \frac{1}{27} \left(A^{3}-3A^{2}-9A\right) = \\ &amp; = &amp; \left(- \frac{1}{27}A^{2}+\frac{1}{9}A+\frac{1}{3}I\right)\ A\end{array}\]</span></p>
+<p>Luego
+<span class="math display">\[\begin{array}{rcl}A^{-1} &amp; = &amp; - \frac{1}{27}A^{2}+\frac{1}{9}A+\frac{1}{3}I =\\ &amp; = &amp; - \frac{1}{27}\left(
+\begin{array}{ccc@{}}
+9 &amp; 0 &amp; 0\\
+0 &amp; 9 &amp; 0\\
+0 &amp; 0 &amp; 9
+\end{array}
+\right)
++\frac{1}{9}\left(
+\begin{array}{ccc@{}}
+9 &amp; 6 &amp; 6\\
+-2 &amp; 1 &amp; -2\\
+-10 &amp; -10 &amp; -7
+\end{array}
+\right)
++\frac{1}{3}\left(
+\begin{array}{ccc@{}}
+1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 1
+\end{array}
+\right)
+ =\\ &amp; = &amp; \left(
+\begin{array}{ccc@{}}
+1 &amp; \frac{2}{3} &amp; \frac{2}{3}\\
+- \frac{2}{9} &amp; \frac{1}{9} &amp; - \frac{2}{9}\\
+- \frac{10}{9} &amp; - \frac{10}{9} &amp; - \frac{7}{9}
+\end{array}
+\right)
+\end{array}\]</span></p>
+<p>Vamos ahora a calcular <span class="math inline">\(A^4\)</span> y <span class="math inline">\(A^5\)</span> como suma de potencias de <span class="math inline">\(A\)</span> de grado menor que su tamaño, es decir, potencias de <span class="math inline">\(A\)</span> de grado menor que <span class="math inline">\(3\)</span>.</p>
+<p>En todos los casos, tenemos que partir de despejar el término <span class="math inline">\(A^{3}\)</span> de la igualdad que nos proporciona el Teorema de Cayley-Hamilton:
+<span class="math display">\[A^{3} = 3A^{2}+9A-27I\]</span></p>
+<p>Para <span class="math inline">\(A^4\)</span>, tenemos:
+<span class="math display">\[A^4 = A\cdot A^3 = A \left(3A^{2}+9A-27I\right) = 3A^{3}+9A^{2}-27A\]</span></p>
+<p>Si queremos dejarlo como suma de potencias de <span class="math inline">\(A\)</span> de grado menor que <span class="math inline">\(3\)</span>, debemos sustituir aquí <span class="math inline">\(A^{3}\)</span> por la expresión que hemos despejado hace un momento.</p>
+<p><span class="math display">\[\begin{array}{rcl}A^4 &amp; = &amp; 3 \left( 3A^{2}+9A-27I \right)+9A^{2}-27A = \\ &amp; = &amp; 18A^{2}-81I = \\ &amp; = &amp; 18\left(
+\begin{array}{ccc@{}}
+9 &amp; 0 &amp; 0\\
+0 &amp; 9 &amp; 0\\
+0 &amp; 0 &amp; 9
+\end{array}
+\right)
+-81\left(
+\begin{array}{ccc@{}}
+1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 1
+\end{array}
+\right)
+ = \\ &amp; = &amp; \left(
+\begin{array}{ccc@{}}
+81 &amp; 0 &amp; 0\\
+0 &amp; 81 &amp; 0\\
+0 &amp; 0 &amp; 81
+\end{array}
+\right)
+\end{array}\]</span></p>
+<p>Evidentemente, podríamos haber hecho el cálculo bien directamente bien haciendo <span class="math inline">\(A^4 = A^2\cdot A^2\)</span>, pero esa forma no está expresada como suma de potencias de grado menor que <span class="math inline">\(n\)</span>.</p>
+<p>Repetimos el proceso para calcular <span class="math inline">\(A^5\)</span>.
+<span class="math display">\[A^5 = A\cdot A^4 = A \left(18A^{2}-81I\right) = 18A^{3}-81A\]</span></p>
+<p>Sustituimos de nuevo <span class="math inline">\(A^{3}\)</span> por su expresión:
+<span class="math display">\[\begin{array}{rcl}A^5 &amp; = &amp; 18 \left( 3A^{2}+9A-27I \right)-81A = \\ &amp; = &amp; 54A^{2}+81A-486I = \\ &amp; = &amp; 54\left(
+\begin{array}{ccc@{}}
+9 &amp; 0 &amp; 0\\
+0 &amp; 9 &amp; 0\\
+0 &amp; 0 &amp; 9
+\end{array}
+\right)
++81\left(
+\begin{array}{ccc@{}}
+9 &amp; 6 &amp; 6\\
+-2 &amp; 1 &amp; -2\\
+-10 &amp; -10 &amp; -7
+\end{array}
+\right)
+-486\left(
+\begin{array}{ccc@{}}
+1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 1
+\end{array}
+\right)
+ = \\ &amp; = &amp; \left(
+\begin{array}{ccc@{}}
+729 &amp; 486 &amp; 486\\
+-162 &amp; 81 &amp; -162\\
+-810 &amp; -810 &amp; -567
+\end{array}
+\right)
+\end{array}\]</span></p>
 
 </div>
 </div>
