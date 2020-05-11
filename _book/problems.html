@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-05-07" />
+<meta name="date" content="2020-05-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -880,6 +880,338 @@ y así <span class="math inline">\(\mathrm{dim}(f(U)) = 2\)</span>.</p>
 </div>
 <div id="prob-diag" class="section level2" number="6.3">
 <h2 number="6.3"><span class="header-section-number">6.3</span> Diagonalización</h2>
+<p><strong>Ejercicio</strong></p>
+<p>Consideremos el siguiente endomorfismo <span class="math inline">\(f:\mathbb{R}^{3}\to\mathbb{R}^{3}\)</span>, dado por
+<span class="math display">\[f\left(\begin{array}{c}
+x\\
+y\\
+z
+\end{array}\right)
+ = \left(\begin{array}{c}
+5x-3z\\
+x+ 8y+ z\\
+-x+ 7z\\
+\end{array}\right)\]</span></p>
+<ol style="list-style-type: lower-alpha">
+<li>Hallar todos los autovalores de <span class="math inline">\(f\)</span>.</li>
+<li>Hallar los subespacios de autovectores de <span class="math inline">\(f\)</span>.</li>
+<li>Comprobar si <span class="math inline">\(f\)</span> es diagonalizable y dar una base <span class="math inline">\(\mathcal{B}\)</span> de <span class="math inline">\(\mathbb{R}^{3}\)</span> tal que la matriz asociada a <span class="math inline">\(f\)</span> en dicha base sea diagonal.</li>
+<li>Expresar y calcular, como suma de potencias de grado menor que <span class="math inline">\(3\)</span>, tanto <span class="math inline">\(A^{-1}\)</span> como <span class="math inline">\(A^4\)</span>, siendo <span class="math inline">\(A\)</span> la matriz asociada a <span class="math inline">\(f\)</span> en la base canónica.</li>
+</ol>
+<p><strong>Solución</strong></p>
+<p>Como paso previo a todos los cálculos, debemos determinar <a href="apli.html#matriz-apli">la matriz asociada</a> a <span class="math inline">\(f\)</span> en las bases canónicas:
+<span class="math display">\[A = \left(
+\begin{array}{ccc@{}}
+5 &amp; 0 &amp; -3\\
+1 &amp; 8 &amp; 1\\
+-1 &amp; 0 &amp; 7
+\end{array}
+\right)
+\]</span></p>
+<ol style="list-style-type: lower-alpha">
+<li>Para <a href="diagonalización.html#eigenvalue">calcular los autovalores</a> de <span class="math inline">\(f\)</span>, o equivalentemente, los de <span class="math inline">\(A\)</span>, debemos construir el <em>polinomio característico</em>:</li>
+</ol>
+<p><span class="math display">\[\begin{array}{rcl}p(\lambda) &amp; = &amp; \mathrm{det}(A - \lambda\ I) = \\ &amp; = &amp; \mathrm{det}\left(\left(
+\begin{array}{ccc@{}}
+5 &amp; 0 &amp; -3\\
+1 &amp; 8 &amp; 1\\
+-1 &amp; 0 &amp; 7
+\end{array}
+\right)
+ - \lambda \left(
+\begin{array}{ccc@{}}
+1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 1
+\end{array}
+\right)
+\right) = \\ &amp; = &amp; \mathrm{det}\left(
+\begin{array}{ccc@{}}
+5-\lambda &amp; 0 &amp; -3\\
+1 &amp; 8-\lambda &amp; 1\\
+-1 &amp; 0 &amp; 7-\lambda
+\end{array}
+\right)
+ = \\ &amp; = &amp; \lambda^{3}-20\lambda^{2}+128\lambda-256\end{array}\]</span></p>
+<p>Factorizamos el polinomio para hallar sus raíces (los autovalores) más fácilmente:
+<span class="math display">\[p(\lambda) = (\lambda -4)\cdot (\lambda -8)^{2}\]</span></p>
+<p>Por tanto, los autovalores de <span class="math inline">\(f\)</span> son <span class="math inline">\(\{4, 8\}\)</span>.</p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Para calcular el <a href="diagonalización.html#eigenspace">subespacio asociado a un autovector</a> <span class="math inline">\(\lambda\)</span>, debemos hallar la solución del sistema homogéneo <span class="math inline">\((A-\lambda\ I)x = 0\)</span>:</li>
+</ol>
+<ul>
+<li>Para el autovalor <span class="math inline">\(\lambda = 4\)</span>:
+<span class="math display">\[(A -4 I)\left(\begin{array}{c}
+x\\
+y\\
+z
+\end{array}\right)
+ = 0\Leftrightarrow\left(
+\begin{array}{ccc@{}}
+1 &amp; 0 &amp; -3\\
+1 &amp; 4 &amp; 1\\
+-1 &amp; 0 &amp; 3
+\end{array}
+\right)
+\left(\begin{array}{c}
+x\\
+y\\
+z
+\end{array}\right)
+ = 0\Leftrightarrow\left\{\begin{array}{rrrcr}
+x &amp;  &amp; -3z &amp; = &amp; 0\\
+x &amp; + 4y &amp; + z &amp; = &amp; 0\\
+-x &amp;  &amp; + 3z &amp; = &amp; 0\\
+\end{array}\right.\]</span></li>
+</ul>
+<p>Resolvemos este sistema por Gauss-Jordan, encontrando la forma paramétrica de su conjunto solución, que es <span class="math inline">\(U_{ 4 }\)</span>:
+<span class="math display">\[\left(
+\begin{array}{ccc|c}
+1 &amp; 0 &amp; -3 &amp; 0\\
+1 &amp; 4 &amp; 1 &amp; 0\\
+-1 &amp; 0 &amp; 3 &amp; 0
+\end{array}
+\right)
+\sim\left(
+\begin{array}{ccc|c}
+1 &amp; 0 &amp; -3 &amp; 0\\
+0 &amp; 4 &amp; 4 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 0
+\end{array}
+\right)
+\Rightarrow\left(\begin{array}{c}
+x\\
+y\\
+z
+\end{array}\right)
+ = \alpha\left(\begin{array}{c}
+3\\
+-1\\
+1
+\end{array}\right)
+{}\]</span></p>
+<p>De aquí que una base de <span class="math inline">\(U_{ 4 }\)</span> sea:
+<span class="math display">\[\mathcal{B}_{U_{4}} = \left\{\left(
+\begin{array}{c@{}}
+3\\
+-1\\
+1
+\end{array}
+\right)
+\right\}\]</span>
+- Para el autovalor <span class="math inline">\(\lambda = 8\)</span>:
+<span class="math display">\[(A -8 I)\left(\begin{array}{c}
+x\\
+y\\
+z
+\end{array}\right)
+ = 0\Leftrightarrow\left(
+\begin{array}{ccc@{}}
+-3 &amp; 0 &amp; -3\\
+1 &amp; 0 &amp; 1\\
+-1 &amp; 0 &amp; -1
+\end{array}
+\right)
+\left(\begin{array}{c}
+x\\
+y\\
+z
+\end{array}\right)
+ = 0\Leftrightarrow\left\{\begin{array}{rrrcr}
+-3x &amp;  &amp; -3z &amp; = &amp; 0\\
+x &amp;  &amp; + z &amp; = &amp; 0\\
+-x &amp;  &amp; -z &amp; = &amp; 0\\
+\end{array}\right.\]</span></p>
+<p>Resolvemos este sistema por Gauss-Jordan, encontrando la forma paramétrica de su conjunto solución, que es <span class="math inline">\(U_{ 8 }\)</span>:
+<span class="math display">\[\left(
+\begin{array}{ccc|c}
+-3 &amp; 0 &amp; -3 &amp; 0\\
+1 &amp; 0 &amp; 1 &amp; 0\\
+-1 &amp; 0 &amp; -1 &amp; 0
+\end{array}
+\right)
+\sim\left(
+\begin{array}{ccc|c}
+-3 &amp; 0 &amp; -3 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 0
+\end{array}
+\right)
+\Rightarrow\left(\begin{array}{c}
+x\\
+y\\
+z
+\end{array}\right)
+ = \alpha\left(\begin{array}{c}
+0\\
+1\\
+0
+\end{array}\right)
+{}+\beta\left(\begin{array}{c}
+-1\\
+0\\
+1
+\end{array}\right)
+{}\]</span></p>
+<p>De aquí que una base de <span class="math inline">\(U_{ 8 }\)</span> sea:
+<span class="math display">\[\mathcal{B}_{U_{8}} = \left\{\left(
+\begin{array}{c@{}}
+0\\
+1\\
+0
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+-1\\
+0\\
+1
+\end{array}
+\right)
+\right\}\]</span></p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Estudiamos si <span class="math inline">\(f\)</span> es <a href="diagonalización.html#diagonalizable">diagonalizable</a>. Para ello, tenemos en cuenta la multiplicidad algebraica y la geométrica de cada autovalor, como presentamos en la siguiente tabla:</li>
+</ol>
+<p><span class="math display">\[ \begin{array}{ccc@{}}
+\text{Autovalor} &amp; \text{Mult. Algebraica} &amp; \text{Mult. Geométrica}\\
+4 &amp; 1 &amp; 1\\
+8 &amp; 2 &amp; 2
+\end{array}
+ \]</span></p>
+<p>Con esto, queda demostrado que el endomorfismo <span class="math inline">\(f\)</span> <strong>sí</strong> es diagonalizable.</p>
+<p>Además, la base <span class="math inline">\(\mathcal{B}\)</span> de autovectores es:
+<span class="math display">\[\mathcal{B} = \mathcal{B}_{4}\cup\ \mathcal{B}_{8} = \left\{\left(
+\begin{array}{c@{}}
+3\\
+-1\\
+1
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+0\\
+1\\
+0
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+-1\\
+0\\
+1
+\end{array}
+\right)
+\right\}\]</span></p>
+<p>La matriz de cambio de base de <span class="math inline">\(\mathcal{B}\)</span> a <span class="math inline">\(\mathcal{C}\)</span> es la que tiene los elementos de <span class="math inline">\(\mathcal{B}\)</span> por columnas:
+<span class="math display">\[P = \left(
+\begin{array}{ccc@{}}
+3 &amp; 0 &amp; -1\\
+-1 &amp; 1 &amp; 0\\
+1 &amp; 0 &amp; 1
+\end{array}
+\right)
+\]</span></p>
+<p>Y la matriz diagonal, asociada a <span class="math inline">\(f\)</span> en la nueva base, es la que tiene los autovalores en la diagonal, que se calcula como:
+<span class="math display">\[\begin{array}{rcl}D &amp; = &amp; P^{-1}\ A\ P = \\ &amp; = &amp; \left(
+\begin{array}{ccc@{}}
+3 &amp; 0 &amp; -1\\
+-1 &amp; 1 &amp; 0\\
+1 &amp; 0 &amp; 1
+\end{array}
+\right)
+^{-1}\left(
+\begin{array}{ccc@{}}
+5 &amp; 0 &amp; -3\\
+1 &amp; 8 &amp; 1\\
+-1 &amp; 0 &amp; 7
+\end{array}
+\right)
+\left(
+\begin{array}{ccc@{}}
+3 &amp; 0 &amp; -1\\
+-1 &amp; 1 &amp; 0\\
+1 &amp; 0 &amp; 1
+\end{array}
+\right)
+\\ &amp; = &amp; \left(
+\begin{array}{ccc@{}}
+4 &amp; 0 &amp; 0\\
+0 &amp; 8 &amp; 0\\
+0 &amp; 0 &amp; 8
+\end{array}
+\right)
+\end{array}\]</span></p>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Ahora aplicaremos el <a href="diagonalización.html#th-cayley">Teorema de Cayley-Hamilton</a> para poder expresar la inversas de <span class="math inline">\(A\)</span> y <span class="math inline">\(A^4\)</span> como suma de potencias de grado menor que <span class="math inline">\(3\)</span>.</li>
+</ol>
+<p>El teorema me dice que la matriz <span class="math inline">\(A\)</span> anula su polinomio característico, es decir:
+<span class="math display">\[p(A) = A^{3}-20A^{2}+128A-256I = 0\]</span></p>
+<p>Despejando la identidad, nos queda:
+<span class="math display">\[\begin{array}{rcl}\displaystyle I &amp; = &amp; - \frac{1}{256} \left(A^{3}-20A^{2}+128A\right) = \\ &amp; = &amp; \left(\frac{1}{256}A^{2}- \frac{5}{64}A+\frac{1}{2}I\right)\ A\end{array}\]</span></p>
+<p>Luego
+<span class="math display">\[\begin{array}{rcl}A^{-1} &amp; = &amp; \frac{1}{256}A^{2}- \frac{5}{64}A+\frac{1}{2}I =\\ &amp; = &amp; +\frac{1}{256}\left(
+\begin{array}{ccc@{}}
+28 &amp; 0 &amp; -36\\
+12 &amp; 64 &amp; 12\\
+-12 &amp; 0 &amp; 52
+\end{array}
+\right)
+- \frac{5}{64}\left(
+\begin{array}{ccc@{}}
+5 &amp; 0 &amp; -3\\
+1 &amp; 8 &amp; 1\\
+-1 &amp; 0 &amp; 7
+\end{array}
+\right)
++\frac{1}{2}\left(
+\begin{array}{ccc@{}}
+1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 1
+\end{array}
+\right)
+ =\\ &amp; = &amp; \left(
+\begin{array}{ccc@{}}
+\frac{7}{32} &amp; 0 &amp; \frac{3}{32}\\
+- \frac{1}{32} &amp; \frac{1}{8} &amp; - \frac{1}{32}\\
+\frac{1}{32} &amp; 0 &amp; \frac{5}{32}
+\end{array}
+\right)
+\end{array}\]</span></p>
+<p>Calculemos ahora <span class="math inline">\(A^4\)</span>. Tenemos que partir de despejar el término <span class="math inline">\(A^{3}\)</span> de la igualdad que nos proporciona el Teorema de Cayley-Hamilton:
+<span class="math display">\[A^{3} = 20A^{2}-128A+256I\]</span></p>
+<p>Para <span class="math inline">\(A^4\)</span>, tenemos:
+<span class="math display">\[A^4 = A\cdot A^3 = A \left(20A^{2}-128A+256I\right) = 20A^{3}-128A^{2}+256A\]</span></p>
+<p>Si queremos dejarlo como suma de potencias de <span class="math inline">\(A\)</span> de grado menor que <span class="math inline">\(3\)</span>, debemos sustituir aquí <span class="math inline">\(A^{3}\)</span> por la expresión que hemos despejado hace un momento.</p>
+<p><span class="math display">\[\begin{array}{rcl}A^4 &amp; = &amp; 20 \left( 20A^{2}-128A+256I \right)-128A^{2}+256A = \\ &amp; = &amp; 272A^{2}-2304A+5120I = \\ &amp; = &amp; 272\left(
+\begin{array}{ccc@{}}
+28 &amp; 0 &amp; -36\\
+12 &amp; 64 &amp; 12\\
+-12 &amp; 0 &amp; 52
+\end{array}
+\right)
+-2304\left(
+\begin{array}{ccc@{}}
+5 &amp; 0 &amp; -3\\
+1 &amp; 8 &amp; 1\\
+-1 &amp; 0 &amp; 7
+\end{array}
+\right)
++5120\left(
+\begin{array}{ccc@{}}
+1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 1
+\end{array}
+\right)
+ = \\ &amp; = &amp; \left(
+\begin{array}{ccc@{}}
+1216 &amp; 0 &amp; -2880\\
+960 &amp; 4096 &amp; 960\\
+-960 &amp; 0 &amp; 3136
+\end{array}
+\right)
+\end{array}\]</span></p>
 </div>
 <div id="prob-espeuclideo" class="section level2" number="6.4">
 <h2 number="6.4"><span class="header-section-number">6.4</span> Espacios Euclídeos</h2>

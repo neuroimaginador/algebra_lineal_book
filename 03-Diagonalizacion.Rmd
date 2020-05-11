@@ -116,7 +116,7 @@ if (diagonalizable) {
 
 __Ejemplo__
 
-Consideremos el siguiente  endomorfismo \(f:\mathbb{R}^{`r n`}\to\mathbb{R}^{`r n`}\), dado por 
+Consideremos el siguiente endomorfismo \(f:\mathbb{R}^{`r n`}\to\mathbb{R}^{`r n`}\), dado por 
 ```{r}
 glue_latex(
   "f[to_latex(generic_vector(n))] = ",

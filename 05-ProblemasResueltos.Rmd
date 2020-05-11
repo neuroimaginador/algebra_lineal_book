@@ -712,5 +712,408 @@ y así \(\mathrm{dim}(f(U)) = `r ncol(fbU)`\).
 
 ## Diagonalización {#prob-diag}
 
+```{r}
+# Dimensión del problema
+n <- dim <- 3
+
+# Autovalores para crear una matriz
+lambdas <- sample(setdiff(-1:2, 0), 
+                  size = dim - 1, 
+                  replace = TRUE) %>% 
+  sort()
+lambdas <- c(lambdas, lambdas[dim - 1])
+D <- diag(lambdas)
+
+# Matriz de paso aleatoria
+# Vamos a exigir que si los 3 autovalores son diferentes,
+# entonces P sea regular.
+# Si el determinante es no nulo, será diagonalizable
+repeat {
+  
+  P <- rMatrix(n = dim, values = -2:3)
+  
+  if (det(P) != 0) break
+  
+}
+
+# Calculamos A = inv(P)AP
+s <- gauss_elimination(P, D %*% P, 
+                       diag1 = TRUE, 
+                       jordan = TRUE)
+A <- s$splits[[2]] %>% remove_fraction(byrow = FALSE)
+
+# Polinomio característico
+p <- charpoly(A)
+p[abs(p) < 1.e-7] <- 0
+# Raíces del polinomio característico
+# Autovalores con multiplicidad
+lambdas2 <- polyroots(p)
+p_latex <- poly2latex(p, var = "\\lambda")
+
+multiplicidad_algebraica <- lambdas2$mult
+autovalores <- round(lambdas2$root)
+
+o <- order(abs(autovalores))
+autovalores <- autovalores[o]
+multiplicidad_algebraica <- multiplicidad_algebraica[o]
+
+D <- diag(rep(autovalores, times = multiplicidad_algebraica))
+
+# Por cada autovalor, sacamos una base del subsepacio asociado
+gen <- list()
+for (L in autovalores) {
+
+  B <- A - L * eye(dim)
+  B[abs(B) < 1.e-7] <- 0
+  gen <- append(gen, list(solve_homogeneous(B)))
+  
+}
+
+b_eigenvectors <- do.call(cbind, gen)
+# foo <- lapply(gen, vectors_to_latex) %>% lapply(cat)
+# glue_matrices(gen) %>% cat()
+
+# Miramos las multiplicidades geométricas
+multiplicidad_geometrica <- sapply(gen, ncol)
+
+# Si coinciden las multiplicidades algebraica y geométrica
+# es diagonalizable
+diagonalizable <- all(multiplicidad_algebraica == multiplicidad_geometrica)
+
+if (diagonalizable) {
+  
+  P2 <- do.call(cbind, gen)
+  
+
+}
+```
+
+__Ejercicio__
+
+Consideremos el siguiente endomorfismo \(f:\mathbb{R}^{`r n`}\to\mathbb{R}^{`r n`}\), dado por 
+```{r}
+glue_latex(
+  "f[to_latex(generic_vector(n))] = ",
+  "\\left([write_system(A, latex = TRUE, format = 'c')]\\right)"
+)
+```
+
+a. Hallar todos los autovalores de $f$.
+b. Hallar los subespacios de autovectores de $f$.
+c. Comprobar si $f$ es diagonalizable y dar una base $\mathcal{B}$ de \(\mathbb{R}^{`r n`}\) tal que la matriz asociada a $f$ en dicha base sea diagonal.
+d. Expresar y calcular, como suma de potencias de grado menor que \(`r n`\), tanto $A^{-1}$ como $A^4$, siendo $A$ la matriz asociada a $f$ en la base canónica.
+
+__Solución__
+
+Como paso previo a todos los cálculos, debemos determinar [la matriz asociada](#matriz-apli) a $f$ en las bases canónicas:
+```{r}
+glue_latex(
+  "A = [glue_matrices(A, latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+
+a. Para [calcular los autovalores](#eigenvalue) de $f$, o equivalentemente, los de $A$, debemos construir el _polinomio característico_:
+
+```{r}
+A_lambdaI <- to_fraction(A, latex = TRUE)
+for (i in seq(nrow(A))) {
+  
+  if (A[i, i] != 0) {
+    
+    A_lambdaI[i, i] <- paste0(A_lambdaI[i, i], "-\\lambda")
+    
+  } else {
+    
+    A_lambdaI[i, i] <- "-\\lambda"
+    
+  }
+  
+}
+glue_latex(
+  "\\begin{array}{rcl}",
+  "p(\\lambda) & = & \\mathrm{det}(A - \\lambda\\ I) = \\\\",
+  " & = & \\mathrm{det}\\left(",
+  "[glue_matrices(A, latex = TRUE, fractions = TRUE)] - \\lambda [glue_matrices(eye(n), latex = TRUE)]",
+  "\\right) = \\\\",
+  " & = & \\mathrm{det}[glue_matrices(A_lambdaI, latex = TRUE)] = \\\\",
+  " & = & [p_latex]",
+  "\\end{array}"
+) %>% 
+  cat()
+```
+
+Factorizamos el polinomio para hallar sus raíces (los autovalores) más fácilmente:
+```{r}
+terms <- -autovalores %>% to_fraction(latex = TRUE)
+terms[autovalores < 0] <- paste0("+", terms[autovalores < 0])
+terms <- paste0("(\\lambda ", terms, ")")
+powers <- paste0("^{", multiplicidad_algebraica, "}")
+powers[multiplicidad_algebraica == 1] <- "" 
+factorization <- glue::glue("{terms}{powers}") %>% 
+  stringr::str_flatten("\\cdot ")
+glue_latex(
+  "p(\\lambda) = [factorization]"
+)
+```
+
+Por tanto, los autovalores de $f$ son \(\{`r str_flatten(autovalores, ", ")`\}\).
+
+b. Para calcular el [subespacio asociado a un autovector](#eigenspace) $\lambda$, debemos hallar la solución del sistema homogéneo $(A-\lambda\ I)x = 0$:
+
+```{r}
+for (av_idx in seq_along(autovalores)) {
+  
+  av <- autovalores[av_idx]
+  
+  cat("- Para el autovalor \\(\\lambda = ", av, "\\):\n")
+  
+  B <- A - av * eye(n)
+  B[abs(B) < 1.e-7] <- 0
+  
+  av_str <- -av %>% to_fraction(latex = TRUE)
+  if (av < 0) {
+    
+    av_str <- paste0("+ ", av_str)
+    
+  }
+  
+  glue_latex(
+    "(A [av_str] I)[to_latex(generic_vector(n))] = 0",
+    "\\Leftrightarrow",
+    "[glue_matrices(B, latex = TRUE, fractions = TRUE)][to_latex(generic_vector(n))] = 0",
+    "\\Leftrightarrow",
+    "\\left\\{[write_system(B, zero_vector(n), latex = TRUE, fractions = TRUE)]\\right."
+  ) %>% 
+    cat()
+  
+  cat("\n\n")
+  
+  cat("Resolvemos este sistema por Gauss-Jordan, encontrando la forma paramétrica de su conjunto solución, que es \\(U_{", av, "}\\):\n")
+  
+  params <- c("\\alpha", "\\beta", "\\gamma", "\\delta")
+  s <- gauss_elimination(B, zero_vector(n), jordan = TRUE)
+  
+  glue_latex(
+    "[glue_matrices(B, zero_vector(n), latex = TRUE, fractions = TRUE)]",
+    "\\sim",
+    "[glue_matrices(s$splits, latex = TRUE, fractions = TRUE)]",
+    "\\Rightarrow",
+    "[to_latex(generic_vector(n))] = [write_linear_combination(gen[[av_idx]], vars = params)]"
+  ) %>% 
+    cat()
+  
+  cat("\n\n")
+  
+  cat("De aquí que una base de \\(U_{", av, "}\\) sea:\n")
+  
+  glue_latex(
+    "\\mathcal{B}_{U_{[av]}} = ",
+    "\\left\\{[vectors_to_latex(gen[[av_idx]])]\\right\\}"
+  ) %>% 
+    cat()
+  
+  cat("\n")
+  
+}
+```
+
+c. Estudiamos si $f$ es [diagonalizable](#diagonalizable). Para ello, tenemos en cuenta la multiplicidad algebraica y la geométrica de cada autovalor, como presentamos en la siguiente tabla:
+
+```{r}
+# L <- as.matrix(lambdas2[o, ])
+L <- matrix(c(autovalores, multiplicidad_algebraica, multiplicidad_geometrica), ncol = 3)
+
+multi_table2 <- rbind(c("\\text{Autovalor}", "\\text{Mult. Algebraica}", "\\text{Mult. Geométrica}"), L)
+```
+
+$$ `r glue_matrices(multi_table2, 
+                  latex = TRUE, 
+                  ldeco = "", rdeco = "")` $$
+                  
+Con esto, queda demostrado que el endomorfismo $f$ __`r ifelse(diagonalizable, "sí", "no")`__ es diagonalizable.
+
+```{r}
+if (diagonalizable) {
+  
+  cat("Además, la base $\\mathcal{B}$ de autovectores es:\n")
+  
+  subspaces <- paste0("\\mathcal{B}_{", autovalores, "}") %>% 
+    str_flatten("\\cup\\ ")
+  
+  glue_latex(
+    "\\mathcal{B} = [subspaces] = \\left\\{[vectors_to_latex(b_eigenvectors)]\\right\\}"
+  ) %>% cat()
+  
+  cat("\n\n")
+  
+  cat("La matriz de cambio de base de $\\mathcal{B}$ a $\\mathcal{C}$ es la que tiene los elementos de $\\mathcal{B}$ por columnas:\n")
+  
+  glue_latex(
+    "P = [glue_matrices(b_eigenvectors, latex = TRUE, fractions = TRUE)]"
+  ) %>% 
+    cat()
+  
+  cat("\n\n")
+  
+  cat("Y la matriz diagonal, asociada a $f$ en la nueva base, es la que tiene los autovalores en la diagonal, que se calcula como:\n")
+  
+  glue_latex(
+    "\\begin{array}{rcl}",
+    "D & = & P^{-1}\\ A\\ P = \\\\",
+    " & = & [glue_matrices(b_eigenvectors, latex = TRUE, fractions = TRUE)]^{-1}[glue_matrices(A, latex = TRUE, fractions = TRUE)][glue_matrices(b_eigenvectors, latex = TRUE, fractions = TRUE)]\\\\",
+    " & = & [glue_matrices(D, latex = TRUE, fractions = TRUE)]",
+    "\\end{array}"
+  ) %>% 
+    cat()
+  
+}
+```
+
+d. Ahora aplicaremos el [Teorema de Cayley-Hamilton](#th-cayley) para poder expresar la inversas de $A$ y $A^4$ como suma de potencias de grado menor que \(`r n`\).
+
+El teorema me dice que la matriz $A$ anula su polinomio característico, es decir:
+```{r}
+pA <- poly2latex(p, var = "A", is_matrix = TRUE)
+glue_latex(
+  "p(A) = [pA] = 0"
+) %>% 
+  cat()
+```
+
+Despejando la identidad, nos queda:
+```{r}
+p_inv <- -p[-length(p)] / (p[length(p)])
+p_dec <- p
+p_dec[length(p)] <- 0
+p_indep <- p[length(p)]
+
+glue_latex(
+  "\\begin{array}{rcl}",
+  "\\displaystyle I & = & [to_fraction(1 / p_indep, latex = TRUE)] \\left([poly2latex(p_dec, var = 'A', is_matrix = TRUE)]\\right) = \\\\",
+  " & = & \\left([poly2latex(p_inv, var = 'A', is_matrix = TRUE)]\\right)\\ A",
+  "\\end{array}"
+) %>% 
+  cat()
+```
+
+Luego
+```{r}
+
+matrices <- list(eye(n))
+    
+for (i in seq(n - 1)) {
+  tmp <- A %*% matrices[[1]]
+  tmp[abs(tmp) < 1.e-7] <- 0
+  
+  matrices <- append(list(tmp), 
+                     matrices)
+  
+}
+
+inversa <- reduce2(.x = matrices, 
+                   .y = p_inv, 
+                   .f = function(ac, x, y) 
+                     ac + x * y, 
+                   .init = 0)
+
+p_inv_str <- to_fraction(p_inv, latex = TRUE)
+p_inv_str[p_inv > 0] <- paste0("+", p_inv_str[p_inv > 0])
+str <- c()
+for (i in seq(n)) {
+  
+  str <- c(str,
+           glue::glue(
+             "{p_inv_str[i]}{glue_matrices(matrices[[i]], latex = TRUE, fractions = TRUE)}"
+           )
+  )
+  
+}
+
+str <- str_flatten(str)
+
+glue_latex(
+  "\\begin{array}{rcl}",
+  "A^{-1} & = & [poly2latex(p_inv, var = 'A', is_matrix = TRUE)] =\\\\",
+  " & = & [str] =\\\\",
+  " & = & [glue_matrices(inversa, latex = TRUE, fractions = TRUE)]",
+  "\\end{array}"
+) %>% cat()
+```
+
+Calculemos ahora $A^4$. Tenemos que partir de despejar el término \(A^{`r n`}\) de la igualdad que nos proporciona el Teorema de Cayley-Hamilton:
+```{r}
+p_power <- -p[-1] / p[1]
+glue_latex(
+  "A^{[n]} = [poly2latex(p_power, var = 'A', is_matrix = TRUE)]"
+) %>% 
+  cat()
+```
+
+Para $A^4$, tenemos:
+```{r}
+p_4 <- c(p_power, 0)
+glue_latex(
+  "A^4 = A\\cdot A^3 = A \\left([poly2latex(p_power, var = 'A', is_matrix = TRUE)]\\right) = [poly2latex(p_4, var = 'A', is_matrix = TRUE)]"
+) %>% 
+  cat()
+```
+
+Si queremos dejarlo como suma de potencias de $A$ de grado menor que \(`r n`\), debemos sustituir aquí \(A^{`r n`}\) por la expresión que hemos despejado hace un momento.
+
+```{r}
+p_4_part <- p_4[-1]
+
+p_4_red <- p_4[1] * p_power + p_4_part
+
+p_4_red_str <- to_fraction(p_4_red, latex = TRUE)
+pos <- setdiff(which(p_4_red > 0), 1)
+p_4_red_str[pos] <- paste0("+", p_4_red_str[pos])
+str2 <- c()
+for (i in seq(n)) {
+  
+  if (p_4_red[i] != 0) {
+    
+    str2 <- c(str2,
+              glue::glue(
+                "{p_4_red_str[i]}{glue_matrices(matrices[[i]], latex = TRUE, fractions = TRUE)}"
+              )
+    )
+    
+  }
+  
+}
+
+str2 <- str_flatten(str2)
+
+potencia <- reduce2(.x = matrices, 
+                   .y = p_4_red, 
+                   .f = function(ac, x, y) 
+                     ac + x * y, 
+                   .init = 0)
+
+
+str <- c(
+  glue::glue(
+    "{to_fraction(p_4[1], latex = TRUE)} \\left( {poly2latex(p_power, var = 'A', is_matrix = TRUE)} \\right)"
+  ),
+  ifelse(p_4[2] > 0, "+", ""),
+  glue::glue(
+    "{poly2latex(p_4_part, var = 'A', is_matrix = TRUE)}"
+  )
+) %>% str_flatten()
+
+glue_latex(
+  "\\begin{array}{rcl}",
+  "A^4 & = & [str] = \\\\",
+  " & = & [poly2latex(p_4_red, var = 'A', is_matrix = TRUE)] = \\\\",
+  " & = & [str2] = \\\\",
+  " & = & [glue_matrices(potencia, latex = TRUE, fractions = TRUE)]",  
+  "\\end{array}"
+  )
+
+cat("\n")
+```
+
 ## Espacios Euclídeos {#prob-espeuclideo}
 
