@@ -666,7 +666,7 @@ glue::glue(
 Ahora, tomando
 ```{r}
 glue_latex(
-  "\\mathcal{G} = \\mathcal{B}_{U} \\cup \\mathcal{B}_{W}",
+  "\\mathcal{G} = \\mathcal{B}_{U} \\cup \\mathcal{B}_{W} = ",
   "\\left\\{[vectors_to_latex(cbind(bU, bW))]\\right\\}"
 )
 ```
