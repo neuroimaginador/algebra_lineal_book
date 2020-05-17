@@ -290,7 +290,7 @@ Basta con usar eliminación gaussiana en ese conjunto de vectores para [eliminar
 
 s <- gauss_elimination(t(cbind(bU, bW)))
 
-cat("$$", to_latex(cbind(t(cbind(bU, bW))), fractions = TRUE), "\\sim", to_latex(cbind(s$U), fractions = TRUE), "$$")
+cat("$$", to_latex(cbind(t(cbind(bU, bW))), fractions = TRUE), "\\sim", to_latex(cbind(s$U[s$ind_rows, ]), fractions = TRUE), "$$")
 ```
 
 Aquellas filas que hayan acabado siendo enteras de ceros, se corresponden con vectores que originalmente eran dependientes linealmente de los demás.
@@ -997,7 +997,7 @@ glue_latex(
   cat()
 ```
 
-Luego
+Luego tenemos
 ```{r}
 
 matrices <- list(eye(n))
