@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-05-13" />
+<meta name="date" content="2020-05-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -111,7 +111,15 @@
 <li class="chapter" data-level="4.3" data-path="diagonalización.html"><a href="diagonalización.html#diagonalizable"><i class="fa fa-check"></i><b>4.3</b> Cómo sabemos si un endomorfismo o una matriz es diagonalizable</a></li>
 <li class="chapter" data-level="4.4" data-path="diagonalización.html"><a href="diagonalización.html#th-cayley"><i class="fa fa-check"></i><b>4.4</b> Para qué podemos utilizar el Teorema de Cayley-Hamilton</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html"><i class="fa fa-check"></i><b>5</b> Espacios Euclídeos</a></li>
+<li class="chapter" data-level="5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html"><i class="fa fa-check"></i><b>5</b> Espacios Euclídeos</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#norm"><i class="fa fa-check"></i><b>5.1</b> Qué son las normas y distancias</a></li>
+<li class="chapter" data-level="5.2" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho"><i class="fa fa-check"></i><b>5.2</b> Qué significa el concepto de ortogonalidad</a></li>
+<li class="chapter" data-level="5.3" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho-basis"><i class="fa fa-check"></i><b>5.3</b> Cómo construimos una base ortonormal</a></li>
+<li class="chapter" data-level="5.4" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#compl-ortho"><i class="fa fa-check"></i><b>5.4</b> Qué es el complemento ortogonal de un subespacio</a></li>
+<li class="chapter" data-level="5.5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#proyec"><i class="fa fa-check"></i><b>5.5</b> Cómo calculamos la proyección de un vector sobre un subespacio</a></li>
+<li class="chapter" data-level="5.6" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#diag-ortho"><i class="fa fa-check"></i><b>5.6</b> Qué es la diagonalización ortogonal</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="problems.html"><a href="problems.html"><i class="fa fa-check"></i><b>6</b> Problemas Resueltos</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="problems.html"><a href="problems.html#prob-ev"><i class="fa fa-check"></i><b>6.1</b> Espacios Vectoriales</a></li>
@@ -162,15 +170,15 @@ z\\
 t
 \end{array}\right)
  \in\mathbb{R}^{4}:\begin{array}{ccr}
-3x+ 9z+ 4t &amp; = &amp; 0\\
-4x+ 4t &amp; = &amp; 0\\
+3x+ 4y &amp; = &amp; 0\\
+9x+ 4z+ 4t &amp; = &amp; 0\\
 \end{array}\right\}\]</span></p>
 <ol style="list-style-type: lower-alpha">
 <li>Hallar la dimensión y una base de <span class="math inline">\(U\)</span> y de <span class="math inline">\(W\)</span>.</li>
 <li>Hallar la dimensión y una base de <span class="math inline">\(U\cap W\)</span> y de <span class="math inline">\(U+W\)</span>.</li>
 <li>Comprobar el teorema de la dimensión.</li>
 <li>Encontrar el subespacio suplementario de <span class="math inline">\(U\)</span>.</li>
-<li>Consideremos el vector <span class="math inline">\(v\)</span> dado por sus coordenadas en la base canónica <span class="math inline">\(\left(\begin{array}{c} -9\\ -13\\ 1\\ 3 \end{array}\right)\)</span>. Consideremos también la base:</li>
+<li>Consideremos el vector <span class="math inline">\(v\)</span> dado por sus coordenadas en la base canónica <span class="math inline">\(\left(\begin{array}{c} -5\\ -9\\ 1\\ -5 \end{array}\right)\)</span>. Consideremos también la base:</li>
 </ol>
 <p><span class="math display">\[\mathcal{B}_{1} = \left\{\left(
 \begin{array}{c@{}}
@@ -190,17 +198,17 @@ t
 \right)
 , \left(
 \begin{array}{c@{}}
+0\\
+0\\
 -1\\
--1\\
-1\\
-1
+-1
 \end{array}
 \right)
 , \left(
 \begin{array}{c@{}}
 -1\\
 -1\\
--1\\
+1\\
 1
 \end{array}
 \right)
@@ -272,20 +280,20 @@ t
 <p>Y, así, <span class="math inline">\(\mathrm{dim}(U) = 3\)</span>.</p>
 <p>Repetimos todo el proceso para el subespacio <span class="math inline">\(W\)</span>. Tomamos su sistema homogéneo asociado:</p>
 <p><span class="math display">\[\left\{\begin{array}{rrrrcr}
-3x &amp;  &amp; + 9z &amp; + 4t &amp; = &amp; 0\\
-4x &amp;  &amp;  &amp; + 4t &amp; = &amp; 0\\
+3x &amp; + 4y &amp;  &amp;  &amp; = &amp; 0\\
+9x &amp;  &amp; + 4z &amp; + 4t &amp; = &amp; 0\\
 \end{array}\right.\]</span></p>
 <p>Lo resolvemos por Gauss para obtener las ecuaciones paramétricas del conjunto solución:
 <span class="math display">\[\left(
 \begin{array}{cccc|c}
-3 &amp; 0 &amp; 9 &amp; 4 &amp; 0\\
-4 &amp; 0 &amp; 0 &amp; 4 &amp; 0
+3 &amp; 4 &amp; 0 &amp; 0 &amp; 0\\
+9 &amp; 0 &amp; 4 &amp; 4 &amp; 0
 \end{array}
 \right)
 \sim\left(
 \begin{array}{cccc|c}
-3 &amp; 0 &amp; 9 &amp; 4 &amp; 0\\
-0 &amp; 0 &amp; -12 &amp; - \frac{4}{3} &amp; 0
+3 &amp; 4 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; -12 &amp; 4 &amp; 4 &amp; 0
 \end{array}
 \right)
 \Rightarrow\quad\ \left(\begin{array}{c}
@@ -330,8 +338,8 @@ t
 <li>El subespacio intersección <span class="math inline">\(U\cap W\)</span> es <a href="ev.html#interseccion">el conjunto de vectores que verifican tanto las ecuaciones cartesianas de <span class="math inline">\(U\)</span> como las de <span class="math inline">\(W\)</span></a>. Es decir, son el conjunto solución del sistema homogéneo:
 <span class="math display">\[\left\{\begin{array}{rrrrcr}
 3x &amp; + y &amp; -z &amp; + 2t &amp; = &amp; 0\\
-3x &amp;  &amp; + 9z &amp; + 4t &amp; = &amp; 0\\
-4x &amp;  &amp;  &amp; + 4t &amp; = &amp; 0\\
+3x &amp; + 4y &amp;  &amp;  &amp; = &amp; 0\\
+9x &amp;  &amp; + 4z &amp; + 4t &amp; = &amp; 0\\
 \end{array}\right.\]</span></li>
 </ol>
 <p>Este sistema, resuelto por Gauss, nos da las siguientes expresiones paramétricas:
@@ -342,18 +350,18 @@ z\\
 t
 \end{array}\right)
  = \alpha\left(\begin{array}{c}
--1\\
-\frac{8}{9}\\
-- \frac{1}{9}\\
+- \frac{2}{3}\\
+\frac{1}{2}\\
+\frac{1}{2}\\
 1
 \end{array}\right)
 {}\]</span></p>
 <p>Por tanto, una base de <span class="math inline">\(U\cap W\)</span> será:
 <span class="math display">\[\mathcal{B}_{U\cap W} = \left\{\left(
 \begin{array}{c@{}}
--1\\
-\frac{8}{9}\\
-- \frac{1}{9}\\
+- \frac{2}{3}\\
+\frac{1}{2}\\
+\frac{1}{2}\\
 1
 \end{array}
 \right)
@@ -413,8 +421,8 @@ t
 - \frac{1}{3} &amp; 1 &amp; 0 &amp; 0\\
 0 &amp; 1 &amp; 1 &amp; 0\\
 0 &amp; 0 &amp; 2 &amp; 1\\
-0 &amp; 0 &amp; 0 &amp; -3\\
-0 &amp; 0 &amp; 0 &amp; 0
+0 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; -3
 \end{array}\right)
  \]</span></p>
 <p>Aquellas filas que hayan acabado siendo enteras de ceros, se corresponden con vectores que originalmente eran dependientes linealmente de los demás.</p>
@@ -494,10 +502,10 @@ t
 <li>Unos escalares <span class="math inline">\(a, b, c, d\)</span> serán <a href="ev.html#coord">las coordenadas de <span class="math inline">\(v\)</span> en la base <span class="math inline">\(\mathcal{B}_1\)</span> si se verifica</a>:</li>
 </ol>
 <p><span class="math display">\[\left(\begin{array}{c}
+-5\\
 -9\\
--13\\
 1\\
-3
+-5
 \end{array}\right)
  = a\left(\begin{array}{c}
 1\\
@@ -512,24 +520,24 @@ t
 -1
 \end{array}\right)
 {}+c\left(\begin{array}{c}
+0\\
+0\\
+-1\\
+-1
+\end{array}\right)
+{}+d\left(\begin{array}{c}
 -1\\
 -1\\
 1\\
 1
 \end{array}\right)
-{}+d\left(\begin{array}{c}
--1\\
--1\\
--1\\
-1
-\end{array}\right)
 {}\]</span></p>
 <p>lo que equivale al siguiente sistema de ecuaciones lineales, que se puede resolver usando métodos Gaussianos, y nos da:
 <span class="math display">\[\left\{\begin{array}{rrrrcr}
-a &amp; -b &amp; -c &amp; -d &amp; = &amp; -9\\
--a &amp; -b &amp; -c &amp; -d &amp; = &amp; -13\\
--a &amp; + b &amp; + c &amp; -d &amp; = &amp; 1\\
--a &amp; -b &amp; + c &amp; + d &amp; = &amp; 3\\
+a &amp; -b &amp;  &amp; -d &amp; = &amp; -5\\
+-a &amp; -b &amp;  &amp; -d &amp; = &amp; -9\\
+-a &amp; + b &amp; -c &amp; + d &amp; = &amp; 1\\
+-a &amp; -b &amp; -c &amp; + d &amp; = &amp; -5\\
 \end{array}\right.\Rightarrow v = \left(\begin{array}{c}
 a\\
 b\\
@@ -553,37 +561,37 @@ _{\mathcal{B}_1}\]</span></p>
 <p>Otro aspecto teórico importante es que la matriz de <span class="math inline">\(\mathcal{B}\)</span> a <span class="math inline">\(\mathcal{B}&#39;\)</span> es la inversa de la del cambio de base de <span class="math inline">\(\mathcal{B}&#39;\)</span> a <span class="math inline">\(\mathcal{B}\)</span>. Si una de ellas es fácil de calcular, la otra se puede construir usando, por ejemplo, el método de Gauss-Jordan para el cálculo de inversas.</p>
 <p>Hay un caso fácil: el cambio de base desde <span class="math inline">\(\mathcal{B}_1\)</span> a la base canónica <span class="math inline">\(\mathcal{C}\)</span> es la propia matriz cuyas columnas son los vectores de <span class="math inline">\(\mathcal{B}_1\)</span>:
 <span class="math display">\[P_{\mathcal{B}_1\to\mathcal{C}} = \left(\begin{array}{cccc}
-1 &amp; -1 &amp; -1 &amp; -1\\
--1 &amp; -1 &amp; -1 &amp; -1\\
--1 &amp; 1 &amp; 1 &amp; -1\\
--1 &amp; -1 &amp; 1 &amp; 1
+1 &amp; -1 &amp; 0 &amp; -1\\
+-1 &amp; -1 &amp; 0 &amp; -1\\
+-1 &amp; 1 &amp; -1 &amp; 1\\
+-1 &amp; -1 &amp; -1 &amp; 1
 \end{array}\right)
 \]</span></p>
 <p>La matriz del cambio de base opuesto la vamos a calcular <a href="ev.html#cambiobase">buscando la matriz inversa</a> de la de <span class="math inline">\(\mathcal{B}_1\)</span> a <span class="math inline">\(\mathcal{C}\)</span>.</p>
 <p>Para ello, se puede usar la eliminación de Gauss-Jordan:
 <span class="math display">\[\left(
 \begin{array}{cccc|cccc}
-1 &amp; -1 &amp; -1 &amp; -1 &amp; 1 &amp; 0 &amp; 0 &amp; 0\\
--1 &amp; -1 &amp; -1 &amp; -1 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
--1 &amp; 1 &amp; 1 &amp; -1 &amp; 0 &amp; 0 &amp; 1 &amp; 0\\
--1 &amp; -1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 1
+1 &amp; -1 &amp; 0 &amp; -1 &amp; 1 &amp; 0 &amp; 0 &amp; 0\\
+-1 &amp; -1 &amp; 0 &amp; -1 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
+-1 &amp; 1 &amp; -1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0\\
+-1 &amp; -1 &amp; -1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 1
 \end{array}
 \right)
 \sim\left(
 \begin{array}{cccc|cccc}
 1 &amp; 0 &amp; 0 &amp; 0 &amp; \frac{1}{2} &amp; - \frac{1}{2} &amp; 0 &amp; 0\\
-0 &amp; 1 &amp; 0 &amp; 0 &amp; - \frac{1}{2} &amp; 0 &amp; 0 &amp; - \frac{1}{2}\\
-0 &amp; 0 &amp; 1 &amp; 0 &amp; \frac{1}{2} &amp; - \frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}\\
-0 &amp; 0 &amp; 0 &amp; 1 &amp; - \frac{1}{2} &amp; 0 &amp; - \frac{1}{2} &amp; 0
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \frac{1}{2} &amp; - \frac{1}{2}\\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; -1 &amp; 0 &amp; -1 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; - \frac{1}{2} &amp; - \frac{1}{2} &amp; - \frac{1}{2} &amp; \frac{1}{2}
 \end{array}
 \right)
 \]</span></p>
 <p>Luego
 <span class="math display">\[P_{\mathcal{C}\to\mathcal{B}_1} = \left(\begin{array}{cccc}
 \frac{1}{2} &amp; - \frac{1}{2} &amp; 0 &amp; 0\\
-- \frac{1}{2} &amp; 0 &amp; 0 &amp; - \frac{1}{2}\\
-\frac{1}{2} &amp; - \frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}\\
-- \frac{1}{2} &amp; 0 &amp; - \frac{1}{2} &amp; 0
+0 &amp; 0 &amp; \frac{1}{2} &amp; - \frac{1}{2}\\
+-1 &amp; 0 &amp; -1 &amp; 0\\
+- \frac{1}{2} &amp; - \frac{1}{2} &amp; - \frac{1}{2} &amp; \frac{1}{2}
 \end{array}\right)
 \]</span></p>
 </div>
@@ -618,21 +626,21 @@ z
 \right)
 , \left(
 \begin{array}{c@{}}
-1\\
 0\\
--2
+0\\
+-1
 \end{array}
 \right)
 \right\}\]</span><span class="math display">\[\mathcal{B}_{2} = \{w_i\} = \left\{\left(
 \begin{array}{c@{}}
-0\\
-2
+2\\
+1
 \end{array}
 \right)
 , \left(
 \begin{array}{c@{}}
-2\\
-1
+0\\
+2
 \end{array}
 \right)
 \right\}\]</span></p></li>
@@ -670,7 +678,7 @@ z
 <p>Llamemos <span class="math inline">\(Y = (f(v_1)|f(v_2)|\ldots|f(v_n))\)</span> a la matriz que tiene por columnas las imágenes de los vectores de <span class="math inline">\(\mathcal{B}_1\)</span> mediante <span class="math inline">\(f\)</span>:
 <span class="math display">\[Y = \left(
 \begin{array}{ccc@{}}
-2 &amp; -1 &amp; 4\\
+2 &amp; -1 &amp; 1\\
 2 &amp; -2 &amp; -2
 \end{array}
 \right)
@@ -679,22 +687,22 @@ y <span class="math inline">\(B_2 = (w_1|w_2|\ldots|w_m)\)</span> a la matriz qu
 <p>Entonces <span class="math inline">\(A&#39; = B_2^{-1}\ Y\)</span>, que podemos calcular mediante Gauss-Jordan, partiendo de <span class="math inline">\((B_2|Y)\)</span> y llegando a <span class="math inline">\((I_m|A&#39;)\)</span>:
 <span class="math display">\[\left(
 \begin{array}{cc|ccc}
-0 &amp; 2 &amp; 2 &amp; -1 &amp; 4\\
-2 &amp; 1 &amp; 2 &amp; -2 &amp; -2
+2 &amp; 0 &amp; 2 &amp; -1 &amp; 1\\
+1 &amp; 2 &amp; 2 &amp; -2 &amp; -2
 \end{array}
 \right)
 \sim\left(
 \begin{array}{cc|ccc}
-1 &amp; 0 &amp; \frac{1}{2} &amp; - \frac{3}{4} &amp; -2\\
-0 &amp; 1 &amp; 1 &amp; - \frac{1}{2} &amp; 2
+1 &amp; 0 &amp; 1 &amp; - \frac{1}{2} &amp; \frac{1}{2}\\
+0 &amp; 1 &amp; \frac{1}{2} &amp; - \frac{3}{4} &amp; - \frac{5}{4}
 \end{array}
 \right)
 \]</span></p>
 <p>Luego
 <span class="math display">\[A&#39; =\left(
 \begin{array}{ccc@{}}
-\frac{1}{2} &amp; - \frac{3}{4} &amp; -2\\
-1 &amp; - \frac{1}{2} &amp; 2
+1 &amp; - \frac{1}{2} &amp; \frac{1}{2}\\
+\frac{1}{2} &amp; - \frac{3}{4} &amp; - \frac{5}{4}
 \end{array}
 \right)
 \]</span></p>
@@ -1148,7 +1156,7 @@ z
 <span class="math display">\[p(A) = A^{3}-20A^{2}+128A-256I = 0\]</span></p>
 <p>Despejando la identidad, nos queda:
 <span class="math display">\[\begin{array}{rcl}\displaystyle I &amp; = &amp; - \frac{1}{256} \left(A^{3}-20A^{2}+128A\right) = \\ &amp; = &amp; \left(\frac{1}{256}A^{2}- \frac{5}{64}A+\frac{1}{2}I\right)\ A\end{array}\]</span></p>
-<p>Luego
+<p>Luego tenemos
 <span class="math display">\[\begin{array}{rcl}A^{-1} &amp; = &amp; \frac{1}{256}A^{2}- \frac{5}{64}A+\frac{1}{2}I =\\ &amp; = &amp; +\frac{1}{256}\left(
 \begin{array}{ccc@{}}
 28 &amp; 0 &amp; -36\\

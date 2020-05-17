@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-05-11" />
+<meta name="date" content="2020-05-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -111,7 +111,15 @@
 <li class="chapter" data-level="4.3" data-path="diagonalización.html"><a href="diagonalización.html#diagonalizable"><i class="fa fa-check"></i><b>4.3</b> Cómo sabemos si un endomorfismo o una matriz es diagonalizable</a></li>
 <li class="chapter" data-level="4.4" data-path="diagonalización.html"><a href="diagonalización.html#th-cayley"><i class="fa fa-check"></i><b>4.4</b> Para qué podemos utilizar el Teorema de Cayley-Hamilton</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html"><i class="fa fa-check"></i><b>5</b> Espacios Euclídeos</a></li>
+<li class="chapter" data-level="5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html"><i class="fa fa-check"></i><b>5</b> Espacios Euclídeos</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#norm"><i class="fa fa-check"></i><b>5.1</b> Qué son las normas y distancias</a></li>
+<li class="chapter" data-level="5.2" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho"><i class="fa fa-check"></i><b>5.2</b> Qué significa el concepto de ortogonalidad</a></li>
+<li class="chapter" data-level="5.3" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho-basis"><i class="fa fa-check"></i><b>5.3</b> Cómo construimos una base ortonormal</a></li>
+<li class="chapter" data-level="5.4" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#compl-ortho"><i class="fa fa-check"></i><b>5.4</b> Qué es el complemento ortogonal de un subespacio</a></li>
+<li class="chapter" data-level="5.5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#proyec"><i class="fa fa-check"></i><b>5.5</b> Cómo calculamos la proyección de un vector sobre un subespacio</a></li>
+<li class="chapter" data-level="5.6" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#diag-ortho"><i class="fa fa-check"></i><b>5.6</b> Qué es la diagonalización ortogonal</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="problems.html"><a href="problems.html"><i class="fa fa-check"></i><b>6</b> Problemas Resueltos</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="problems.html"><a href="problems.html#prob-ev"><i class="fa fa-check"></i><b>6.1</b> Espacios Vectoriales</a></li>
@@ -141,7 +149,180 @@
             <section class="normal" id="section-">
 <div id="espacios-euclídeos" class="section level1" number="5">
 <h1 number="5"><span class="header-section-number">5</span> Espacios Euclídeos</h1>
+<p>En este capítulo, damos un paso para acercarnos a los conceptos geométricos clásicos de distancias y ángulos, abstrayéndolos en el contexto de los espacios vectoriales.</p>
+<p>Para ello, precisaremos de la noción de <em>producto escalar</em>: Una aplicación <span class="math inline">\(g:V\times V\to \mathbb{R}\)</span>, donde <span class="math inline">\(V\)</span> es un espacio vectorial sobre <span class="math inline">\(\mathbb{R}\)</span>, es un <strong>producto escalar</strong> si verifica:</p>
+<ul>
+<li>Es simétrica: <span class="math inline">\(g(u, v) = g(v, u)\)</span> para todo <span class="math inline">\(u,v\in V\)</span>.</li>
+<li>Es bilineal: <span class="math inline">\(g(\alpha u + \beta v, w) = \alpha g(u, w) + \beta g(v, w)\)</span> para todos los <span class="math inline">\(\alpha,\beta\in\mathbb{R}\)</span>, <span class="math inline">\(u,v,w\in V\)</span>. Por simetría, se tiene lo mismo para la linealidad en la segunda componente.</li>
+<li>Es definida positiva: <span class="math inline">\(g(v, v) &gt; 0\)</span> para todo <span class="math inline">\(v\in V\setminus\{0\}\)</span>, <span class="math inline">\(g(v, v) = 0\)</span> si, y sólo si <span class="math inline">\(v = 0\)</span>.</li>
+</ul>
+<p>En resumen, se suele definir un producto escalar como una <em>forma bilineal, simétrica y definida positiva</em>.</p>
+<p><strong>Notación</strong>: El producto escalar de dos vectores <span class="math inline">\(u\)</span> y <span class="math inline">\(v\)</span> suele recibir diversas notaciones, aunque las más usadas son <span class="math inline">\(u\cdot v\)</span> y <span class="math inline">\(\langle u, v \rangle\)</span>.</p>
+<p>A un espacio vectorial <span class="math inline">\(V\)</span> donde podemos definir un producto vectorial lo llamamos <strong>espacio euclídeo</strong>.</p>
+<hr />
+<p><strong>Ejemplo</strong></p>
+<p>En <span class="math inline">\(\mathbb{R}^n\)</span>, disponemos de un <em>producto escalar usual</em>, de forma que si <span class="math inline">\(u, v\in\mathbb{R}^n\)</span>, entonces
+<span class="math display">\[\langle u,v \rangle = u_1v_1+u_2v_2+\ldots+u_nv_n\]</span>
+siendo <span class="math inline">\(u_i, v_i\)</span>, <span class="math inline">\(i=1,\ldots,n\)</span> las coordenadas de <span class="math inline">\(u\)</span> y de <span class="math inline">\(v\)</span>, respectivamente, en una base dada (la canónica como caso particular). A este producto vectorial es al que nos referiremos cuando usemos la notación <span class="math inline">\(u\cdot v\)</span>.</p>
+<p>Podemos generalizar este producto escalar, definiendo unos pesos <span class="math inline">\(\alpha_i\in\mathbb{R}^{+}\)</span> para cada componente:
+<span class="math display">\[\langle u,v \rangle = \alpha_1u_1v_1+\alpha_2u_2v_2+\ldots+\alpha_nu_nv_n\]</span></p>
+<p>Podemos construir productos escalares de la siguiente forma: Tomemos una matriz <span class="math inline">\(A\in\mathcal{M}_n(\mathbb{R})\)</span> simétrica y definida positiva. Entonces la aplicación <span class="math inline">\(\langle\cdot,\cdot\rangle:\mathbb{R}^n\times\mathbb{R}^n\to\mathbb{R}\)</span> definida por
+<span class="math display">\[\langle u, v \rangle = u^{\text{t}}\ A\ v\]</span>
+es un producto escalar. Los dos ejemplos anteriores se correspondían con tomar como <span class="math inline">\(A\)</span> la matriz identidad o una matriz diagonal con elementos positivos <span class="math inline">\(\alpha_i\in\mathbb{R}^{+}\)</span> en la diagonal.</p>
+<hr />
+<p><strong>¿Qué preguntas vamos a responder en este capítulo?</strong></p>
+<ul>
+<li><a href="espacios-euclídeos.html#norm">¿Qué son las normas y distancias?</a></li>
+<li><a href="espacios-euclídeos.html#ortho">¿Qué significa el concepto de ortogonalidad?</a></li>
+<li><a href="espacios-euclídeos.html#ortho-basis">¿Cómo construimos una base ortonormal?</a></li>
+<li><a href="espacios-euclídeos.html#compl-ortho">¿Qué es el complemento ortogonal de un subespacio?</a></li>
+<li><a href="espacios-euclídeos.html#proyec">¿Cómo calculamos la proyección de un vector sobre un subespacio?</a></li>
+<li><a href="espacios-euclídeos.html#diag-ortho">¿Qué es la diagonalización ortogonal?</a></li>
+</ul>
+<div id="norm" class="section level2" number="5.1">
+<h2 number="5.1"><span class="header-section-number">5.1</span> Qué son las normas y distancias</h2>
+<p>Una <strong>norma</strong> vectorial sobre un espacio <span class="math inline">\(V\)</span> (sobre un cuerpo <span class="math inline">\(\mathbb{K}\)</span>) es un operador que sirve para <em>medir</em> la longitud de un vector (es decir, su distancia al origen), y se define formalmente como una aplicación <span class="math inline">\(\|\cdot\|:V\to\mathbb{R}\)</span> que verifica:</p>
+<ul>
+<li>Para todo <span class="math inline">\(v\in V\)</span>, <span class="math inline">\(\|v\| &gt; 0\)</span>, con <span class="math inline">\(\|v\| = 0\)</span> si, y solo si, <span class="math inline">\(v = 0\)</span>.</li>
+<li>Para todo <span class="math inline">\(c\in\mathbb{K}\)</span>, <span class="math inline">\(v\in V\)</span>, se tiene <span class="math inline">\(\|cv\| = |c|\cdot \|v\|\)</span>.</li>
+<li>Para todo <span class="math inline">\(u,v\in V\)</span>, <span class="math inline">\(\|u+v\|\le\|u\|+\|v\|\)</span>. Esta propiedad se llama <em>desigualdad triangular</em> (en un triángulo, la suma de la longitud de dos de sus lados – <span class="math inline">\(\|u\|\)</span> y <span class="math inline">\(\|v\|\)</span> – es siempre menor que la longitud de su otro lado – <span class="math inline">\(\|u+v\|\)</span> – ).</li>
+</ul>
+<p>Cualquier operador <span class="math inline">\(\|\cdot\|\)</span> que verifique lo anterior es una norma vectorial. Sin embargo, podemos construir normas a partir de un producto escalar:</p>
+<blockquote>
+<p>Si <span class="math inline">\(\langle\cdot,\cdot\rangle\)</span> es un producto escalar en el espacio <span class="math inline">\(V\)</span>, entonces la aplicación <span class="math inline">\(\|\cdot\|:V\to\mathbb{R}\)</span> dada por <span class="math inline">\(\|v\| = \sqrt{\langle v, v\rangle}\)</span> es una <strong>norma derivada del producto escalar</strong> sobre <span class="math inline">\(V\)</span>.</p>
+</blockquote>
+<p>Al definir la norma vectorial a partir de un producto escalar, además, tenemos la siguiente propiedad que será de gran interés en la <a href="espacios-euclídeos.html#ortho">siguiente sección</a>:</p>
+<blockquote>
+<p>(Desigualdad de Cauchy-Schwarz) Si <span class="math inline">\(\|\cdot\|\)</span> es una norma derivada del producto escalar <span class="math inline">\(\langle\cdot,\cdot\rangle\)</span>, entonces
+<span class="math display">\[|\langle u, v \rangle| \le \|u\|\cdot\|v\|\]</span>
+para todo <span class="math inline">\(u,v\in V\)</span>.</p>
+</blockquote>
+<p>Un concepto implícitamente relacionado con el de norma vectorial es el de <em>distancia</em>. Una <strong>distancia</strong> (también llamada <em>métrica</em>) es un operador <span class="math inline">\(d:V\times V\to R\)</span> que verifica las siguientes propiedades:</p>
+<ul>
+<li><span class="math inline">\(d(u, v) = 0\)</span> si, y solo si, <span class="math inline">\(u = v\)</span>.</li>
+<li>Es simétrica: <span class="math inline">\(d(u, v) = d(v, u)\)</span>.</li>
+<li>Cumple la desigualdad triangular: <span class="math inline">\(d(u, v) \le d(u, w) + d(w, v)\)</span>.</li>
+</ul>
+<p>Además, de aquí se deduce que <span class="math inline">\(d(u, v) \ge 0\)</span> para todo <span class="math inline">\(u,v\in V\)</span>.</p>
+<p>Podemos deducir una distancia a partir de una norma, para así completar las relaciones existentes entre los conceptos aquí explicados:</p>
+<blockquote>
+<p>Si <span class="math inline">\(\|\cdot\|\)</span> es una norma sobre un espacio vectorial <span class="math inline">\(V\)</span>, entonces la aplicación <span class="math inline">\(d:V\times V\to \mathbb{R}\)</span> definida por
+<span class="math display">\[d(u, v) = \|u-v\|\]</span>
+para todo <span class="math inline">\(u,v\in V\)</span> es una <em>distancia</em>.</p>
+</blockquote>
+<p><strong>Nota</strong>: Existen muchas más normas de las que se deducen a partir de un producto escalar, al igual que más <em>distancias</em>.</p>
+<hr />
+<p><strong>Ejemplo</strong></p>
+<p>Podemos deducir la expresión de la norma (a veces llamada <em>módulo</em>) de un vector <span class="math inline">\(v\in\mathbb{R}^n\)</span>.</p>
+<p>Si <span class="math inline">\(v=\left(\begin{array}{c}v_1\\ v_2\\\vdots\\ v_n\end{array}\right)\)</span>, entonces
+<span class="math display">\[\|v\| = \sqrt{v\cdot v} = \sqrt{v_1^2+v_2^2+\ldots+v_n^2}\]</span></p>
+<p>Y así, además, deducimos la expresión para la distancia euclídea usual en <span class="math inline">\(\mathbb{R}^n\)</span>:
+<span class="math display">\[d(u,v) = \|u - v\| = \sqrt{(u_1-v_1)^2+\ldots+(u_n-v_n)^2}\]</span></p>
+<p>Como ejemplo, podemos calcular la norma del vector
+<span class="math display">\[v = \left(\begin{array}{c}
+-2\\
+1\\
+1\\
+1
+\end{array}\right)
+\]</span><span class="math display">\[\|v\| = \sqrt{(-2)^2+1^2+1^2+1^2} = \sqrt{7}\]</span></p>
+<hr />
+</div>
+<div id="ortho" class="section level2" number="5.2">
+<h2 number="5.2"><span class="header-section-number">5.2</span> Qué significa el concepto de ortogonalidad</h2>
+<p>Si partimos de la <em>desigualdad de Cauchy-Schwarz</em> que <a href="espacios-euclídeos.html#norm">hemos visto antes</a>, podemos llegar a que
+<span class="math display">\[-1 \le \frac{\langle u, v\rangle}{\|u\|\cdot\|v|} \le 1\]</span>
+para todo <span class="math inline">\(u,v\in V\)</span>.</p>
+<p>Por otro lado, la función coseno restringida a <span class="math inline">\([0, \pi]\)</span>, es decir, <span class="math inline">\(\cos:[0,\pi]\to[-1,1]\)</span>, es biyectiva. Eso quiere decir que existe un único <span class="math inline">\(\theta\in[0, \pi]\)</span> tal que <span class="math inline">\(\cos\theta = \frac{\langle u, v\rangle}{\|u\|\cdot\|v|}\)</span>.</p>
+<p>Llamamos entonces <strong>ángulo entre los vectores <span class="math inline">\(u,v\in V\)</span></strong> al único <span class="math inline">\(\theta\in[0,\pi]\)</span> tal que <span class="math inline">\(\cos\theta = \frac{\langle u, v\rangle}{\|u\|\cdot\|v|}\)</span>.</p>
+<p>Diremos que dos vectores <span class="math inline">\(u\)</span> y <span class="math inline">\(v\)</span> de <span class="math inline">\(V\)</span> son <strong>ortogonales</strong> (o <strong>perpendiculares</strong>) si el ángulo que forman es <span class="math inline">\(\frac{\pi}{2}\)</span>, es decir, si <span class="math inline">\(\langle u, v \rangle = 0\)</span>.</p>
+<p>La noción de <em>ortogonalidad</em> en el espacio euclídeo se corresponde con la perpendicularidad de vectores que todos tenemos de forma intuitiva. Lo podemos extender también a ortogonalidad con respecto a un espacio vectorial: Un vector <span class="math inline">\(v\in V\)</span> es <strong>ortogonal al subespacio <span class="math inline">\(U\)</span></strong> de <span class="math inline">\(V\)</span> si, y sólo si, es ortogonal a todos y cada uno de los vectores de <span class="math inline">\(U\)</span>, es decir, <span class="math inline">\(\langle v, u \rangle = 0\)</span> para todo <span class="math inline">\(u\in U\)</span>.</p>
+<blockquote>
+<p>Sea <span class="math inline">\(U\)</span> un subespacio de <span class="math inline">\(V\)</span>, y sea <span class="math inline">\(\mathcal{B} = \{u_1,\ldots,u_k\}\)</span> una base de <span class="math inline">\(U\)</span>. Un vector <span class="math inline">\(v\in V\)</span> es ortogonal a <span class="math inline">\(U\)</span> si, y solo si, es ortogonal a cada <span class="math inline">\(u_i\)</span>: <span class="math inline">\(\langle v, u_i \rangle = 0\)</span> para todo <span class="math inline">\(i=1,\ldots,k\)</span>.</p>
+</blockquote>
+<p>Un <strong>sistema ortogonal</strong> es un conjunto de vectores <span class="math inline">\(\{v_1,\ldots,v_m\}\subset V\)</span> donde los <span class="math inline">\(v_i\)</span> son ortogonales dos a dos, es decir, <span class="math inline">\(\langle v_i, v_j \rangle = 0\)</span> para todo <span class="math inline">\(i\ne j\)</span>.</p>
+<p><strong>Algunas propiedades y caracterizaciones de los vectores y sistemas ortogonales</strong></p>
+<blockquote>
+<ul>
+<li>Dos vectores <span class="math inline">\(u\)</span> y <span class="math inline">\(w\)</span> son ortogonales si, y solo si, <span class="math inline">\(\|u+w\|^2 = \|u\|^2 + \|v\|^2\)</span> (generalización del Teorema de Pitágoras).</li>
+<li>Si un sistema de vectores es ortogonal, entonces es linealmente independiente. Por tanto, en un espacio <span class="math inline">\(V\)</span> de dimensión finita <span class="math inline">\(n\)</span>, cualquier conjunto de <span class="math inline">\(n\)</span> vectores ortogonales entre sí es una base.</li>
+</ul>
+</blockquote>
+<p><strong>Ortonormalidad</strong></p>
+<p>Un vector <span class="math inline">\(v\in V\)</span> se dice <strong>unitario</strong> si <span class="math inline">\(\|v\| = 1\)</span>. Es fácil crear vectores unitarios: dado <span class="math inline">\(u\in V\)</span>, si definimos <span class="math inline">\(v = \frac{1}{\|u\|}u\)</span>, este vector tiene norma 1. A este proceso se le llama <em>normalizar</em>.</p>
+<p>Un sistema de vectores <span class="math inline">\(\{v_1,\ldots,v_k\}\)</span> se llama <strong>sistema ortonormal</strong> si es un sistema ortogonal y cada <span class="math inline">\(v_i\)</span> es un vector unitario (<span class="math inline">\(i=1,\ldots, k\)</span>).</p>
+<p>En relación a lo comentado de las propiedades de los sistemas ortogonales, en nuestro caso podemos decir que un sistema ortonormal <span class="math inline">\(\{v_1,\ldots,v_n\}\)</span>, donde <span class="math inline">\(\mathrm{dim}(V) = n\)</span>, es una <strong>base ortonormal</strong>.</p>
+<p>El interés de una base ortonormal es que es sencillo calcular las <a href="ev.html#coord">coordenadas</a> de cualquier vector con respecto a dicha base:</p>
+<blockquote>
+<p>Sea <span class="math inline">\(\mathcal{B} = \{v_1,\ldots,v_n\}\)</span> una base <em>ortonormal</em> del espacio vectorial <span class="math inline">\(V\)</span>. Entonces, para cada <span class="math inline">\(v\in V\)</span>, tenemos:
+<span class="math display">\[v = \langle v, v_1 \rangle v_1 + \ldots \langle v, v_n \rangle v_n\]</span>
+luego las coordenadas de <span class="math inline">\(v\)</span> en la base <span class="math inline">\(\mathcal{B}\)</span> las podemos calcular como:
+<span class="math display">\[[v]_{\mathcal{B}} = \left(
+\begin{array}{c}
+\langle v, v_1 \rangle \\
+\langle v, v_2 \rangle \\
+\vdots \\
+\langle v, v_n \rangle \\
+\end{array}
+\right)_{\mathcal{B}}\]</span></p>
+</blockquote>
+<hr />
+<p><strong>Ejemplo</strong></p>
+<ul>
+<li>Ángulo entre los vectores de la base de <span class="math inline">\(U\)</span></li>
+<li>Comprobar que <span class="math inline">\(v\)</span> es ortogonal a <span class="math inline">\(U\)</span></li>
+<li>Dar un sistema ortogonal -&gt; base</li>
+<li>Normalizar el sistema ortogonal -&gt; base ortonormal</li>
+</ul>
+<hr />
+</div>
+<div id="ortho-basis" class="section level2" number="5.3">
+<h2 number="5.3"><span class="header-section-number">5.3</span> Cómo construimos una base ortonormal</h2>
+<ul>
+<li>Teorema de existencia</li>
+<li>Gram-Schmidt</li>
+</ul>
+<hr />
+<p><strong>Ejemplo</strong></p>
+<hr />
+</div>
+<div id="compl-ortho" class="section level2" number="5.4">
+<h2 number="5.4"><span class="header-section-number">5.4</span> Qué es el complemento ortogonal de un subespacio</h2>
+<ul>
+<li>Definición de complemento ortogonal</li>
+<li>Método de cálculo</li>
+</ul>
+<hr />
+<p><strong>Ejemplo</strong></p>
+<hr />
+</div>
+<div id="proyec" class="section level2" number="5.5">
+<h2 number="5.5"><span class="header-section-number">5.5</span> Cómo calculamos la proyección de un vector sobre un subespacio</h2>
+<ul>
+<li>Definición de proyección ortogonal sobre otro vector</li>
+<li>Propiedades</li>
+<li>Definición de proyección sobre un subespacio</li>
+<li>Teorema de descomposición ortogonal</li>
+</ul>
+<hr />
+<p><strong>Ejemplo</strong></p>
+<hr />
+</div>
+<div id="diag-ortho" class="section level2" number="5.6">
+<h2 number="5.6"><span class="header-section-number">5.6</span> Qué es la diagonalización ortogonal</h2>
+<ul>
+<li>Definición de aplicación ortogonal y de matriz ortogonal</li>
+<li>Teorema de relación entre matriz ortogonal y base ortonormal</li>
+<li>Definición de matriz diagonalizable ortogonalmente</li>
+<li>Teorema diagonalización ortogonal</li>
+<li>Teoremas que relacionan matrices simétricas con diagonabilidad ortogonal</li>
+<li>Procedimiento diagonalización ortogonal matriz simétrica</li>
+</ul>
+<hr />
+<p><strong>Ejemplo</strong></p>
+<hr />
 
+</div>
 </div>
             </section>
 

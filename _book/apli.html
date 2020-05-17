@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-05-11" />
+<meta name="date" content="2020-05-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -111,7 +111,15 @@
 <li class="chapter" data-level="4.3" data-path="diagonalización.html"><a href="diagonalización.html#diagonalizable"><i class="fa fa-check"></i><b>4.3</b> Cómo sabemos si un endomorfismo o una matriz es diagonalizable</a></li>
 <li class="chapter" data-level="4.4" data-path="diagonalización.html"><a href="diagonalización.html#th-cayley"><i class="fa fa-check"></i><b>4.4</b> Para qué podemos utilizar el Teorema de Cayley-Hamilton</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html"><i class="fa fa-check"></i><b>5</b> Espacios Euclídeos</a></li>
+<li class="chapter" data-level="5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html"><i class="fa fa-check"></i><b>5</b> Espacios Euclídeos</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#norm"><i class="fa fa-check"></i><b>5.1</b> Qué son las normas y distancias</a></li>
+<li class="chapter" data-level="5.2" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho"><i class="fa fa-check"></i><b>5.2</b> Qué significa el concepto de ortogonalidad</a></li>
+<li class="chapter" data-level="5.3" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho-basis"><i class="fa fa-check"></i><b>5.3</b> Cómo construimos una base ortonormal</a></li>
+<li class="chapter" data-level="5.4" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#compl-ortho"><i class="fa fa-check"></i><b>5.4</b> Qué es el complemento ortogonal de un subespacio</a></li>
+<li class="chapter" data-level="5.5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#proyec"><i class="fa fa-check"></i><b>5.5</b> Cómo calculamos la proyección de un vector sobre un subespacio</a></li>
+<li class="chapter" data-level="5.6" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#diag-ortho"><i class="fa fa-check"></i><b>5.6</b> Qué es la diagonalización ortogonal</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="problems.html"><a href="problems.html"><i class="fa fa-check"></i><b>6</b> Problemas Resueltos</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="problems.html"><a href="problems.html#prob-ev"><i class="fa fa-check"></i><b>6.1</b> Espacios Vectoriales</a></li>
@@ -262,16 +270,16 @@ x-2y\\
 <p>Consideremos ahora dos bases distintas de la canónica tanto en <span class="math inline">\(V\)</span> como <span class="math inline">\(W\)</span>:</p>
 <p><span class="math display">\[\mathcal{B}_{1} = \{v_i\} = \left\{\left(
 \begin{array}{c@{}}
-0\\
 -1\\
-1
+1\\
+-1
 \end{array}
 \right)
 , \left(
 \begin{array}{c@{}}
+0\\
 -1\\
-1\\
--1
+1
 \end{array}
 \right)
 , \left(
@@ -291,15 +299,15 @@ x-2y\\
 , \left(
 \begin{array}{c@{}}
 1\\
-0\\
-1
+2\\
+0
 \end{array}
 \right)
 , \left(
 \begin{array}{c@{}}
 1\\
-2\\
-0
+0\\
+1
 \end{array}
 \right)
 \right\}\]</span></p>
@@ -309,9 +317,9 @@ x-2y\\
 <p>Aplicando <span class="math inline">\(f\)</span> sucesivamente a los vectores de <span class="math inline">\(\mathcal{B}_1\)</span>, tenemos que
 <span class="math display">\[Y = \left(
 \begin{array}{ccc@{}}
-0 &amp; -1 &amp; -3\\
-2 &amp; -3 &amp; 1\\
-2 &amp; -4 &amp; -2
+-1 &amp; 0 &amp; -3\\
+-3 &amp; 2 &amp; 1\\
+-4 &amp; 2 &amp; -2
 \end{array}
 \right)
 \]</span>
@@ -319,33 +327,33 @@ y
 <span class="math display">\[B_2 = \left(
 \begin{array}{ccc@{}}
 1 &amp; 1 &amp; 1\\
-0 &amp; 0 &amp; 2\\
-2 &amp; 1 &amp; 0
+0 &amp; 2 &amp; 0\\
+2 &amp; 0 &amp; 1
 \end{array}
 \right)
 \]</span></p>
 <p>Luego podemos obtener <span class="math inline">\(A&#39;\)</span> como <span class="math inline">\(B_2^{-1} Y\)</span>, que resolvemos por Gauss-Jordan:
 <span class="math display">\[\left(
 \begin{array}{ccc|ccc}
-1 &amp; 1 &amp; 1 &amp; 0 &amp; -1 &amp; -3\\
-0 &amp; 0 &amp; 2 &amp; 2 &amp; -3 &amp; 1\\
-2 &amp; 1 &amp; 0 &amp; 2 &amp; -4 &amp; -2
+1 &amp; 1 &amp; 1 &amp; -1 &amp; 0 &amp; -3\\
+0 &amp; 2 &amp; 0 &amp; -3 &amp; 2 &amp; 1\\
+2 &amp; 0 &amp; 1 &amp; -4 &amp; 2 &amp; -2
 \end{array}
 \right)
 \sim\left(
 \begin{array}{ccc|ccc}
-1 &amp; 0 &amp; 0 &amp; 3 &amp; - \frac{9}{2} &amp; \frac{3}{2}\\
-0 &amp; 1 &amp; 0 &amp; -4 &amp; 5 &amp; -5\\
-0 &amp; 0 &amp; 1 &amp; 1 &amp; - \frac{3}{2} &amp; \frac{1}{2}
+1 &amp; 0 &amp; 0 &amp; - \frac{9}{2} &amp; 3 &amp; \frac{3}{2}\\
+0 &amp; 1 &amp; 0 &amp; - \frac{3}{2} &amp; 1 &amp; \frac{1}{2}\\
+0 &amp; 0 &amp; 1 &amp; 5 &amp; -4 &amp; -5
 \end{array}
 \right)
 \]</span>
 Y de aquí que la nueva matriz, asociada a <span class="math inline">\(f\)</span> en las nuevas bases, sea:
 <span class="math display">\[A&#39; = \left(
 \begin{array}{ccc@{}}
-3 &amp; - \frac{9}{2} &amp; \frac{3}{2}\\
--4 &amp; 5 &amp; -5\\
-1 &amp; - \frac{3}{2} &amp; \frac{1}{2}
+- \frac{9}{2} &amp; 3 &amp; \frac{3}{2}\\
+- \frac{3}{2} &amp; 1 &amp; \frac{1}{2}\\
+5 &amp; -4 &amp; -5
 \end{array}
 \right)
 \]</span></p>
@@ -387,16 +395,16 @@ V_{\mathcal{B}&#39;_V} &amp;
 <p>Continuemos con el ejemplo de <a href="apli.html#matriz-apli">la sección anterior</a>. Sabemos que la aplicación <span class="math inline">\(f\)</span> allí definida tenía por matriz asociada:
 <span class="math display">\[A = \left(
 \begin{array}{ccc@{}}
-3 &amp; - \frac{9}{2} &amp; \frac{3}{2}\\
--4 &amp; 5 &amp; -5\\
-1 &amp; - \frac{3}{2} &amp; \frac{1}{2}
+- \frac{9}{2} &amp; 3 &amp; \frac{3}{2}\\
+- \frac{3}{2} &amp; 1 &amp; \frac{1}{2}\\
+5 &amp; -4 &amp; -5
 \end{array}
 \right)
 \]</span></p>
 <p>Consideremos ahora dos bases distintas tanto en <span class="math inline">\(V\)</span> como <span class="math inline">\(W\)</span>:
 <span class="math display">\[\mathcal{B}&#39;_{1} =\left\{\left(
 \begin{array}{c@{}}
-0\\
+1\\
 -1\\
 1
 \end{array}
@@ -410,7 +418,7 @@ V_{\mathcal{B}&#39;_V} &amp;
 \right)
 , \left(
 \begin{array}{c@{}}
-1\\
+0\\
 -1\\
 1
 \end{array}
@@ -424,16 +432,16 @@ V_{\mathcal{B}&#39;_V} &amp;
 \right)
 , \left(
 \begin{array}{c@{}}
+1\\
 0\\
-0\\
-1
+2
 \end{array}
 \right)
 , \left(
 \begin{array}{c@{}}
 0\\
-2\\
-0
+0\\
+1
 \end{array}
 \right)
 \right\}\]</span></p>
@@ -444,46 +452,46 @@ V_{\mathcal{B}&#39;_V} &amp;
 <p>Hacemos Gauss-Jordan partiendo de <span class="math inline">\((B_1 | B&#39;_1)\)</span> hasta llegar a <span class="math inline">\((I_n | P)\)</span>, y partiendo de <span class="math inline">\((B&#39;_2 | B_2)\)</span> hasta <span class="math inline">\((I_m | Q)\)</span>, obteniendo:
 <span class="math display">\[P = \left(
 \begin{array}{ccc@{}}
-1 &amp; -1 &amp; 0\\
-0 &amp; -1 &amp; -1\\
+-1 &amp; -1 &amp; 0\\
+0 &amp; -1 &amp; 1\\
 0 &amp; 1 &amp; 0
 \end{array}
 \right)
 ,\quad\quad\ Q = \left(
 \begin{array}{ccc@{}}
-\frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}\\
-1 &amp; 0 &amp; -1\\
-- \frac{1}{2} &amp; - \frac{1}{2} &amp; \frac{1}{2}
+0 &amp; 1 &amp; 0\\
+1 &amp; -1 &amp; 1\\
+0 &amp; 0 &amp; -1
 \end{array}
 \right)
 \]</span></p>
 <p>De ahí:
 <span class="math display">\[A&#39; = Q\ A\ P = \left(
 \begin{array}{ccc@{}}
-\frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}\\
-1 &amp; 0 &amp; -1\\
-- \frac{1}{2} &amp; - \frac{1}{2} &amp; \frac{1}{2}
+0 &amp; 1 &amp; 0\\
+1 &amp; -1 &amp; 1\\
+0 &amp; 0 &amp; -1
 \end{array}
 \right)
 \left(
 \begin{array}{ccc@{}}
-3 &amp; - \frac{9}{2} &amp; \frac{3}{2}\\
--4 &amp; 5 &amp; -5\\
-1 &amp; - \frac{3}{2} &amp; \frac{1}{2}
+- \frac{9}{2} &amp; 3 &amp; \frac{3}{2}\\
+- \frac{3}{2} &amp; 1 &amp; \frac{1}{2}\\
+5 &amp; -4 &amp; -5
 \end{array}
 \right)
 \left(
 \begin{array}{ccc@{}}
-1 &amp; -1 &amp; 0\\
-0 &amp; -1 &amp; -1\\
+-1 &amp; -1 &amp; 0\\
+0 &amp; -1 &amp; 1\\
 0 &amp; 1 &amp; 0
 \end{array}
 \right)
  = \left(
 \begin{array}{ccc@{}}
-0 &amp; -1 &amp; \frac{1}{2}\\
-2 &amp; 2 &amp; 3\\
-1 &amp; 2 &amp; 1
+\frac{3}{2} &amp; 1 &amp; 1\\
+-2 &amp; -4 &amp; -2\\
+5 &amp; 6 &amp; 4
 \end{array}
 \right)
 \]</span></p>
@@ -881,7 +889,7 @@ z
 \end{array}
 \right)
 \right\}\]</span></p>
-<p>Como sabemos que <span class="math inline">\(g\)</span> es un <a href="apli.html#isomorfismo">isomorfismo</a>, sabemos que la imagen de un sistema linealmente independiente es también un sistema linealmente independiente. Luego <span class="math inline">\(\mathcal{B}_{g(U)} = g(\mathcal{B}_U)\)</span>. Si no recordáramos este resultado, deberíamos intentar eliminar los vectores linealmente dependientes en <span class="math inline">\(g(U)\)</span> para así obtener la base.</p>
+<p>Como sabemos que <span class="math inline">\(g\)</span> es un <a href="apli.html#isomorfismo">isomorfismo</a>, sabemos que la imagen de un sistema linealmente independiente es también un sistema linealmente independiente. Luego <span class="math inline">\(\mathcal{B}_{g(U)} = g(\mathcal{B}_U)\)</span>. Si no recordáramos este resultado, deberíamos intentar eliminar los vectores linealmente dependientes en <span class="math inline">\(g(\mathcal{B}_U)\)</span> para así obtener la base.</p>
 <hr />
 </div>
 <div id="rango-nulidad" class="section level2" number="3.10">
