@@ -759,7 +759,7 @@ glue_latex(
   cat()
 ```
 
-Como sabemos que $g$ es un [isomorfismo](#isomorfismo), sabemos que la imagen de un sistema linealmente independiente es también un sistema linealmente independiente. Luego $\mathcal{B}_{g(U)} = g(\mathcal{B}_U)$. Si no recordáramos este resultado, deberíamos intentar eliminar los vectores linealmente dependientes en $g(U)$ para así obtener la base.
+Como sabemos que $g$ es un [isomorfismo](#isomorfismo), sabemos que la imagen de un sistema linealmente independiente es también un sistema linealmente independiente. Luego $\mathcal{B}_{g(U)} = g(\mathcal{B}_U)$. Si no recordáramos este resultado, deberíamos intentar eliminar los vectores linealmente dependientes en $g(\mathcal{B}_U)$ para así obtener la base.
 
 ---
 
