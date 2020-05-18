@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-05-17" />
+<meta name="date" content="2020-05-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -115,10 +115,11 @@
 <ul>
 <li class="chapter" data-level="5.1" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#norm"><i class="fa fa-check"></i><b>5.1</b> Qué son las normas y distancias</a></li>
 <li class="chapter" data-level="5.2" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho"><i class="fa fa-check"></i><b>5.2</b> Qué significa el concepto de ortogonalidad</a></li>
-<li class="chapter" data-level="5.3" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho-basis"><i class="fa fa-check"></i><b>5.3</b> Cómo construimos una base ortonormal</a></li>
-<li class="chapter" data-level="5.4" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#compl-ortho"><i class="fa fa-check"></i><b>5.4</b> Qué es el complemento ortogonal de un subespacio</a></li>
-<li class="chapter" data-level="5.5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#proyec"><i class="fa fa-check"></i><b>5.5</b> Cómo calculamos la proyección de un vector sobre un subespacio</a></li>
-<li class="chapter" data-level="5.6" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#diag-ortho"><i class="fa fa-check"></i><b>5.6</b> Qué es la diagonalización ortogonal</a></li>
+<li class="chapter" data-level="5.3" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho-basis"><i class="fa fa-check"></i><b>5.3</b> Qué es y qué utilidad tiene una base ortonormal</a></li>
+<li class="chapter" data-level="5.4" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#gram-schmidt"><i class="fa fa-check"></i><b>5.4</b> Cómo construimos una base ortonormal</a></li>
+<li class="chapter" data-level="5.5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#compl-ortho"><i class="fa fa-check"></i><b>5.5</b> Qué es el complemento ortogonal de un subespacio</a></li>
+<li class="chapter" data-level="5.6" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#proyec"><i class="fa fa-check"></i><b>5.6</b> Cómo calculamos la proyección de un vector sobre un subespacio</a></li>
+<li class="chapter" data-level="5.7" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#diag-ortho"><i class="fa fa-check"></i><b>5.7</b> Qué es la diagonalización ortogonal</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="problems.html"><a href="problems.html"><i class="fa fa-check"></i><b>6</b> Problemas Resueltos</a>
 <ul>
@@ -174,7 +175,8 @@ es un producto escalar. Los dos ejemplos anteriores se correspondían con tomar 
 <ul>
 <li><a href="espacios-euclídeos.html#norm">¿Qué son las normas y distancias?</a></li>
 <li><a href="espacios-euclídeos.html#ortho">¿Qué significa el concepto de ortogonalidad?</a></li>
-<li><a href="espacios-euclídeos.html#ortho-basis">¿Cómo construimos una base ortonormal?</a></li>
+<li><a href="espacios-euclídeos.html#ortho-basis">¿Qué es y qué utilidad tiene una base ortonormal?</a></li>
+<li><a href="espacios-euclídeos.html#gram-schmidt">¿Cómo construimos una base ortonormal?</a></li>
 <li><a href="espacios-euclídeos.html#compl-ortho">¿Qué es el complemento ortogonal de un subespacio?</a></li>
 <li><a href="espacios-euclídeos.html#proyec">¿Cómo calculamos la proyección de un vector sobre un subespacio?</a></li>
 <li><a href="espacios-euclídeos.html#diag-ortho">¿Qué es la diagonalización ortogonal?</a></li>
@@ -248,7 +250,226 @@ para todo <span class="math inline">\(u,v\in V\)</span>.</p>
 <li>Si un sistema de vectores es ortogonal, entonces es linealmente independiente. Por tanto, en un espacio <span class="math inline">\(V\)</span> de dimensión finita <span class="math inline">\(n\)</span>, cualquier conjunto de <span class="math inline">\(n\)</span> vectores ortogonales entre sí es una base.</li>
 </ul>
 </blockquote>
-<p><strong>Ortonormalidad</strong></p>
+<p>Este último resultado es interesante, pues nos constata que cualquier sistema ortogonal con tantos vectores como la dimensión del espacio vectorial es una base.</p>
+<hr />
+<p><strong>Ejemplo</strong></p>
+<p>Consideremos el espacio <span class="math inline">\(U\)</span> dado por:
+<span class="math display">\[U = \left\{\left(\begin{array}{c}
+x\\
+y\\
+z\\
+t
+\end{array}\right)
+\in\mathbb{R}^{4}:\begin{array}{ccr}
+-x+ 4y+ z &amp; = &amp; 0\\
+y+ t &amp; = &amp; 0\\
+\end{array}\right\}\]</span>
+y los vectores
+<span class="math display">\[v = \left(\begin{array}{c}
+1\\
+-2\\
+-1\\
+2
+\end{array}\right)
+\quad\quad w = \left(\begin{array}{c}
+-1\\
+2\\
+-1\\
+-1
+\end{array}\right)
+\]</span></p>
+<p>Calculemos el ángulo entre <span class="math inline">\(v\)</span> y <span class="math inline">\(w\)</span>:
+<span class="math display">\[\theta = \arccos \frac{v\cdot w}{\|v\|\cdot\|w\|}\]</span><span class="math display">\[v\cdot w = 1\cdot(-1)+(-2)\cdot2+(-1)\cdot(-1)+2\cdot(-1) = -6\]</span><span class="math display">\[\|v\| = \sqrt{1^2+(-2)^2+(-1)^2+2^2} = \sqrt{10}\]</span><span class="math display">\[\|w\| = \sqrt{(-1)^2+2^2+(-1)^2+(-1)^2} = \sqrt{7}\]</span></p>
+<p>Luego
+<span class="math display">\[\theta = \arccos \frac{-6}{\sqrt{10}\sqrt{7}} = \arccos \frac{-3\cdot\sqrt{70}}{35}\]</span></p>
+<p>Vamos a comprobar ahora que <span class="math inline">\(v\)</span> es ortogonal al subespacio <span class="math inline">\(U\)</span>. Para ello, a partir de las ecuaciones cartesianas de <span class="math inline">\(U\)</span>, vamos a <a href="ev.html#base">hallar una base</a> suya, resolviendo el sistema por Gauss-Jordan y pasando por las ecuaciones paramétricas:
+<span class="math display">\[\left(
+\begin{array}{cccc@{}}
+-1 &amp; 4 &amp; 1 &amp; 0\\
+0 &amp; 1 &amp; 0 &amp; 1
+\end{array}
+\right)
+\sim\left(
+\begin{array}{cccc@{}}
+1 &amp; 0 &amp; -1 &amp; 4\\
+0 &amp; 1 &amp; 0 &amp; 1
+\end{array}
+\right)
+\Rightarrow\left(\begin{array}{c}
+x\\
+y\\
+z\\
+t
+\end{array}\right)
+ = \alpha\left(\begin{array}{c}
+1\\
+0\\
+1\\
+0
+\end{array}\right)
+{}+\beta\left(\begin{array}{c}
+-4\\
+-1\\
+0\\
+1
+\end{array}\right)
+{}\]</span></p>
+<p>De aquí que la base de <span class="math inline">\(U\)</span> sea:
+<span class="math display">\[\mathcal{B}_U = \left\{u_i\right\} = \left\{\left(
+\begin{array}{c@{}}
+1\\
+0\\
+1\\
+0
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+-4\\
+-1\\
+0\\
+1
+\end{array}
+\right)
+\right\}\]</span></p>
+<p>Como hemos visto antes, para comprobar que <span class="math inline">\(v\)</span> es ortogonal a <span class="math inline">\(U\)</span>, nos basta con comprobar que lo es a cada vector de <span class="math inline">\(\mathcal{B}_U\)</span>, hallando su producto escalar:
+<span class="math display">\[\langle v, u_1 \rangle = \langle \left(\begin{array}{c}
+1\\
+-2\\
+-1\\
+2
+\end{array}\right)
+, \left(\begin{array}{c}
+1\\
+0\\
+1\\
+0
+\end{array}\right)
+ \rangle = 1\cdot1+(-2)\cdot0+(-1)\cdot1+2\cdot0 = 0\]</span><span class="math display">\[\langle v, u_2 \rangle = \langle \left(\begin{array}{c}
+1\\
+-2\\
+-1\\
+2
+\end{array}\right)
+, \left(\begin{array}{c}
+-4\\
+-1\\
+0\\
+1
+\end{array}\right)
+ \rangle = 1\cdot(-4)+(-2)\cdot(-1)+(-1)\cdot0+2\cdot1 = 0\]</span></p>
+<p>Consideremos ahora el siguiente sistema de vectores:
+<span class="math display">\[S = \{s_i\} = \left\{\left(
+\begin{array}{c@{}}
+1\\
+1\\
+1\\
+0
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+-1\\
+2\\
+-1\\
+0
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+1\\
+0\\
+-1\\
+2
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+-1\\
+0\\
+1\\
+1
+\end{array}
+\right)
+\right\}\]</span></p>
+<p>Podemos comprobar fácilmente que es un sistema ortogonal, hallando los productos escalares de los vectores de <span class="math inline">\(S\)</span> dos a dos:
+<span class="math display">\[\langle s_1, s_2 \rangle = \langle \left(\begin{array}{c}
+1\\
+1\\
+1\\
+0
+\end{array}\right)
+, \left(\begin{array}{c}
+-1\\
+2\\
+-1\\
+0
+\end{array}\right)
+ \rangle = 1\cdot(-1)+1\cdot2+1\cdot(-1)+0\cdot0 = 0\]</span><span class="math display">\[\langle s_1, s_3 \rangle = \langle \left(\begin{array}{c}
+1\\
+1\\
+1\\
+0
+\end{array}\right)
+, \left(\begin{array}{c}
+1\\
+0\\
+-1\\
+2
+\end{array}\right)
+ \rangle = 1\cdot1+1\cdot0+1\cdot(-1)+0\cdot2 = 0\]</span><span class="math display">\[\langle s_1, s_4 \rangle = \langle \left(\begin{array}{c}
+1\\
+1\\
+1\\
+0
+\end{array}\right)
+, \left(\begin{array}{c}
+-1\\
+0\\
+1\\
+1
+\end{array}\right)
+ \rangle = 1\cdot(-1)+1\cdot0+1\cdot1+0\cdot1 = 0\]</span><span class="math display">\[\langle s_2, s_3 \rangle = \langle \left(\begin{array}{c}
+-1\\
+2\\
+-1\\
+0
+\end{array}\right)
+, \left(\begin{array}{c}
+1\\
+0\\
+-1\\
+2
+\end{array}\right)
+ \rangle = (-1)\cdot1+2\cdot0+(-1)\cdot(-1)+0\cdot2 = 0\]</span><span class="math display">\[\langle s_2, s_4 \rangle = \langle \left(\begin{array}{c}
+-1\\
+2\\
+-1\\
+0
+\end{array}\right)
+, \left(\begin{array}{c}
+-1\\
+0\\
+1\\
+1
+\end{array}\right)
+ \rangle = (-1)\cdot(-1)+2\cdot0+(-1)\cdot1+0\cdot1 = 0\]</span><span class="math display">\[\langle s_3, s_4 \rangle = \langle \left(\begin{array}{c}
+1\\
+0\\
+-1\\
+2
+\end{array}\right)
+, \left(\begin{array}{c}
+-1\\
+0\\
+1\\
+1
+\end{array}\right)
+ \rangle = 1\cdot(-1)+0\cdot0+(-1)\cdot1+2\cdot1 = 0\]</span></p>
+<p>Tenemos, por tanto, un sistema de 4 vectores ortogonales en <span class="math inline">\(\mathbb{R}^{4}\)</span>, y, como hemos comentado antes, son linealmente independientes, luego forman una base del espacio vectorial.</p>
+</div>
+<div id="ortho-basis" class="section level2" number="5.3">
+<h2 number="5.3"><span class="header-section-number">5.3</span> Qué es y qué utilidad tiene una base ortonormal</h2>
 <p>Un vector <span class="math inline">\(v\in V\)</span> se dice <strong>unitario</strong> si <span class="math inline">\(\|v\| = 1\)</span>. Es fácil crear vectores unitarios: dado <span class="math inline">\(u\in V\)</span>, si definimos <span class="math inline">\(v = \frac{1}{\|u\|}u\)</span>, este vector tiene norma 1. A este proceso se le llama <em>normalizar</em>.</p>
 <p>Un sistema de vectores <span class="math inline">\(\{v_1,\ldots,v_k\}\)</span> se llama <strong>sistema ortonormal</strong> si es un sistema ortogonal y cada <span class="math inline">\(v_i\)</span> es un vector unitario (<span class="math inline">\(i=1,\ldots, k\)</span>).</p>
 <p>En relación a lo comentado de las propiedades de los sistemas ortogonales, en nuestro caso podemos decir que un sistema ortonormal <span class="math inline">\(\{v_1,\ldots,v_n\}\)</span>, donde <span class="math inline">\(\mathrm{dim}(V) = n\)</span>, es una <strong>base ortonormal</strong>.</p>
@@ -268,16 +489,130 @@ luego las coordenadas de <span class="math inline">\(v\)</span> en la base <span
 </blockquote>
 <hr />
 <p><strong>Ejemplo</strong></p>
+<p>Consideremos ahora el sistema de vectores ortogonales del <a href="espacios-euclídeos.html#ortho">ejemplo anterior</a>:
+<span class="math display">\[S = \{s_i\} = \left\{\left(
+\begin{array}{c@{}}
+1\\
+1\\
+1\\
+0
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+-1\\
+2\\
+-1\\
+0
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+1\\
+0\\
+-1\\
+2
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+-1\\
+0\\
+1\\
+1
+\end{array}
+\right)
+\right\}\]</span></p>
+<p>A partir de <span class="math inline">\(S\)</span>, formemos un sistema ortonormal <span class="math inline">\(S&#39;\)</span>, donde cada vector de <span class="math inline">\(S&#39;\)</span> es un vector de <span class="math inline">\(S\)</span>, que se ha normalizado.
+<span class="math display">\[S&#39; = \left\{\left(\begin{array}{c}
+\frac{\sqrt{3}}{3}\\
+\frac{\sqrt{3}}{3}\\
+\frac{\sqrt{3}}{3}\\
+0
+\end{array}\right), \left(\begin{array}{c}
+\frac{-\sqrt{6}}{6}\\
+\frac{\sqrt{6}}{3}\\
+\frac{-\sqrt{6}}{6}\\
+0
+\end{array}\right), \left(\begin{array}{c}
+\frac{\sqrt{6}}{6}\\
+0\\
+\frac{-\sqrt{6}}{6}\\
+\frac{\sqrt{6}}{3}
+\end{array}\right), \left(\begin{array}{c}
+\frac{-\sqrt{3}}{3}\\
+0\\
+\frac{\sqrt{3}}{3}\\
+\frac{\sqrt{3}}{3}
+\end{array}\right)\right\}\]</span></p>
+<p><span class="math inline">\(S&#39;\)</span> forma una base <em>ortonormal</em> de <span class="math inline">\(\mathbb{R}^{4}\)</span>.
+Si consideramos vector
+<span class="math display">\[v = \left(
+\begin{array}{c@{}}
+1\\
+-2\\
+-1\\
+2
+\end{array}
+\right)
+\]</span>
+podemos hallar sus coordenadas en la base <span class="math inline">\(S&#39;\)</span>, ya que cada coordenada de <span class="math inline">\(v\)</span> será el producto escalar de <span class="math inline">\(v\)</span> por el correspondiente vector de <span class="math inline">\(S&#39;\)</span>:
+<span class="math display">\[\langle v, s&#39;_1 \rangle = \langle \left(\begin{array}{c}
+1\\
+-2\\
+-1\\
+2
+\end{array}\right), \left(\begin{array}{c}
+\frac{\sqrt{3}}{3}\\
+\frac{\sqrt{3}}{3}\\
+\frac{\sqrt{3}}{3}\\
+0
+\end{array}\right) \rangle = \frac{-2\cdot\sqrt{3}}{3}\]</span><span class="math display">\[\langle v, s&#39;_2 \rangle = \langle \left(\begin{array}{c}
+1\\
+-2\\
+-1\\
+2
+\end{array}\right), \left(\begin{array}{c}
+\frac{-\sqrt{6}}{6}\\
+\frac{\sqrt{6}}{3}\\
+\frac{-\sqrt{6}}{6}\\
+0
+\end{array}\right) \rangle = \frac{-2\cdot\sqrt{6}}{3}\]</span><span class="math display">\[\langle v, s&#39;_3 \rangle = \langle \left(\begin{array}{c}
+1\\
+-2\\
+-1\\
+2
+\end{array}\right), \left(\begin{array}{c}
+\frac{\sqrt{6}}{6}\\
+0\\
+\frac{-\sqrt{6}}{6}\\
+\frac{\sqrt{6}}{3}
+\end{array}\right) \rangle = \sqrt{6}\]</span><span class="math display">\[\langle v, s&#39;_4 \rangle = \langle \left(\begin{array}{c}
+1\\
+-2\\
+-1\\
+2
+\end{array}\right), \left(\begin{array}{c}
+\frac{-\sqrt{3}}{3}\\
+0\\
+\frac{\sqrt{3}}{3}\\
+\frac{\sqrt{3}}{3}
+\end{array}\right) \rangle = 0\]</span></p>
+<p>Entonces, podremos escribir:
+<span class="math display">\[v = \left(\begin{array}{c}
+\frac{-2\cdot\sqrt{3}}{3}\\
+\frac{-2\cdot\sqrt{6}}{3}\\
+\sqrt{6}\\
+0
+\end{array}\right)_{S&#39;}\]</span></p>
 <ul>
-<li>Ángulo entre los vectores de la base de <span class="math inline">\(U\)</span></li>
-<li>Comprobar que <span class="math inline">\(v\)</span> es ortogonal a <span class="math inline">\(U\)</span></li>
-<li>Dar un sistema ortogonal -&gt; base</li>
 <li>Normalizar el sistema ortogonal -&gt; base ortonormal</li>
+<li>Coordenadas en base ortonormal</li>
 </ul>
 <hr />
 </div>
-<div id="ortho-basis" class="section level2" number="5.3">
-<h2 number="5.3"><span class="header-section-number">5.3</span> Cómo construimos una base ortonormal</h2>
+<div id="gram-schmidt" class="section level2" number="5.4">
+<h2 number="5.4"><span class="header-section-number">5.4</span> Cómo construimos una base ortonormal</h2>
 <ul>
 <li>Teorema de existencia</li>
 <li>Gram-Schmidt</li>
@@ -286,8 +621,8 @@ luego las coordenadas de <span class="math inline">\(v\)</span> en la base <span
 <p><strong>Ejemplo</strong></p>
 <hr />
 </div>
-<div id="compl-ortho" class="section level2" number="5.4">
-<h2 number="5.4"><span class="header-section-number">5.4</span> Qué es el complemento ortogonal de un subespacio</h2>
+<div id="compl-ortho" class="section level2" number="5.5">
+<h2 number="5.5"><span class="header-section-number">5.5</span> Qué es el complemento ortogonal de un subespacio</h2>
 <ul>
 <li>Definición de complemento ortogonal</li>
 <li>Método de cálculo</li>
@@ -296,8 +631,8 @@ luego las coordenadas de <span class="math inline">\(v\)</span> en la base <span
 <p><strong>Ejemplo</strong></p>
 <hr />
 </div>
-<div id="proyec" class="section level2" number="5.5">
-<h2 number="5.5"><span class="header-section-number">5.5</span> Cómo calculamos la proyección de un vector sobre un subespacio</h2>
+<div id="proyec" class="section level2" number="5.6">
+<h2 number="5.6"><span class="header-section-number">5.6</span> Cómo calculamos la proyección de un vector sobre un subespacio</h2>
 <ul>
 <li>Definición de proyección ortogonal sobre otro vector</li>
 <li>Propiedades</li>
@@ -308,8 +643,8 @@ luego las coordenadas de <span class="math inline">\(v\)</span> en la base <span
 <p><strong>Ejemplo</strong></p>
 <hr />
 </div>
-<div id="diag-ortho" class="section level2" number="5.6">
-<h2 number="5.6"><span class="header-section-number">5.6</span> Qué es la diagonalización ortogonal</h2>
+<div id="diag-ortho" class="section level2" number="5.7">
+<h2 number="5.7"><span class="header-section-number">5.7</span> Qué es la diagonalización ortogonal</h2>
 <ul>
 <li>Definición de aplicación ortogonal y de matriz ortogonal</li>
 <li>Teorema de relación entre matriz ortogonal y base ortonormal</li>

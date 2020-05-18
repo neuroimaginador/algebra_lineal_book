@@ -44,7 +44,8 @@ __¿Qué preguntas vamos a responder en este capítulo?__
 
 - [¿Qué son las normas y distancias?](#norm)
 - [¿Qué significa el concepto de ortogonalidad?](#ortho)
-- [¿Cómo construimos una base ortonormal?](#ortho-basis)
+- [¿Qué es y qué utilidad tiene una base ortonormal?](#ortho-basis)
+- [¿Cómo construimos una base ortonormal?](#gram-schmidt)
 - [¿Qué es el complemento ortogonal de un subespacio?](#compl-ortho)
 - [¿Cómo calculamos la proyección de un vector sobre un subespacio?](#proyec)
 - [¿Qué es la diagonalización ortogonal?](#diag-ortho)
@@ -97,7 +98,7 @@ $$d(u,v) = \|u - v\| = \sqrt{(u_1-v_1)^2+\ldots+(u_n-v_n)^2}$$
 
 Como ejemplo, podemos calcular la norma del vector
 ```{r}
-v <- rVector(n = n)
+v <- rVector(n = 4)
 glue_latex(
   "v = [to_latex(v)]"
 ) %>% 
@@ -136,27 +137,7 @@ __Algunas propiedades y caracterizaciones de los vectores y sistemas ortogonales
 > - Dos vectores $u$ y $w$ son ortogonales si, y solo si, $\|u+w\|^2 = \|u\|^2 + \|v\|^2$ (generalización del Teorema de Pitágoras).
 - Si un sistema de vectores es ortogonal, entonces es linealmente independiente. Por tanto, en un espacio $V$ de dimensión finita $n$, cualquier conjunto de $n$ vectores ortogonales entre sí es una base.
 
-__Ortonormalidad__
-
-Un vector $v\in V$ se dice __unitario__ si $\|v\| = 1$. Es fácil crear vectores unitarios: dado $u\in V$, si definimos $v = \frac{1}{\|u\|}u$, este vector tiene norma 1. A este proceso se le llama _normalizar_.
-
-Un sistema de vectores $\{v_1,\ldots,v_k\}$ se llama __sistema ortonormal__ si es un sistema ortogonal y cada $v_i$ es un vector unitario ($i=1,\ldots, k$).
-
-En relación a lo comentado de las propiedades de los sistemas ortogonales, en nuestro caso podemos decir que un sistema ortonormal $\{v_1,\ldots,v_n\}$, donde $\mathrm{dim}(V) = n$, es una __base ortonormal__.
-
-El interés de una base ortonormal es que es sencillo calcular las [coordenadas](#coord) de cualquier vector con respecto a dicha base:
-
-> Sea $\mathcal{B} = \{v_1,\ldots,v_n\}$ una base _ortonormal_ del espacio vectorial $V$. Entonces, para cada $v\in V$, tenemos:
-$$v = \langle v, v_1 \rangle v_1 + \ldots \langle v, v_n \rangle v_n$$
-luego las coordenadas de $v$ en la base $\mathcal{B}$ las podemos calcular como:
-$$[v]_{\mathcal{B}} = \left(
-\begin{array}{c}
-\langle v, v_1 \rangle \\
-\langle v, v_2 \rangle \\
-\vdots \\
-\langle v, v_n \rangle \\
-\end{array}
-\right)_{\mathcal{B}}$$
+Este último resultado es interesante, pues nos constata que cualquier sistema ortogonal con tantos vectores como la dimensión del espacio vectorial es una base.
 
 ---
 
@@ -186,29 +167,280 @@ bUt <- solve_homogeneous(t(bU)) %>%
 # Vector v aleatorio en el ortogonal
 scalars <- rVector(n = ncol(bUt))
 v <- bUt %*% scalars
+w <- rVector(n = n)
 
 # Construyamos ahora una base aleatoria y la 
 # ortonormalizamos usando GS
 repeat {
   
-  B <- rMatrix(n = n, m = n) %>% 
+  B <- rMatrix(n = n, m = n * 4, values = 0:1) %>% 
     linearly_independents()
   
   if (ncol(B) == n) break
   
 }
-c(B, s) %<-% gram_schmidt(B)
+c(B_ortho, s) %<-% gram_schmidt(B)
+
+B_ortho[] <- B_ortho %>% t() %>% 
+  remove_fraction() %>% t() %>% 
+  round()
 
 ```
 
-- Ángulo entre los vectores de la base de $U$
-- Comprobar que $v$ es ortogonal a $U$
-- Dar un sistema ortogonal -> base
-- Normalizar el sistema ortogonal -> base ortonormal
+Consideremos el espacio $U$ dado por:
+```{r}
+glue_latex(
+  "U = \\left\\{",
+  "[to_latex(generic_vector(n))]\\in\\mathbb{R}^{[n]}:",
+  "[write_system(AU, zero_vector(AU), fractions = TRUE, latex = TRUE, format = 'c')]",
+  "\\right\\}"
+)
+```
+y los vectores
+```{r}
+glue_latex(
+  "v = [to_latex(v)]\\quad\\quad w = [to_latex(w)]"
+) %>% 
+  cat()
+```
+
+Calculemos el ángulo entre $v$ y $w$:
+```{r}
+v_str <- as.character(v)
+v_str[v < 0] <- paste0("(", v_str[v < 0], ")")
+w_str <- as.character(w)
+w_str[w < 0] <- paste0("(", w_str[w < 0], ")")
+glue_latex(
+  "\\theta = \\arccos \\frac{v\\cdot w}{\\|v\\|\\cdot\\|w\\|}"
+) %>% 
+  cat()
+prod_str <- "\\cdot"
+glue_latex(
+  "v\\cdot w = [glue::glue('{v_str}{prod_str}{w_str}') %>% str_flatten('+')] = [sum(v * w)]"
+) %>% 
+  cat()
+glue_latex(
+  "\\|v\\| = \\sqrt{[glue::glue('{v_str}^2') %>% str_flatten('+')]} = \\sqrt{[sum(v^2)]}"
+) %>% 
+  cat()
+glue_latex(
+  "\\|w\\| = \\sqrt{[glue::glue('{w_str}^2') %>% str_flatten('+')]} = \\sqrt{[sum(w^2)]}"
+) %>% 
+  cat()
+
+vv <- Vector$new(v)
+vw <- Vector$new(w)
+dot_prod <- vv$prod(vw)
+nv <- vv$norm()
+nv_orig <- vv$norm()
+nw <- vw$norm()
+nvnw <- nv$prod(nw)
+nvnw$inverse()
+nvnw$prod(dot_prod)
+nvnw$simplify()
+nvnw$rationalize()
+```
+
+Luego
+```{r}
+glue_latex(
+  "\\theta = \\arccos \\frac{[dot_prod$to_latex()]}{[nv_orig$to_latex()][nw$to_latex()]} = \\arccos [nvnw$to_latex()]"
+) %>% 
+  cat()
+```
+
+Vamos a comprobar ahora que $v$ es ortogonal al subespacio $U$. Para ello, a partir de las ecuaciones cartesianas de $U$, vamos a [hallar una base](#base) suya, resolviendo el sistema por Gauss-Jordan y pasando por las ecuaciones paramétricas:
+```{r}
+s <- gauss_elimination(AU, jordan = TRUE, diag1 = TRUE)
+params <- c("\\alpha", "\\beta", "\\delta", "\\gamma")
+glue_latex(
+  "[glue_matrices(AU, latex = TRUE, fractions = TRUE)]",
+  "\\sim",
+  "[glue_matrices(s$splits, latex = TRUE, fractions = TRUE)]",
+  "\\Rightarrow",
+  "[to_latex(generic_vector(n))] = [write_linear_combination(bU, vars = params)]"
+) %>% 
+  cat()
+```
+
+De aquí que la base de $U$ sea:
+```{r}
+glue_latex(
+  "\\mathcal{B}_U = \\left\\{u_i\\right\\} = \\left\\{",
+  "[vectors_to_latex(bU)]",
+  "\\right\\}"
+)
+```
+
+Como hemos visto antes, para comprobar que $v$ es ortogonal a $U$, nos basta con comprobar que lo es a cada vector de $\mathcal{B}_U$, hallando su producto escalar:
+```{r}
+for (i in seq(ncol(bU))) {
+  
+  ui <- matrix(bU[, i], ncol = 1)
+  ui_str <- as.character(ui)
+  ui_str[ui < 0] <- paste0("(", ui_str[ui < 0], ")")
+  glue_latex(
+    "\\langle v, u_[i] \\rangle = ",
+    "\\langle [to_latex(v)], [to_latex(ui)] \\rangle = ",
+    "[glue::glue('{v_str}{prod_str}{ui_str}') %>% str_flatten('+')] = ",
+    "[sum(v * ui)]"
+  ) %>% 
+    cat()
+  
+}
+```
+
+Consideremos ahora el siguiente sistema de vectores:
+```{r}
+glue_latex(
+  "S = \\{s_i\\} = \\left\\{",
+  "[vectors_to_latex(B_ortho)]",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+
+Podemos comprobar fácilmente que es un sistema ortogonal, hallando los productos escalares de los vectores de $S$ dos a dos:
+```{r}
+for (i in seq(ncol(B_ortho) - 1)) {
+  
+  vi <- matrix(B_ortho[, i], ncol = 1)
+  vi_str <- as.character(vi)
+  vi_str[vi < 0] <- paste0("(", vi_str[vi < 0], ")")
+  
+  for (j in seq(i + 1, ncol(B_ortho))) {
+    
+    vj <- matrix(B_ortho[, j], ncol = 1)
+    vj_str <- as.character(vj)
+    vj_str[vj < 0] <- paste0("(", vj_str[vj < 0], ")")
+
+    glue_latex(
+      "\\langle s_[i], s_[j] \\rangle = ",
+      "\\langle [to_latex(vi)], [to_latex(vj)] \\rangle = ",
+      "[glue::glue('{vi_str}{prod_str}{vj_str}') %>% str_flatten('+')] = ",
+      "[sum(vi * vj)]"
+    ) %>% 
+      cat()
+      
+  }
+  
+}
+```
+
+Tenemos, por tanto, un sistema de `r ncol(B_ortho)` vectores ortogonales en \(\mathbb{R}^{`r n`}\), y, como hemos comentado antes, son linealmente independientes, luego forman una base del espacio vectorial.
+
+
+
+## Qué es y qué utilidad tiene una base ortonormal {#ortho-basis}
+
+
+Un vector $v\in V$ se dice __unitario__ si $\|v\| = 1$. Es fácil crear vectores unitarios: dado $u\in V$, si definimos $v = \frac{1}{\|u\|}u$, este vector tiene norma 1. A este proceso se le llama _normalizar_.
+
+Un sistema de vectores $\{v_1,\ldots,v_k\}$ se llama __sistema ortonormal__ si es un sistema ortogonal y cada $v_i$ es un vector unitario ($i=1,\ldots, k$).
+
+En relación a lo comentado de las propiedades de los sistemas ortogonales, en nuestro caso podemos decir que un sistema ortonormal $\{v_1,\ldots,v_n\}$, donde $\mathrm{dim}(V) = n$, es una __base ortonormal__.
+
+El interés de una base ortonormal es que es sencillo calcular las [coordenadas](#coord) de cualquier vector con respecto a dicha base:
+
+> Sea $\mathcal{B} = \{v_1,\ldots,v_n\}$ una base _ortonormal_ del espacio vectorial $V$. Entonces, para cada $v\in V$, tenemos:
+$$v = \langle v, v_1 \rangle v_1 + \ldots \langle v, v_n \rangle v_n$$
+luego las coordenadas de $v$ en la base $\mathcal{B}$ las podemos calcular como:
+$$[v]_{\mathcal{B}} = \left(
+\begin{array}{c}
+\langle v, v_1 \rangle \\
+\langle v, v_2 \rangle \\
+\vdots \\
+\langle v, v_n \rangle \\
+\end{array}
+\right)_{\mathcal{B}}$$
+
 
 ---
 
-## Cómo construimos una base ortonormal {#ortho-basis}
+__Ejemplo__
+
+Consideremos ahora el sistema de vectores ortogonales del [ejemplo anterior](#ortho):
+```{r}
+glue_latex(
+  "S = \\{s_i\\} = \\left\\{",
+  "[vectors_to_latex(B_ortho)]",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+
+A partir de $S$, formemos un sistema ortonormal $S'$, donde cada vector de $S'$ es un vector de $S$, que se ha normalizado.
+```{r}
+base <- lapply(seq(ncol(B_ortho)), function(i) Vector$new(matrix(B_ortho[, i], ncol = 1)))
+base_norm <- lapply(base, 
+                    function(v) {
+                      norma <- v$norm()
+                      v$prod(norma$inverse())
+                    })
+
+base <- lapply(base, 
+                    function(v) v$simplify())
+
+base_norm <- lapply(base_norm, 
+                    function(v) v$rationalize())
+
+str_vectors <- lapply(base_norm, 
+       function(v) v$to_latex()) %>% 
+  str_flatten(", ")
+glue_latex(
+  "S' = \\left\\{",
+  "[str_vectors]",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+
+$S'$ forma una base _ortonormal_ de \(\mathbb{R}^{`r n`}\). 
+Si consideramos vector 
+```{r}
+glue_latex(
+  "v = [glue_matrices(v, latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+podemos hallar sus coordenadas en la base $S'$, ya que cada coordenada de $v$ será el producto escalar de $v$ por el correspondiente vector de $S'$:
+```{r}
+
+v <- Vector$new(v)
+producto <- list()
+for (i in seq_along(base)) {
+  
+  si <- base[[i]]
+  p <- v$prod(si)
+  p$simplify()
+  p$rationalize()
+  producto[[i]] <- p
+  
+  glue_latex(
+    "\\langle v, s'_[i] \\rangle = ",
+    "\\langle [v$to_latex()], [si$to_latex()] \\rangle = ",
+    "[p$to_latex()]"
+  ) %>% 
+    cat()
+}
+```
+
+Entonces, podremos escribir:
+```{r}
+coord <- Vector$new(producto)
+glue_latex(
+  "v = [coord$to_latex()]_{S'}"
+) %>% 
+  cat()
+```
+
+
+- Normalizar el sistema ortogonal -> base ortonormal
+- Coordenadas en base ortonormal
+
+---
+
+## Cómo construimos una base ortonormal {#gram-schmidt}
 
 - Teorema de existencia
 - Gram-Schmidt
