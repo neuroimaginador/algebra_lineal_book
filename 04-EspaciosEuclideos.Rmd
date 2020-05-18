@@ -48,7 +48,9 @@ __¿Qué preguntas vamos a responder en este capítulo?__
 - [¿Cómo construimos una base ortonormal?](#gram-schmidt)
 - [¿Qué es el complemento ortogonal de un subespacio?](#compl-ortho)
 - [¿Cómo calculamos la proyección de un vector sobre un subespacio?](#proyec)
+- [¿Qué es una matriz ortogonal y una aplicación ortogonal?](#ortho-matrix)
 - [¿Qué es la diagonalización ortogonal?](#diag-ortho)
+- [Qué matrices son diagonalizables ortogonalmente](#diag-ortho2)
 
 ## Qué son las normas y distancias {#norm}
 
@@ -396,7 +398,7 @@ glue_latex(
 ```
 
 $S'$ forma una base _ortonormal_ de \(\mathbb{R}^{`r n`}\). 
-Si consideramos vector 
+Si consideramos el vector 
 ```{r}
 glue_latex(
   "v = [glue_matrices(v, latex = TRUE, fractions = TRUE)]"
@@ -434,10 +436,6 @@ glue_latex(
   cat()
 ```
 
-
-- Normalizar el sistema ortogonal -> base ortonormal
-- Coordenadas en base ortonormal
-
 ---
 
 ## Cómo construimos una base ortonormal {#gram-schmidt}
@@ -462,7 +460,7 @@ __Ejemplo__
 
 ```{r}
 bW <- rMatrix(n = n, m = 2)
-bWt <- solve_homogeneous(bW)
+bWt <- solve_homogeneous(t(bW))
 ```
 
 ---
@@ -480,15 +478,26 @@ __Ejemplo__
 
 ---
 
+## Qué es una matriz ortogonal y una aplicación ortogonal {#ortho-matrix}
+
 ## Qué es la diagonalización ortogonal {#diag-ortho}
 
 - Definición de aplicación ortogonal y de matriz ortogonal 
 - Teorema de relación entre matriz ortogonal y base ortonormal
 - Definición de matriz diagonalizable ortogonalmente
 - Teorema diagonalización ortogonal
+
+
+---
+
+__Ejemplo__
+
+---
+
+## Qué matrices son diagonalizables ortogonalmente {#diag-ortho2}
+
 - Teoremas que relacionan matrices simétricas con diagonabilidad ortogonal
 - Procedimiento diagonalización ortogonal matriz simétrica
-
 
 ---
 
