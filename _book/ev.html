@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-05-18" />
+<meta name="date" content="2020-05-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -115,11 +115,13 @@
 <ul>
 <li class="chapter" data-level="5.1" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#norm"><i class="fa fa-check"></i><b>5.1</b> Qué son las normas y distancias</a></li>
 <li class="chapter" data-level="5.2" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho"><i class="fa fa-check"></i><b>5.2</b> Qué significa el concepto de ortogonalidad</a></li>
-<li class="chapter" data-level="5.3" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho-basis"><i class="fa fa-check"></i><b>5.3</b> Qué es y qué utilidad tiene una base ortonormal</a></li>
-<li class="chapter" data-level="5.4" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#gram-schmidt"><i class="fa fa-check"></i><b>5.4</b> Cómo construimos una base ortonormal</a></li>
-<li class="chapter" data-level="5.5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#compl-ortho"><i class="fa fa-check"></i><b>5.5</b> Qué es el complemento ortogonal de un subespacio</a></li>
-<li class="chapter" data-level="5.6" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#proyec"><i class="fa fa-check"></i><b>5.6</b> Cómo calculamos la proyección de un vector sobre un subespacio</a></li>
-<li class="chapter" data-level="5.7" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#diag-ortho"><i class="fa fa-check"></i><b>5.7</b> Qué es la diagonalización ortogonal</a></li>
+<li class="chapter" data-level="5.3" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#compl-ortho"><i class="fa fa-check"></i><b>5.3</b> Qué es el complemento ortogonal de un subespacio</a></li>
+<li class="chapter" data-level="5.4" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#proyec"><i class="fa fa-check"></i><b>5.4</b> Cómo calculamos la proyección de un vector sobre un subespacio</a></li>
+<li class="chapter" data-level="5.5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho-basis"><i class="fa fa-check"></i><b>5.5</b> Qué es y qué utilidad tiene una base ortonormal</a></li>
+<li class="chapter" data-level="5.6" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#gram-schmidt"><i class="fa fa-check"></i><b>5.6</b> Cómo construimos una base ortonormal</a></li>
+<li class="chapter" data-level="5.7" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho-matrix"><i class="fa fa-check"></i><b>5.7</b> Qué es una matriz ortogonal y una aplicación ortogonal</a></li>
+<li class="chapter" data-level="5.8" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#diag-ortho"><i class="fa fa-check"></i><b>5.8</b> Qué es la diagonalización ortogonal</a></li>
+<li class="chapter" data-level="5.9" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#diag-ortho2"><i class="fa fa-check"></i><b>5.9</b> Qué matrices son diagonalizables ortogonalmente</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="problems.html"><a href="problems.html"><i class="fa fa-check"></i><b>6</b> Problemas Resueltos</a>
 <ul>
@@ -273,6 +275,7 @@ entonces el sistema de los <span class="math inline">\(v_i\)</span> será indepe
 <h2 number="2.3"><span class="header-section-number">2.3</span> Qué es un sistema generador y el subespacio generado por un conjunto de vectores</h2>
 <p>Consideramos un sistema de vectores <span class="math inline">\(\mathcal{S} = \{v_1,\ldots,v_n\}\)</span>. El <strong>subespacio generado</strong> por <span class="math inline">\(\mathcal{S}\)</span> es el conjunto de vectores que se calcula como combinaciones lineales de los de <span class="math inline">\(\mathcal{S}\)</span>.</p>
 <p>Es decir, si yo voy dando valores a unos escalares <span class="math inline">\(\alpha_1,\ldots,\alpha_n\)</span>, entonces el vector <span class="math inline">\(\alpha_1v_1+\ldots+\alpha_nv_n\)</span> es combinación lineal de los de <span class="math inline">\(\mathcal{S}\)</span>, luego pertenece al subespacio generado por éste.</p>
+<p>Como conclusión, el subespacio generado por <span class="math inline">\(\mathcal{S}\)</span> es el menor subespacio de <span class="math inline">\(V\)</span> que contiene a los elementos de <span class="math inline">\(\mathcal{S}\)</span>.</p>
 <p>Denotamos como <span class="math inline">\(\mathcal{L}(\mathcal{S})\)</span> al subsepacio generado por <span class="math inline">\(\mathcal{S}\)</span>.</p>
 <hr />
 <p><strong>Ejemplo</strong></p>
@@ -807,7 +810,7 @@ que es un sistema generador de la suma, podemos construir una base de <span clas
 <h2 number="2.10"><span class="header-section-number">2.10</span> Qué dice el teorema de la dimensión</h2>
 <p>Hay un resultado teórico que relaciona las dimensiones de dos subespacios <span class="math inline">\(U\)</span> y <span class="math inline">\(W\)</span> con las de su intersección y su suma:</p>
 <blockquote>
-<p><span class="math inline">\(\mathrm{dim}(U+W) = \mathrm{dim}(U) + \mathrm{dim}(W) - \mathrm{dim}(U\cap W)\)</span></p>
+<p><strong>Fórmula de Grassmann</strong>: <span class="math inline">\(\mathrm{dim}(U+W) = \mathrm{dim}(U) + \mathrm{dim}(W) - \mathrm{dim}(U\cap W)\)</span></p>
 </blockquote>
 <hr />
 <p><strong>Ejemplo</strong></p>

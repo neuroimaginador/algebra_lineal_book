@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-05-18" />
+<meta name="date" content="2020-05-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -115,11 +115,13 @@
 <ul>
 <li class="chapter" data-level="5.1" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#norm"><i class="fa fa-check"></i><b>5.1</b> Qué son las normas y distancias</a></li>
 <li class="chapter" data-level="5.2" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho"><i class="fa fa-check"></i><b>5.2</b> Qué significa el concepto de ortogonalidad</a></li>
-<li class="chapter" data-level="5.3" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho-basis"><i class="fa fa-check"></i><b>5.3</b> Qué es y qué utilidad tiene una base ortonormal</a></li>
-<li class="chapter" data-level="5.4" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#gram-schmidt"><i class="fa fa-check"></i><b>5.4</b> Cómo construimos una base ortonormal</a></li>
-<li class="chapter" data-level="5.5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#compl-ortho"><i class="fa fa-check"></i><b>5.5</b> Qué es el complemento ortogonal de un subespacio</a></li>
-<li class="chapter" data-level="5.6" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#proyec"><i class="fa fa-check"></i><b>5.6</b> Cómo calculamos la proyección de un vector sobre un subespacio</a></li>
-<li class="chapter" data-level="5.7" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#diag-ortho"><i class="fa fa-check"></i><b>5.7</b> Qué es la diagonalización ortogonal</a></li>
+<li class="chapter" data-level="5.3" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#compl-ortho"><i class="fa fa-check"></i><b>5.3</b> Qué es el complemento ortogonal de un subespacio</a></li>
+<li class="chapter" data-level="5.4" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#proyec"><i class="fa fa-check"></i><b>5.4</b> Cómo calculamos la proyección de un vector sobre un subespacio</a></li>
+<li class="chapter" data-level="5.5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho-basis"><i class="fa fa-check"></i><b>5.5</b> Qué es y qué utilidad tiene una base ortonormal</a></li>
+<li class="chapter" data-level="5.6" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#gram-schmidt"><i class="fa fa-check"></i><b>5.6</b> Cómo construimos una base ortonormal</a></li>
+<li class="chapter" data-level="5.7" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho-matrix"><i class="fa fa-check"></i><b>5.7</b> Qué es una matriz ortogonal y una aplicación ortogonal</a></li>
+<li class="chapter" data-level="5.8" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#diag-ortho"><i class="fa fa-check"></i><b>5.8</b> Qué es la diagonalización ortogonal</a></li>
+<li class="chapter" data-level="5.9" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#diag-ortho2"><i class="fa fa-check"></i><b>5.9</b> Qué matrices son diagonalizables ortogonalmente</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="problems.html"><a href="problems.html"><i class="fa fa-check"></i><b>6</b> Problemas Resueltos</a>
 <ul>
@@ -813,8 +815,8 @@ y <span class="math inline">\(\mathrm{dim}(\mathrm{Im}\ f) = 2\)</span>.</p>
 <li>Para determinar si <span class="math inline">\(f\)</span> es <a href="apli.html#inyectividad">inyectiva</a> o <a href="apli.html#sobrey">sobreyectiva</a>, nos fijaremos en las dimensiones de su núcleo y de su imagen:</li>
 </ol>
 <ul>
-<li><span class="math inline">\(f\)</span> será inyectiva si y solo si se cumple <span class="math inline">\(\mathrm{dim}(\mathrm{Ker}\ f) = 0\)</span>. Pero sabemos que <span class="math inline">\(\mathrm{dim}(\mathrm{Ker}\ f) = 1\)</span>, luego <span class="math inline">\(f\)</span> no es inyectiva.</li>
-<li><span class="math inline">\(f\)</span> será sobreyectiva si y solo si se cumple que <span class="math inline">\(\mathrm{dim}(\mathrm{Im}\ f) = \mathrm{dim}(W) = \mathrm{dim}(\mathbb{R}^{2})\)</span>, y esto sí se cumple, como hemos visto en el apartado anterior,luego <span class="math inline">\(f\)</span> es sobreyectiva.</li>
+<li><span class="math inline">\(f\)</span> será inyectiva si y solo si se cumple <span class="math inline">\(\mathrm{dim}(\mathrm{Ker}\ f) = 0\)</span>. Sabemos que <span class="math inline">\(\mathrm{dim}(\mathrm{Ker}\ f) = 1\)</span>, luego <span class="math inline">\(f\)</span> no es inyectiva.</li>
+<li><span class="math inline">\(f\)</span> será sobreyectiva si y solo si se cumple que <span class="math inline">\(\mathrm{dim}(\mathrm{Im}\ f) = \mathrm{dim}(W) = \mathrm{dim}(\mathbb{R}^{2})\)</span>, y esto se cumple, como hemos visto en el apartado anterior, luego <span class="math inline">\(f\)</span> es sobreyectiva.</li>
 </ul>
 <ol start="4" style="list-style-type: lower-alpha">
 <li><p>El <a href="@th-dim-nucleo">teorema de la dimensión para núcleo e imagen</a> dice que <span class="math inline">\(\mathrm{dim}(V) = \mathrm{dim}(\mathrm{Ker}\ f) + \mathrm{dim}(\mathrm{Im}\ f)\)</span>. Lo podemos comprobar fácilmente:
@@ -825,63 +827,65 @@ y <span class="math inline">\(\mathrm{dim}(\mathrm{Im}\ f) = 2\)</span>.</p>
 <li><p>Dado el subespacio <span class="math inline">\(U\)</span>, debemos encontrar un sistema de vectores <span class="math inline">\(\mathcal{G}\)</span> que <a href="ev.html#gen">lo genere</a>, calcular su imagen <span class="math inline">\(f(\mathcal{G})\)</span>, y eso será un sistema generador de <span class="math inline">\(f(U)\)</span>. A partir de ahí, podemos <a href="#sisgenabase">extraer una base</a> de <span class="math inline">\(f(U)\)</span>.</p></li>
 </ol>
 <p>Para calcular un sistema generador de <span class="math inline">\(U\)</span>, pasamos sus <a href="ev.html#base">ecuaciones cartesianas</a> a paramétricas, usando métodos Gaussianos:
-<span class="math display">\[\left\{2x + 2y + z = 0\right.\Rightarrow\left(\begin{array}{c}
+<span class="math display">\[\left\{\begin{array}{rrrcr}
+2x &amp; + 2y &amp; + z &amp; = &amp; 0\\
+\end{array}\right.\Rightarrow\left(\begin{array}{c}
 x\\
 y\\
 z
 \end{array}\right)
  = \alpha\left(\begin{array}{c}
+-1\\
 1\\
-0\\
--2
+0
 \end{array}\right)
 {}+\beta\left(\begin{array}{c}
-1\\
--1\\
-0
+- \frac{1}{2}\\
+0\\
+1
 \end{array}\right)
 {}\]</span></p>
 <p>De aquí podemos determinar una base de <span class="math inline">\(U\)</span>, si eliminamos sus vectores linealmente dependientes:
 <span class="math display">\[\mathcal{B}_U = \left\{\left(
 \begin{array}{c@{}}
+-1\\
 1\\
-0\\
--2
+0
 \end{array}
 \right)
 , \left(
 \begin{array}{c@{}}
-1\\
--1\\
-0
+- \frac{1}{2}\\
+0\\
+1
 \end{array}
 \right)
 \right\}\]</span></p>
 <p>Ahora procedemos a calcular <span class="math inline">\(f(\mathcal{B}_U)\)</span>:
 <span class="math display">\[f(\mathcal{B}_U) = \left\{\left(
 \begin{array}{c@{}}
-4\\
+-1\\
 -2
 \end{array}
 \right)
 , \left(
 \begin{array}{c@{}}
-1\\
-2
+-2\\
+1
 \end{array}
 \right)
 \right\}\]</span>
 que es un sistema generador de <span class="math inline">\(f(U)\)</span>. Eliminamos los vectores linealmente dependientes (en este caso es sencillo) para obtener una base de <span class="math inline">\(f(U)\)</span>:
 <span class="math display">\[\mathcal{B}_{f(U)} =\left\{\left(
 \begin{array}{c@{}}
-4\\
+-1\\
 -2
 \end{array}
 \right)
 , \left(
 \begin{array}{c@{}}
-1\\
-2
+-2\\
+1
 \end{array}
 \right)
 \right\}\]</span>

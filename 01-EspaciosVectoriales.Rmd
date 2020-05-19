@@ -155,7 +155,9 @@ Consideramos un sistema de vectores $\mathcal{S} = \{v_1,\ldots,v_n\}$. El __sub
 
 Es decir, si yo voy dando valores a unos escalares $\alpha_1,\ldots,\alpha_n$, entonces el vector $\alpha_1v_1+\ldots+\alpha_nv_n$ es combinación lineal de los de $\mathcal{S}$, luego pertenece al subespacio generado por éste.
 
-Denotamos como $\mathcal{L}(\mathcal{S})$ al subsepacio generado por $\mathcal{S}$.
+Como conclusión, el subespacio generado por $\mathcal{S}$ es el menor subespacio de $V$ que contiene a los elementos de $\mathcal{S}$. 
+
+Denotamos como $\mathcal{L}(\mathcal{S})$ al subsepacio generado por $\mathcal{S}$. 
 
 ---
 
@@ -693,7 +695,7 @@ Y, así, tenemos que $\mathrm{dim}(U+W) = `r ncol(b_Sum)`$.
 
 Hay un resultado teórico que relaciona las dimensiones de dos subespacios $U$ y $W$ con las de su intersección y su suma:
 
-> $\mathrm{dim}(U+W) = \mathrm{dim}(U) + \mathrm{dim}(W) - \mathrm{dim}(U\cap W)$
+> __Fórmula de Grassmann__: $\mathrm{dim}(U+W) = \mathrm{dim}(U) + \mathrm{dim}(W) - \mathrm{dim}(U\cap W)$
 
 ---
 

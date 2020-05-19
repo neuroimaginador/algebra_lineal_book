@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-05-18" />
+<meta name="date" content="2020-05-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -115,10 +115,10 @@
 <ul>
 <li class="chapter" data-level="5.1" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#norm"><i class="fa fa-check"></i><b>5.1</b> Qué son las normas y distancias</a></li>
 <li class="chapter" data-level="5.2" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho"><i class="fa fa-check"></i><b>5.2</b> Qué significa el concepto de ortogonalidad</a></li>
-<li class="chapter" data-level="5.3" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho-basis"><i class="fa fa-check"></i><b>5.3</b> Qué es y qué utilidad tiene una base ortonormal</a></li>
-<li class="chapter" data-level="5.4" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#gram-schmidt"><i class="fa fa-check"></i><b>5.4</b> Cómo construimos una base ortonormal</a></li>
-<li class="chapter" data-level="5.5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#compl-ortho"><i class="fa fa-check"></i><b>5.5</b> Qué es el complemento ortogonal de un subespacio</a></li>
-<li class="chapter" data-level="5.6" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#proyec"><i class="fa fa-check"></i><b>5.6</b> Cómo calculamos la proyección de un vector sobre un subespacio</a></li>
+<li class="chapter" data-level="5.3" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#compl-ortho"><i class="fa fa-check"></i><b>5.3</b> Qué es el complemento ortogonal de un subespacio</a></li>
+<li class="chapter" data-level="5.4" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#proyec"><i class="fa fa-check"></i><b>5.4</b> Cómo calculamos la proyección de un vector sobre un subespacio</a></li>
+<li class="chapter" data-level="5.5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho-basis"><i class="fa fa-check"></i><b>5.5</b> Qué es y qué utilidad tiene una base ortonormal</a></li>
+<li class="chapter" data-level="5.6" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#gram-schmidt"><i class="fa fa-check"></i><b>5.6</b> Cómo construimos una base ortonormal</a></li>
 <li class="chapter" data-level="5.7" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho-matrix"><i class="fa fa-check"></i><b>5.7</b> Qué es una matriz ortogonal y una aplicación ortogonal</a></li>
 <li class="chapter" data-level="5.8" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#diag-ortho"><i class="fa fa-check"></i><b>5.8</b> Qué es la diagonalización ortogonal</a></li>
 <li class="chapter" data-level="5.9" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#diag-ortho2"><i class="fa fa-check"></i><b>5.9</b> Qué matrices son diagonalizables ortogonalmente</a></li>
@@ -161,7 +161,7 @@
 </ul>
 <p>En resumen, se suele definir un producto escalar como una <em>forma bilineal, simétrica y definida positiva</em>.</p>
 <p><strong>Notación</strong>: El producto escalar de dos vectores <span class="math inline">\(u\)</span> y <span class="math inline">\(v\)</span> suele recibir diversas notaciones, aunque las más usadas son <span class="math inline">\(u\cdot v\)</span> y <span class="math inline">\(\langle u, v \rangle\)</span>.</p>
-<p>A un espacio vectorial <span class="math inline">\(V\)</span> donde podemos definir un producto vectorial lo llamamos <strong>espacio euclídeo</strong>.</p>
+<p>A un espacio vectorial <span class="math inline">\(V\)</span> donde podemos definir un producto vectorial lo llamamos <strong>espacio euclídeo</strong>, y lo solemos denotar mediante el par <span class="math inline">\(\left(V, \langle\cdot,\cdot\rangle\right)\)</span>.</p>
 <hr />
 <p><strong>Ejemplo</strong></p>
 <p>En <span class="math inline">\(\mathbb{R}^n\)</span>, disponemos de un <em>producto escalar usual</em>, de forma que si <span class="math inline">\(u, v\in\mathbb{R}^n\)</span>, entonces
@@ -171,16 +171,16 @@ siendo <span class="math inline">\(u_i, v_i\)</span>, <span class="math inline">
 <span class="math display">\[\langle u,v \rangle = \alpha_1u_1v_1+\alpha_2u_2v_2+\ldots+\alpha_nu_nv_n\]</span></p>
 <p>Podemos construir productos escalares de la siguiente forma: Tomemos una matriz <span class="math inline">\(A\in\mathcal{M}_n(\mathbb{R})\)</span> simétrica y definida positiva. Entonces la aplicación <span class="math inline">\(\langle\cdot,\cdot\rangle:\mathbb{R}^n\times\mathbb{R}^n\to\mathbb{R}\)</span> definida por
 <span class="math display">\[\langle u, v \rangle = u^{\text{t}}\ A\ v\]</span>
-es un producto escalar. Los dos ejemplos anteriores se correspondían con tomar como <span class="math inline">\(A\)</span> la matriz identidad o una matriz diagonal con elementos positivos <span class="math inline">\(\alpha_i\in\mathbb{R}^{+}\)</span> en la diagonal.</p>
+es un producto escalar. A esta matriz <span class="math inline">\(A\)</span> se le denomina <em>matriz de Gram</em>, y todo producto escalar tiene asociada una. Los dos ejemplos anteriores se correspondían con tomar como <span class="math inline">\(A\)</span> la matriz identidad o una matriz diagonal con elementos positivos <span class="math inline">\(\alpha_i\in\mathbb{R}^{+}\)</span> en la diagonal.</p>
 <hr />
 <p><strong>¿Qué preguntas vamos a responder en este capítulo?</strong></p>
 <ul>
 <li><a href="espacios-euclídeos.html#norm">¿Qué son las normas y distancias?</a></li>
 <li><a href="espacios-euclídeos.html#ortho">¿Qué significa el concepto de ortogonalidad?</a></li>
-<li><a href="espacios-euclídeos.html#ortho-basis">¿Qué es y qué utilidad tiene una base ortonormal?</a></li>
-<li><a href="espacios-euclídeos.html#gram-schmidt">¿Cómo construimos una base ortonormal?</a></li>
 <li><a href="espacios-euclídeos.html#compl-ortho">¿Qué es el complemento ortogonal de un subespacio?</a></li>
 <li><a href="espacios-euclídeos.html#proyec">¿Cómo calculamos la proyección de un vector sobre un subespacio?</a></li>
+<li><a href="espacios-euclídeos.html#ortho-basis">¿Qué es y qué utilidad tiene una base ortonormal?</a></li>
+<li><a href="espacios-euclídeos.html#gram-schmidt">¿Cómo construimos una base ortonormal?</a></li>
 <li><a href="espacios-euclídeos.html#ortho-matrix">¿Qué es una matriz ortogonal y una aplicación ortogonal?</a></li>
 <li><a href="espacios-euclídeos.html#diag-ortho">¿Qué es la diagonalización ortogonal?</a></li>
 <li><a href="espacios-euclídeos.html#diag-ortho2">Qué matrices son diagonalizables ortogonalmente</a></li>
@@ -472,10 +472,337 @@ t
  \rangle = 1\cdot(-1)+0\cdot0+(-1)\cdot1+2\cdot1 = 0\]</span></p>
 <p>Tenemos, por tanto, un sistema de 4 vectores ortogonales en <span class="math inline">\(\mathbb{R}^{4}\)</span>, y, como hemos comentado antes, son linealmente independientes, luego forman una base del espacio vectorial.</p>
 </div>
-<div id="ortho-basis" class="section level2" number="5.3">
-<h2 number="5.3"><span class="header-section-number">5.3</span> Qué es y qué utilidad tiene una base ortonormal</h2>
+<div id="compl-ortho" class="section level2" number="5.3">
+<h2 number="5.3"><span class="header-section-number">5.3</span> Qué es el complemento ortogonal de un subespacio</h2>
+<p>Consideremos un espacio vectorial <span class="math inline">\(V\)</span> con producto escalar <span class="math inline">\(\langle \cdot,\cdot \rangle\)</span>, y sea <span class="math inline">\(U\)</span> un subespacio de <span class="math inline">\(V\)</span>.</p>
+<p>Llamamos <strong>complemento ortogonal de <span class="math inline">\(U\)</span></strong> al conjunto de vectores que son ortogonales a todos los de <span class="math inline">\(U\)</span>:
+<span class="math display">\[U^{\perp} = \{v\in V: \langle v, u \rangle = 0\,\,\text{para todo }u\in U\}\]</span></p>
+<p>Tenemos las siguientes propiedades del complemento ortogonal de un subespacio:</p>
+<blockquote>
+<ul>
+<li><span class="math inline">\(U^{\perp}\)</span> es un subespacio vectorial de <span class="math inline">\(V\)</span>.</li>
+<li><span class="math inline">\(U\cap U^{\perp} = \{0\}\)</span>.</li>
+<li>Si <span class="math inline">\(V\)</span> es de dimensión finita, <span class="math inline">\(\mathrm{dim}(U) + \mathrm{dim}(U^{\perp}) = \mathrm{dim}(V)\)</span>.</li>
+</ul>
+</blockquote>
+<p>Como consecuencia, este resultado nos dice que <strong><span class="math inline">\(V\)</span> se puede descomponer como la suma directa de <span class="math inline">\(U\)</span> y de su complemento ortogonal</strong>: <span class="math inline">\(U\oplus U^{\perp} = V\)</span>.</p>
+<p><strong>¿Cómo calculamos el complemento ortogonal de un subespacio?</strong></p>
+<p>Hemos de hallar los vectores que son ortogonales a un subespacio <span class="math inline">\(U\)</span>. Como hemos <a href="espacios-euclídeos.html#ortho">visto antes</a>, un vector <span class="math inline">\(v\)</span> es ortogonal a <span class="math inline">\(U\)</span> si, y solo si, es ortogonal a todos los vectores de una base de <span class="math inline">\(U\)</span>.</p>
+<p>Así pues, partimos de que tenemos una base <span class="math inline">\(\mathcal{B} = \{u_1,\ldots,u_m\}\)</span> de <span class="math inline">\(U\)</span> y tomemos un vector genérico <span class="math inline">\(v\in V\)</span>. Para que <span class="math inline">\(v\in U^{\perp}\)</span>, debe cumplirse que <span class="math inline">\(\langle v, u_i\rangle = 0\)</span> para todo <span class="math inline">\(i=1,\ldots,m\)</span>.</p>
+<p>Cada una de las restricciones <span class="math inline">\(\langle v, u_i\rangle = 0\)</span> nos proporciona una ecuación lineal que debe verificar un vector para poder pertenecer a <span class="math inline">\(U^{\perp}\)</span>.</p>
+<p>Tomamos, por tanto, todas las ecuaciones lineales que se deducen de las restricciones anteriores: ese sistema de ecuaciones nos representa las ecuaciones cartesianas del espacio <span class="math inline">\(U^{\perp}\)</span>.</p>
+<p>En el caso concreto de un espacio <span class="math inline">\(V=\mathbb{R}^n\)</span> con el <em>producto escalar euclídeo</em>, podemos ver qué aspecto tienen las ecuaciones del tipo <span class="math inline">\(\langle v, u_i \rangle = 0\)</span>. Supongamos que los vectores <span class="math inline">\(v\)</span> y <span class="math inline">\(u_i\)</span> tienen por coordenadas, en la base canónica, las siguientes:
+<span class="math display">\[v = \left(
+\begin{array}{c}
+x_1\\ x_2\\ \vdots \\ x_n\\
+\end{array}\right), \quad 
+u_i = \left(
+\begin{array}{c}
+\alpha_{i,1}\\ \alpha_{i,2}\\ \vdots \\ \alpha_{i,n}\\
+\end{array}\right)\]</span></p>
+<p>Entonces
+<span class="math display">\[
+\langle v, u_i \rangle = 0 \Leftrightarrow 
+\langle \left(
+\begin{array}{c}
+x_1\\ x_2\\ \vdots \\ x_n\\
+\end{array}\right) , 
+\left(
+\begin{array}{c}
+\alpha_{i,1}\\ \alpha_{i,2}\\ \vdots \\ \alpha_{i,n}\\
+\end{array}\right) \rangle = 0 \Leftrightarrow \alpha_{i,1}x_1+\alpha_{i,2}x_2+\ldots+\alpha_{i,n}x_n = 0
+\]</span></p>
+<p>Si nos fijamos, nos queda una ecuación lineal cuyas incógnitas son las coordenadas canónicas de <span class="math inline">\(v\)</span> y cuyos coeficientes son las coordenadas de <span class="math inline">\(u_i\)</span>. Si repetimos el proceso para todo <span class="math inline">\(i=1,\ldots,m\)</span>, tenemos el siguiente sistema de ecuaciones:
+<span class="math display">\[Av = 0\quad\text{donde}\quad A = \left(
+\begin{array}{cccc}
+\alpha_{1,1} &amp; \alpha_{1,2} &amp; \ldots &amp; \alpha_{1,n} \\
+\alpha_{2,1} &amp; \alpha_{2,2} &amp; \ldots &amp; \alpha_{2,n} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\alpha_{m,1} &amp; \alpha_{m,2} &amp; \ldots &amp; \alpha_{m,n} \\
+\end{array}
+\right)\]</span></p>
+<p>Es decir, las <em>ecuaciones cartesianas</em> de <span class="math inline">\(U^{\perp}\)</span> son las que tienen por matriz de coeficientes a las coordenadas de los vectores de la base de <span class="math inline">\(U\)</span> puestos por filas. De hecho, si llamamos <span class="math inline">\(B\)</span> a la matriz que resulta de poner por columnas los vectores de <span class="math inline">\(\mathcal{B}\)</span>, entonces <span class="math inline">\(A = B^{\mathrm{t}}\)</span>.</p>
+<p>A partir de esas ecuaciones cartesianas, ya podríamos <a href="ev.html#base">encontrar una base</a> del subespacio <span class="math inline">\(U^{\perp}\)</span>.</p>
+<hr />
+<p><strong>Ejemplo</strong></p>
+<p>Consideremos el espacio <span class="math inline">\(U\)</span> generado por la base siguiente:
+<span class="math display">\[\mathcal{B} = \{u_i\} = \left\{\left(
+\begin{array}{c@{}}
+-2\\
+0\\
+-2\\
+2
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+-1\\
+-1\\
+-2\\
+2
+\end{array}
+\right)
+\right\}\]</span></p>
+<p>Para hallar su complemento ortogonal, suponemos un vector genérico
+<span class="math display">\[v = \left(\begin{array}{c}
+x\\
+y\\
+z\\
+t
+\end{array}\right)
+\in \mathbb{R}^{4}\]</span>
+y hacemos su producto escalar por todos los vectores de <span class="math inline">\(\mathcal{B}\)</span>, imponiendo que valga 0:
+<span class="math display">\[\langle v, u_1 \rangle = 0\Leftrightarrow\langle \left(\begin{array}{c}
+x\\
+y\\
+z\\
+t
+\end{array}\right)
+, \left(\begin{array}{c}
+-2\\
+0\\
+-2\\
+2
+\end{array}\right)
+ = 0\Leftrightarrow\ \begin{array}{ccr}
+-2x-2z+ 2t &amp; = &amp; 0\\
+\end{array}\]</span><span class="math display">\[\langle v, u_2 \rangle = 0\Leftrightarrow\langle \left(\begin{array}{c}
+x\\
+y\\
+z\\
+t
+\end{array}\right)
+, \left(\begin{array}{c}
+-1\\
+-1\\
+-2\\
+2
+\end{array}\right)
+ = 0\Leftrightarrow\ \begin{array}{ccr}
+-x-y-2z+ 2t &amp; = &amp; 0\\
+\end{array}\]</span></p>
+<p>Hemos llegado, por tanto, al siguiente sistema de ecuaciones que representan las ecuaciones cartesianas de <span class="math inline">\(U^{\perp}\)</span>:
+<span class="math display">\[\begin{array}{rrrrcr}
+-2x &amp;  &amp; -2z &amp; + 2t &amp; = &amp; 0\\
+-x &amp; -y &amp; -2z &amp; + 2t &amp; = &amp; 0\\
+\end{array}\]</span>
+Nos podemos dar cuenta de que la matriz del sistema es la que resulta de poner los vectores de la base <span class="math inline">\(\mathcal{B}\)</span> <em>por filas</em>.</p>
+<p>Como siempre, podemos resolver el sistema por Gauss-Jordan para <a href="ev.html#param2cartesian">deducir la forma paramétrica</a> de la solución, y, por tanto, un <a href="#sisgen">sistema generador</a> de <span class="math inline">\(U^{\perp}\)</span>:
+<span class="math display">\[\left(
+\begin{array}{cccc@{}}
+-2 &amp; 0 &amp; -2 &amp; 2\\
+-1 &amp; -1 &amp; -2 &amp; 2
+\end{array}
+\right)
+\sim\left(
+\begin{array}{cccc@{}}
+1 &amp; 0 &amp; 1 &amp; -1\\
+0 &amp; 1 &amp; 1 &amp; -1
+\end{array}
+\right)
+\Rightarrow\left(\begin{array}{c}
+x\\
+y\\
+z\\
+t
+\end{array}\right)
+ = \alpha\left(\begin{array}{c}
+-1\\
+-1\\
+1\\
+0
+\end{array}\right)
+{}+\beta\left(\begin{array}{c}
+1\\
+1\\
+0\\
+1
+\end{array}\right)
+{}\]</span></p>
+<p>De aquí que una base del complemento ortogonal <span class="math inline">\(U^{\perp}\)</span> sea:
+<span class="math display">\[\mathcal{B}&#39; = \left\{\left(
+\begin{array}{c@{}}
+-1\\
+-1\\
+1\\
+0
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+1\\
+1\\
+0\\
+1
+\end{array}
+\right)
+\right\}\]</span></p>
+<p>Podemos comprobar fácilmente que los vectores de <span class="math inline">\(\mathcal{B}&#39;\)</span> son ortogonales a los de <span class="math inline">\(\mathcal{B}\)</span>.</p>
+<hr />
+</div>
+<div id="proyec" class="section level2" number="5.4">
+<h2 number="5.4"><span class="header-section-number">5.4</span> Cómo calculamos la proyección de un vector sobre un subespacio</h2>
+<p>Consideremos un espacio euclídeo <span class="math inline">\(\left(V, \langle\cdot,\cdot\rangle\right)\)</span>. Consideremos un subespacio <span class="math inline">\(U\)</span>, del que conocemos una <a href="espacios-euclídeos.html#ortho">base <em>ortogonal</em></a> <span class="math inline">\(\mathcal{B}_U = \{u_1,\ldots,u_m\}\)</span>. Definimos la <strong>proyección <em>ortogonal</em> de un vector <span class="math inline">\(v\)</span> sobre el subespacio <span class="math inline">\(U\)</span></strong>, como:
+<span class="math display">\[\mathrm{proy}_U(v) = \frac{\langle v, u_1\rangle}{\langle u_1, u_1 \rangle}u_1 + \frac{\langle v, u_2\rangle}{\langle u_2, u_2 \rangle}u_2 + \ldots + \frac{\langle v, u_m\rangle}{\langle u_m, u_m \rangle}u_m\]</span></p>
+<p>Es decir, la proyección <span class="math inline">\(\mathrm{proy}_U(v)\)</span> es un vector del subespacio <span class="math inline">\(U\)</span>, ya que es combinación lineal de los elementos de su base, y además esta combinación lineal tiene como coeficientes el producto escalar de <span class="math inline">\(v\)</span> por cada elemento de la base, dividido por la norma de <span class="math inline">\(u_i\)</span> al cuadrado (<a href="espacios-euclídeos.html#norm">recordemos que <span class="math inline">\(\|x\| = \sqrt{\langle x,x \rangle}\)</span></a>).</p>
+<p>Evidentemente, si los elementos de la base de <span class="math inline">\(U\)</span> tienen norma 1, el denominador desaparece.</p>
+<p>La proyección de <span class="math inline">\(v\)</span> sobre el subespacio <span class="math inline">\(U\)</span> tiene la propiedad siguiente:</p>
+<blockquote>
+<p>Si <span class="math inline">\(u\)</span> es un vector del subespacio <span class="math inline">\(U\)</span>, y <span class="math inline">\(v\in V\)</span>, entonces <span class="math inline">\(d(u, v) \ge d(\mathrm{proy}_U(v), v)\)</span>, y la única forma para que se dé la igualdad es que <span class="math inline">\(u = \mathrm{proy}_U(v)\)</span>.</p>
+</blockquote>
+<p>Esto significa que la proyección ortogonal de <span class="math inline">\(v\)</span> sobre <span class="math inline">\(U\)</span> es el vector de <span class="math inline">\(U\)</span> más cercano (según la distancia <span class="math inline">\(d\)</span>) a <span class="math inline">\(v\)</span>.</p>
+<p>Como caso particular, podríamos definir la <strong>proyección ortogonal de un vector <span class="math inline">\(v\)</span> sobre otro vector <span class="math inline">\(u\)</span></strong> como
+<span class="math display">\[\mathrm{proy}_u(v) = \frac{\langle v, u \rangle}{\langle u, u\rangle}u\]</span>
+(realmente es la proyección del vector <span class="math inline">\(v\)</span> sobre el <a href="#sisgen">subespacio generado</a> por el vector <span class="math inline">\(u\)</span>).</p>
+<p>Podemos entonces concluir que, si la base ortogonal de <span class="math inline">\(U\)</span> es <span class="math inline">\(\mathcal{B}_U = \{u_1,\ldots,u_m\}\)</span>, entonces
+<span class="math display">\[\mathrm{proy}_U(v) = \mathrm{proy}_{u_1}(v)+\ldots+\mathrm{proy}_{u_m}(v)\]</span></p>
+<p>A partir del hecho de que la base de <span class="math inline">\(U\)</span> es <em>ortogonal</em>, podemos deducir que:</p>
+<blockquote>
+<p>Si <span class="math inline">\(U\)</span> es un subespacio de <span class="math inline">\(V\)</span>, <span class="math inline">\(v\in V\)</span>, y una base ortogonal de <span class="math inline">\(U\)</span> es <span class="math inline">\(\mathcal{B}_U = \{u_1,\ldots,u_m\}\)</span>, entonces el vector <span class="math inline">\(v - \mathrm{proy}_U(v)\)</span> es ortogonal a <span class="math inline">\(U\)</span>, es decir, <span class="math inline">\(v - \mathrm{proy}_U(v) \in U^{\perp}\)</span> está en el <a href="espacios-euclídeos.html#compl-ortho">complemento ortogonal</a> de <span class="math inline">\(U\)</span>.</p>
+</blockquote>
+<p>Esto, junto con que <span class="math inline">\(\mathrm{proy}_U(v)\in U\)</span>, nos justifican el siguiente resultado, llamado <strong>teorema de la descomposición ortogonal</strong>:</p>
+<blockquote>
+<p>En un espacio euclídeo <span class="math inline">\((V, \langle\cdot,\cdot\rangle)\)</span>, dado un subespacio <span class="math inline">\(U\)</span>, y <span class="math inline">\(v\in V\)</span>, existe una única descomposición de <span class="math inline">\(v\)</span> como suma de dos vectores ortogonales, <span class="math inline">\(v = v_1 + v_2\)</span>, tales que <span class="math inline">\(v_1\in U\)</span> y <span class="math inline">\(v_2\in U^{\perp}\)</span>. Concretamente, <span class="math inline">\(v_1 = \mathrm{proy}_U(v)\)</span> y <span class="math inline">\(v_2 = v - v_1 = \mathrm{proy}_{U^{\perp}}(v)\)</span>.</p>
+</blockquote>
+<p>Podemos siempre descomponer un vector de <span class="math inline">\(V\)</span> como suma de dos vectores, uno de <span class="math inline">\(U\)</span> y otro de <span class="math inline">\(U^{\perp}\)</span>, que coinciden con las proyecciones sobre ambos subespacios.</p>
+<hr />
+<p><strong>Ejemplo</strong></p>
+<p>Consideremos el subespacio <span class="math inline">\(U\)</span> cuya base es
+<span class="math display">\[\mathcal{B} = \{u_i\} = \left\{\left(
+\begin{array}{c@{}}
+-1\\
+1\\
+-1\\
+-1
+\end{array}
+\right)
+, \left(
+\begin{array}{c@{}}
+-3\\
+-5\\
+1\\
+-3
+\end{array}
+\right)
+\right\}\]</span></p>
+<p>Notemos que <span class="math inline">\(\mathcal{B}\)</span> es una base <em>ortogonal</em>.</p>
+<p>Consideremos el vector
+<span class="math display">\[v = \left(
+\begin{array}{c@{}}
+-1\\
+1\\
+-2\\
+0
+\end{array}
+\right)
+\]</span></p>
+<p>Buscamos la <em>descomposición ortogonal</em> de <span class="math inline">\(v\)</span> con respecto al subespacio <span class="math inline">\(U\)</span>. Sabemos que podemos escribir <span class="math inline">\(v = v_1 + v_2\)</span>, donde <span class="math inline">\(v_1 = \mathrm{proy}_U(v)\)</span> y <span class="math inline">\(v_2 = v - v_1 \in U^{\perp}\)</span>.
+<span class="math display">\[v_1 = \mathrm{proy}_U(v) = \mathrm{proy}_{u_1}(v)+\mathrm{proy}_{u_2}(v) = \frac{\langle v, u_1\rangle}{\langle u_1, u_1 \rangle} u_1+\frac{\langle v, u_2\rangle}{\langle u_2, u_2 \rangle} u_2\]</span></p>
+<p>Si calculamos esas cantidades
+<span class="math display">\[\langle v, u_1 \rangle = \langle \left(\begin{array}{c}
+-1\\
+1\\
+-2\\
+0
+\end{array}\right)
+, \left(\begin{array}{c}
+-1\\
+1\\
+-1\\
+-1
+\end{array}\right)
+ \rangle = (-1)\cdot(-1)+1\cdot1+(-2)\cdot(-1)+0\cdot(-1) = 4\]</span><span class="math display">\[\langle v, u_2 \rangle = \langle \left(\begin{array}{c}
+-1\\
+1\\
+-2\\
+0
+\end{array}\right)
+, \left(\begin{array}{c}
+-3\\
+-5\\
+1\\
+-3
+\end{array}\right)
+ \rangle = (-1)\cdot(-3)+1\cdot(-5)+(-2)\cdot1+0\cdot(-3) = -4\]</span><span class="math display">\[\langle u_1, u_1 \rangle = \langle \left(\begin{array}{c}
+-1\\
+1\\
+-1\\
+-1
+\end{array}\right)
+, \left(\begin{array}{c}
+-1\\
+1\\
+-1\\
+-1
+\end{array}\right)
+ \rangle = (-1)^2+1^2+(-1)^2+(-1)^2 = 4\]</span><span class="math display">\[\langle u_2, u_2 \rangle = \langle \left(\begin{array}{c}
+-3\\
+-5\\
+1\\
+-3
+\end{array}\right)
+, \left(\begin{array}{c}
+-3\\
+-5\\
+1\\
+-3
+\end{array}\right)
+ \rangle = (-3)^2+(-5)^2+1^2+(-3)^2 = 44\]</span>
+podemos sustituirlas en la expresión de más arriba y llegamos a
+<span class="math display">\[v_1 = 1\cdot\left(\begin{array}{c}
+-1\\
+1\\
+-1\\
+-1
+\end{array}\right)
++(- \frac{1}{11})\cdot\left(\begin{array}{c}
+-3\\
+-5\\
+1\\
+-3
+\end{array}\right)
+ = \left(
+\begin{array}{c@{}}
+- \frac{8}{11}\\
+\frac{16}{11}\\
+- \frac{12}{11}\\
+- \frac{8}{11}
+\end{array}
+\right)
+\]</span></p>
+<p>Por tanto,
+<span class="math display">\[v_2 = \left(
+\begin{array}{c@{}}
+-1\\
+1\\
+-2\\
+0
+\end{array}
+\right)
+ - \left(
+\begin{array}{c@{}}
+- \frac{8}{11}\\
+\frac{16}{11}\\
+- \frac{12}{11}\\
+- \frac{8}{11}
+\end{array}
+\right)
+ = \left(
+\begin{array}{c@{}}
+- \frac{3}{11}\\
+- \frac{5}{11}\\
+- \frac{10}{11}\\
+\frac{8}{11}
+\end{array}
+\right)
+\]</span></p>
+<p>Por lo comentado anteriormente, sabemos que <span class="math inline">\(v_2 = \mathrm{proy}_{U^{\perp}}(v)\in U^{\perp}\)</span>, lo cual se podría comprobar haciendo el producto escalar <span class="math inline">\(\langle v_2, u_i \rangle\)</span> y viendo que su valor es 0 para todo <span class="math inline">\(i\)</span>.</p>
+<hr />
+</div>
+<div id="ortho-basis" class="section level2" number="5.5">
+<h2 number="5.5"><span class="header-section-number">5.5</span> Qué es y qué utilidad tiene una base ortonormal</h2>
 <p>Un vector <span class="math inline">\(v\in V\)</span> se dice <strong>unitario</strong> si <span class="math inline">\(\|v\| = 1\)</span>. Es fácil crear vectores unitarios: dado <span class="math inline">\(u\in V\)</span>, si definimos <span class="math inline">\(v = \frac{1}{\|u\|}u\)</span>, este vector tiene norma 1. A este proceso se le llama <em>normalizar</em>.</p>
-<p>Un sistema de vectores <span class="math inline">\(\{v_1,\ldots,v_k\}\)</span> se llama <strong>sistema ortonormal</strong> si es un sistema ortogonal y cada <span class="math inline">\(v_i\)</span> es un vector unitario (<span class="math inline">\(i=1,\ldots, k\)</span>).</p>
+<p>Un sistema de vectores <span class="math inline">\(\{v_1,\ldots,v_k\}\)</span> se llama <strong>sistema ortonormal</strong> si es un <a href="espacios-euclídeos.html#ortho">sistema ortogonal</a> y cada <span class="math inline">\(v_i\)</span> es un vector unitario (<span class="math inline">\(i=1,\ldots, k\)</span>).</p>
 <p>En relación a lo comentado de las propiedades de los sistemas ortogonales, en nuestro caso podemos decir que un sistema ortonormal <span class="math inline">\(\{v_1,\ldots,v_n\}\)</span>, donde <span class="math inline">\(\mathrm{dim}(V) = n\)</span>, es una <strong>base ortonormal</strong>.</p>
 <p>El interés de una base ortonormal es que es sencillo calcular las <a href="ev.html#coord">coordenadas</a> de cualquier vector con respecto a dicha base:</p>
 <blockquote>
@@ -553,98 +880,85 @@ luego las coordenadas de <span class="math inline">\(v\)</span> en la base <span
 Si consideramos el vector
 <span class="math display">\[v = \left(
 \begin{array}{c@{}}
+-1\\
 1\\
 -2\\
--1\\
-2
+0
 \end{array}
 \right)
 \]</span>
 podemos hallar sus coordenadas en la base <span class="math inline">\(S&#39;\)</span>, ya que cada coordenada de <span class="math inline">\(v\)</span> será el producto escalar de <span class="math inline">\(v\)</span> por el correspondiente vector de <span class="math inline">\(S&#39;\)</span>:
 <span class="math display">\[\langle v, s&#39;_1 \rangle = \langle \left(\begin{array}{c}
+-1\\
 1\\
 -2\\
--1\\
-2
+0
 \end{array}\right), \left(\begin{array}{c}
 \frac{\sqrt{3}}{3}\\
 \frac{\sqrt{3}}{3}\\
 \frac{\sqrt{3}}{3}\\
 0
 \end{array}\right) \rangle = \frac{-2\cdot\sqrt{3}}{3}\]</span><span class="math display">\[\langle v, s&#39;_2 \rangle = \langle \left(\begin{array}{c}
+-1\\
 1\\
 -2\\
--1\\
-2
+0
 \end{array}\right), \left(\begin{array}{c}
 \frac{-\sqrt{6}}{6}\\
 \frac{\sqrt{6}}{3}\\
 \frac{-\sqrt{6}}{6}\\
 0
-\end{array}\right) \rangle = \frac{-2\cdot\sqrt{6}}{3}\]</span><span class="math display">\[\langle v, s&#39;_3 \rangle = \langle \left(\begin{array}{c}
+\end{array}\right) \rangle = \frac{5\cdot\sqrt{6}}{6}\]</span><span class="math display">\[\langle v, s&#39;_3 \rangle = \langle \left(\begin{array}{c}
+-1\\
 1\\
 -2\\
--1\\
-2
+0
 \end{array}\right), \left(\begin{array}{c}
 \frac{\sqrt{6}}{6}\\
 0\\
 \frac{-\sqrt{6}}{6}\\
 \frac{\sqrt{6}}{3}
-\end{array}\right) \rangle = \sqrt{6}\]</span><span class="math display">\[\langle v, s&#39;_4 \rangle = \langle \left(\begin{array}{c}
+\end{array}\right) \rangle = \frac{\sqrt{6}}{6}\]</span><span class="math display">\[\langle v, s&#39;_4 \rangle = \langle \left(\begin{array}{c}
+-1\\
 1\\
 -2\\
--1\\
-2
+0
 \end{array}\right), \left(\begin{array}{c}
 \frac{-\sqrt{3}}{3}\\
 0\\
 \frac{\sqrt{3}}{3}\\
 \frac{\sqrt{3}}{3}
-\end{array}\right) \rangle = 0\]</span></p>
+\end{array}\right) \rangle = \frac{-\sqrt{3}}{3}\]</span></p>
 <p>Entonces, podremos escribir:
 <span class="math display">\[v = \left(\begin{array}{c}
 \frac{-2\cdot\sqrt{3}}{3}\\
-\frac{-2\cdot\sqrt{6}}{3}\\
-\sqrt{6}\\
-0
+\frac{5\cdot\sqrt{6}}{6}\\
+\frac{\sqrt{6}}{6}\\
+\frac{-\sqrt{3}}{3}
 \end{array}\right)_{S&#39;}\]</span></p>
 <hr />
 </div>
-<div id="gram-schmidt" class="section level2" number="5.4">
-<h2 number="5.4"><span class="header-section-number">5.4</span> Cómo construimos una base ortonormal</h2>
-<ul>
-<li>Teorema de existencia</li>
-<li>Gram-Schmidt</li>
-</ul>
-<hr />
-<p><strong>Ejemplo</strong></p>
-<hr />
-</div>
-<div id="compl-ortho" class="section level2" number="5.5">
-<h2 number="5.5"><span class="header-section-number">5.5</span> Qué es el complemento ortogonal de un subespacio</h2>
-<ul>
-<li>Definición de complemento ortogonal</li>
-<li>Método de cálculo</li>
-</ul>
-<hr />
-<p><strong>Ejemplo</strong></p>
-<hr />
-</div>
-<div id="proyec" class="section level2" number="5.6">
-<h2 number="5.6"><span class="header-section-number">5.6</span> Cómo calculamos la proyección de un vector sobre un subespacio</h2>
-<ul>
-<li>Definición de proyección ortogonal sobre otro vector</li>
-<li>Propiedades</li>
-<li>Definición de proyección sobre un subespacio</li>
-<li>Teorema de descomposición ortogonal</li>
-</ul>
+<div id="gram-schmidt" class="section level2" number="5.6">
+<h2 number="5.6"><span class="header-section-number">5.6</span> Cómo construimos una base ortonormal</h2>
+<p>En las secciones anteriores hemos usado bases ortogonales y ortonormales, pero cabe preguntarnos si la existencia de tales bases está asegurada. La respuesta nos la da el siguiente resultado:</p>
+<blockquote>
+<p>Sea <span class="math inline">\(V\)</span> un espacio vectorial euclídeo de <em>dimensión finita</em>. Entonces <span class="math inline">\(V\)</span> tiene una base ortonormal.</p>
+</blockquote>
+<p>La demostración de este resultado teórico realmente nos presenta un método constructivo que permite hallar una base ortonormal del espacio <span class="math inline">\(V\)</span> a partir de una base cualquiera.</p>
+<p><strong>Método de Ortonormalización de Gram-Schmidt</strong></p>
 <hr />
 <p><strong>Ejemplo</strong></p>
 <hr />
 </div>
 <div id="ortho-matrix" class="section level2" number="5.7">
 <h2 number="5.7"><span class="header-section-number">5.7</span> Qué es una matriz ortogonal y una aplicación ortogonal</h2>
+<ul>
+<li>Definición de matriz ortogonal</li>
+<li>Definición de aplicación ortogonal</li>
+</ul>
+<hr />
+<p><strong>Ejemplo</strong></p>
+<hr />
 </div>
 <div id="diag-ortho" class="section level2" number="5.8">
 <h2 number="5.8"><span class="header-section-number">5.8</span> Qué es la diagonalización ortogonal</h2>

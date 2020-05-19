@@ -529,6 +529,7 @@ glue_latex(
 
 __Solución__
 
+
 a. Para hallar la [matriz asociada](#matriz-apli) a la aplicación $f$ en las bases canónicas, basta con mirar los coeficientes de las variables $x,y,\ldots$ en la expresión de $f$ y ponerlos por columnas. De esta forma:
 ```{r}
 glue_latex(
@@ -661,8 +662,8 @@ y \(\mathrm{dim}(\mathrm{Im}\ f) = `r ncol(bImf)`\).
 
 c. Para determinar si $f$ es [inyectiva](#inyectividad) o [sobreyectiva](#sobrey), nos fijaremos en las dimensiones de su núcleo y de su imagen:
 
-- $f$ será inyectiva si y solo si se cumple $\mathrm{dim}(\mathrm{Ker}\ f) = 0$. Pero sabemos que \(\mathrm{dim}(\mathrm{Ker}\ f) = `r ncol(genKer)`\), luego $f$ no es inyectiva.
-- $f$ será sobreyectiva si y solo si se cumple que \(\mathrm{dim}(\mathrm{Im}\ f) = \mathrm{dim}(W) = \mathrm{dim}(\mathbb{R}^{`r m`})\), y esto sí se cumple, como hemos visto en el apartado anterior,luego $f$ es sobreyectiva.
+- $f$ será inyectiva si y solo si se cumple $\mathrm{dim}(\mathrm{Ker}\ f) = 0$. Sabemos que \(\mathrm{dim}(\mathrm{Ker}\ f) = `r ncol(genKer)`\), luego $f$ `r ifelse(ncol(genKer) == 0, "", "no")` es inyectiva.
+- $f$ será sobreyectiva si y solo si se cumple que \(\mathrm{dim}(\mathrm{Im}\ f) = \mathrm{dim}(W) = \mathrm{dim}(\mathbb{R}^{`r m`})\), y esto `r ifelse(ncol(bImf) == m, "", "no")` se cumple, como hemos visto en el apartado anterior, luego $f$ `r ifelse(ncol(bImf) == m, "", "no")` es sobreyectiva.
 
 d. El [teorema de la dimensión para núcleo e imagen](@th-dim-nucleo) dice que $\mathrm{dim}(V) = \mathrm{dim}(\mathrm{Ker}\ f) + \mathrm{dim}(\mathrm{Im}\ f)$. Lo podemos comprobar fácilmente:
 $$\begin{array}{ccccc}
@@ -674,8 +675,9 @@ e. Dado el subespacio $U$, debemos encontrar un sistema de vectores $\mathcal{G}
 
 Para calcular un sistema generador de $U$, pasamos sus [ecuaciones cartesianas](#base) a paramétricas, usando métodos Gaussianos:
 ```{r}
+U <- solve_homogeneous(AU)
 glue_latex(
-  "\\left\\{[write_system(AU, matlab::zeros(nrow(AU), 1))]\\right.",
+  "\\left\\{[write_system(AU, zero_vector(AU), fractions = TRUE, latex = TRUE)]\\right.",
   "\\Rightarrow",
   "[to_latex(gen_vector_V)] = [write_linear_combination(U, vars = params)]"
 )

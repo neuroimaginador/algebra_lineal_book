@@ -21,7 +21,7 @@ En resumen, se suele definir un producto escalar como una _forma bilineal, simé
 
 __Notación__: El producto escalar de dos vectores $u$ y $v$ suele recibir diversas notaciones, aunque las más usadas son $u\cdot v$ y $\langle u, v \rangle$.
 
-A un espacio vectorial $V$ donde podemos definir un producto vectorial lo llamamos __espacio euclídeo__.
+A un espacio vectorial $V$ donde podemos definir un producto vectorial lo llamamos __espacio euclídeo__, y lo solemos denotar mediante el par $\left(V, \langle\cdot,\cdot\rangle\right)$.
 
 ---
 
@@ -36,7 +36,7 @@ $$\langle u,v \rangle = \alpha_1u_1v_1+\alpha_2u_2v_2+\ldots+\alpha_nu_nv_n$$
 
 Podemos construir productos escalares de la siguiente forma: Tomemos una matriz $A\in\mathcal{M}_n(\mathbb{R})$ simétrica y definida positiva. Entonces la aplicación $\langle\cdot,\cdot\rangle:\mathbb{R}^n\times\mathbb{R}^n\to\mathbb{R}$ definida por
 $$\langle u, v \rangle = u^{\text{t}}\ A\ v$$
-es un producto escalar. Los dos ejemplos anteriores se correspondían con tomar como $A$ la matriz identidad o una matriz diagonal con elementos positivos $\alpha_i\in\mathbb{R}^{+}$ en la diagonal.
+es un producto escalar. A esta matriz $A$ se le denomina _matriz de Gram_, y todo producto escalar tiene asociada una. Los dos ejemplos anteriores se correspondían con tomar como $A$ la matriz identidad o una matriz diagonal con elementos positivos $\alpha_i\in\mathbb{R}^{+}$ en la diagonal.
 
 ---
 
@@ -44,10 +44,10 @@ __¿Qué preguntas vamos a responder en este capítulo?__
 
 - [¿Qué son las normas y distancias?](#norm)
 - [¿Qué significa el concepto de ortogonalidad?](#ortho)
-- [¿Qué es y qué utilidad tiene una base ortonormal?](#ortho-basis)
-- [¿Cómo construimos una base ortonormal?](#gram-schmidt)
 - [¿Qué es el complemento ortogonal de un subespacio?](#compl-ortho)
 - [¿Cómo calculamos la proyección de un vector sobre un subespacio?](#proyec)
+- [¿Qué es y qué utilidad tiene una base ortonormal?](#ortho-basis)
+- [¿Cómo construimos una base ortonormal?](#gram-schmidt)
 - [¿Qué es una matriz ortogonal y una aplicación ortogonal?](#ortho-matrix)
 - [¿Qué es la diagonalización ortogonal?](#diag-ortho)
 - [Qué matrices son diagonalizables ortogonalmente](#diag-ortho2)
@@ -333,12 +333,308 @@ Tenemos, por tanto, un sistema de `r ncol(B_ortho)` vectores ortogonales en \(\m
 
 
 
-## Qué es y qué utilidad tiene una base ortonormal {#ortho-basis}
+## Qué es el complemento ortogonal de un subespacio {#compl-ortho}
 
+Consideremos un espacio vectorial $V$ con producto escalar $\langle \cdot,\cdot \rangle$, y sea $U$ un subespacio de $V$.
+
+Llamamos __complemento ortogonal de $U$__ al conjunto de vectores que son ortogonales a todos los de $U$:
+$$U^{\perp} = \{v\in V: \langle v, u \rangle = 0\,\,\text{para todo }u\in U\}$$
+
+Tenemos las siguientes propiedades del complemento ortogonal de un subespacio:
+
+> - $U^{\perp}$ es un subespacio vectorial de $V$.
+- $U\cap U^{\perp} = \{0\}$.
+- Si $V$ es de dimensión finita, $\mathrm{dim}(U) + \mathrm{dim}(U^{\perp}) = \mathrm{dim}(V)$.
+
+Como consecuencia, este resultado nos dice que __$V$ se puede descomponer como la suma directa de $U$ y de su complemento ortogonal__: $U\oplus U^{\perp} = V$.
+
+__¿Cómo calculamos el complemento ortogonal de un subespacio?__
+
+Hemos de hallar los vectores que son ortogonales a un subespacio $U$. Como hemos [visto antes](#ortho), un vector $v$ es ortogonal a $U$ si, y solo si, es ortogonal a todos los vectores de una base de $U$.
+
+Así pues, partimos de que tenemos una base $\mathcal{B} = \{u_1,\ldots,u_m\}$ de $U$ y tomemos un vector genérico $v\in V$. Para que $v\in U^{\perp}$, debe cumplirse que $\langle v, u_i\rangle = 0$ para todo $i=1,\ldots,m$.
+
+Cada una de las restricciones $\langle v, u_i\rangle = 0$ nos proporciona una ecuación lineal que debe verificar un vector para poder pertenecer a $U^{\perp}$.
+
+Tomamos, por tanto, todas las ecuaciones lineales que se deducen de las restricciones anteriores: ese sistema de ecuaciones nos representa las ecuaciones cartesianas del espacio $U^{\perp}$.
+
+En el caso concreto de un espacio $V=\mathbb{R}^n$ con el _producto escalar euclídeo_, podemos ver qué aspecto tienen las ecuaciones del tipo $\langle v, u_i \rangle = 0$. Supongamos que los vectores $v$ y $u_i$ tienen por coordenadas, en la base canónica, las siguientes:
+$$v = \left(
+\begin{array}{c}
+x_1\\ x_2\\ \vdots \\ x_n\\
+\end{array}\right), \quad 
+u_i = \left(
+\begin{array}{c}
+\alpha_{i,1}\\ \alpha_{i,2}\\ \vdots \\ \alpha_{i,n}\\
+\end{array}\right)$$
+
+Entonces
+$$
+\langle v, u_i \rangle = 0 \Leftrightarrow 
+\langle \left(
+\begin{array}{c}
+x_1\\ x_2\\ \vdots \\ x_n\\
+\end{array}\right) , 
+\left(
+\begin{array}{c}
+\alpha_{i,1}\\ \alpha_{i,2}\\ \vdots \\ \alpha_{i,n}\\
+\end{array}\right) \rangle = 0 \Leftrightarrow \alpha_{i,1}x_1+\alpha_{i,2}x_2+\ldots+\alpha_{i,n}x_n = 0
+$$
+
+Si nos fijamos, nos queda una ecuación lineal cuyas incógnitas son las coordenadas canónicas de $v$ y cuyos coeficientes son las coordenadas de $u_i$. Si repetimos el proceso para todo $i=1,\ldots,m$, tenemos el siguiente sistema de ecuaciones:
+$$Av = 0\quad\text{donde}\quad A = \left(
+\begin{array}{cccc}
+\alpha_{1,1} & \alpha_{1,2} & \ldots & \alpha_{1,n} \\
+\alpha_{2,1} & \alpha_{2,2} & \ldots & \alpha_{2,n} \\
+\vdots & \vdots & \ddots & \vdots \\
+\alpha_{m,1} & \alpha_{m,2} & \ldots & \alpha_{m,n} \\
+\end{array}
+\right)$$
+
+Es decir, las _ecuaciones cartesianas_ de $U^{\perp}$ son las que tienen por matriz de coeficientes a las coordenadas de los vectores de la base de $U$ puestos por filas. De hecho, si llamamos $B$ a la matriz que resulta de poner por columnas los vectores de $\mathcal{B}$, entonces $A = B^{\mathrm{t}}$.
+
+A partir de esas ecuaciones cartesianas, ya podríamos [encontrar una base](#base) del subespacio $U^{\perp}$.
+
+---
+
+__Ejemplo__
+
+```{r}
+bW <- rMatrix(n = n, m = 2)
+bWt <- solve_homogeneous(t(bW))
+```
+
+Consideremos el espacio $U$ generado por la base siguiente:
+```{r}
+glue_latex(
+  "\\mathcal{B} = \\{u_i\\} = \\left\\{",
+  "[vectors_to_latex(bW)]",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+
+Para hallar su complemento ortogonal, suponemos un vector genérico 
+```{r}
+glue_latex(
+  "v = [to_latex(generic_vector(n))]\\in \\mathbb{R}^{[n]}"
+) %>% 
+  cat()
+```
+y hacemos su producto escalar por todos los vectores de $\mathcal{B}$, imponiendo que valga 0:
+```{r}
+for (i in seq(ncol(bW))) {
+  
+  ui <- matrix(bW[, i])
+  
+  glue_latex(
+    "\\langle v, u_[i] \\rangle = 0",
+    "\\Leftrightarrow",
+    "\\langle [to_latex(generic_vector(n))], [to_latex(ui)] = 0",
+    "\\Leftrightarrow",
+    "\\ [write_system(t(ui), 0, latex = TRUE, format = 'c')]"
+  ) %>% 
+    cat()
+}
+```
+
+Hemos llegado, por tanto, al siguiente sistema de ecuaciones que representan las ecuaciones cartesianas de $U^{\perp}$:
+```{r}
+glue_latex(
+  "[write_system(t(bW), zero_vector(t(bW)), latex = TRUE)]"
+) %>% 
+  cat()
+```
+Nos podemos dar cuenta de que la matriz del sistema es la que resulta de poner los vectores de la base $\mathcal{B}$ _por filas_.
+
+Como siempre, podemos resolver el sistema por Gauss-Jordan para [deducir la forma paramétrica](#param2cartesian) de la solución, y, por tanto, un [sistema generador](#sisgen) de $U^{\perp}$:
+```{r}
+params <- c("\\alpha", "\\beta", "\\gamma", "\\delta")
+s <- gauss_elimination(t(bW), jordan = TRUE, diag1 = TRUE)
+glue_latex(
+  "[glue_matrices(t(bW), latex = TRUE, fractions = TRUE)]",
+  "\\sim",
+  "[glue_matrices(s$splits, latex = TRUE, fractions = TRUE)]",
+  "\\Rightarrow",
+  "[to_latex(generic_vector(n))] = [write_linear_combination(bWt, vars = params)]"
+) %>% 
+  cat()
+```
+
+De aquí que una base del complemento ortogonal $U^{\perp}$ sea:
+```{r}
+glue_latex(
+  "\\mathcal{B}' = \\left\\{",
+  "[vectors_to_latex(bWt)]",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+
+Podemos comprobar fácilmente que los vectores de $\mathcal{B}'$ son ortogonales a los de $\mathcal{B}$.
+
+---
+
+## Cómo calculamos la proyección de un vector sobre un subespacio {#proyec}
+
+Consideremos un espacio euclídeo $\left(V, \langle\cdot,\cdot\rangle\right)$. Consideremos un subespacio $U$, del que conocemos una [base _ortogonal_](#ortho) $\mathcal{B}_U = \{u_1,\ldots,u_m\}$.  Definimos la __proyección _ortogonal_ de un vector $v$ sobre el subespacio $U$__, como:
+$$\mathrm{proy}_U(v) = \frac{\langle v, u_1\rangle}{\langle u_1, u_1 \rangle}u_1 + \frac{\langle v, u_2\rangle}{\langle u_2, u_2 \rangle}u_2 + \ldots + \frac{\langle v, u_m\rangle}{\langle u_m, u_m \rangle}u_m$$
+
+Es decir, la proyección $\mathrm{proy}_U(v)$ es un vector del subespacio $U$, ya que es combinación lineal de los elementos de su base, y además esta combinación lineal tiene como coeficientes el producto escalar de $v$ por cada elemento de la base, dividido por la norma de $u_i$ al cuadrado ([recordemos que $\|x\| = \sqrt{\langle x,x \rangle}$](#norm)).
+
+Evidentemente, si los elementos de la base de $U$ tienen norma 1, el denominador desaparece.
+
+La proyección de $v$ sobre el subespacio $U$ tiene la propiedad siguiente:
+
+> Si $u$ es un vector del subespacio $U$, y $v\in V$, entonces $d(u, v) \ge d(\mathrm{proy}_U(v), v)$, y la única forma para que se dé la igualdad es que $u = \mathrm{proy}_U(v)$.
+
+Esto significa que la proyección ortogonal de $v$ sobre $U$ es el vector de $U$ más cercano (según la distancia $d$) a $v$.
+
+Como caso particular, podríamos definir la __proyección ortogonal de un vector $v$ sobre otro vector $u$__ como
+$$\mathrm{proy}_u(v) = \frac{\langle v, u \rangle}{\langle u, u\rangle}u$$
+(realmente es la proyección del vector $v$ sobre el [subespacio generado](#sisgen) por el vector $u$).
+
+Podemos entonces concluir que, si la base ortogonal de $U$ es $\mathcal{B}_U = \{u_1,\ldots,u_m\}$, entonces
+$$\mathrm{proy}_U(v) = \mathrm{proy}_{u_1}(v)+\ldots+\mathrm{proy}_{u_m}(v)$$
+
+A partir del hecho de que la base de $U$ es _ortogonal_, podemos deducir que:
+
+> Si $U$ es un subespacio de $V$, $v\in V$, y una base ortogonal de $U$ es $\mathcal{B}_U = \{u_1,\ldots,u_m\}$, entonces el vector $v - \mathrm{proy}_U(v)$ es ortogonal a $U$, es decir, $v - \mathrm{proy}_U(v) \in U^{\perp}$ está en el [complemento ortogonal](#compl-ortho) de $U$.
+
+Esto, junto con que $\mathrm{proy}_U(v)\in U$, nos justifican el siguiente resultado, llamado __teorema de la descomposición ortogonal__:
+
+> En un espacio euclídeo $(V, \langle\cdot,\cdot\rangle)$, dado un subespacio $U$, y $v\in V$, existe una única descomposición de $v$ como suma de dos vectores ortogonales, $v = v_1 + v_2$, tales que $v_1\in U$ y $v_2\in U^{\perp}$. Concretamente, $v_1 = \mathrm{proy}_U(v)$ y $v_2 = v - v_1 = \mathrm{proy}_{U^{\perp}}(v)$.
+
+Podemos siempre descomponer un vector de $V$ como suma de dos vectores, uno de $U$ y otro de $U^{\perp}$, que coinciden con las proyecciones sobre ambos subespacios.
+
+---
+
+__Ejemplo__
+
+```{r}
+repeat {
+
+  bU <- rMatrix(n = n, m = 2) %>% 
+    linearly_independents() %>% 
+    t() %>% remove_fraction() %>% t()
+
+  if (ncol(bU) == 2) break  
+  
+}
+c(bU, s) %<-% gram_schmidt(bU)
+bU <- (bU / s) %>% t() %>% 
+  remove_fraction() %>% t()
+```
+
+Consideremos el subespacio $U$ cuya base es
+```{r}
+glue_latex(
+  "\\mathcal{B} = \\{u_i\\} = \\left\\{",
+  "[vectors_to_latex(bU)]",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+
+Notemos que $\mathcal{B}$ es una base _ortogonal_. 
+
+Consideremos el vector
+```{r}
+v <- rVector(n = n)
+glue_latex(
+  "v = [glue_matrices(v, latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+
+Buscamos la _descomposición ortogonal_ de $v$ con respecto al subespacio $U$. Sabemos que podemos escribir $v = v_1  + v_2$, donde $v_1 = \mathrm{proy}_U(v)$ y $v_2 = v - v_1 \in U^{\perp}$.
+```{r}
+ii <- seq(ncol(bU))
+str <- glue::glue("\\mathrm{proy}_{u_[ii]}(v)",
+                  .open = "[", .close = "]") %>% 
+  str_flatten("+")
+str2 <- glue::glue("\\frac{\\langle v, u_[ii]\\rangle}{\\langle u_[ii], u_[ii] \\rangle} u_[ii]",
+                   .open = "[", .close = "]") %>% 
+  str_flatten("+")
+glue_latex(
+  "v_1 = \\mathrm{proy}_U(v) = [str] = [str2]"
+) %>% 
+  cat()
+```
+
+Si calculamos esas cantidades
+```{r}
+v_str <- as.character(v)
+v_str[v < 0] <- paste0("(", v_str[v < 0], ")")
+prod_str <- "\\cdot"
+uv <- rep(0, ncol(bU))
+uu <- rep(0, ncol(bU))
+for (i in seq(ncol(bU))) {
+  
+  ui <- matrix(bU[, i], ncol = 1)
+  ui_str <- as.character(ui)
+  ui_str[ui < 0] <- paste0("(", ui_str[ui < 0], ")")
+  
+  uv[i] <- sum(v * ui)
+
+  glue_latex(
+    "\\langle v, u_[i] \\rangle = \\langle [to_latex(v)], ",
+    "[to_latex(ui)] \\rangle = ",
+    "[glue::glue('{v_str}{prod_str}{ui_str}') %>% str_flatten('+')] = [sum(v * ui)]"
+  ) %>% 
+    cat()
+  
+}
+
+for (i in seq(ncol(bU))) {
+  
+  ui <- matrix(bU[, i], ncol = 1)
+  ui_str <- as.character(ui)
+  ui_str[ui < 0] <- paste0("(", ui_str[ui < 0], ")")
+  
+  uu[i] <- sum(ui * ui)
+
+  glue_latex(
+    "\\langle u_[i], u_[i] \\rangle = \\langle [to_latex(ui)], ",
+    "[to_latex(ui)] \\rangle = ",
+    "[glue::glue('{ui_str}^2') %>% str_flatten('+')] = [sum(ui * ui)]"
+  ) %>% 
+    cat()
+}
+```
+podemos sustituirlas en la expresión de más arriba y llegamos a
+```{r}
+bU_cols <- lapply(ii, function(i) to_latex(matrix(bU[, i], ncol = 1)))
+coef <- to_fraction(uv / uu, latex = TRUE)
+coef[uv < 0] <- paste0("(", coef[uv < 0], ")")
+str <- glue::glue("{coef}{prod_str}{bU_cols}") %>% 
+  str_flatten("+")
+C <- matrix(rep(uv / uu, nrow(bU)), nrow = nrow(bU), byrow = TRUE)
+proy <- matrix(rowSums(C * bU), ncol = 1)
+glue_latex(
+  "v_1 = [str] = [glue_matrices(proy, latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+
+Por tanto,
+```{r}
+glue_latex(
+  "v_2 = [glue_matrices(v, latex = TRUE, fractions = TRUE)] - [glue_matrices(proy, latex = TRUE, fractions = TRUE)] = ",
+  "[glue_matrices(v - proy, latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+
+Por lo comentado anteriormente, sabemos que $v_2 = \mathrm{proy}_{U^{\perp}}(v)\in U^{\perp}$, lo cual se podría comprobar haciendo el producto escalar $\langle v_2, u_i \rangle$ y viendo que su valor es 0 para todo $i$.
+
+---
+
+## Qué es y qué utilidad tiene una base ortonormal {#ortho-basis}
 
 Un vector $v\in V$ se dice __unitario__ si $\|v\| = 1$. Es fácil crear vectores unitarios: dado $u\in V$, si definimos $v = \frac{1}{\|u\|}u$, este vector tiene norma 1. A este proceso se le llama _normalizar_.
 
-Un sistema de vectores $\{v_1,\ldots,v_k\}$ se llama __sistema ortonormal__ si es un sistema ortogonal y cada $v_i$ es un vector unitario ($i=1,\ldots, k$).
+Un sistema de vectores $\{v_1,\ldots,v_k\}$ se llama __sistema ortonormal__ si es un [sistema ortogonal](#ortho) y cada $v_i$ es un vector unitario ($i=1,\ldots, k$).
 
 En relación a lo comentado de las propiedades de los sistemas ortogonales, en nuestro caso podemos decir que un sistema ortonormal $\{v_1,\ldots,v_n\}$, donde $\mathrm{dim}(V) = n$, es una __base ortonormal__.
 
@@ -438,10 +734,18 @@ glue_latex(
 
 ---
 
+
 ## Cómo construimos una base ortonormal {#gram-schmidt}
 
-- Teorema de existencia
-- Gram-Schmidt
+En las secciones anteriores hemos usado bases ortogonales y ortonormales, pero cabe preguntarnos si la existencia de tales bases está asegurada. La respuesta nos la da el siguiente resultado:
+
+> Sea $V$ un espacio vectorial euclídeo de _dimensión finita_. Entonces $V$ tiene una base ortonormal.
+
+La demostración de este resultado teórico realmente nos presenta un método constructivo que permite hallar una base ortonormal del espacio $V$ a partir de una base cualquiera.
+
+__Método de Ortonormalización de Gram-Schmidt__
+
+
 
 ---
 
@@ -449,36 +753,17 @@ __Ejemplo__
 
 ---
 
-## Qué es el complemento ortogonal de un subespacio {#compl-ortho}
-
-- Definición de complemento ortogonal
-- Método de cálculo
-
----
-
-__Ejemplo__
-
-```{r}
-bW <- rMatrix(n = n, m = 2)
-bWt <- solve_homogeneous(t(bW))
-```
-
----
-
-## Cómo calculamos la proyección de un vector sobre un subespacio {#proyec}
-
-- Definición de proyección ortogonal sobre otro vector
-- Propiedades
-- Definición de proyección sobre un subespacio
-- Teorema de descomposición ortogonal
-
----
-
-__Ejemplo__
-
----
 
 ## Qué es una matriz ortogonal y una aplicación ortogonal {#ortho-matrix}
+
+- Definición de matriz ortogonal
+- Definición de aplicación ortogonal
+
+---
+
+__Ejemplo__
+
+---
 
 ## Qué es la diagonalización ortogonal {#diag-ortho}
 
