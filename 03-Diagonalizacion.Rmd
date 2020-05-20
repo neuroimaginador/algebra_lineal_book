@@ -166,6 +166,7 @@ __¿Qué preguntas vamos a responder en este capítulo?__
 - [¿Qué son los autovalores de un endomorfismo y de una matriz?](#eigenvalue)
 - [¿Cómo calculamos los autovectores asociados a un autovalor?](#eigenspace)
 - [¿Cómo sabemos si un endomorfismo o una matriz es diagonalizable?](#diagonalizable)
+- [¿Si una matriz es diagonalizable, cómo podemos hallar sus potencias?](#pot-matrix)
 - [¿Para qué podemos utilizar el Teorema de Cayley-Hamilton?](#th-cayley)
 
 ## Qué son los autovalores de un endomorfismo y de una matriz {#eigenvalue}
@@ -479,6 +480,70 @@ if (diagonalizable) {
 }
 ```
 
+---
+
+## Si una matriz es diagonalizable, cómo podemos hallar sus potencias {#pot-matrix}
+
+Consideremos una matriz cuadrada [diagonalizable](#diagonalizable). En concreto, eso significa que existe otra matriz cuadrada $P$ regular (cuyas columnas son los vectores de la base de [autovectores](#eigenspace)) tal que 
+$$A = P^{-1}\ D\ P$$
+donde $D$ es la matriz diagonal con los [autovalores](#eigenvalue) de $A$ en la diagonal principal.
+
+Supongamos que queremos hallar $A^k$, con $k > 1$ entero. Si usamos la expresión anterior, nos queda:
+$$A^k = A\cdot A\cdot\ldots A = (P^{-1}\ D\ P) \cdot (P^{-1}\ D\ P) \cdot\ldots (P^{-1}\ D\ P)$$
+donde los productos se repiten $k$ veces. Si agrupamos cada par $P\cdot P^{-1}$, que es igual a la identidad, entonces nos queda:
+$$A^k = P^{-1}\ D^k\ P$$
+Como $D$ es una matriz diagonal con los autovalores, es fácil calcular su potencia $k$-ésima:
+$$ \left(
+\begin{array}{cccc}
+\lambda_1 & 0 & \ldots & 0 \\
+0 & \lambda_2 & \ldots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \ldots & \lambda_n \\
+\end{array}\right)^k =
+\left(
+\begin{array}{cccc}
+\lambda_1^k & 0 & \ldots & 0 \\
+0 & \lambda_2^k & \ldots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \ldots & \lambda_n^k \\
+\end{array}\right)
+$$
+
+De esta forma, calcular la potencia de $A$ se reduce a calcular la potencia $k$-ésima de la matriz $D$. Esto es especialmente útil para calcular potencias _altas_ de $A$.
+
+---
+
+__Ejemplo__
+
+Calculemos $A^{100}$ donde $A$ es la matriz del [ejemplo anterior](#diagonalizable).
+
+Conocemos su descomposición:
+```{r}
+glue_latex(
+    "\\begin{array}{rcl}",
+    "A & = & P\\ D\\ P^{-1} = \\\\",
+    " & = & [glue_matrices(b_eigenvectors, latex = TRUE, fractions = TRUE)][glue_matrices(D, latex = TRUE, fractions = TRUE)][glue_matrices(b_eigenvectors, latex = TRUE, fractions = TRUE)]^{-1} \\\\",
+    "\\end{array}"
+  ) %>% 
+    cat()
+```
+
+Entonces, por lo comentado anteriormente, $A^{100} = P\ D^{100}\ P^{-1}$, es decir:
+```{r}
+di <- to_fraction(diag(D))
+di[diag(D) < 0] <- paste0("(", di[diag(D) < 0], ")")
+di <- paste0(di, "^{100}")
+D_str <- matrix(as.character(D), ncol = ncol(D))
+diag(D_str) <- di
+glue_latex(
+  "\\begin{array}{rcl}",
+  "A^{100} & = & P\ D^{100}\ P^{-1} = \\\\",
+  " & = & [glue_matrices(b_eigenvectors, latex = TRUE, fractions = TRUE)][glue_matrices(D_str, latex = TRUE)][glue_matrices(b_eigenvectors, latex = TRUE, fractions = TRUE)]^{-1} \\\\",
+  "\\end{array}"
+) %>% 
+  cat()
+```
+
 
 ---
 
@@ -509,7 +574,7 @@ $$A^{-1} = -\dfrac{1}{c_0}\left(c_nA^{n-1}+\ldots+c_1\ I\right)$$
 
 Por tanto, __el teorema de Cayley-Hamilton nos da una forma de calcular la inversa de una matriz cuadrada $A$, únicamente a partir de sumas de potencias de la matriz__.
 
-Esta misma estrategia nos proporciona un __método para calcular potencias de la matriz $A$__, reduciendo el problema a potencias de $A$ de grado menor que el tamaño de la propia matriz.
+Esta misma estrategia nos proporciona un __método para calcular potencias de la matriz $A$__, [aparte del ya explicado](#pot-matrix), reduciendo el problema a potencias de $A$ de grado menor que el tamaño de la propia matriz.
 
 Si, de la igualdad del teorema, despejamos el término $A^n$, nos queda
 $$A^n = -\frac{1}{c_n}\left(-c_{n-1}A^{n-1}-\ldots-c_1 A- c_0 I\right)$$
