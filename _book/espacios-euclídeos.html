@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-05-19" />
+<meta name="date" content="2020-05-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -109,7 +109,8 @@
 <li class="chapter" data-level="4.1" data-path="diagonalización.html"><a href="diagonalización.html#eigenvalue"><i class="fa fa-check"></i><b>4.1</b> Qué son los autovalores de un endomorfismo y de una matriz</a></li>
 <li class="chapter" data-level="4.2" data-path="diagonalización.html"><a href="diagonalización.html#eigenspace"><i class="fa fa-check"></i><b>4.2</b> Cómo calculamos los autovectores asociados a un autovalor</a></li>
 <li class="chapter" data-level="4.3" data-path="diagonalización.html"><a href="diagonalización.html#diagonalizable"><i class="fa fa-check"></i><b>4.3</b> Cómo sabemos si un endomorfismo o una matriz es diagonalizable</a></li>
-<li class="chapter" data-level="4.4" data-path="diagonalización.html"><a href="diagonalización.html#th-cayley"><i class="fa fa-check"></i><b>4.4</b> Para qué podemos utilizar el Teorema de Cayley-Hamilton</a></li>
+<li class="chapter" data-level="4.4" data-path="diagonalización.html"><a href="diagonalización.html#pot-matrix"><i class="fa fa-check"></i><b>4.4</b> Si una matriz es diagonalizable, cómo podemos hallar sus potencias</a></li>
+<li class="chapter" data-level="4.5" data-path="diagonalización.html"><a href="diagonalización.html#th-cayley"><i class="fa fa-check"></i><b>4.5</b> Para qué podemos utilizar el Teorema de Cayley-Hamilton</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html"><i class="fa fa-check"></i><b>5</b> Espacios Euclídeos</a>
 <ul>
@@ -225,22 +226,16 @@ para todo <span class="math inline">\(u,v\in V\)</span> es una <em>distancia</em
 <p>Y así, además, deducimos la expresión para la distancia euclídea usual en <span class="math inline">\(\mathbb{R}^n\)</span>:
 <span class="math display">\[d(u,v) = \|u - v\| = \sqrt{(u_1-v_1)^2+\ldots+(u_n-v_n)^2}\]</span></p>
 <p>Como ejemplo, podemos calcular la norma del vector
-<span class="math display">\[v = \left(\begin{array}{c}
--2\\
-1\\
-1\\
-1
-\end{array}\right)
-\]</span><span class="math display">\[\|v\| = \sqrt{(-2)^2+1^2+1^2+1^2} = \sqrt{7}\]</span></p>
+<span class="math display">\[v = \left(\begin{array}{c} -2\\ 1\\ 1\\ 1 \end{array}\right) \]</span><span class="math display">\[\|v\| = \sqrt{(-2)^2+1^2+1^2+1^2} = \sqrt{7}\]</span></p>
 <hr />
 </div>
 <div id="ortho" class="section level2" number="5.2">
 <h2 number="5.2"><span class="header-section-number">5.2</span> Qué significa el concepto de ortogonalidad</h2>
 <p>Si partimos de la <em>desigualdad de Cauchy-Schwarz</em> que <a href="espacios-euclídeos.html#norm">hemos visto antes</a>, podemos llegar a que
-<span class="math display">\[-1 \le \frac{\langle u, v\rangle}{\|u\|\cdot\|v|} \le 1\]</span>
+<span class="math display">\[-1 \le \frac{\langle u, v\rangle}{\|u\|\cdot\|v\|} \le 1\]</span>
 para todo <span class="math inline">\(u,v\in V\)</span>.</p>
-<p>Por otro lado, la función coseno restringida a <span class="math inline">\([0, \pi]\)</span>, es decir, <span class="math inline">\(\cos:[0,\pi]\to[-1,1]\)</span>, es biyectiva. Eso quiere decir que existe un único <span class="math inline">\(\theta\in[0, \pi]\)</span> tal que <span class="math inline">\(\cos\theta = \frac{\langle u, v\rangle}{\|u\|\cdot\|v|}\)</span>.</p>
-<p>Llamamos entonces <strong>ángulo entre los vectores <span class="math inline">\(u,v\in V\)</span></strong> al único <span class="math inline">\(\theta\in[0,\pi]\)</span> tal que <span class="math inline">\(\cos\theta = \frac{\langle u, v\rangle}{\|u\|\cdot\|v|}\)</span>.</p>
+<p>Por otro lado, la función coseno restringida a <span class="math inline">\([0, \pi]\)</span>, es decir, <span class="math inline">\(\cos:[0,\pi]\to[-1,1]\)</span>, es biyectiva. Eso quiere decir que existe un único <span class="math inline">\(\theta\in[0, \pi]\)</span> tal que <span class="math inline">\(\cos\theta = \frac{\langle u, v\rangle}{\|u\|\cdot\|v\|}\)</span>.</p>
+<p>Llamamos entonces <strong>ángulo entre los vectores <span class="math inline">\(u,v\in V\)</span></strong> al único <span class="math inline">\(\theta\in[0,\pi]\)</span> tal que <span class="math inline">\(\cos\theta = \frac{\langle u, v\rangle}{\|u\|\cdot\|v\|}\)</span>.</p>
 <p>Diremos que dos vectores <span class="math inline">\(u\)</span> y <span class="math inline">\(v\)</span> de <span class="math inline">\(V\)</span> son <strong>ortogonales</strong> (o <strong>perpendiculares</strong>) si el ángulo que forman es <span class="math inline">\(\frac{\pi}{2}\)</span>, es decir, si <span class="math inline">\(\langle u, v \rangle = 0\)</span>.</p>
 <p>La noción de <em>ortogonalidad</em> en el espacio euclídeo se corresponde con la perpendicularidad de vectores que todos tenemos de forma intuitiva. Lo podemos extender también a ortogonalidad con respecto a un espacio vectorial: Un vector <span class="math inline">\(v\in V\)</span> es <strong>ortogonal al subespacio <span class="math inline">\(U\)</span></strong> de <span class="math inline">\(V\)</span> si, y sólo si, es ortogonal a todos y cada uno de los vectores de <span class="math inline">\(U\)</span>, es decir, <span class="math inline">\(\langle v, u \rangle = 0\)</span> para todo <span class="math inline">\(u\in U\)</span>.</p>
 <blockquote>
@@ -258,218 +253,23 @@ para todo <span class="math inline">\(u,v\in V\)</span>.</p>
 <hr />
 <p><strong>Ejemplo</strong></p>
 <p>Consideremos el espacio <span class="math inline">\(U\)</span> dado por:
-<span class="math display">\[U = \left\{\left(\begin{array}{c}
-x\\
-y\\
-z\\
-t
-\end{array}\right)
-\in\mathbb{R}^{4}:\begin{array}{ccr}
--x+ 4y+ z &amp; = &amp; 0\\
-y+ t &amp; = &amp; 0\\
-\end{array}\right\}\]</span>
+<span class="math display">\[U = \left\{\left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right) \in\mathbb{R}^{4}:\begin{array}{ccr} -x+ 4y+ z &amp; = &amp; 0\\ y+ t &amp; = &amp; 0\\ \end{array}\right\}\]</span>
 y los vectores
-<span class="math display">\[v = \left(\begin{array}{c}
-1\\
--2\\
--1\\
-2
-\end{array}\right)
-\quad\quad w = \left(\begin{array}{c}
--1\\
-2\\
--1\\
--1
-\end{array}\right)
-\]</span></p>
+<span class="math display">\[v = \left(\begin{array}{c} 1\\ -2\\ -1\\ 2 \end{array}\right) \quad\quad w = \left(\begin{array}{c} -1\\ 2\\ -1\\ -1 \end{array}\right) \]</span></p>
 <p>Calculemos el ángulo entre <span class="math inline">\(v\)</span> y <span class="math inline">\(w\)</span>:
 <span class="math display">\[\theta = \arccos \frac{v\cdot w}{\|v\|\cdot\|w\|}\]</span><span class="math display">\[v\cdot w = 1\cdot(-1)+(-2)\cdot2+(-1)\cdot(-1)+2\cdot(-1) = -6\]</span><span class="math display">\[\|v\| = \sqrt{1^2+(-2)^2+(-1)^2+2^2} = \sqrt{10}\]</span><span class="math display">\[\|w\| = \sqrt{(-1)^2+2^2+(-1)^2+(-1)^2} = \sqrt{7}\]</span></p>
 <p>Luego
 <span class="math display">\[\theta = \arccos \frac{-6}{\sqrt{10}\sqrt{7}} = \arccos \frac{-3\cdot\sqrt{70}}{35}\]</span></p>
 <p>Vamos a comprobar ahora que <span class="math inline">\(v\)</span> es ortogonal al subespacio <span class="math inline">\(U\)</span>. Para ello, a partir de las ecuaciones cartesianas de <span class="math inline">\(U\)</span>, vamos a <a href="ev.html#base">hallar una base</a> suya, resolviendo el sistema por Gauss-Jordan y pasando por las ecuaciones paramétricas:
-<span class="math display">\[\left(
-\begin{array}{cccc@{}}
--1 &amp; 4 &amp; 1 &amp; 0\\
-0 &amp; 1 &amp; 0 &amp; 1
-\end{array}
-\right)
-\sim\left(
-\begin{array}{cccc@{}}
-1 &amp; 0 &amp; -1 &amp; 4\\
-0 &amp; 1 &amp; 0 &amp; 1
-\end{array}
-\right)
-\Rightarrow\left(\begin{array}{c}
-x\\
-y\\
-z\\
-t
-\end{array}\right)
- = \alpha\left(\begin{array}{c}
-1\\
-0\\
-1\\
-0
-\end{array}\right)
-{}+\beta\left(\begin{array}{c}
--4\\
--1\\
-0\\
-1
-\end{array}\right)
-{}\]</span></p>
+<span class="math display">\[\left( \begin{array}{cccc@{}} -1 &amp; 4 &amp; 1 &amp; 0\\ 0 &amp; 1 &amp; 0 &amp; 1 \end{array} \right) \sim\left( \begin{array}{cccc@{}} 1 &amp; 0 &amp; -1 &amp; 4\\ 0 &amp; 1 &amp; 0 &amp; 1 \end{array} \right) \Rightarrow\left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right)  = \alpha\left(\begin{array}{c} 1\\ 0\\ 1\\ 0 \end{array}\right) {}+\beta\left(\begin{array}{c} -4\\ -1\\ 0\\ 1 \end{array}\right) {}\]</span></p>
 <p>De aquí que la base de <span class="math inline">\(U\)</span> sea:
-<span class="math display">\[\mathcal{B}_U = \left\{u_i\right\} = \left\{\left(
-\begin{array}{c@{}}
-1\\
-0\\
-1\\
-0
-\end{array}
-\right)
-, \left(
-\begin{array}{c@{}}
--4\\
--1\\
-0\\
-1
-\end{array}
-\right)
-\right\}\]</span></p>
+<span class="math display">\[\mathcal{B}_U = \left\{u_i\right\} = \left\{\left( \begin{array}{c@{}} 1\\ 0\\ 1\\ 0 \end{array} \right) , \left( \begin{array}{c@{}} -4\\ -1\\ 0\\ 1 \end{array} \right) \right\}\]</span></p>
 <p>Como hemos visto antes, para comprobar que <span class="math inline">\(v\)</span> es ortogonal a <span class="math inline">\(U\)</span>, nos basta con comprobar que lo es a cada vector de <span class="math inline">\(\mathcal{B}_U\)</span>, hallando su producto escalar:
-<span class="math display">\[\langle v, u_1 \rangle = \langle \left(\begin{array}{c}
-1\\
--2\\
--1\\
-2
-\end{array}\right)
-, \left(\begin{array}{c}
-1\\
-0\\
-1\\
-0
-\end{array}\right)
- \rangle = 1\cdot1+(-2)\cdot0+(-1)\cdot1+2\cdot0 = 0\]</span><span class="math display">\[\langle v, u_2 \rangle = \langle \left(\begin{array}{c}
-1\\
--2\\
--1\\
-2
-\end{array}\right)
-, \left(\begin{array}{c}
--4\\
--1\\
-0\\
-1
-\end{array}\right)
- \rangle = 1\cdot(-4)+(-2)\cdot(-1)+(-1)\cdot0+2\cdot1 = 0\]</span></p>
+<span class="math display">\[\langle v, u_1 \rangle = \langle \left(\begin{array}{c} 1\\ -2\\ -1\\ 2 \end{array}\right) , \left(\begin{array}{c} 1\\ 0\\ 1\\ 0 \end{array}\right)  \rangle = 1\cdot1+(-2)\cdot0+(-1)\cdot1+2\cdot0 = 0\]</span><span class="math display">\[\langle v, u_2 \rangle = \langle \left(\begin{array}{c} 1\\ -2\\ -1\\ 2 \end{array}\right) , \left(\begin{array}{c} -4\\ -1\\ 0\\ 1 \end{array}\right)  \rangle = 1\cdot(-4)+(-2)\cdot(-1)+(-1)\cdot0+2\cdot1 = 0\]</span></p>
 <p>Consideremos ahora el siguiente sistema de vectores:
-<span class="math display">\[S = \{s_i\} = \left\{\left(
-\begin{array}{c@{}}
-1\\
-1\\
-1\\
-0
-\end{array}
-\right)
-, \left(
-\begin{array}{c@{}}
--1\\
-2\\
--1\\
-0
-\end{array}
-\right)
-, \left(
-\begin{array}{c@{}}
-1\\
-0\\
--1\\
-2
-\end{array}
-\right)
-, \left(
-\begin{array}{c@{}}
--1\\
-0\\
-1\\
-1
-\end{array}
-\right)
-\right\}\]</span></p>
+<span class="math display">\[S = \{s_i\} = \left\{\left( \begin{array}{c@{}} 1\\ 1\\ 1\\ 0 \end{array} \right) , \left( \begin{array}{c@{}} -1\\ 2\\ -1\\ 0 \end{array} \right) , \left( \begin{array}{c@{}} 1\\ 0\\ -1\\ 2 \end{array} \right) , \left( \begin{array}{c@{}} -1\\ 0\\ 1\\ 1 \end{array} \right) \right\}\]</span></p>
 <p>Podemos comprobar fácilmente que es un sistema ortogonal, hallando los productos escalares de los vectores de <span class="math inline">\(S\)</span> dos a dos:
-<span class="math display">\[\langle s_1, s_2 \rangle = \langle \left(\begin{array}{c}
-1\\
-1\\
-1\\
-0
-\end{array}\right)
-, \left(\begin{array}{c}
--1\\
-2\\
--1\\
-0
-\end{array}\right)
- \rangle = 1\cdot(-1)+1\cdot2+1\cdot(-1)+0\cdot0 = 0\]</span><span class="math display">\[\langle s_1, s_3 \rangle = \langle \left(\begin{array}{c}
-1\\
-1\\
-1\\
-0
-\end{array}\right)
-, \left(\begin{array}{c}
-1\\
-0\\
--1\\
-2
-\end{array}\right)
- \rangle = 1\cdot1+1\cdot0+1\cdot(-1)+0\cdot2 = 0\]</span><span class="math display">\[\langle s_1, s_4 \rangle = \langle \left(\begin{array}{c}
-1\\
-1\\
-1\\
-0
-\end{array}\right)
-, \left(\begin{array}{c}
--1\\
-0\\
-1\\
-1
-\end{array}\right)
- \rangle = 1\cdot(-1)+1\cdot0+1\cdot1+0\cdot1 = 0\]</span><span class="math display">\[\langle s_2, s_3 \rangle = \langle \left(\begin{array}{c}
--1\\
-2\\
--1\\
-0
-\end{array}\right)
-, \left(\begin{array}{c}
-1\\
-0\\
--1\\
-2
-\end{array}\right)
- \rangle = (-1)\cdot1+2\cdot0+(-1)\cdot(-1)+0\cdot2 = 0\]</span><span class="math display">\[\langle s_2, s_4 \rangle = \langle \left(\begin{array}{c}
--1\\
-2\\
--1\\
-0
-\end{array}\right)
-, \left(\begin{array}{c}
--1\\
-0\\
-1\\
-1
-\end{array}\right)
- \rangle = (-1)\cdot(-1)+2\cdot0+(-1)\cdot1+0\cdot1 = 0\]</span><span class="math display">\[\langle s_3, s_4 \rangle = \langle \left(\begin{array}{c}
-1\\
-0\\
--1\\
-2
-\end{array}\right)
-, \left(\begin{array}{c}
--1\\
-0\\
-1\\
-1
-\end{array}\right)
- \rangle = 1\cdot(-1)+0\cdot0+(-1)\cdot1+2\cdot1 = 0\]</span></p>
+<span class="math display">\[\langle s_1, s_2 \rangle = \langle \left(\begin{array}{c} 1\\ 1\\ 1\\ 0 \end{array}\right) , \left(\begin{array}{c} -1\\ 2\\ -1\\ 0 \end{array}\right)  \rangle = 1\cdot(-1)+1\cdot2+1\cdot(-1)+0\cdot0 = 0\]</span><span class="math display">\[\langle s_1, s_3 \rangle = \langle \left(\begin{array}{c} 1\\ 1\\ 1\\ 0 \end{array}\right) , \left(\begin{array}{c} 1\\ 0\\ -1\\ 2 \end{array}\right)  \rangle = 1\cdot1+1\cdot0+1\cdot(-1)+0\cdot2 = 0\]</span><span class="math display">\[\langle s_1, s_4 \rangle = \langle \left(\begin{array}{c} 1\\ 1\\ 1\\ 0 \end{array}\right) , \left(\begin{array}{c} -1\\ 0\\ 1\\ 1 \end{array}\right)  \rangle = 1\cdot(-1)+1\cdot0+1\cdot1+0\cdot1 = 0\]</span><span class="math display">\[\langle s_2, s_3 \rangle = \langle \left(\begin{array}{c} -1\\ 2\\ -1\\ 0 \end{array}\right) , \left(\begin{array}{c} 1\\ 0\\ -1\\ 2 \end{array}\right)  \rangle = (-1)\cdot1+2\cdot0+(-1)\cdot(-1)+0\cdot2 = 0\]</span><span class="math display">\[\langle s_2, s_4 \rangle = \langle \left(\begin{array}{c} -1\\ 2\\ -1\\ 0 \end{array}\right) , \left(\begin{array}{c} -1\\ 0\\ 1\\ 1 \end{array}\right)  \rangle = (-1)\cdot(-1)+2\cdot0+(-1)\cdot1+0\cdot1 = 0\]</span><span class="math display">\[\langle s_3, s_4 \rangle = \langle \left(\begin{array}{c} 1\\ 0\\ -1\\ 2 \end{array}\right) , \left(\begin{array}{c} -1\\ 0\\ 1\\ 1 \end{array}\right)  \rangle = 1\cdot(-1)+0\cdot0+(-1)\cdot1+2\cdot1 = 0\]</span></p>
 <p>Tenemos, por tanto, un sistema de 4 vectores ortogonales en <span class="math inline">\(\mathbb{R}^{4}\)</span>, y, como hemos comentado antes, son linealmente independientes, luego forman una base del espacio vectorial.</p>
 </div>
 <div id="compl-ortho" class="section level2" number="5.3">
@@ -526,117 +326,18 @@ x_1\\ x_2\\ \vdots \\ x_n\\
 <hr />
 <p><strong>Ejemplo</strong></p>
 <p>Consideremos el espacio <span class="math inline">\(U\)</span> generado por la base siguiente:
-<span class="math display">\[\mathcal{B} = \{u_i\} = \left\{\left(
-\begin{array}{c@{}}
--2\\
-0\\
--2\\
-2
-\end{array}
-\right)
-, \left(
-\begin{array}{c@{}}
--1\\
--1\\
--2\\
-2
-\end{array}
-\right)
-\right\}\]</span></p>
+<span class="math display">\[\mathcal{B} = \{u_i\} = \left\{\left( \begin{array}{c@{}} -2\\ 0\\ -2\\ 2 \end{array} \right) , \left( \begin{array}{c@{}} -1\\ -1\\ -2\\ 2 \end{array} \right) \right\}\]</span></p>
 <p>Para hallar su complemento ortogonal, suponemos un vector genérico
-<span class="math display">\[v = \left(\begin{array}{c}
-x\\
-y\\
-z\\
-t
-\end{array}\right)
-\in \mathbb{R}^{4}\]</span>
+<span class="math display">\[v = \left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right) \in \mathbb{R}^{4}\]</span>
 y hacemos su producto escalar por todos los vectores de <span class="math inline">\(\mathcal{B}\)</span>, imponiendo que valga 0:
-<span class="math display">\[\langle v, u_1 \rangle = 0\Leftrightarrow\langle \left(\begin{array}{c}
-x\\
-y\\
-z\\
-t
-\end{array}\right)
-, \left(\begin{array}{c}
--2\\
-0\\
--2\\
-2
-\end{array}\right)
- = 0\Leftrightarrow\ \begin{array}{ccr}
--2x-2z+ 2t &amp; = &amp; 0\\
-\end{array}\]</span><span class="math display">\[\langle v, u_2 \rangle = 0\Leftrightarrow\langle \left(\begin{array}{c}
-x\\
-y\\
-z\\
-t
-\end{array}\right)
-, \left(\begin{array}{c}
--1\\
--1\\
--2\\
-2
-\end{array}\right)
- = 0\Leftrightarrow\ \begin{array}{ccr}
--x-y-2z+ 2t &amp; = &amp; 0\\
-\end{array}\]</span></p>
+<span class="math display">\[\langle v, u_1 \rangle = 0\Leftrightarrow\langle \left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right) , \left(\begin{array}{c} -2\\ 0\\ -2\\ 2 \end{array}\right)  = 0\Leftrightarrow\ \begin{array}{ccr} -2x-2z+ 2t &amp; = &amp; 0\\ \end{array}\]</span><span class="math display">\[\langle v, u_2 \rangle = 0\Leftrightarrow\langle \left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right) , \left(\begin{array}{c} -1\\ -1\\ -2\\ 2 \end{array}\right)  = 0\Leftrightarrow\ \begin{array}{ccr} -x-y-2z+ 2t &amp; = &amp; 0\\ \end{array}\]</span></p>
 <p>Hemos llegado, por tanto, al siguiente sistema de ecuaciones que representan las ecuaciones cartesianas de <span class="math inline">\(U^{\perp}\)</span>:
-<span class="math display">\[\begin{array}{rrrrcr}
--2x &amp;  &amp; -2z &amp; + 2t &amp; = &amp; 0\\
--x &amp; -y &amp; -2z &amp; + 2t &amp; = &amp; 0\\
-\end{array}\]</span>
+<span class="math display">\[\begin{array}{rrrrcr} -2x &amp;  &amp; -2z &amp; + 2t &amp; = &amp; 0\\ -x &amp; -y &amp; -2z &amp; + 2t &amp; = &amp; 0\\ \end{array}\]</span>
 Nos podemos dar cuenta de que la matriz del sistema es la que resulta de poner los vectores de la base <span class="math inline">\(\mathcal{B}\)</span> <em>por filas</em>.</p>
 <p>Como siempre, podemos resolver el sistema por Gauss-Jordan para <a href="ev.html#param2cartesian">deducir la forma paramétrica</a> de la solución, y, por tanto, un <a href="#sisgen">sistema generador</a> de <span class="math inline">\(U^{\perp}\)</span>:
-<span class="math display">\[\left(
-\begin{array}{cccc@{}}
--2 &amp; 0 &amp; -2 &amp; 2\\
--1 &amp; -1 &amp; -2 &amp; 2
-\end{array}
-\right)
-\sim\left(
-\begin{array}{cccc@{}}
-1 &amp; 0 &amp; 1 &amp; -1\\
-0 &amp; 1 &amp; 1 &amp; -1
-\end{array}
-\right)
-\Rightarrow\left(\begin{array}{c}
-x\\
-y\\
-z\\
-t
-\end{array}\right)
- = \alpha\left(\begin{array}{c}
--1\\
--1\\
-1\\
-0
-\end{array}\right)
-{}+\beta\left(\begin{array}{c}
-1\\
-1\\
-0\\
-1
-\end{array}\right)
-{}\]</span></p>
+<span class="math display">\[\left( \begin{array}{cccc@{}} -2 &amp; 0 &amp; -2 &amp; 2\\ -1 &amp; -1 &amp; -2 &amp; 2 \end{array} \right) \sim\left( \begin{array}{cccc@{}} 1 &amp; 0 &amp; 1 &amp; -1\\ 0 &amp; 1 &amp; 1 &amp; -1 \end{array} \right) \Rightarrow\left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right)  = \alpha\left(\begin{array}{c} -1\\ -1\\ 1\\ 0 \end{array}\right) {}+\beta\left(\begin{array}{c} 1\\ 1\\ 0\\ 1 \end{array}\right) {}\]</span></p>
 <p>De aquí que una base del complemento ortogonal <span class="math inline">\(U^{\perp}\)</span> sea:
-<span class="math display">\[\mathcal{B}&#39; = \left\{\left(
-\begin{array}{c@{}}
--1\\
--1\\
-1\\
-0
-\end{array}
-\right)
-, \left(
-\begin{array}{c@{}}
-1\\
-1\\
-0\\
-1
-\end{array}
-\right)
-\right\}\]</span></p>
+<span class="math display">\[\mathcal{B}&#39; = \left\{\left( \begin{array}{c@{}} -1\\ -1\\ 1\\ 0 \end{array} \right) , \left( \begin{array}{c@{}} 1\\ 1\\ 0\\ 1 \end{array} \right) \right\}\]</span></p>
 <p>Podemos comprobar fácilmente que los vectores de <span class="math inline">\(\mathcal{B}&#39;\)</span> son ortogonales a los de <span class="math inline">\(\mathcal{B}\)</span>.</p>
 <hr />
 </div>
@@ -668,134 +369,18 @@ t
 <hr />
 <p><strong>Ejemplo</strong></p>
 <p>Consideremos el subespacio <span class="math inline">\(U\)</span> cuya base es
-<span class="math display">\[\mathcal{B} = \{u_i\} = \left\{\left(
-\begin{array}{c@{}}
--1\\
-1\\
--1\\
--1
-\end{array}
-\right)
-, \left(
-\begin{array}{c@{}}
--3\\
--5\\
-1\\
--3
-\end{array}
-\right)
-\right\}\]</span></p>
+<span class="math display">\[\mathcal{B} = \{u_i\} = \left\{\left( \begin{array}{c@{}} -1\\ 1\\ -1\\ -1 \end{array} \right) , \left( \begin{array}{c@{}} -3\\ -5\\ 1\\ -3 \end{array} \right) \right\}\]</span></p>
 <p>Notemos que <span class="math inline">\(\mathcal{B}\)</span> es una base <em>ortogonal</em>.</p>
 <p>Consideremos el vector
-<span class="math display">\[v = \left(
-\begin{array}{c@{}}
--1\\
-1\\
--2\\
-0
-\end{array}
-\right)
-\]</span></p>
+<span class="math display">\[v = \left( \begin{array}{c@{}} -1\\ 1\\ -2\\ 0 \end{array} \right) \]</span></p>
 <p>Buscamos la <em>descomposición ortogonal</em> de <span class="math inline">\(v\)</span> con respecto al subespacio <span class="math inline">\(U\)</span>. Sabemos que podemos escribir <span class="math inline">\(v = v_1 + v_2\)</span>, donde <span class="math inline">\(v_1 = \mathrm{proy}_U(v)\)</span> y <span class="math inline">\(v_2 = v - v_1 \in U^{\perp}\)</span>.
 <span class="math display">\[v_1 = \mathrm{proy}_U(v) = \mathrm{proy}_{u_1}(v)+\mathrm{proy}_{u_2}(v) = \frac{\langle v, u_1\rangle}{\langle u_1, u_1 \rangle} u_1+\frac{\langle v, u_2\rangle}{\langle u_2, u_2 \rangle} u_2\]</span></p>
 <p>Si calculamos esas cantidades
-<span class="math display">\[\langle v, u_1 \rangle = \langle \left(\begin{array}{c}
--1\\
-1\\
--2\\
-0
-\end{array}\right)
-, \left(\begin{array}{c}
--1\\
-1\\
--1\\
--1
-\end{array}\right)
- \rangle = (-1)\cdot(-1)+1\cdot1+(-2)\cdot(-1)+0\cdot(-1) = 4\]</span><span class="math display">\[\langle v, u_2 \rangle = \langle \left(\begin{array}{c}
--1\\
-1\\
--2\\
-0
-\end{array}\right)
-, \left(\begin{array}{c}
--3\\
--5\\
-1\\
--3
-\end{array}\right)
- \rangle = (-1)\cdot(-3)+1\cdot(-5)+(-2)\cdot1+0\cdot(-3) = -4\]</span><span class="math display">\[\langle u_1, u_1 \rangle = \langle \left(\begin{array}{c}
--1\\
-1\\
--1\\
--1
-\end{array}\right)
-, \left(\begin{array}{c}
--1\\
-1\\
--1\\
--1
-\end{array}\right)
- \rangle = (-1)^2+1^2+(-1)^2+(-1)^2 = 4\]</span><span class="math display">\[\langle u_2, u_2 \rangle = \langle \left(\begin{array}{c}
--3\\
--5\\
-1\\
--3
-\end{array}\right)
-, \left(\begin{array}{c}
--3\\
--5\\
-1\\
--3
-\end{array}\right)
- \rangle = (-3)^2+(-5)^2+1^2+(-3)^2 = 44\]</span>
+<span class="math display">\[\langle v, u_1 \rangle = \langle \left(\begin{array}{c} -1\\ 1\\ -2\\ 0 \end{array}\right) , \left(\begin{array}{c} -1\\ 1\\ -1\\ -1 \end{array}\right)  \rangle = (-1)\cdot(-1)+1\cdot1+(-2)\cdot(-1)+0\cdot(-1) = 4\]</span><span class="math display">\[\langle v, u_2 \rangle = \langle \left(\begin{array}{c} -1\\ 1\\ -2\\ 0 \end{array}\right) , \left(\begin{array}{c} -3\\ -5\\ 1\\ -3 \end{array}\right)  \rangle = (-1)\cdot(-3)+1\cdot(-5)+(-2)\cdot1+0\cdot(-3) = -4\]</span><span class="math display">\[\langle u_1, u_1 \rangle = \langle \left(\begin{array}{c} -1\\ 1\\ -1\\ -1 \end{array}\right) , \left(\begin{array}{c} -1\\ 1\\ -1\\ -1 \end{array}\right)  \rangle = (-1)^2+1^2+(-1)^2+(-1)^2 = 4\]</span><span class="math display">\[\langle u_2, u_2 \rangle = \langle \left(\begin{array}{c} -3\\ -5\\ 1\\ -3 \end{array}\right) , \left(\begin{array}{c} -3\\ -5\\ 1\\ -3 \end{array}\right)  \rangle = (-3)^2+(-5)^2+1^2+(-3)^2 = 44\]</span>
 podemos sustituirlas en la expresión de más arriba y llegamos a
-<span class="math display">\[v_1 = 1\cdot\left(\begin{array}{c}
--1\\
-1\\
--1\\
--1
-\end{array}\right)
-+(- \frac{1}{11})\cdot\left(\begin{array}{c}
--3\\
--5\\
-1\\
--3
-\end{array}\right)
- = \left(
-\begin{array}{c@{}}
-- \frac{8}{11}\\
-\frac{16}{11}\\
-- \frac{12}{11}\\
-- \frac{8}{11}
-\end{array}
-\right)
-\]</span></p>
+<span class="math display">\[v_1 = 1\cdot\left(\begin{array}{c} -1\\ 1\\ -1\\ -1 \end{array}\right) +(- \frac{1}{11})\cdot\left(\begin{array}{c} -3\\ -5\\ 1\\ -3 \end{array}\right)  = \left( \begin{array}{c@{}} - \frac{8}{11}\\ \frac{16}{11}\\ - \frac{12}{11}\\ - \frac{8}{11} \end{array} \right) \]</span></p>
 <p>Por tanto,
-<span class="math display">\[v_2 = \left(
-\begin{array}{c@{}}
--1\\
-1\\
--2\\
-0
-\end{array}
-\right)
- - \left(
-\begin{array}{c@{}}
-- \frac{8}{11}\\
-\frac{16}{11}\\
-- \frac{12}{11}\\
-- \frac{8}{11}
-\end{array}
-\right)
- = \left(
-\begin{array}{c@{}}
-- \frac{3}{11}\\
-- \frac{5}{11}\\
-- \frac{10}{11}\\
-\frac{8}{11}
-\end{array}
-\right)
-\]</span></p>
+<span class="math display">\[v_2 = \left( \begin{array}{c@{}} -1\\ 1\\ -2\\ 0 \end{array} \right)  - \left( \begin{array}{c@{}} - \frac{8}{11}\\ \frac{16}{11}\\ - \frac{12}{11}\\ - \frac{8}{11} \end{array} \right)  = \left( \begin{array}{c@{}} - \frac{3}{11}\\ - \frac{5}{11}\\ - \frac{10}{11}\\ \frac{8}{11} \end{array} \right) \]</span></p>
 <p>Por lo comentado anteriormente, sabemos que <span class="math inline">\(v_2 = \mathrm{proy}_{U^{\perp}}(v)\in U^{\perp}\)</span>, lo cual se podría comprobar haciendo el producto escalar <span class="math inline">\(\langle v_2, u_i \rangle\)</span> y viendo que su valor es 0 para todo <span class="math inline">\(i\)</span>.</p>
 <hr />
 </div>
@@ -821,121 +406,16 @@ luego las coordenadas de <span class="math inline">\(v\)</span> en la base <span
 <hr />
 <p><strong>Ejemplo</strong></p>
 <p>Consideremos ahora el sistema de vectores ortogonales del <a href="espacios-euclídeos.html#ortho">ejemplo anterior</a>:
-<span class="math display">\[S = \{s_i\} = \left\{\left(
-\begin{array}{c@{}}
-1\\
-1\\
-1\\
-0
-\end{array}
-\right)
-, \left(
-\begin{array}{c@{}}
--1\\
-2\\
--1\\
-0
-\end{array}
-\right)
-, \left(
-\begin{array}{c@{}}
-1\\
-0\\
--1\\
-2
-\end{array}
-\right)
-, \left(
-\begin{array}{c@{}}
--1\\
-0\\
-1\\
-1
-\end{array}
-\right)
-\right\}\]</span></p>
+<span class="math display">\[S = \{s_i\} = \left\{\left( \begin{array}{c@{}} 1\\ 1\\ 1\\ 0 \end{array} \right) , \left( \begin{array}{c@{}} -1\\ 2\\ -1\\ 0 \end{array} \right) , \left( \begin{array}{c@{}} 1\\ 0\\ -1\\ 2 \end{array} \right) , \left( \begin{array}{c@{}} -1\\ 0\\ 1\\ 1 \end{array} \right) \right\}\]</span></p>
 <p>A partir de <span class="math inline">\(S\)</span>, formemos un sistema ortonormal <span class="math inline">\(S&#39;\)</span>, donde cada vector de <span class="math inline">\(S&#39;\)</span> es un vector de <span class="math inline">\(S\)</span>, que se ha normalizado.
-<span class="math display">\[S&#39; = \left\{\left(\begin{array}{c}
-\frac{\sqrt{3}}{3}\\
-\frac{\sqrt{3}}{3}\\
-\frac{\sqrt{3}}{3}\\
-0
-\end{array}\right), \left(\begin{array}{c}
-\frac{-\sqrt{6}}{6}\\
-\frac{\sqrt{6}}{3}\\
-\frac{-\sqrt{6}}{6}\\
-0
-\end{array}\right), \left(\begin{array}{c}
-\frac{\sqrt{6}}{6}\\
-0\\
-\frac{-\sqrt{6}}{6}\\
-\frac{\sqrt{6}}{3}
-\end{array}\right), \left(\begin{array}{c}
-\frac{-\sqrt{3}}{3}\\
-0\\
-\frac{\sqrt{3}}{3}\\
-\frac{\sqrt{3}}{3}
-\end{array}\right)\right\}\]</span></p>
+<span class="math display">\[S&#39; = \left\{\left(\begin{array}{c} \frac{\sqrt{3}}{3}\\ \frac{\sqrt{3}}{3}\\ \frac{\sqrt{3}}{3}\\ 0 \end{array}\right), \left(\begin{array}{c} \frac{-\sqrt{6}}{6}\\ \frac{\sqrt{6}}{3}\\ \frac{-\sqrt{6}}{6}\\ 0 \end{array}\right), \left(\begin{array}{c} \frac{\sqrt{6}}{6}\\ 0\\ \frac{-\sqrt{6}}{6}\\ \frac{\sqrt{6}}{3} \end{array}\right), \left(\begin{array}{c} \frac{-\sqrt{3}}{3}\\ 0\\ \frac{\sqrt{3}}{3}\\ \frac{\sqrt{3}}{3} \end{array}\right)\right\}\]</span></p>
 <p><span class="math inline">\(S&#39;\)</span> forma una base <em>ortonormal</em> de <span class="math inline">\(\mathbb{R}^{4}\)</span>.
 Si consideramos el vector
-<span class="math display">\[v = \left(
-\begin{array}{c@{}}
--1\\
-1\\
--2\\
-0
-\end{array}
-\right)
-\]</span>
+<span class="math display">\[v = \left( \begin{array}{c@{}} -1\\ 1\\ -2\\ 0 \end{array} \right) \]</span>
 podemos hallar sus coordenadas en la base <span class="math inline">\(S&#39;\)</span>, ya que cada coordenada de <span class="math inline">\(v\)</span> será el producto escalar de <span class="math inline">\(v\)</span> por el correspondiente vector de <span class="math inline">\(S&#39;\)</span>:
-<span class="math display">\[\langle v, s&#39;_1 \rangle = \langle \left(\begin{array}{c}
--1\\
-1\\
--2\\
-0
-\end{array}\right), \left(\begin{array}{c}
-\frac{\sqrt{3}}{3}\\
-\frac{\sqrt{3}}{3}\\
-\frac{\sqrt{3}}{3}\\
-0
-\end{array}\right) \rangle = \frac{-2\cdot\sqrt{3}}{3}\]</span><span class="math display">\[\langle v, s&#39;_2 \rangle = \langle \left(\begin{array}{c}
--1\\
-1\\
--2\\
-0
-\end{array}\right), \left(\begin{array}{c}
-\frac{-\sqrt{6}}{6}\\
-\frac{\sqrt{6}}{3}\\
-\frac{-\sqrt{6}}{6}\\
-0
-\end{array}\right) \rangle = \frac{5\cdot\sqrt{6}}{6}\]</span><span class="math display">\[\langle v, s&#39;_3 \rangle = \langle \left(\begin{array}{c}
--1\\
-1\\
--2\\
-0
-\end{array}\right), \left(\begin{array}{c}
-\frac{\sqrt{6}}{6}\\
-0\\
-\frac{-\sqrt{6}}{6}\\
-\frac{\sqrt{6}}{3}
-\end{array}\right) \rangle = \frac{\sqrt{6}}{6}\]</span><span class="math display">\[\langle v, s&#39;_4 \rangle = \langle \left(\begin{array}{c}
--1\\
-1\\
--2\\
-0
-\end{array}\right), \left(\begin{array}{c}
-\frac{-\sqrt{3}}{3}\\
-0\\
-\frac{\sqrt{3}}{3}\\
-\frac{\sqrt{3}}{3}
-\end{array}\right) \rangle = \frac{-\sqrt{3}}{3}\]</span></p>
+<span class="math display">\[\langle v, s&#39;_1 \rangle = \langle \left(\begin{array}{c} -1\\ 1\\ -2\\ 0 \end{array}\right), \left(\begin{array}{c} \frac{\sqrt{3}}{3}\\ \frac{\sqrt{3}}{3}\\ \frac{\sqrt{3}}{3}\\ 0 \end{array}\right) \rangle = \frac{-2\cdot\sqrt{3}}{3}\]</span><span class="math display">\[\langle v, s&#39;_2 \rangle = \langle \left(\begin{array}{c} -1\\ 1\\ -2\\ 0 \end{array}\right), \left(\begin{array}{c} \frac{-\sqrt{6}}{6}\\ \frac{\sqrt{6}}{3}\\ \frac{-\sqrt{6}}{6}\\ 0 \end{array}\right) \rangle = \frac{5\cdot\sqrt{6}}{6}\]</span><span class="math display">\[\langle v, s&#39;_3 \rangle = \langle \left(\begin{array}{c} -1\\ 1\\ -2\\ 0 \end{array}\right), \left(\begin{array}{c} \frac{\sqrt{6}}{6}\\ 0\\ \frac{-\sqrt{6}}{6}\\ \frac{\sqrt{6}}{3} \end{array}\right) \rangle = \frac{\sqrt{6}}{6}\]</span><span class="math display">\[\langle v, s&#39;_4 \rangle = \langle \left(\begin{array}{c} -1\\ 1\\ -2\\ 0 \end{array}\right), \left(\begin{array}{c} \frac{-\sqrt{3}}{3}\\ 0\\ \frac{\sqrt{3}}{3}\\ \frac{\sqrt{3}}{3} \end{array}\right) \rangle = \frac{-\sqrt{3}}{3}\]</span></p>
 <p>Entonces, podremos escribir:
-<span class="math display">\[v = \left(\begin{array}{c}
-\frac{-2\cdot\sqrt{3}}{3}\\
-\frac{5\cdot\sqrt{6}}{6}\\
-\frac{\sqrt{6}}{6}\\
-\frac{-\sqrt{3}}{3}
-\end{array}\right)_{S&#39;}\]</span></p>
+<span class="math display">\[v = \left(\begin{array}{c} \frac{-2\cdot\sqrt{3}}{3}\\ \frac{5\cdot\sqrt{6}}{6}\\ \frac{\sqrt{6}}{6}\\ \frac{-\sqrt{3}}{3} \end{array}\right)_{S&#39;}\]</span></p>
 <hr />
 </div>
 <div id="gram-schmidt" class="section level2" number="5.6">
@@ -946,16 +426,77 @@ podemos hallar sus coordenadas en la base <span class="math inline">\(S&#39;\)</
 </blockquote>
 <p>La demostración de este resultado teórico realmente nos presenta un método constructivo que permite hallar una base ortonormal del espacio <span class="math inline">\(V\)</span> a partir de una base cualquiera.</p>
 <p><strong>Método de Ortonormalización de Gram-Schmidt</strong></p>
+<p>Consideremos una base <span class="math inline">\(\mathcal{B} = \{v_1,\ldots,v_n\}\)</span> en <span class="math inline">\(V\)</span>. Vamos a utilizar el método de Gram-Schmidt para construir una base ortonormal a partir de ella.</p>
+<p>El proceso se divide en dos fases:</p>
+<ul>
+<li>En la primera fase, construiremos una base ortogonal <span class="math inline">\(\mathcal{B}&#39;\)</span>.</li>
+<li>En un segundo paso, cada vector de <span class="math inline">\(\mathcal{B}&#39;\)</span> se normaliza, de forma que obtendremos una base ortonormal.</li>
+</ul>
+<p><em>Primera fase</em></p>
+<p>El proceso del primer paso es incremental.</p>
+<p>Llamamos <span class="math inline">\(u_1 = v_1\)</span>, el primer vector de la base <span class="math inline">\(\mathcal{B}\)</span>.</p>
+<p>Ahora consideramos el segundo vector <span class="math inline">\(v_2\)</span>. Por un <a href="espacios-euclídeos.html#proyec">resultado teórico</a> sobre las proyecciones que vimos antes, si llamamos <span class="math inline">\(U_1 = \mathcal{L}(\{u_1\})\)</span>, entonces <span class="math inline">\(v_2 - \mathrm{proy}_{U_1}(v_2)\)</span> es un vector ortogonal a <span class="math inline">\(U_1\)</span>, en particular es ortogonal a <span class="math inline">\(u_1\)</span>.</p>
+<p>Llamemos entonces <span class="math inline">\(u_2 = v_2 - \mathrm{proy}_{U_1}(v_2)\)</span>.
+Entonces, el sistema <span class="math inline">\(\{u_1, u_2\}\)</span> es ortogonal.</p>
+<p>Llamamos ahora <span class="math inline">\(U_2 = \mathcal{L}(\{u_1,u_2\})\)</span>. Entonces, por el mismo motivo que antes, si llamamos <span class="math inline">\(u_3 = v_3 - \mathrm{proy}_{U_2}(v_3)\)</span>, tenemos que <span class="math inline">\(u_3\)</span> es ortogonal a <span class="math inline">\(U_2\)</span>, luego <span class="math inline">\(\{u_1, u_2, u_3\}\)</span> es un sistema ortogonal.</p>
+<p>De esta forma, sucesivamente, en el paso <span class="math inline">\(m\)</span>, vamos construyendo <span class="math inline">\(U_m = \mathcal{L}(\{u_1,\ldots,u_m\})\)</span> y consideramos <span class="math inline">\(u_{m+1} = v_{m+1} - \mathrm{proy}_{U_m}(v_{m+1})\)</span>, que es un vector ortogonal a <span class="math inline">\(U_m\)</span> y, por tanto, <span class="math inline">\(\{u_1,\ldots,u_{m+1}\}\)</span> es un sistema ortogonal.</p>
+<p>Una vez se haya completado el proceso, se habrá construido el conjunto <span class="math inline">\(\mathcal{B}&#39; = \{u_1,\ldots,u_n\}\)</span>. Como estamos en un espacio <span class="math inline">\(V\)</span> de dimensión <span class="math inline">\(n\)</span>, y tenemos <span class="math inline">\(n\)</span> vectores ortogonales, luego <a href="espacios-euclídeos.html#ortho">linealmente independientes</a>, éstos forman una base. Luego <span class="math inline">\(\mathcal{B}&#39;\)</span> es una base ortogonal.</p>
+<p><em>Segunda fase</em></p>
+<p>La segunda fase es más sencilla, ya que implica únicamente normalizar cada vector de <span class="math inline">\(\mathcal{B}&#39;\)</span>.</p>
+<p>De esta forma, la base ortonormal es la formada por
+<span class="math display">\[\left\{\frac{u_1}{\|u_1\|}, \ldots, \frac{u_n}{\|u_n\|}\right\}\]</span></p>
 <hr />
 <p><strong>Ejemplo</strong></p>
+<p>Consideremos la base <span class="math inline">\(\mathcal{B}\)</span> en <span class="math inline">\(\mathbb{R}^{4}\)</span> dada por
+<span class="math display">\[\mathcal{B} = \{v_i\} = \left\{\left( \begin{array}{c@{}} -1\\ -1\\ -1\\ -1 \end{array} \right) , \left( \begin{array}{c@{}} 1\\ -1\\ 1\\ -1 \end{array} \right) , \left( \begin{array}{c@{}} -1\\ -1\\ 0\\ -1 \end{array} \right) , \left( \begin{array}{c@{}} -1\\ 1\\ 1\\ -1 \end{array} \right) \right\}\]</span></p>
+<p>Vamos a usar el método de Gram-Schmidt para encontrar una base ortonormal, a partir de <span class="math inline">\(\mathcal{B}\)</span>.</p>
+<p><em>Fase 1</em></p>
+<p>Llamamos
+<span class="math display">\[u_1 = v_1 = \left(\begin{array}{c} -1\\ -1\\ -1\\ -1 \end{array}\right) \]</span></p>
+<p>A partir de este momento, procedemos de forma recursiva:</p>
+<ul>
+<li>Construimos:
+<span class="math display">\[U_1 = \mathcal{L}(\{u_1\}) = \mathcal{L}(\left\{\left( \begin{array}{c@{}} -1\\ -1\\ -1\\ -1 \end{array} \right) \right\})\]</span>
+Entonces
+<span class="math display">\[\begin{array}{rcl}\mathrm{proy}_{U_1}(v_2) &amp; = &amp; \frac{\langle v_2, u_1 \rangle}{\langle u_1, u_1 \rangle} u_1 \\ &amp; = &amp; \frac{0}{4} \left( \begin{array}{c@{}} -1\\ -1\\ -1\\ -1 \end{array} \right)  \\ &amp; = &amp; \left( \begin{array}{c@{}} 0\\ 0\\ 0\\ 0 \end{array} \right) \\\end{array}\]</span>
+Y llamamos
+<span class="math display">\[u_2  = v_2 - \mathrm{proy}_{U_1}(v_2) = \left(\begin{array}{c} 1\\ -1\\ 1\\ -1 \end{array}\right)  - \left( \begin{array}{c@{}} 0\\ 0\\ 0\\ 0 \end{array} \right)  =  \left( \begin{array}{c@{}} 1\\ -1\\ 1\\ -1 \end{array} \right) \]</span></li>
+<li>Construimos:
+<span class="math display">\[U_2 = \mathcal{L}(\{u_1, u_2\}) = \mathcal{L}(\left\{\left( \begin{array}{c@{}} -1\\ -1\\ -1\\ -1 \end{array} \right) , \left( \begin{array}{c@{}} 1\\ -1\\ 1\\ -1 \end{array} \right) \right\})\]</span>
+Entonces
+<span class="math display">\[\begin{array}{rcl}\mathrm{proy}_{U_2}(v_3) &amp; = &amp; \frac{\langle v_3, u_1 \rangle}{\langle u_1, u_1 \rangle} u_1+\frac{\langle v_3, u_2 \rangle}{\langle u_2, u_2 \rangle} u_2 \\ &amp; = &amp; \frac{3}{4} \left( \begin{array}{c@{}} -1\\ -1\\ -1\\ -1 \end{array} \right) +\frac{1}{4} \left( \begin{array}{c@{}} 1\\ -1\\ 1\\ -1 \end{array} \right)  \\ &amp; = &amp; \left( \begin{array}{c@{}} - \frac{1}{2}\\ -1\\ - \frac{1}{2}\\ -1 \end{array} \right) \\\end{array}\]</span>
+Y llamamos
+<span class="math display">\[u_3  = v_3 - \mathrm{proy}_{U_2}(v_3) = \left(\begin{array}{c} -1\\ -1\\ 0\\ -1 \end{array}\right)  - \left( \begin{array}{c@{}} - \frac{1}{2}\\ -1\\ - \frac{1}{2}\\ -1 \end{array} \right)  =  \left( \begin{array}{c@{}} - \frac{1}{2}\\ 0\\ \frac{1}{2}\\ 0 \end{array} \right) \]</span></li>
+<li>Construimos:
+<span class="math display">\[U_3 = \mathcal{L}(\{u_1, u_2, u_3\}) = \mathcal{L}(\left\{\left( \begin{array}{c@{}} -1\\ -1\\ -1\\ -1 \end{array} \right) , \left( \begin{array}{c@{}} 1\\ -1\\ 1\\ -1 \end{array} \right) , \left( \begin{array}{c@{}} - \frac{1}{2}\\ 0\\ \frac{1}{2}\\ 0 \end{array} \right) \right\})\]</span>
+Entonces
+<span class="math display">\[\begin{array}{rcl}\mathrm{proy}_{U_3}(v_4) &amp; = &amp; \frac{\langle v_4, u_1 \rangle}{\langle u_1, u_1 \rangle} u_1+\frac{\langle v_4, u_2 \rangle}{\langle u_2, u_2 \rangle} u_2+\frac{\langle v_4, u_3 \rangle}{\langle u_3, u_3 \rangle} u_3 \\ &amp; = &amp; \frac{0}{4} \left( \begin{array}{c@{}} -1\\ -1\\ -1\\ -1 \end{array} \right) +\frac{0}{4} \left( \begin{array}{c@{}} 1\\ -1\\ 1\\ -1 \end{array} \right) +\frac{1}{\frac{1}{2}} \left( \begin{array}{c@{}} - \frac{1}{2}\\ 0\\ \frac{1}{2}\\ 0 \end{array} \right)  \\ &amp; = &amp; \left( \begin{array}{c@{}} -1\\ 0\\ 1\\ 0 \end{array} \right) \\\end{array}\]</span>
+Y llamamos
+<span class="math display">\[u_4  = v_4 - \mathrm{proy}_{U_3}(v_4) = \left(\begin{array}{c} -1\\ 1\\ 1\\ -1 \end{array}\right)  - \left( \begin{array}{c@{}} -1\\ 0\\ 1\\ 0 \end{array} \right)  =  \left( \begin{array}{c@{}} 0\\ 1\\ 0\\ -1 \end{array} \right) \]</span></li>
+</ul>
+<p>Por tanto, la base ortogonal a la que llegamos es
+<span class="math display">\[\mathcal{B}&#39; = \{u_i\} = \left\{\left( \begin{array}{c@{}} -1\\ -1\\ -1\\ -1 \end{array} \right) , \left( \begin{array}{c@{}} 1\\ -1\\ 1\\ -1 \end{array} \right) , \left( \begin{array}{c@{}} - \frac{1}{2}\\ 0\\ \frac{1}{2}\\ 0 \end{array} \right) , \left( \begin{array}{c@{}} 0\\ 1\\ 0\\ -1 \end{array} \right) \right\}\]</span></p>
+<p><em>Fase 2</em></p>
+<p>Ahora debemos multiplicar cada vector <span class="math inline">\(u_i\)</span> en <span class="math inline">\(\mathcal{B}&#39;\)</span> por el inverso de su norma, y llegamos a los vectores <span class="math inline">\(\frac{1}{\|u_i\|}u_i\)</span>, que nos forman la base ortonormal siguiente:
+<span class="math display">\[\begin{array}{rcl}\mathcal{B}&#39;&#39; &amp; = &amp; \left\{\frac{1}{2}\left(\begin{array}{c} -1\\ -1\\ -1\\ -1 \end{array}\right), \frac{1}{2}\left(\begin{array}{c} 1\\ -1\\ 1\\ -1 \end{array}\right), \frac{1}{\frac{\sqrt{2}}{2}}\left(\begin{array}{c} \frac{-1}{2}\\ 0\\ \frac{1}{2}\\ 0 \end{array}\right), \frac{1}{\sqrt{2}}\left(\begin{array}{c} 0\\ 1\\ 0\\ -1 \end{array}\right)\right\} = \\ &amp; = &amp; \left\{\left(\begin{array}{c} \frac{-1}{2}\\ \frac{-1}{2}\\ \frac{-1}{2}\\ \frac{-1}{2} \end{array}\right), \left(\begin{array}{c} \frac{1}{2}\\ \frac{-1}{2}\\ \frac{1}{2}\\ \frac{-1}{2} \end{array}\right), \left(\begin{array}{c} \frac{-\sqrt{2}}{2}\\ 0\\ \frac{\sqrt{2}}{2}\\ 0 \end{array}\right), \left(\begin{array}{c} 0\\ \frac{\sqrt{2}}{2}\\ 0\\ \frac{-\sqrt{2}}{2} \end{array}\right)\right\} \\\end{array}\]</span></p>
 <hr />
 </div>
 <div id="ortho-matrix" class="section level2" number="5.7">
 <h2 number="5.7"><span class="header-section-number">5.7</span> Qué es una matriz ortogonal y una aplicación ortogonal</h2>
-<ul>
-<li>Definición de matriz ortogonal</li>
-<li>Definición de aplicación ortogonal</li>
-</ul>
+<p>Una matriz cuadrada <span class="math inline">\(Q\)</span> se llama <strong>ortogonal</strong> si <span class="math inline">\(Q^{\text{t}}Q = I\)</span> o, equivalentemente, <span class="math inline">\(Q^{-1} = Q^{\text{t}}\)</span>.</p>
+<p>Es decir, una matriz ortogonal es aquella cuya inversa es su propia traspuesta.</p>
+<blockquote>
+<p>Una matriz <span class="math inline">\(A\in\mathcal{M}_n(\mathbb{R})\)</span> es ortogonal si, y sólo si, sus columnas forman una base <em>ortonormal</em> de <span class="math inline">\(\mathbb{R}^n\)</span>.</p>
+</blockquote>
+<p>Un endomorfismo <span class="math inline">\(f:V\to V\)</span> se llama <strong>ortogonal</strong> si respeta el producto escalar, es decir, si <span class="math inline">\(\langle\cdot,\cdot\rangle\)</span> es el producto escalar en <span class="math inline">\(V\)</span>, entonces <span class="math inline">\(\langle f(u), f(v) \rangle = \langle u, v \rangle\)</span> para todo <span class="math inline">\(u,v\in V\)</span>.</p>
+<p>Como la aplicación ortogonal conserva el producto escalar, también conserva todas las cantidades que hemos definido a partir de él: <a href="espacios-euclídeos.html#norm">la norma, la distancia</a> y <a href="espacios-euclídeos.html#ortho">el ángulo</a> entre vectores de <span class="math inline">\(V\)</span>: <span class="math inline">\(\|f(v)\| = \|v\|\)</span>, <span class="math inline">\(d(f(u), f(v)) = d(u,v)\)</span> y <span class="math inline">\(\mathrm{ang}(f(u),f(v)) = \mathrm{ang}(u, v)\)</span> para todo <span class="math inline">\(u,v\in V\)</span>.</p>
+<blockquote>
+<p>Una aplicación <span class="math inline">\(f:V\to V\)</span> es ortogonal si, y sólo si, la imagen de toda base ortonormal es de nuevo una base ortonormal de <span class="math inline">\(V\)</span>.</p>
+</blockquote>
+<p>¿Qué relación existe entre matrices ortogonales y aplicaciones ortogonales?</p>
+<blockquote>
+<p>Sea <span class="math inline">\(f:V\to V\)</span> una aplicación lineal y sea <span class="math inline">\(A\)</span> su matriz asociada respecto a una base ortonormal de <span class="math inline">\(V\)</span>. Entonces <span class="math inline">\(f\)</span> es ortogonal si, y solo si, la matriz <span class="math inline">\(A\)</span> es ortogonal.</p>
+</blockquote>
 <hr />
 <p><strong>Ejemplo</strong></p>
 <hr />
