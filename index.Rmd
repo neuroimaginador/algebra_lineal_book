@@ -46,7 +46,8 @@ glue_latex <- function(...) {
              ...,
              "$$",
              .open = "[", .close = "]", 
-             .sep = "")
+             .sep = "") %>% 
+    str_replace_all("\n", " ")
   
 }
 
