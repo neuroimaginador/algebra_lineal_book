@@ -121,14 +121,16 @@ Consideremos el siguiente endomorfismo \(f:\mathbb{R}^{`r n`}\to\mathbb{R}^{`r n
 glue_latex(
   "f[to_latex(generic_vector(n))] = ",
   "\\left([write_system(A, latex = TRUE, format = 'c')]\\right)"
-)
+) %>% 
+  cat()
 ```
 
 Es claro que su matriz asociada en la base canónica es:
 ```{r}
 glue_latex(
   "A = [glue_matrices(A, latex = TRUE, fractions = TRUE)]"
-)
+) %>% 
+  cat()
 ```
 
 
@@ -138,13 +140,15 @@ glue_latex(
   "\\mathcal{B} = \\left\\{",
   "[vectors_to_latex(b_eigenvectors)]",
   "\\right\\}"
-)
+) %>% 
+  cat()
 ```
 entonces la matriz de cambio de $\mathcal{B}$ a la canónica $\mathcal{C}$ es:
 ```{r}
 glue_latex(
   "P = [glue_matrices(P2, latex = TRUE, fractions = TRUE)]"
-)
+) %>% 
+  cat()
 ```
 y la matriz asociada a $f$ en la nueva base es:
 ```{r}
@@ -153,7 +157,8 @@ glue_latex(
   "A' & = & [glue_matrices(P2, latex = TRUE, fractions = TRUE)]^{-1}\\ [glue_matrices(A, latex = TRUE, fractions = TRUE)]\\ [glue_matrices(P2, latex = TRUE, fractions = TRUE)] = \\\\",
   " & = & [glue_matrices(D, latex = TRUE, fractions = TRUE)]",
   "\\end{array}"
-)
+) %>% 
+  cat()
 ```
 
 En este capítulo, veremos el método para hallar esa descomposición, la base y la matriz diagonal.
@@ -222,7 +227,8 @@ Vamos a calcular los autovalores del endomorfismo \(f:\mathbb{R}^{`r n`}\to\math
 glue_latex(
   "f[to_latex(generic_vector(n))] = ",
   "\\left([write_system(A, latex = TRUE, format = 'c')]\\right)"
-)
+) %>% 
+  cat()
 ```
 del ejemplo anterior.
 
@@ -230,7 +236,8 @@ Sabemos que su matriz asociada en la base canónica es:
 ```{r}
 glue_latex(
   "A = [glue_matrices(A, latex = TRUE, fractions = TRUE)]"
-)
+) %>% 
+  cat()
 ```
 
 Definimos entonces el polinomio característico como:
@@ -257,14 +264,16 @@ glue_latex(
   "\\right) = \\\\",
   " & = & \\mathrm{det}[glue_matrices(A_lambdaI, latex = TRUE)]",
   "\\end{array}"
-)
+) %>% 
+  cat()
 ```
 
 Si desarrollamos el determinante, nos queda como _polinomio característico_:
 ```{r}
 glue_latex(
   "p(\\lambda) = [p_latex]"
-)
+) %>% 
+  cat()
 ```
 
 Igualándolo a 0, tenemos la ecuación característica \(`r p_latex` = 0\), que podemos resolver (generalmente se podrá factorizar de forma simple o usando Ruffini) y nos quedan las siguientes soluciones: \(\lambda = `r str_flatten(autovalores, ", ")`\). Esta última solución es raíz doble, ya que:
@@ -278,7 +287,8 @@ factorization <- glue::glue("{terms}{powers}") %>%
   stringr::str_flatten("\\cdot ")
 glue_latex(
   "p(\\lambda) = [factorization]"
-)
+) %>% 
+  cat()
 ```
 
 
@@ -611,7 +621,8 @@ Conocemos su [polinomio característico](#eigenvalue):
 ```{r}
 glue_latex(
   "p(\\lambda) = [p_latex]"
-)
+) %>% 
+  cat()
 ```
 
 El teorema nos proporciona la siguiente igualdad:
@@ -754,7 +765,8 @@ glue_latex(
   " & = & [str2] = \\\\",
   " & = & [glue_matrices(potencia, latex = TRUE, fractions = TRUE)]",  
   "\\end{array}"
-  )
+  ) %>% 
+  cat()
 
 cat("\n")
 ```
@@ -822,7 +834,8 @@ glue_latex(
   " & = & [str2] = \\\\",
   " & = & [glue_matrices(potencia, latex = TRUE, fractions = TRUE)]",  
   "\\end{array}"
-  )
+  ) %>% 
+  cat()
 
 cat("\n")
 ```

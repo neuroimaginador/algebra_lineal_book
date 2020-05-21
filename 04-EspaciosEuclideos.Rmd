@@ -961,12 +961,14 @@ Como la aplicación ortogonal conserva el producto escalar, también conserva to
 
 __Ejemplo__
 
+- La matriz asociada a la rotación.
+
+- Matriz formada por base ortonormal del apartado anterior.
+
 ---
 
 ## Qué es la diagonalización ortogonal {#diag-ortho}
 
-- Definición de aplicación ortogonal y de matriz ortogonal 
-- Teorema de relación entre matriz ortogonal y base ortonormal
 - Definición de matriz diagonalizable ortogonalmente
 - Teorema diagonalización ortogonal
 

@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-05-20" />
+<meta name="date" content="2020-05-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -166,15 +166,15 @@
 <hr />
 <p><strong>Ejemplo</strong></p>
 <p>Consideremos el siguiente endomorfismo <span class="math inline">\(f:\mathbb{R}^{3}\to\mathbb{R}^{3}\)</span>, dado por
-[1] “<span class="math display">\[f\\left(\\begin{array}{c} x\\\\ y\\\\ z \\end{array}\\right)  = \\left(\\begin{array}{c} 9x+ 6y+ 6z\\\\ -2x+ y-2z\\\\ -10x-10y-7z\\\\ \\end{array}\\right)\]</span>”</p>
+<span class="math display">\[f\left(\begin{array}{c} x\\ y\\ z \end{array}\right)  = \left(\begin{array}{c} 9x+ 6y+ 6z\\ -2x+ y-2z\\ -10x-10y-7z\\ \end{array}\right)\]</span></p>
 <p>Es claro que su matriz asociada en la base canónica es:
-[1] “<span class="math display">\[A = \\left( \\begin{array}{ccc@{}} 9 &amp; 6 &amp; 6\\\\ -2 &amp; 1 &amp; -2\\\\ -10 &amp; -10 &amp; -7 \\end{array} \\right) \]</span>”</p>
+<span class="math display">\[A = \left( \begin{array}{ccc@{}} 9 &amp; 6 &amp; 6\\ -2 &amp; 1 &amp; -2\\ -10 &amp; -10 &amp; -7 \end{array} \right) \]</span></p>
 <p>Si consideramos la siguiente base:
-[1] “<span class="math display">\[\\mathcal{B} = \\left\\{\\left( \\begin{array}{c@{}} - \\frac{3}{5}\\\\ \\frac{1}{5}\\\\ 1 \\end{array} \\right) , \\left( \\begin{array}{c@{}} -1\\\\ 1\\\\ 0 \\end{array} \\right) , \\left( \\begin{array}{c@{}} -1\\\\ 0\\\\ 1 \\end{array} \\right) \\right\\}\]</span>”
+<span class="math display">\[\mathcal{B} = \left\{\left( \begin{array}{c@{}} - \frac{3}{5}\\ \frac{1}{5}\\ 1 \end{array} \right) , \left( \begin{array}{c@{}} -1\\ 1\\ 0 \end{array} \right) , \left( \begin{array}{c@{}} -1\\ 0\\ 1 \end{array} \right) \right\}\]</span>
 entonces la matriz de cambio de <span class="math inline">\(\mathcal{B}\)</span> a la canónica <span class="math inline">\(\mathcal{C}\)</span> es:
-[1] “<span class="math display">\[P = \\left( \\begin{array}{ccc@{}} - \\frac{3}{5} &amp; -1 &amp; -1\\\\ \\frac{1}{5} &amp; 1 &amp; 0\\\\ 1 &amp; 0 &amp; 1 \\end{array} \\right) \]</span>”
+<span class="math display">\[P = \left( \begin{array}{ccc@{}} - \frac{3}{5} &amp; -1 &amp; -1\\ \frac{1}{5} &amp; 1 &amp; 0\\ 1 &amp; 0 &amp; 1 \end{array} \right) \]</span>
 y la matriz asociada a <span class="math inline">\(f\)</span> en la nueva base es:
-[1] “<span class="math display">\[\\begin{array}{rcl}A&#39; &amp; = &amp; \\left( \\begin{array}{ccc@{}} - \\frac{3}{5} &amp; -1 &amp; -1\\\\ \\frac{1}{5} &amp; 1 &amp; 0\\\\ 1 &amp; 0 &amp; 1 \\end{array} \\right) ^{-1}\\ \\left( \\begin{array}{ccc@{}} 9 &amp; 6 &amp; 6\\\\ -2 &amp; 1 &amp; -2\\\\ -10 &amp; -10 &amp; -7 \\end{array} \\right) \\ \\left( \\begin{array}{ccc@{}} - \\frac{3}{5} &amp; -1 &amp; -1\\\\ \\frac{1}{5} &amp; 1 &amp; 0\\\\ 1 &amp; 0 &amp; 1 \\end{array} \\right)  = \\\\ &amp; = &amp; \\left( \\begin{array}{ccc@{}} -3 &amp; 0 &amp; 0\\\\ 0 &amp; 3 &amp; 0\\\\ 0 &amp; 0 &amp; 3 \\end{array} \\right) \\end{array}\]</span>”</p>
+<span class="math display">\[\begin{array}{rcl}A&#39; &amp; = &amp; \left( \begin{array}{ccc@{}} - \frac{3}{5} &amp; -1 &amp; -1\\ \frac{1}{5} &amp; 1 &amp; 0\\ 1 &amp; 0 &amp; 1 \end{array} \right) ^{-1}\ \left( \begin{array}{ccc@{}} 9 &amp; 6 &amp; 6\\ -2 &amp; 1 &amp; -2\\ -10 &amp; -10 &amp; -7 \end{array} \right) \ \left( \begin{array}{ccc@{}} - \frac{3}{5} &amp; -1 &amp; -1\\ \frac{1}{5} &amp; 1 &amp; 0\\ 1 &amp; 0 &amp; 1 \end{array} \right)  = \\ &amp; = &amp; \left( \begin{array}{ccc@{}} -3 &amp; 0 &amp; 0\\ 0 &amp; 3 &amp; 0\\ 0 &amp; 0 &amp; 3 \end{array} \right) \end{array}\]</span></p>
 <p>En este capítulo, veremos el método para hallar esa descomposición, la base y la matriz diagonal.</p>
 <hr />
 <p><strong>¿Qué preguntas vamos a responder en este capítulo?</strong></p>
@@ -215,16 +215,16 @@ y la matriz asociada a <span class="math inline">\(f\)</span> en la nueva base e
 <hr />
 <p><strong>Ejemplo</strong></p>
 <p>Vamos a calcular los autovalores del endomorfismo <span class="math inline">\(f:\mathbb{R}^{3}\to\mathbb{R}^{3}\)</span>, dado por
-[1] “<span class="math display">\[f\\left(\\begin{array}{c} x\\\\ y\\\\ z \\end{array}\\right)  = \\left(\\begin{array}{c} 9x+ 6y+ 6z\\\\ -2x+ y-2z\\\\ -10x-10y-7z\\\\ \\end{array}\\right)\]</span>”
+<span class="math display">\[f\left(\begin{array}{c} x\\ y\\ z \end{array}\right)  = \left(\begin{array}{c} 9x+ 6y+ 6z\\ -2x+ y-2z\\ -10x-10y-7z\\ \end{array}\right)\]</span>
 del ejemplo anterior.</p>
 <p>Sabemos que su matriz asociada en la base canónica es:
-[1] “<span class="math display">\[A = \\left( \\begin{array}{ccc@{}} 9 &amp; 6 &amp; 6\\\\ -2 &amp; 1 &amp; -2\\\\ -10 &amp; -10 &amp; -7 \\end{array} \\right) \]</span>”</p>
+<span class="math display">\[A = \left( \begin{array}{ccc@{}} 9 &amp; 6 &amp; 6\\ -2 &amp; 1 &amp; -2\\ -10 &amp; -10 &amp; -7 \end{array} \right) \]</span></p>
 <p>Definimos entonces el polinomio característico como:
-[1] “<span class="math display">\[\\begin{array}{rcl}p(\\lambda) &amp; = &amp; \\mathrm{det}(A - \\lambda\\ I) = \\\\ &amp; = &amp; \\mathrm{det}\\left(\\left( \\begin{array}{ccc@{}} 9 &amp; 6 &amp; 6\\\\ -2 &amp; 1 &amp; -2\\\\ -10 &amp; -10 &amp; -7 \\end{array} \\right)  - \\lambda \\left( \\begin{array}{ccc@{}} 1 &amp; 0 &amp; 0\\\\ 0 &amp; 1 &amp; 0\\\\ 0 &amp; 0 &amp; 1 \\end{array} \\right) \\right) = \\\\ &amp; = &amp; \\mathrm{det}\\left( \\begin{array}{ccc@{}} 9-\\lambda &amp; 6 &amp; 6\\\\ -2 &amp; 1-\\lambda &amp; -2\\\\ -10 &amp; -10 &amp; -7-\\lambda \\end{array} \\right) \\end{array}\]</span>”</p>
+<span class="math display">\[\begin{array}{rcl}p(\lambda) &amp; = &amp; \mathrm{det}(A - \lambda\ I) = \\ &amp; = &amp; \mathrm{det}\left(\left( \begin{array}{ccc@{}} 9 &amp; 6 &amp; 6\\ -2 &amp; 1 &amp; -2\\ -10 &amp; -10 &amp; -7 \end{array} \right)  - \lambda \left( \begin{array}{ccc@{}} 1 &amp; 0 &amp; 0\\ 0 &amp; 1 &amp; 0\\ 0 &amp; 0 &amp; 1 \end{array} \right) \right) = \\ &amp; = &amp; \mathrm{det}\left( \begin{array}{ccc@{}} 9-\lambda &amp; 6 &amp; 6\\ -2 &amp; 1-\lambda &amp; -2\\ -10 &amp; -10 &amp; -7-\lambda \end{array} \right) \end{array}\]</span></p>
 <p>Si desarrollamos el determinante, nos queda como <em>polinomio característico</em>:
-[1] “<span class="math display">\[p(\\lambda) = \\lambda^{3}-3\\lambda^{2}-9\\lambda+27\]</span>”</p>
+<span class="math display">\[p(\lambda) = \lambda^{3}-3\lambda^{2}-9\lambda+27\]</span></p>
 <p>Igualándolo a 0, tenemos la ecuación característica <span class="math inline">\(\lambda^{3}-3\lambda^{2}-9\lambda+27 = 0\)</span>, que podemos resolver (generalmente se podrá factorizar de forma simple o usando Ruffini) y nos quedan las siguientes soluciones: <span class="math inline">\(\lambda = -3, 3\)</span>. Esta última solución es raíz doble, ya que:
-[1] “<span class="math display">\[p(\\lambda) = (\\lambda +3)\\cdot (\\lambda -3)^{2}\]</span>”</p>
+<span class="math display">\[p(\lambda) = (\lambda +3)\cdot (\lambda -3)^{2}\]</span></p>
 <p>Por tanto, <span class="math inline">\(\lambda = -3, 3\)</span> son autovalores de la matriz <span class="math inline">\(A\)</span> y del endomorfismo <span class="math inline">\(f\)</span>.</p>
 <hr />
 </div>
@@ -395,7 +395,7 @@ A^{n+1} &amp; = &amp; A\cdot A^n = \\
 asociada al endomorfismo <span class="math inline">\(f\)</span> de los ejemplos anteriores.</p>
 <p>Vamos a calcular <span class="math inline">\(A^{-1}\)</span>, <span class="math inline">\(A^4\)</span> y <span class="math inline">\(A^5\)</span> usando el Teorema de Cayley-Hamilton.</p>
 <p>Conocemos su <a href="diagonalización.html#eigenvalue">polinomio característico</a>:
-[1] “<span class="math display">\[p(\\lambda) = \\lambda^{3}-3\\lambda^{2}-9\\lambda+27\]</span>”</p>
+<span class="math display">\[p(\lambda) = \lambda^{3}-3\lambda^{2}-9\lambda+27\]</span></p>
 <p>El teorema nos proporciona la siguiente igualdad:
 <span class="math display">\[p(A) = A^{3}-3A^{2}-9A+27I = 0\]</span></p>
 <p>Despejando la identidad, nos queda:
@@ -408,12 +408,12 @@ asociada al endomorfismo <span class="math inline">\(f\)</span> de los ejemplos 
 <p>Para <span class="math inline">\(A^4\)</span>, tenemos:
 <span class="math display">\[A^4 = A\cdot A^3 = A \left(3A^{2}+9A-27I\right) = 3A^{3}+9A^{2}-27A\]</span></p>
 <p>Si queremos dejarlo como suma de potencias de <span class="math inline">\(A\)</span> de grado menor que <span class="math inline">\(3\)</span>, debemos sustituir aquí <span class="math inline">\(A^{3}\)</span> por la expresión que hemos despejado hace un momento.</p>
-<p>[1] “<span class="math display">\[\\begin{array}{rcl}A^4 &amp; = &amp; 3 \\left( 3A^{2}+9A-27I \\right)+9A^{2}-27A = \\\\ &amp; = &amp; 18A^{2}-81I = \\\\ &amp; = &amp; 18\\left( \\begin{array}{ccc@{}} 9 &amp; 0 &amp; 0\\\\ 0 &amp; 9 &amp; 0\\\\ 0 &amp; 0 &amp; 9 \\end{array} \\right) -81\\left( \\begin{array}{ccc@{}} 1 &amp; 0 &amp; 0\\\\ 0 &amp; 1 &amp; 0\\\\ 0 &amp; 0 &amp; 1 \\end{array} \\right)  = \\\\ &amp; = &amp; \\left( \\begin{array}{ccc@{}} 81 &amp; 0 &amp; 0\\\\ 0 &amp; 81 &amp; 0\\\\ 0 &amp; 0 &amp; 81 \\end{array} \\right) \\end{array}\]</span>”</p>
+<p><span class="math display">\[\begin{array}{rcl}A^4 &amp; = &amp; 3 \left( 3A^{2}+9A-27I \right)+9A^{2}-27A = \\ &amp; = &amp; 18A^{2}-81I = \\ &amp; = &amp; 18\left( \begin{array}{ccc@{}} 9 &amp; 0 &amp; 0\\ 0 &amp; 9 &amp; 0\\ 0 &amp; 0 &amp; 9 \end{array} \right) -81\left( \begin{array}{ccc@{}} 1 &amp; 0 &amp; 0\\ 0 &amp; 1 &amp; 0\\ 0 &amp; 0 &amp; 1 \end{array} \right)  = \\ &amp; = &amp; \left( \begin{array}{ccc@{}} 81 &amp; 0 &amp; 0\\ 0 &amp; 81 &amp; 0\\ 0 &amp; 0 &amp; 81 \end{array} \right) \end{array}\]</span></p>
 <p>Evidentemente, podríamos haber hecho el cálculo bien directamente bien haciendo <span class="math inline">\(A^4 = A^2\cdot A^2\)</span>, pero esa forma no está expresada como suma de potencias de grado menor que <span class="math inline">\(n\)</span>.</p>
 <p>Repetimos el proceso para calcular <span class="math inline">\(A^5\)</span>.
 <span class="math display">\[A^5 = A\cdot A^4 = A \left(18A^{2}-81I\right) = 18A^{3}-81A\]</span></p>
 <p>Sustituimos de nuevo <span class="math inline">\(A^{3}\)</span> por su expresión:
-[1] “<span class="math display">\[\\begin{array}{rcl}A^5 &amp; = &amp; 18 \\left( 3A^{2}+9A-27I \\right)-81A = \\\\ &amp; = &amp; 54A^{2}+81A-486I = \\\\ &amp; = &amp; 54\\left( \\begin{array}{ccc@{}} 9 &amp; 0 &amp; 0\\\\ 0 &amp; 9 &amp; 0\\\\ 0 &amp; 0 &amp; 9 \\end{array} \\right) +81\\left( \\begin{array}{ccc@{}} 9 &amp; 6 &amp; 6\\\\ -2 &amp; 1 &amp; -2\\\\ -10 &amp; -10 &amp; -7 \\end{array} \\right) -486\\left( \\begin{array}{ccc@{}} 1 &amp; 0 &amp; 0\\\\ 0 &amp; 1 &amp; 0\\\\ 0 &amp; 0 &amp; 1 \\end{array} \\right)  = \\\\ &amp; = &amp; \\left( \\begin{array}{ccc@{}} 729 &amp; 486 &amp; 486\\\\ -162 &amp; 81 &amp; -162\\\\ -810 &amp; -810 &amp; -567 \\end{array} \\right) \\end{array}\]</span>”</p>
+<span class="math display">\[\begin{array}{rcl}A^5 &amp; = &amp; 18 \left( 3A^{2}+9A-27I \right)-81A = \\ &amp; = &amp; 54A^{2}+81A-486I = \\ &amp; = &amp; 54\left( \begin{array}{ccc@{}} 9 &amp; 0 &amp; 0\\ 0 &amp; 9 &amp; 0\\ 0 &amp; 0 &amp; 9 \end{array} \right) +81\left( \begin{array}{ccc@{}} 9 &amp; 6 &amp; 6\\ -2 &amp; 1 &amp; -2\\ -10 &amp; -10 &amp; -7 \end{array} \right) -486\left( \begin{array}{ccc@{}} 1 &amp; 0 &amp; 0\\ 0 &amp; 1 &amp; 0\\ 0 &amp; 0 &amp; 1 \end{array} \right)  = \\ &amp; = &amp; \left( \begin{array}{ccc@{}} 729 &amp; 486 &amp; 486\\ -162 &amp; 81 &amp; -162\\ -810 &amp; -810 &amp; -567 \end{array} \right) \end{array}\]</span></p>
 
 </div>
 </div>
