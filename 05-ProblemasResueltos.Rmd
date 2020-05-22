@@ -554,7 +554,8 @@ Y <- A %*% B1
 glue_latex(
   "Y = ",
   "[glue_matrices(Y, latex = TRUE, fractions = TRUE)]"
-)
+) %>% 
+  cat()
 ```
 y $B_2 = (w_1|w_2|\ldots|w_m)$ a la matriz que tiene por columnas los vectores de $\mathcal{B}_2$.
 
@@ -590,7 +591,8 @@ glue_latex(
   "[to_latex(gen_vector_V)]\\in V:",
   "[write_system(A, matlab::zeros(m, 1), latex = TRUE, format = 'c')]",
   "\\right\\}"
-)
+) %>% 
+  cat()
 ```
 
 Resolvemos este sistema por Gauss para [encontrar las ecuaciones paramétricas](#base) y, a partir de ahí, una [base](#sisgenabase) del núcleo:
@@ -622,7 +624,8 @@ glue_latex(
   "\\left\\{",
   "[vectors_to_latex(genKer)]",
   "\\right\\}"
-)
+) %>% 
+  cat()
 ```
 y \(\mathrm{dim}(\mathrm{Ker}\ f) = `r ncol(genKer)`\).
 
@@ -656,7 +659,8 @@ bImf <- linearly_independents(A)
 glue_latex(
   "\\mathcal{B}_{\\mathrm{Im}\\ f} =",
   "\\left\\{[vectors_to_latex(bImf)]\\right\\}"
-)
+) %>% 
+  cat()
 ```
 y \(\mathrm{dim}(\mathrm{Im}\ f) = `r ncol(bImf)`\).
 
@@ -680,7 +684,8 @@ glue_latex(
   "\\left\\{[write_system(AU, zero_vector(AU), fractions = TRUE, latex = TRUE)]\\right.",
   "\\Rightarrow",
   "[to_latex(gen_vector_V)] = [write_linear_combination(U, vars = params)]"
-)
+) %>% 
+  cat()
 ```
 
 De aquí podemos determinar una base de $U$, si eliminamos sus vectores linealmente dependientes:
@@ -690,7 +695,8 @@ glue_latex(
   "\\mathcal{B}_U = \\left\\{",
   "[vectors_to_latex(bU)]",
   "\\right\\}"
-)
+) %>% 
+  cat()
 ```
 
 Ahora procedemos a calcular $f(\mathcal{B}_U)$:
@@ -700,14 +706,16 @@ glue_latex(
   "f(\\mathcal{B}_U) = \\left\\{",
   "[vectors_to_latex(fbU)]",
   "\\right\\}"
-)
+) %>% 
+  cat()
 ```
 que es un sistema generador de $f(U)$. Eliminamos los vectores linealmente dependientes (en este caso es sencillo) para obtener una base de $f(U)$:
 ```{r}
 glue_latex(
   "\\mathcal{B}_{f(U)} =",
   "\\left\\{[vectors_to_latex(fbU)]\\right\\}"
-)
+) %>% 
+  cat()
 ```
 y así \(\mathrm{dim}(f(U)) = `r ncol(fbU)`\).
 
@@ -797,7 +805,8 @@ Consideremos el siguiente endomorfismo \(f:\mathbb{R}^{`r n`}\to\mathbb{R}^{`r n
 glue_latex(
   "f[to_latex(generic_vector(n))] = ",
   "\\left([write_system(A, latex = TRUE, format = 'c')]\\right)"
-)
+) %>% 
+  cat()
 ```
 
 a. Hallar todos los autovalores de $f$.
@@ -856,7 +865,8 @@ factorization <- glue::glue("{terms}{powers}") %>%
   stringr::str_flatten("\\cdot ")
 glue_latex(
   "p(\\lambda) = [factorization]"
-)
+) %>% 
+  cat()
 ```
 
 Por tanto, los autovalores de $f$ son \(\{`r str_flatten(autovalores, ", ")`\}\).
@@ -1112,10 +1122,168 @@ glue_latex(
   " & = & [str2] = \\\\",
   " & = & [glue_matrices(potencia, latex = TRUE, fractions = TRUE)]",  
   "\\end{array}"
-  )
+  ) %>% 
+  cat()
 
 cat("\n")
 ```
 
 ## Espacios Euclídeos {#prob-espeuclideo}
+
+__Ejercicio__
+
+```{r}
+set.seed(4321)
+n <- 4
+u <- rVector(n)
+v <- rVector(n)
+
+repeat {
+  
+  bU <- rMatrix(n = n, m = 2) %>% 
+    linearly_independents()
+  
+  if(ncol(bU) == 2) break
+  
+}
+
+
+repeat {
+  
+  n <- 4
+  lambdas <- sample(-1:0, size = n, replace = TRUE) %>% 
+    sort()
+  D <- diag(lambdas)
+  repeat {
+    
+    B <- rMatrix(n = n, m = n * 4, values = 0:1) %>% 
+      linearly_independents()
+    
+    if (ncol(B) == n) break
+    
+  }
+  c(B, s) %<-% gram_schmidt(B)
+  
+  B <- B %>% t() %>% 
+    remove_fraction() %>% t()
+  
+  A <- t(B) %*% D %*% B
+  A[abs(A) < 1.e-7] <- 0
+  
+  p <- charpoly(A)
+  p[abs(p) < 1.e-7] <- 0
+  
+  L <- polyroots(p)
+  
+  roots <- L$root
+  
+  if (max(roots - floor(roots)) == 0) break
+  
+}
+```
+
+
+a. Consideremos los vectores 
+```{r}
+glue_latex(
+  "u = [to_latex(u, fractions = TRUE)]\\quad\\quad v= [to_latex(v, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+Hallar el ángulo que forman $u$ y $v$, la norma de cada uno de ellos, $d(u,v)$, y normalizarlos.
+
+b. Encontrar el complemento ortogonal del subespacio generado por el siguiente sistema de vectores:
+```{r}
+glue_latex(
+  "\\mathcal{B} = \\left\\{",
+  "[vectors_to_latex(bU)]",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+c. Diagonalizar ortogonalmente la matriz
+```{r}
+glue_latex(
+  "A = [glue_matrices(A, latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+hallando una base ortonormal de autovectores y expresando de forma explícita la matriz diagonal en función de la matriz $A$ y de la matriz de cambio de base.
+
+__Solución__
+
+a. Vamos a calcular tanto el [producto escalar](#espeuc) de $u$ y $v$ como sus [normas](#norm):
+```{r}
+prod_str <- "\\cdot"
+u_str <- to_fraction(u, latex = TRUE)
+u_str[u < 0] <- paste0("(", u_str[u < 0], ")")
+v_str <- to_fraction(v, latex = TRUE)
+v_str[v < 0] <- paste0("(", v_str[v < 0], ")")
+dot_prod <- glue::glue("{u_str}{prod_str}{v_str}") %>% 
+  str_flatten("+")
+glue_latex(
+  "\\langle u, v \\rangle = \\langle [to_latex(u)], [to_latex(v)]\\rangle = [dot_prod] = [sum(u * v)]" 
+) %>% 
+  cat()
+
+u2_str <- glue::glue("{u_str}^2") %>% str_flatten("+")
+u_vector <- Vector$new(u)
+norm_u <- u_vector$norm()
+glue_latex(
+  "\\|u\\| = \\sqrt{\\langle u, u \\rangle} = \\sqrt{[u2_str]} = [norm_u$to_latex()]"
+) %>% 
+  cat()
+
+v2_str <- glue::glue("{v_str}^2") %>% str_flatten("+")
+v_vector <- Vector$new(v)
+norm_v <- v_vector$norm()
+glue_latex(
+  "\\|v\\| = \\sqrt{\\langle v, v \\rangle} = \\sqrt{[v2_str]} = [norm_v$to_latex()]"
+) %>% 
+  cat()
+
+```
+
+Entonces
+```{r}
+uv <- Number$new(sum(u * v))
+norm_u_inv <- Number$new(norm_u)
+norm_u_inv$inverse()
+norm_u_inv$simplify()
+norm_u_inv$rationalize()
+norm_v_inv <- Number$new(norm_v)
+norm_v_inv$inverse()
+norm_v_inv$simplify()
+norm_v_inv$rationalize()
+norm_prod <- Number$new(norm_u_inv)$prod(norm_v_inv)
+cos_theta <- uv$prod(norm_prod)
+cos_theta$simplify()
+cos_theta$rationalize()
+glue_latex(
+  "\\mathrm{ang}(u, v) = \\arccos\\frac{\\langle u, v \\rangle}{\\|u\\| \\|v\\|} = \\arccos\\frac{[sum(u * v)]}{[norm_u$to_latex()][norm_v$to_latex()]} = \\arccos [cos_theta$to_latex()]"
+) %>% 
+  cat()
+```
+
+Pasamos a normalizar cada vector:
+```{r}
+u_latex <- u_vector$to_latex()
+u_norm <- u_vector$prod(norm_u_inv)
+v_latex <- v_vector$to_latex()
+v_norm <- v_vector$prod(norm_v_inv)
+glue_latex(
+  "\\frac{u}{\\|u\\|} = [norm_u_inv$to_latex()][u_latex] = [u_norm$to_latex()],\\quad\\quad \\frac{v}{\\|v\\|} = [norm_v_inv$to_latex()][v_latex] = [v_norm$to_latex()]"
+) %>% 
+  cat()
+```
+
+Por último, calculamos la [distancia](#norm):
+```{r}
+u_v <- u - v
+u_v_vector <- Vector$new(u_v)
+glue_latex(
+  "d(u,v) = \\|u-v\\| = \\left\\|[u_latex] - [v_latex]\\right\\| = \\left\\|[u_v_vector$to_latex()]\\right\\| = [u_v_vector$norm()$to_latex()]"
+) %>% 
+  cat()
+```
 

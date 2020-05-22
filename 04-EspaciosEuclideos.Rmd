@@ -1,4 +1,4 @@
-# Espacios Euclídeos
+# Espacios Euclídeos {#espeuc}
 
 ```{r echo = FALSE}
 knitr::opts_chunk$set(echo = FALSE,
@@ -947,6 +947,8 @@ Es decir, una matriz ortogonal es aquella cuya inversa es su propia traspuesta.
 
 > Una matriz $A\in\mathcal{M}_n(\mathbb{R})$ es ortogonal si, y sólo si, sus columnas forman una base _ortonormal_ de $\mathbb{R}^n$.
 
+> Sea $A$ una matriz ortogonal. Entonces $\mathrm{det}(A) = \pm 1$.
+
 Un endomorfismo $f:V\to V$ se llama __ortogonal__ si respeta el producto escalar, es decir, si $\langle\cdot,\cdot\rangle$ es el producto escalar en $V$, entonces $\langle f(u), f(v) \rangle = \langle u, v \rangle$ para todo $u,v\in V$.
 
 Como la aplicación ortogonal conserva el producto escalar, también conserva todas las cantidades que hemos definido a partir de él: [la norma, la distancia](#norm) y [el ángulo](#ortho) entre vectores de $V$: $\|f(v)\| = \|v\|$, $d(f(u), f(v)) = d(u,v)$ y $\mathrm{ang}(f(u),f(v)) = \mathrm{ang}(u, v)$ para todo $u,v\in V$.
@@ -961,31 +963,521 @@ Como la aplicación ortogonal conserva el producto escalar, también conserva to
 
 __Ejemplo__
 
-- La matriz asociada a la rotación.
+Como hemos comentado, si tomamos una base ortonormal y ponemos sus vectores por columnas, nos forman una matriz _ortogonal_. Por tanto, podemos considerar la base $\mathcal{B}''$ del [ejemplo anterior](#gram-schmidt), y construir la matriz ortogonal asociada:
+```{r}
+base2_str <- base2 %>% 
+  sapply(function(v) v$to_latex(ldeco = "", rdeco = "")) %>% 
+  str_flatten(" ")
+matriz <- glue::glue("\\left({base2_str}\\right)")
+glue_latex(
+  "Q = [matriz]"
+) %>% 
+  cat()
+```
 
-- Matriz formada por base ortonormal del apartado anterior.
+Es fácil comprobar que, en este caso, $Q^{\text{t}}\ Q = I$.
+
+Hay otros ejemplos de matrices ortogonales. En particular, una tipología concreta de matrices ortogonales en $\mathbb{R}^2$ es muy utilizada en la práctica. Llamemos:
+$$R(\alpha) = \left(
+\begin{array}{cc}
+\cos(\alpha) & \sin(\alpha) \\
+-\sin(\alpha) & \cos(\alpha) \\
+\end{array}\right)$$
+
+Son las denominadas __matrices de rotación__. Están asociadas a la aplicación lineal que representa un giro o rotación de $\alpha$ radianes en sentido positivo (_antihorario_) alrededor del origen de coordenadas.
+
+Así 
+$$
+\left(
+\begin{array}{c}
+x' \\ y' \\
+\end{array}\right) = R(\alpha)\left(
+\begin{array}{c}
+x \\ y \\
+\end{array}\right)$$
+son las coordenadas del vector girado, en función de las coordenadas del vector original.
+
+Estas matrices de rotación se pueden extender a dimensiones superiores. Por ejemplo, en $\mathbb{R}^3$, la rotación de $\alpha$ radianes alrededor del _eje $X$_ se representa mediante la matriz ortogonal
+$$R(\alpha) = \left(
+\begin{array}{ccc}
+1 & 0 & 0 \\
+0 & \cos(\alpha) & \sin(\alpha) \\
+0 & -\sin(\alpha) & \cos(\alpha) \\
+\end{array}\right)
+$$
 
 ---
 
 ## Qué es la diagonalización ortogonal {#diag-ortho}
 
-- Definición de matriz diagonalizable ortogonalmente
-- Teorema diagonalización ortogonal
+Recordemos [la definición de endomorfismo o de matriz diagonalizable](#diagonalizable). Una aplicación lineal $f:V\to V$ es diagonalizable si y solo si existe una base de $V$ formada por autovectores de $f$, lo cual equivale a que la representación matricial de $f$ en dicha base sea una matriz diagonal $D$. En representación matricial, esto se traduce en que una matriz $A\in\mathbb{M}_n(\mathbb{R})$ es diagonalizable si y solo si, existe una matriz regular $P$ tal que $D = P^{-1}\ A\ P$. Las columnas de $P$ están formadas por los autovectores de la base de la definición.
 
+Veamos cómo influye el hecho de tener bases ortonormales en un espacio euclídeo en la diagonalización, lo que da lugar a la denominada _diagonalización ortogonal_.
+
+Diremos que una aplicación lineal $f:V\to V$ es __diagonalizable ortogonalmente__ si y solo si existe una base ortonormal en $V$ formada por autovectores de $f$. 
+
+En matrices, una matriz $A$ se dice __diagonalizable ortogonalmente__ si existe una matriz $P$ _ortogonal_ tal que $D = P^{\text{t}}\ A\ P$, donde $D$, la matriz asociada a $f$ en la base de autovectores, es diagonal con autovalores en la diagonal principal.
 
 ---
 
 __Ejemplo__
+
+```{r}
+set.seed(3412)
+repeat {
+  
+  n <- 4
+  lambdas <- sample(-1:1, size = n, replace = TRUE) %>% 
+    sort()
+  D <- diag(lambdas)
+  repeat {
+    
+    B <- rMatrix(n = n, m = n * 4, values = 0:1) %>% 
+      linearly_independents()
+    
+    if (ncol(B) == n) break
+    
+  }
+  c(B, s) %<-% gram_schmidt(B)
+  
+  B <- B %>% t() %>% 
+    remove_fraction() %>% t()
+  
+  A <- t(B) %*% D %*% B
+  A[abs(A) < 1.e-7] <- 0
+  
+  p <- charpoly(A)
+  p[abs(p) < 1.e-7] <- 0
+  
+  L <- polyroots(p)
+  
+  roots <- L$root
+  
+  if (max(roots - floor(roots)) == 0) break
+  
+}
+
+p_latex <- poly2latex(p, var = "\\lambda")
+
+multiplicidad_algebraica <- L$mult
+autovalores <- round(L$root)
+
+o <- order(abs(autovalores))
+autovalores <- autovalores[o]
+multiplicidad_algebraica <- multiplicidad_algebraica[o]
+
+D <- diag(rep(autovalores, times = multiplicidad_algebraica))
+
+# Por cada autovalor, sacamos una base del subsepacio asociado
+gen <- list()
+basis <- list()
+for (av in autovalores) {
+  
+  B <- A - av * eye(n)
+  B[abs(B) < 1.e-7] <- 0
+  H <- solve_homogeneous(B) %>% 
+    linearly_independents()
+  gen <- append(gen, list(H))
+  
+  # Ortogonalizamos con GS
+  Bi <- lapply(seq(ncol(H)),
+               function(i) Vector$new(H[, i]))
+  
+  basis <- append(basis, GS(Bi))
+  
+}
+
+b_eigenvectors <- do.call(cbind, gen)
+
+normas <- lapply(basis, function(v) v$norm()) %>% 
+  lapply(function(s) s$simplify()) %>% 
+  lapply(function(s) s$rationalize())
+
+normas_str <- normas %>% 
+  sapply(function(s) s$to_latex())
+
+normas_str <- glue::glue("\\frac{1}{[normas_str]}", 
+                         .open = "[", .close = "]")  
+
+normas <- normas %>% 
+  lapply(function(s) s$inverse())
+
+base_str <- basis %>% 
+  sapply(function(v) v$to_latex())
+
+Bpp <- glue::glue("{normas_str}{base_str}") %>% 
+  str_flatten(", ")
+
+base2 <- lapply(seq_along(basis), function(i) basis[[i]]$prod(normas[[i]])) %>% 
+  lapply(function(s) s$simplify()) %>% 
+  lapply(function(s) s$rationalize())
+
+base2_str <- base2 %>% 
+  sapply(function(v) v$to_latex()) %>% 
+  str_flatten(", ")
+
+```
+
+Consideremos la matriz $A$ dada por 
+```{r}
+glue_latex(
+  "A = [glue_matrices(A, fractions = TRUE, latex = TRUE)]"
+) %>% 
+  cat()
+```
+asociada a un endomorfismo \(f:\mathbb{R}^{`r n`} \to \mathbb{R}^{`r n`}\) en la base canónica.
+
+Si tomamos la base
+```{r}
+glue_latex(
+  "\\mathcal{B} = \\left\\{",
+  "[base2_str]",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+resulta ser una [base ortonormal](#ortho-basis) formada por autovectores de $f$ (en [la siguiente sección](#diag-ortho2) detallaremos el proceso completo).
+
+Por tanto, esta matriz (y el endomorfismo $f$) es diagonalizable ortogonalmente. De hecho, si consideramos como matriz $P$ la del [cambio de base](#cambiobase) de $\mathcal{B}$ a la canónica, podemos calcular la expresión diagonal, teniendo en cuenta que $P$ es una matriz ortogonal:
+```{r}
+P_str <- vectors2matrix(base2)
+glue_latex(
+  "\\begin{array}{rcl}",
+  "D & = & P^{\\text{t}}\\ A\\ P = \\\\",
+  "  & = & [glue_matrices(P_str, latex = TRUE)]^{\\text{t}}\\ [glue_matrices(A, latex = TRUE, fractions = TRUE)]\\ [glue_matrices(P_str, latex = TRUE)] = \\\\",
+  "  & = & [glue_matrices(D, latex = TRUE, fractions = TRUE)]",
+  "\\end{array}"
+) %>% 
+  cat()
+```
+donde podemos comprobar que los elementos de la diagonal de $D$ son autovalores de $A$.
 
 ---
 
 ## Qué matrices son diagonalizables ortogonalmente {#diag-ortho2}
 
-- Teoremas que relacionan matrices simétricas con diagonabilidad ortogonal
-- Procedimiento diagonalización ortogonal matriz simétrica
+Supongamos una matriz $A\in\mathcal{M}_n(\mathbb{R})$ que sea [diagonalizable ortogonalmente](#diag-ortho), es decir, tal que existe $P$ ortogonal con $P^{\text{t}}\ A\ P = D$ una matriz diagonal.
+
+Como $D$ es diagonal, en particular tenemos que $D^{\text{t}} = D$, luego: 
+$$P^{\text{t}}\ A\ P = D = D^{\text{t}} = (P^{\text{t}}\ A\ P)^{\text{t}} = P^{\text{t}}\ A^{\text{t}}\ \left(P^{\text{t}}\right)^{\text{t}} = P^{\text{t}}\ A^{\text{t}}\ P$$
+Luego, multiplicando por $P$ a la izquierda en los extremos de la igualdad, y por $P^{\text{t}}$ en la derecha, recordando que $P$ es una [matriz ortogonal](#ortho-matrix), llegamos a que $A = A^{\text{t}}$.
+
+Esto significa que:
+
+> Si una matriz $A\in\mathcal{M}_n(\mathbb{R})$ es _diagonalizable ortogonalmente_, entonces es simétrica.
+
+Por tanto, una matriz _no simétrica_ podrá ser [diagonalizable](#diagonalizable) (dependiendo de si cumple los criterios ya estudiados), pero _nunca_ puede ser _diagonalizable ortogonalmente_.
+
+Podemos estudiar entonces algunas de las propiedades de las matrices simétricas en lo que se refiere a diagonalización:
+
+> Sea $A\in\mathcal{M}_n(\mathbb{R})$ una matriz simétrica. Entonces:
+>
+> - Todos los autovalores de $A$ son reales.
+- Si $\lambda_1$ y $\lambda_2$ son dos autovalores distintos, y sus subespacios asociados son $U_{\lambda_1}$ y $U_{\lambda_2}$, respectivamente, entonces $U_{\lambda_1}$ es ortogonal a $U_{\lambda_2}$.
+- La multiplicidad geométrica de cada autovalor de $A$ coincide con su multiplicidad algebraica.
+
+En consecuencia
+
+> Una matriz $A\in\mathcal{M}_n(\mathbb{R})$ es diagonalizable ortogonalmente si y solo si es simétrica.
+
+__¿Cómo diagonalizamos ortogonalmente una mtriz simétrica?__
+
+El procedimiento es idéntico al que se conoce para [diagonalizar](#diagonalizable) una matriz cualquiera, con las siguientes puntualizaciones:
+
+- Al ser una matriz simétrica, tenemos asegurada que es diagonalizable (incluso ortogonalmente).
+- Al calcular la base del subespacio asociado a un autovalor $\lambda$, podemos hacer un paso extra, usando el [método de Gram-Schmidt](#gram-schmidt), para tener dicha base en forma ortonormal.
+- Al finalizar, al igual que hacíamos en la digonalización _estándar_, podemos unir todas las bases de los distintos subespacios asociados a los autovalores y tenemos una base ortonormal del espacio vectorial $V$.
+
+De forma esquemática, incluyendo todo lo que conocemos de diagonalización, queda:
+
+1. Calcular el [polinomio característico](#eigenvalue) $p(\lambda)$ de $A$, y sus raíces, los autovalores de $A$. Sean $\lambda_1,\ldots,\lambda_k$ los autovalores.
+2. Para cada autovalor $\lambda$:
+    1. Determinar una [base](#base) $\mathcal{B}_{\lambda}$ del [subespacio propio](#eigenspace) $U_{\lambda}$. 
+    2. Aplicar [el método de Gram-Schmidt](#gram-schmidt) a $\mathcal{B}_{\lambda}$ para obtener una [base _ortonormal](#ortho-basis) de $U_{\lambda}$ a la que llamaremos $\mathcal{B}'_{\lambda}$.
+3. Llamamos $\mathcal{B} = \mathcal{B}'_{\lambda_1}\cup\ldots\cup\mathcal{B}_{\lambda_k}$. Entonces $\mathcal{B}$ es una base ortonormal de $V$. Además, la matriz $P$ de [cambio de base](#cambiobase) de $\mathcal{B}$ a la canónica es una matriz [ortogonal](#ortho-matrix), tiene por columnas las coordenadas de los vectores de $\mathcal{B}$, y verifica que $D = P^{\text{t}}\ A\ P$ es una matriz diagonal con los autovalores en la diagonal principal (con multiplicidades incluidas).
 
 ---
 
 __Ejemplo__
+
+Consideremos la matriz
+```{r}
+glue_latex(
+  "A = [glue_matrices(A, latex = TRUE, fractions = TRUE)]"
+) %>% 
+  cat()
+```
+
+Como es simétrica, es diagonalizable ortogonalmente. Vamos a seguir los pasos vistos para encontrar su forma diagonal y la base ortonormal de autovectores.
+
+_Paso 1: Encontrar los autovalores de $A$_
+
+Para calcular los autovalores de $A$, comenzamos por construir su [polinomio característico](#eigenvalue):
+```{r}
+A_lambdaI <- to_fraction(A, latex = TRUE)
+for (i in seq(nrow(A))) {
+  
+  if (A[i, i] != 0) {
+    
+    A_lambdaI[i, i] <- paste0(A_lambdaI[i, i], "-\\lambda")
+    
+  } else {
+    
+    A_lambdaI[i, i] <- "-\\lambda"
+    
+  }
+  
+}
+glue_latex(
+  "\\begin{array}{rcl}",
+  "p(\\lambda) & = & \\mathrm{det}(A - \\lambda\\ I) = \\\\",
+  " & = & \\mathrm{det}\\left(",
+  "[glue_matrices(A, latex = TRUE, fractions = TRUE)] - \\lambda [glue_matrices(eye(n), latex = TRUE)]",
+  "\\right) = \\\\",
+  " & = & \\mathrm{det}[glue_matrices(A_lambdaI, latex = TRUE)] \\\\",
+  " & = & [p_latex]",
+  "\\end{array}"
+) %>% 
+  cat()
+```
+
+Igualándolo a 0 y resolviendo la ecuación que queda, llegamos a que los autovalores son: \(\lambda = `r str_flatten(autovalores, ", ")`\), ya que:
+```{r}
+terms <- -autovalores %>% to_fraction(latex = TRUE)
+terms[autovalores < 0] <- paste0("+", terms[autovalores < 0])
+terms[autovalores == 0] <- ""
+terms <- paste0("\\lambda ", terms)
+terms[autovalores != 0] <- paste0("(", terms[autovalores != 0], ")")
+powers <- paste0("^{", multiplicidad_algebraica, "}")
+powers[multiplicidad_algebraica == 1] <- "" 
+factorization <- glue::glue("{terms}{powers}") %>% 
+  stringr::str_flatten("\\cdot ")
+glue_latex(
+  "p(\\lambda) = [factorization]"
+) %>% 
+  cat()
+```
+
+_Paso 2: Encontrar una base ortonormal de cada subespacio propio_
+
+Recorremos ahora cada autovalor, encontrando una base del subespacio propio asociado, y ortonormalizándola usando el [método de Gram-Schmidt](#gram-schmidt).
+
+```{r}
+for (av_idx in seq_along(autovalores)) {
+  
+  av <- autovalores[av_idx]
+  
+  cat("\n- Para el autovalor \\(\\lambda = ", av, "\\):\n")
+  
+  B <- A - av * eye(n)
+  B[abs(B) < 1.e-7] <- 0
+  
+  av_str <- -av %>% to_fraction(latex = TRUE)
+  if (av < 0) {
+    
+    av_str <- paste0("+ ", av_str)
+    
+  }
+  if (av == 0) {
+    
+    av_str <- "- 0"
+    
+  }
+  
+  glue_latex(
+    "(A [av_str] I)[to_latex(generic_vector(n))] = 0",
+    "\\Leftrightarrow",
+    "[glue_matrices(B, latex = TRUE, fractions = TRUE)][to_latex(generic_vector(n))] = 0",
+    "\\Leftrightarrow",
+    "\\left\\{[write_system(B, zero_vector(n), latex = TRUE, fractions = TRUE)]\\right."
+  ) %>% 
+    cat()
+  
+  cat("\n\n")
+  
+  cat("Resolvemos este sistema por Gauss-Jordan, encontrando la forma paramétrica de \\(U_{", av, "}\\):\n")
+  
+  params <- c("\\alpha", "\\beta", "\\gamma", "\\delta")
+  s <- gauss_elimination(B, zero_vector(n), jordan = TRUE)
+  
+  glue_latex(
+    "[glue_matrices(B, zero_vector(n), latex = TRUE, fractions = TRUE)]",
+    "\\sim",
+    "[glue_matrices(s$splits, latex = TRUE, fractions = TRUE)]",
+    "\\Rightarrow",
+    "[to_latex(generic_vector(n))] = [write_linear_combination(gen[[av_idx]], vars = params)]"
+  ) %>% 
+    cat()
+  
+  cat("\n\n")
+  
+  cat("Luego una base de \\(U_{", av, "}\\) sea:\n")
+  
+  glue_latex(
+    "\\mathcal{B}_{U_{[av]}} = ",
+    "\\left\\{[vectors_to_latex(gen[[av_idx]])]\\right\\}"
+  ) %>% 
+    cat()
+  
+  cat("\n")
+  
+  if (ncol(gen[[av_idx]]) > 1) {
+    
+      cat("El siguiente paso es _ortonormalizar_ esta base, mediante el método de Gram-Schmidt. Llamemos $v_i$ a los vectores de esta base hallada.\n")
+
+    B <- gen[[av_idx]]
+    
+    cat("Llamamos\n")
+    
+    v1 <- matrix(B[, 1], ncol = 1)
+    Bp <- v1
+    glue_latex(
+      "u_1 = v_1 = [to_latex(v1, fractions = TRUE)]"
+    ) %>% 
+      cat()
+
+    cat("\n")
+    
+    cat("Procedemos con el resto de vectores:\n")
+    cat("\n")
+    for (i in seq(2, ncol(B))) {
+      
+      Ui <- Bp
+      vi <- matrix(B[, i], ncol = 1)
+      
+      uivi <- (matrix(rep(vi, i - 1), ncol = i - 1) * Ui) %>% 
+        colSums()
+      uiui <- colSums(Ui * Ui)
+      
+      ii <- seq(i - 1)
+      
+      proy_form <- glue::glue("\\frac{\\langle v_[i], u_[ii] \\rangle}{\\langle u_[ii], u_[ii] \\rangle} u_[ii]", .open = "[", .close = "]") %>% 
+        str_flatten("+")
+      
+      ui_str <- sapply(seq(i - 1), function(j) glue_matrices(matrix(Ui[, j], ncol = 1), latex = TRUE, fractions = TRUE))
+      
+      proy_val <- glue::glue("\\frac{[to_fraction(uivi, latex = TRUE)]}{[to_fraction(uiui, latex = TRUE)]} [ui_str]", .open = "[", .close = "]") %>% 
+        str_flatten("+")
+      
+      coefs <- matrix(rep(uivi/uiui, nrow(Ui)), nrow = nrow(Ui), byrow = TRUE)
+      proyec <- matrix(rowSums(coefs * Ui), ncol = 1)
+      ui_new <- vi - proyec
+      Bp <- cbind(Bp, ui_new)
+      
+      previous_ui <- glue::glue("u_{ii}") %>% str_flatten(", ")
+      
+      cat("Construimos:\n")
+      glue_latex(
+        "U_[i-1] = \\mathcal{L}(\\{[previous_ui]\\}) = ",
+        "\\mathcal{L}(\\left\\{[vectors_to_latex(Ui)]\\right\\})"
+      ) %>% str_replace_all("\n", " ") %>% 
+        cat()
+      cat("\n")
+      
+      cat("Entonces\n")
+      
+      glue_latex(
+        "\\mathrm{proy}_{U_[i-1]}(v_[i])  = [proy_form]  =  [proy_val]  = [glue_matrices(proyec, fractions = TRUE, latex = TRUE)]"
+      ) %>% 
+        str_replace_all(pattern = "\n", replacement = " ") %>% 
+        cat()
+      
+      cat("\n")
+      
+      cat("Y llamamos\n")
+      
+      glue_latex(
+        "u_[i]  = v_[i] - \\mathrm{proy}_{U_[i - 1]}(v_[i]) = ",
+        "[to_latex(vi, fractions = TRUE)] - [glue_matrices(proyec, fractions = TRUE, latex = TRUE)] = ",
+        " [glue_matrices(ui_new, fractions = TRUE, latex = TRUE)]"
+      ) %>% str_replace_all(pattern = "\n", replacement = " ") %>% cat()
+      
+      cat("\n")
+      
+    }    
+    
+    cat("\nY así hemos llegado a un sistema ortogonal formado por los vectores $u_i$.\n")
+    
+  } else {
+    
+    cat("\nComo solo tenemos un vector en la base, ya forma un sistema ortogonal.\n")
+    
+  }
+  
+  cat("Debemos normalizar ahora los vectores de este sistema ortogonal que tenemos, multiplicando cada uno por el inverso de su norma, llegando a la siguiente base ortonormal de $U_{", av, "}$.\n")
+  
+  this_basis <- lapply(seq(ncol(gen[[av_idx]])), 
+                       function(i) Vector$new(gen[[av_idx]][, i]))
+  
+normas <- lapply(this_basis, function(v) v$norm()) %>% 
+  lapply(function(s) s$simplify()) %>% 
+  lapply(function(s) s$rationalize())
+
+normas_str <- normas %>% 
+  sapply(function(s) s$to_latex())
+
+normas_str <- glue::glue("\\frac{1}{[normas_str]}", 
+                         .open = "[", .close = "]")  
+
+normas <- normas %>% 
+  lapply(function(s) s$inverse())
+
+base_str <- this_basis %>% 
+  sapply(function(v) v$to_latex())
+
+Bpp <- glue::glue("{normas_str}{base_str}") %>% 
+  str_flatten(", ")
+
+this_base2 <- lapply(seq_along(this_basis), function(i) this_basis[[i]]$prod(normas[[i]])) %>% 
+  lapply(function(s) s$simplify()) %>% 
+  lapply(function(s) s$rationalize())
+
+base2_str <- this_base2 %>% 
+  sapply(function(v) v$to_latex()) %>% 
+  str_flatten(", ")
+
+  glue_latex(
+    "\\mathcal{B}'_{U_{[av]}} = \\left\\{",
+    "[Bpp]\\right\\} = \\left\\{[base2_str]\\right\\}"
+  ) %>% 
+    cat()
+  
+  cat("\n\n")
+  
+}
+```
+
+_Paso 3: Hallar una base ortonormal formada por autovectores_
+
+Definimos
+```{r}
+str <- glue::glue("\\mathcal{B}'_{U_{[autovalores]}}", 
+           .open = "[", .close = "]") %>% 
+  str_flatten(" \\cup ")
+base2_str <- base2 %>% 
+  sapply(function(v) v$to_latex()) %>% 
+  str_flatten(", ")
+
+glue_latex(
+  "\\mathcal{B} = [str] = \\left\\{[base2_str]\\right\\}"
+) %>% 
+  cat()
+```
+Es una base ortonormal de \(\mathbb{R}^{`r n`}\), formada únicamente por autovectores de la matriz $A$.
+
+Además, la matriz $P$ del [cambio de base](#cambiobase) de esta base $\mathcal{B}$ a la canónica, formada por los vectores de $\mathcal{B}$ puestos por columnas, es _ortogonal_ y nos proporciona la relación entre $A$ y la matriz diagonal $D$ de los autovalores:
+```{r}
+P <- vectors2matrix(base2)
+glue_latex(
+  "\\begin{array}{rcl}",
+  "D & = & P^{\\text{t}}\\ A\\ P = \\\\",
+  " & = & [glue_matrices(t(P), latex = TRUE)]\\ [glue_matrices(A, latex = TRUE, fractions = TRUE)]\\ [glue_matrices(P, latex = TRUE)] \\\\",
+  " & = & [glue_matrices(D, latex = TRUE, fractions = TRUE)]",
+  "\\end{array}"
+) %>% 
+  cat()
+```
+
+Recordemos que en la diagonal de $D$ se encuentran los autovalores (en el mismo orden en que se han puesto los autovectores en las columnas de $P$), con sus respectivas multiplicidades.
 
 ---

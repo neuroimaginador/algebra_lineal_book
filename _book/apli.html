@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-05-18" />
+<meta name="date" content="2020-05-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -109,17 +109,20 @@
 <li class="chapter" data-level="4.1" data-path="diagonalización.html"><a href="diagonalización.html#eigenvalue"><i class="fa fa-check"></i><b>4.1</b> Qué son los autovalores de un endomorfismo y de una matriz</a></li>
 <li class="chapter" data-level="4.2" data-path="diagonalización.html"><a href="diagonalización.html#eigenspace"><i class="fa fa-check"></i><b>4.2</b> Cómo calculamos los autovectores asociados a un autovalor</a></li>
 <li class="chapter" data-level="4.3" data-path="diagonalización.html"><a href="diagonalización.html#diagonalizable"><i class="fa fa-check"></i><b>4.3</b> Cómo sabemos si un endomorfismo o una matriz es diagonalizable</a></li>
-<li class="chapter" data-level="4.4" data-path="diagonalización.html"><a href="diagonalización.html#th-cayley"><i class="fa fa-check"></i><b>4.4</b> Para qué podemos utilizar el Teorema de Cayley-Hamilton</a></li>
+<li class="chapter" data-level="4.4" data-path="diagonalización.html"><a href="diagonalización.html#pot-matrix"><i class="fa fa-check"></i><b>4.4</b> Si una matriz es diagonalizable, cómo podemos hallar sus potencias</a></li>
+<li class="chapter" data-level="4.5" data-path="diagonalización.html"><a href="diagonalización.html#th-cayley"><i class="fa fa-check"></i><b>4.5</b> Para qué podemos utilizar el Teorema de Cayley-Hamilton</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html"><i class="fa fa-check"></i><b>5</b> Espacios Euclídeos</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#norm"><i class="fa fa-check"></i><b>5.1</b> Qué son las normas y distancias</a></li>
 <li class="chapter" data-level="5.2" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho"><i class="fa fa-check"></i><b>5.2</b> Qué significa el concepto de ortogonalidad</a></li>
-<li class="chapter" data-level="5.3" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho-basis"><i class="fa fa-check"></i><b>5.3</b> Qué es y qué utilidad tiene una base ortonormal</a></li>
-<li class="chapter" data-level="5.4" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#gram-schmidt"><i class="fa fa-check"></i><b>5.4</b> Cómo construimos una base ortonormal</a></li>
-<li class="chapter" data-level="5.5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#compl-ortho"><i class="fa fa-check"></i><b>5.5</b> Qué es el complemento ortogonal de un subespacio</a></li>
-<li class="chapter" data-level="5.6" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#proyec"><i class="fa fa-check"></i><b>5.6</b> Cómo calculamos la proyección de un vector sobre un subespacio</a></li>
-<li class="chapter" data-level="5.7" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#diag-ortho"><i class="fa fa-check"></i><b>5.7</b> Qué es la diagonalización ortogonal</a></li>
+<li class="chapter" data-level="5.3" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#compl-ortho"><i class="fa fa-check"></i><b>5.3</b> Qué es el complemento ortogonal de un subespacio</a></li>
+<li class="chapter" data-level="5.4" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#proyec"><i class="fa fa-check"></i><b>5.4</b> Cómo calculamos la proyección de un vector sobre un subespacio</a></li>
+<li class="chapter" data-level="5.5" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho-basis"><i class="fa fa-check"></i><b>5.5</b> Qué es y qué utilidad tiene una base ortonormal</a></li>
+<li class="chapter" data-level="5.6" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#gram-schmidt"><i class="fa fa-check"></i><b>5.6</b> Cómo construimos una base ortonormal</a></li>
+<li class="chapter" data-level="5.7" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#ortho-matrix"><i class="fa fa-check"></i><b>5.7</b> Qué es una matriz ortogonal y una aplicación ortogonal</a></li>
+<li class="chapter" data-level="5.8" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#diag-ortho"><i class="fa fa-check"></i><b>5.8</b> Qué es la diagonalización ortogonal</a></li>
+<li class="chapter" data-level="5.9" data-path="espacios-euclídeos.html"><a href="espacios-euclídeos.html#diag-ortho2"><i class="fa fa-check"></i><b>5.9</b> Qué matrices son diagonalizables ortogonalmente</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="problems.html"><a href="problems.html"><i class="fa fa-check"></i><b>6</b> Problemas Resueltos</a>
 <ul>
@@ -316,48 +319,13 @@ x-2y\\
 <p><span class="math display">\[Y= (f(v_1)|\ldots|f(v_n))\]</span>
 <span class="math display">\[B_2 = (w_1|\ldots|w_m)\]</span></p>
 <p>Aplicando <span class="math inline">\(f\)</span> sucesivamente a los vectores de <span class="math inline">\(\mathcal{B}_1\)</span>, tenemos que
-<span class="math display">\[Y = \left(
-\begin{array}{ccc@{}}
--1 &amp; 0 &amp; -3\\
--3 &amp; 2 &amp; 1\\
--4 &amp; 2 &amp; -2
-\end{array}
-\right)
-\]</span>
+<span class="math display">\[Y = \left( \begin{array}{ccc@{}} -1 &amp; 0 &amp; -3\\ -3 &amp; 2 &amp; 1\\ -4 &amp; 2 &amp; -2 \end{array} \right) \]</span>
 y
-<span class="math display">\[B_2 = \left(
-\begin{array}{ccc@{}}
-1 &amp; 1 &amp; 1\\
-0 &amp; 2 &amp; 0\\
-2 &amp; 0 &amp; 1
-\end{array}
-\right)
-\]</span></p>
+<span class="math display">\[B_2 = \left( \begin{array}{ccc@{}} 1 &amp; 1 &amp; 1\\ 0 &amp; 2 &amp; 0\\ 2 &amp; 0 &amp; 1 \end{array} \right) \]</span></p>
 <p>Luego podemos obtener <span class="math inline">\(A&#39;\)</span> como <span class="math inline">\(B_2^{-1} Y\)</span>, que resolvemos por Gauss-Jordan:
-<span class="math display">\[\left(
-\begin{array}{ccc|ccc}
-1 &amp; 1 &amp; 1 &amp; -1 &amp; 0 &amp; -3\\
-0 &amp; 2 &amp; 0 &amp; -3 &amp; 2 &amp; 1\\
-2 &amp; 0 &amp; 1 &amp; -4 &amp; 2 &amp; -2
-\end{array}
-\right)
-\sim\left(
-\begin{array}{ccc|ccc}
-1 &amp; 0 &amp; 0 &amp; - \frac{9}{2} &amp; 3 &amp; \frac{3}{2}\\
-0 &amp; 1 &amp; 0 &amp; - \frac{3}{2} &amp; 1 &amp; \frac{1}{2}\\
-0 &amp; 0 &amp; 1 &amp; 5 &amp; -4 &amp; -5
-\end{array}
-\right)
-\]</span>
+<span class="math display">\[\left( \begin{array}{ccc|ccc} 1 &amp; 1 &amp; 1 &amp; -1 &amp; 0 &amp; -3\\ 0 &amp; 2 &amp; 0 &amp; -3 &amp; 2 &amp; 1\\ 2 &amp; 0 &amp; 1 &amp; -4 &amp; 2 &amp; -2 \end{array} \right) \sim\left( \begin{array}{ccc|ccc} 1 &amp; 0 &amp; 0 &amp; - \frac{9}{2} &amp; 3 &amp; \frac{3}{2}\\ 0 &amp; 1 &amp; 0 &amp; - \frac{3}{2} &amp; 1 &amp; \frac{1}{2}\\ 0 &amp; 0 &amp; 1 &amp; 5 &amp; -4 &amp; -5 \end{array} \right) \]</span>
 Y de aquí que la nueva matriz, asociada a <span class="math inline">\(f\)</span> en las nuevas bases, sea:
-<span class="math display">\[A&#39; = \left(
-\begin{array}{ccc@{}}
-- \frac{9}{2} &amp; 3 &amp; \frac{3}{2}\\
-- \frac{3}{2} &amp; 1 &amp; \frac{1}{2}\\
-5 &amp; -4 &amp; -5
-\end{array}
-\right)
-\]</span></p>
+<span class="math display">\[A&#39; = \left( \begin{array}{ccc@{}} - \frac{9}{2} &amp; 3 &amp; \frac{3}{2}\\ - \frac{3}{2} &amp; 1 &amp; \frac{1}{2}\\ 5 &amp; -4 &amp; -5 \end{array} \right) \]</span></p>
 <hr />
 </div>
 <div id="cambiobase-apli" class="section level2" number="3.3">
@@ -394,14 +362,7 @@ V_{\mathcal{B}&#39;_V} &amp;
 <hr />
 <p><strong>Ejemplo</strong></p>
 <p>Continuemos con el ejemplo de <a href="apli.html#matriz-apli">la sección anterior</a>. Sabemos que la aplicación <span class="math inline">\(f\)</span> allí definida tenía por matriz asociada:
-<span class="math display">\[A = \left(
-\begin{array}{ccc@{}}
-- \frac{9}{2} &amp; 3 &amp; \frac{3}{2}\\
-- \frac{3}{2} &amp; 1 &amp; \frac{1}{2}\\
-5 &amp; -4 &amp; -5
-\end{array}
-\right)
-\]</span></p>
+<span class="math display">\[A = \left( \begin{array}{ccc@{}} - \frac{9}{2} &amp; 3 &amp; \frac{3}{2}\\ - \frac{3}{2} &amp; 1 &amp; \frac{1}{2}\\ 5 &amp; -4 &amp; -5 \end{array} \right) \]</span></p>
 <p>Consideremos ahora dos bases distintas tanto en <span class="math inline">\(V\)</span> como <span class="math inline">\(W\)</span>:
 <span class="math display">\[\mathcal{B}&#39;_{1} =\left\{\left(
 \begin{array}{c@{}}
@@ -451,51 +412,9 @@ V_{\mathcal{B}&#39;_V} &amp;
 <p>Si llamamos <span class="math inline">\(B_1\)</span>, <span class="math inline">\(B&#39;_1\)</span>, <span class="math inline">\(B_2\)</span> y <span class="math inline">\(B&#39;_2\)</span> a las matrices que resultan de poner por columnas los vectores de <span class="math inline">\(\mathcal{B}_1\)</span>, <span class="math inline">\(\mathcal{B}&#39;_1\)</span>, <span class="math inline">\(\mathcal{B}_2\)</span> y <span class="math inline">\(\mathcal{B}&#39;_2\)</span>, respectivamente, podemos calcular <span class="math inline">\(P\)</span> y <span class="math inline">\(Q\)</span> de la siguiente manera, según <a href="ev.html#cambiobase">ya hemos visto</a>:
 <span class="math display">\[P = B_1^{-1}\ B&#39;_1,\quad\quad Q = {B&#39;_2}^{-1}\ B_2\]</span></p>
 <p>Hacemos Gauss-Jordan partiendo de <span class="math inline">\((B_1 | B&#39;_1)\)</span> hasta llegar a <span class="math inline">\((I_n | P)\)</span>, y partiendo de <span class="math inline">\((B&#39;_2 | B_2)\)</span> hasta <span class="math inline">\((I_m | Q)\)</span>, obteniendo:
-<span class="math display">\[P = \left(
-\begin{array}{ccc@{}}
--1 &amp; -1 &amp; 0\\
-0 &amp; -1 &amp; 1\\
-0 &amp; 1 &amp; 0
-\end{array}
-\right)
-,\quad\quad\ Q = \left(
-\begin{array}{ccc@{}}
-0 &amp; 1 &amp; 0\\
-1 &amp; -1 &amp; 1\\
-0 &amp; 0 &amp; -1
-\end{array}
-\right)
-\]</span></p>
+<span class="math display">\[P = \left( \begin{array}{ccc@{}} -1 &amp; -1 &amp; 0\\ 0 &amp; -1 &amp; 1\\ 0 &amp; 1 &amp; 0 \end{array} \right) ,\quad\quad\ Q = \left( \begin{array}{ccc@{}} 0 &amp; 1 &amp; 0\\ 1 &amp; -1 &amp; 1\\ 0 &amp; 0 &amp; -1 \end{array} \right) \]</span></p>
 <p>De ahí:
-<span class="math display">\[A&#39; = Q\ A\ P = \left(
-\begin{array}{ccc@{}}
-0 &amp; 1 &amp; 0\\
-1 &amp; -1 &amp; 1\\
-0 &amp; 0 &amp; -1
-\end{array}
-\right)
-\left(
-\begin{array}{ccc@{}}
-- \frac{9}{2} &amp; 3 &amp; \frac{3}{2}\\
-- \frac{3}{2} &amp; 1 &amp; \frac{1}{2}\\
-5 &amp; -4 &amp; -5
-\end{array}
-\right)
-\left(
-\begin{array}{ccc@{}}
--1 &amp; -1 &amp; 0\\
-0 &amp; -1 &amp; 1\\
-0 &amp; 1 &amp; 0
-\end{array}
-\right)
- = \left(
-\begin{array}{ccc@{}}
-\frac{3}{2} &amp; 1 &amp; 1\\
--2 &amp; -4 &amp; -2\\
-5 &amp; 6 &amp; 4
-\end{array}
-\right)
-\]</span></p>
+<span class="math display">\[A&#39; = Q\ A\ P = \left( \begin{array}{ccc@{}} 0 &amp; 1 &amp; 0\\ 1 &amp; -1 &amp; 1\\ 0 &amp; 0 &amp; -1 \end{array} \right) \left( \begin{array}{ccc@{}} - \frac{9}{2} &amp; 3 &amp; \frac{3}{2}\\ - \frac{3}{2} &amp; 1 &amp; \frac{1}{2}\\ 5 &amp; -4 &amp; -5 \end{array} \right) \left( \begin{array}{ccc@{}} -1 &amp; -1 &amp; 0\\ 0 &amp; -1 &amp; 1\\ 0 &amp; 1 &amp; 0 \end{array} \right)  = \left( \begin{array}{ccc@{}} \frac{3}{2} &amp; 1 &amp; 1\\ -2 &amp; -4 &amp; -2\\ 5 &amp; 6 &amp; 4 \end{array} \right) \]</span></p>
 <hr />
 </div>
 <div id="nucleo" class="section level2" number="3.4">
@@ -541,37 +460,12 @@ x-2y\\
 \end{array}\right)
  \]</span></p>
 <p>Usamos esa matriz <span class="math inline">\(A\)</span> para construir el sistema homogéneo:
-<span class="math display">\[\begin{array}{rrrcr}
-x &amp; + y &amp; + z &amp; = &amp; 0\\
-x &amp; -2y &amp;  &amp; = &amp; 0\\
-2x &amp; -y &amp; + z &amp; = &amp; 0\\
-\end{array}\]</span>
+<span class="math display">\[\begin{array}{rrrcr} x &amp; + y &amp; + z &amp; = &amp; 0\\ x &amp; -2y &amp;  &amp; = &amp; 0\\ 2x &amp; -y &amp; + z &amp; = &amp; 0\\ \end{array}\]</span>
 que se corresponde con las ecuaciones cartesianas de <span class="math inline">\(\mathrm{Ker}\ f\)</span> (podíamos haber hecho directamente <span class="math inline">\(f(v) = 0\)</span> usando la definición de <span class="math inline">\(f\)</span>).</p>
 <p>Usaremos <a href="ev.html#base">lo que hemos visto ya</a> para convertir esas ecuaciones a forma paramétrica (usando eliminación Gaussiana), y así conseguir un sistema generador y <a href="#sisgenabase">una base</a>:
-<span class="math display">\[\begin{array}{rrrcr}
-x &amp; + y &amp; + z &amp; = &amp; 0\\
-x &amp; -2y &amp;  &amp; = &amp; 0\\
-2x &amp; -y &amp; + z &amp; = &amp; 0\\
-\end{array}\Leftrightarrow\ \left(\begin{array}{c}
-x\\
-y\\
-z
-\end{array}\right)
- = \alpha\left(\begin{array}{c}
-- \frac{2}{3}\\
-- \frac{1}{3}\\
-1
-\end{array}\right)
-{}\]</span></p>
+<span class="math display">\[\begin{array}{rrrcr} x &amp; + y &amp; + z &amp; = &amp; 0\\ x &amp; -2y &amp;  &amp; = &amp; 0\\ 2x &amp; -y &amp; + z &amp; = &amp; 0\\ \end{array}\Leftrightarrow\ \left(\begin{array}{c} x\\ y\\ z \end{array}\right)  = \alpha\left(\begin{array}{c} - \frac{2}{3}\\ - \frac{1}{3}\\ 1 \end{array}\right) {}\]</span></p>
 <p>Luego
-<span class="math display">\[\mathcal{B}_{\mathrm{Ker}\ f} = \left\{\left(
-\begin{array}{c@{}}
-- \frac{2}{3}\\
-- \frac{1}{3}\\
-1
-\end{array}
-\right)
-\right\}\]</span></p>
+<span class="math display">\[\mathcal{B}_{\mathrm{Ker}\ f} = \left\{\left( \begin{array}{c@{}} - \frac{2}{3}\\ - \frac{1}{3}\\ 1 \end{array} \right) \right\}\]</span></p>
 <hr />
 </div>
 <div id="inyectividad" class="section level2" number="3.5">
@@ -597,55 +491,11 @@ z
 <p><strong>Ejemplo</strong></p>
 <p>En el ejemplo de <a href="apli.html#nucleo">la sección anterior</a>, tenemos que <span class="math inline">\(\mathrm{dim}(\mathrm{Ker}\ f) = 1\)</span>, luego <span class="math inline">\(f\)</span> <strong>no es inyectiva</strong>, ya que en ese caso debería ser <span class="math inline">\(\mathrm{dim}(\mathrm{Ker}\ f) = 0\)</span>.</p>
 <p>Consideremos otra aplicación <span class="math inline">\(g:\mathbb{R}^{3}\to \mathbb{R}^{3}\)</span> dada por:
-<span class="math display">\[g \left(\begin{array}{c}
-x\\
-y\\
-z
-\end{array}\right)
- = \left(
-\begin{array}{ccc@{}}
-2 &amp; -1 &amp; 0\\
-1 &amp; 3 &amp; 0\\
-2 &amp; 0 &amp; 4
-\end{array}
-\right)
-\ \left(\begin{array}{c}
-x\\
-y\\
-z
-\end{array}\right)
- = \left(\begin{array}{c}
-2x-y\\
-x+ 3y\\
-2x+ 4z\\
-\end{array}\right)\]</span></p>
+<span class="math display">\[g \left(\begin{array}{c} x\\ y\\ z \end{array}\right)  = \left( \begin{array}{ccc@{}} 2 &amp; -1 &amp; 0\\ 1 &amp; 3 &amp; 0\\ 2 &amp; 0 &amp; 4 \end{array} \right) \ \left(\begin{array}{c} x\\ y\\ z \end{array}\right)  = \left(\begin{array}{c} 2x-y\\ x+ 3y\\ 2x+ 4z\\ \end{array}\right)\]</span></p>
 <p>Podemos estudiar su núcleo para comprobar si es inyectiva:
-<span class="math display">\[\mathrm{Ker}\ g =\left\{\left(\begin{array}{c}
-x\\
-y\\
-z
-\end{array}\right)
-\in\mathbb{R}^{3}:\begin{array}{ccr}
-2x-y &amp; = &amp; 0\\
-x+ 3y &amp; = &amp; 0\\
-2x+ 4z &amp; = &amp; 0\\
-\end{array}\right\}\]</span></p>
+<span class="math display">\[\mathrm{Ker}\ g =\left\{\left(\begin{array}{c} x\\ y\\ z \end{array}\right) \in\mathbb{R}^{3}:\begin{array}{ccr} 2x-y &amp; = &amp; 0\\ x+ 3y &amp; = &amp; 0\\ 2x+ 4z &amp; = &amp; 0\\ \end{array}\right\}\]</span></p>
 <p>Resolvemos el sistema homogéneo para llegar a que
-<span class="math display">\[\left\{\begin{array}{rrrcr}
-2x &amp; -y &amp;  &amp; = &amp; 0\\
-x &amp; + 3y &amp;  &amp; = &amp; 0\\
-2x &amp;  &amp; + 4z &amp; = &amp; 0\\
-\end{array}\right.\Rightarrow\left(\begin{array}{c}
-x\\
-y\\
-z
-\end{array}\right)
- = \left(\begin{array}{c}
-0\\
-0\\
-0
-\end{array}\right)
-\]</span></p>
+<span class="math display">\[\left\{\begin{array}{rrrcr} 2x &amp; -y &amp;  &amp; = &amp; 0\\ x &amp; + 3y &amp;  &amp; = &amp; 0\\ 2x &amp;  &amp; + 4z &amp; = &amp; 0\\ \end{array}\right.\Rightarrow\left(\begin{array}{c} x\\ y\\ z \end{array}\right)  = \left(\begin{array}{c} 0\\ 0\\ 0 \end{array}\right) \]</span></p>
 <p>Luego <span class="math inline">\(\mathrm{Ker}\ g=\{0\}\)</span>, y así <span class="math inline">\(g\)</span> es inyectiva.</p>
 <hr />
 </div>
@@ -669,92 +519,15 @@ z
 <p><strong>Ejemplo</strong></p>
 <p>Vamos a estudiar la imagen de las dos aplicaciones <span class="math inline">\(f\)</span> y <span class="math inline">\(g\)</span> del <a href="apli.html#inyectividad">ejemplo anterior</a>.</p>
 <p>Para <span class="math inline">\(f\)</span>, tenemos que <span class="math inline">\(\mathrm{Im}\ f\)</span> está generado por los vectores columnas de la matriz <span class="math inline">\(A\)</span>, luego un sistema generador de <span class="math inline">\(\mathrm{Im}\ f\)</span> será:
-<span class="math display">\[\mathcal{G}_{\mathrm{Im}\ f} = \left\{\left(
-\begin{array}{c@{}}
-1\\
-1\\
-2
-\end{array}
-\right)
-, \left(
-\begin{array}{c@{}}
-1\\
--2\\
--1
-\end{array}
-\right)
-, \left(
-\begin{array}{c@{}}
-1\\
-0\\
-1
-\end{array}
-\right)
-\right\}\]</span></p>
+<span class="math display">\[\mathcal{G}_{\mathrm{Im}\ f} = \left\{\left( \begin{array}{c@{}} 1\\ 1\\ 2 \end{array} \right) , \left( \begin{array}{c@{}} 1\\ -2\\ -1 \end{array} \right) , \left( \begin{array}{c@{}} 1\\ 0\\ 1 \end{array} \right) \right\}\]</span></p>
 <p>A partir de él, <a href="#sisgenabase">eliminando los vectores que sean linealmente dependientes</a>, encontramos una base de <span class="math inline">\(\mathrm{Im}\ f\)</span>:
-<span class="math display">\[\mathcal{B}_{\mathrm{Im}\ f} = \left\{\left(
-\begin{array}{c@{}}
-1\\
-1\\
-2
-\end{array}
-\right)
-, \left(
-\begin{array}{c@{}}
-1\\
--2\\
--1
-\end{array}
-\right)
-\right\}\]</span></p>
+<span class="math display">\[\mathcal{B}_{\mathrm{Im}\ f} = \left\{\left( \begin{array}{c@{}} 1\\ 1\\ 2 \end{array} \right) , \left( \begin{array}{c@{}} 1\\ -2\\ -1 \end{array} \right) \right\}\]</span></p>
 <p>Luego <span class="math inline">\(\mathrm{dim}(\mathrm{Im}\ f) = 2\)</span>.</p>
 <p>Vayamos ahora con la aplicación <span class="math inline">\(g\)</span>. Con el mismo razonamiento, sabemos que
-<span class="math display">\[\mathcal{G}_{\mathrm{Im}\ g} = \left\{\left(
-\begin{array}{c@{}}
-2\\
-1\\
-2
-\end{array}
-\right)
-, \left(
-\begin{array}{c@{}}
--1\\
-3\\
-0
-\end{array}
-\right)
-, \left(
-\begin{array}{c@{}}
-0\\
-0\\
-4
-\end{array}
-\right)
-\right\}\]</span>
+<span class="math display">\[\mathcal{G}_{\mathrm{Im}\ g} = \left\{\left( \begin{array}{c@{}} 2\\ 1\\ 2 \end{array} \right) , \left( \begin{array}{c@{}} -1\\ 3\\ 0 \end{array} \right) , \left( \begin{array}{c@{}} 0\\ 0\\ 4 \end{array} \right) \right\}\]</span>
 es un sistema generador de <span class="math inline">\(\mathrm{Im}\ g\)</span>.</p>
 <p>Igual que antes, podemos encontrar una base de <span class="math inline">\(\mathrm{Im}\ g\)</span>:
-<span class="math display">\[\mathcal{B}_{\mathrm{Im}\ g} = \left\{\left(
-\begin{array}{c@{}}
-2\\
-1\\
-2
-\end{array}
-\right)
-, \left(
-\begin{array}{c@{}}
--1\\
-3\\
-0
-\end{array}
-\right)
-, \left(
-\begin{array}{c@{}}
-0\\
-0\\
-4
-\end{array}
-\right)
-\right\}\]</span></p>
+<span class="math display">\[\mathcal{B}_{\mathrm{Im}\ g} = \left\{\left( \begin{array}{c@{}} 2\\ 1\\ 2 \end{array} \right) , \left( \begin{array}{c@{}} -1\\ 3\\ 0 \end{array} \right) , \left( \begin{array}{c@{}} 0\\ 0\\ 4 \end{array} \right) \right\}\]</span></p>
 <p>Entonces <span class="math inline">\(\mathrm{dim}(\mathrm{Im}\ g) = 3\)</span>. Esto nos dice que <span class="math inline">\(\mathrm{Im}\ g = W\)</span>.</p>
 <hr />
 </div>
@@ -816,80 +589,17 @@ es un sistema generador de <span class="math inline">\(\mathrm{Im}\ g\)</span>.<
 <hr />
 <p><strong>Ejemplo</strong></p>
 <p>Consideremos el subespacio <span class="math inline">\(U\)</span> dado por
-<span class="math display">\[U = \left\{\left(\begin{array}{c}
-x\\
-y\\
-z
-\end{array}\right)
-\in\mathbb{R}^{3}:\begin{array}{ccr}
--x- \frac{1}{2}y+ z &amp; = &amp; 0\\
-\end{array}\right\}\]</span></p>
+<span class="math display">\[U = \left\{\left(\begin{array}{c} x\\ y\\ z \end{array}\right) \in\mathbb{R}^{3}:\begin{array}{ccr} -x- \frac{1}{2}y+ z &amp; = &amp; 0\\ \end{array}\right\}\]</span></p>
 <p>Queremos calcular <span class="math inline">\(f(U)\)</span> y <span class="math inline">\(g(U)\)</span>, siendo <span class="math inline">\(f\)</span> y <span class="math inline">\(g\)</span> las de <a href="apli.html#nucleo">los ejemplos anteriores</a>.</p>
 <p>El primer paso es <a href="ev.html#base">calcular una base</a> de <span class="math inline">\(U\)</span>. Para ello, pasamos las ecuaciones cartesianas de <span class="math inline">\(U\)</span> a paramétricas, que nos dan un sistema generador, resolviendo el sistema de ecuaciones por Gauss. A partir del sistema generador, ya podríamos proceder, o podemos calcular una base de <span class="math inline">\(U\)</span>.</p>
 <p>En nuestro caso,
-<span class="math display">\[\mathcal{B}_U = \left\{\left(
-\begin{array}{c@{}}
--2\\
-2\\
--1
-\end{array}
-\right)
-, \left(
-\begin{array}{c@{}}
-1\\
-0\\
-1
-\end{array}
-\right)
-\right\}\]</span></p>
+<span class="math display">\[\mathcal{B}_U = \left\{\left( \begin{array}{c@{}} -2\\ 2\\ -1 \end{array} \right) , \left( \begin{array}{c@{}} 1\\ 0\\ 1 \end{array} \right) \right\}\]</span></p>
 <p>Comenzamos por calcular <span class="math inline">\(f(U)\)</span>. Debemos calcular la imagen de los vectores de la base de <span class="math inline">\(U\)</span> con la aplicación <span class="math inline">\(f\)</span>:
-<span class="math display">\[f(\mathcal{B}_U) = \left\{\left(
-\begin{array}{c@{}}
--1\\
--6\\
--7
-\end{array}
-\right)
-, \left(
-\begin{array}{c@{}}
-2\\
-1\\
-3
-\end{array}
-\right)
-\right\}\]</span></p>
+<span class="math display">\[f(\mathcal{B}_U) = \left\{\left( \begin{array}{c@{}} -1\\ -6\\ -7 \end{array} \right) , \left( \begin{array}{c@{}} 2\\ 1\\ 3 \end{array} \right) \right\}\]</span></p>
 <p>Si <a href="#sisgenabase">eliminamos los vectores linealmente dependientes</a> de <span class="math inline">\(f(\mathcal{B}_U)\)</span>, nos queda una base de <span class="math inline">\(f(U)\)</span>:
-<span class="math display">\[\mathcal{B}_{f(U)} = \left\{\left(
-\begin{array}{c@{}}
--1\\
--6\\
--7
-\end{array}
-\right)
-, \left(
-\begin{array}{c@{}}
-2\\
-1\\
-3
-\end{array}
-\right)
-\right\}\]</span></p>
+<span class="math display">\[\mathcal{B}_{f(U)} = \left\{\left( \begin{array}{c@{}} -1\\ -6\\ -7 \end{array} \right) , \left( \begin{array}{c@{}} 2\\ 1\\ 3 \end{array} \right) \right\}\]</span></p>
 <p>Repetimos el proceso con la aplicación <span class="math inline">\(g\)</span>. Calculamos:
-<span class="math display">\[g(\mathcal{B}_U) = \left\{\left(
-\begin{array}{c@{}}
--6\\
-4\\
--8
-\end{array}
-\right)
-, \left(
-\begin{array}{c@{}}
-2\\
-1\\
-6
-\end{array}
-\right)
-\right\}\]</span></p>
+<span class="math display">\[g(\mathcal{B}_U) = \left\{\left( \begin{array}{c@{}} -6\\ 4\\ -8 \end{array} \right) , \left( \begin{array}{c@{}} 2\\ 1\\ 6 \end{array} \right) \right\}\]</span></p>
 <p>Como sabemos que <span class="math inline">\(g\)</span> es un <a href="apli.html#isomorfismo">isomorfismo</a>, sabemos que la imagen de un sistema linealmente independiente es también un sistema linealmente independiente. Luego <span class="math inline">\(\mathcal{B}_{g(U)} = g(\mathcal{B}_U)\)</span>. Si no recordáramos este resultado, deberíamos intentar eliminar los vectores linealmente dependientes en <span class="math inline">\(g(\mathcal{B}_U)\)</span> para así obtener la base.</p>
 <hr />
 </div>
