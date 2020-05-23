@@ -2,6 +2,8 @@
 title: "Preguntas y respuestas de Álgebra Lineal"
 author: "Domingo López"
 date: "`r Sys.Date()`"
+fontsize: 11pt
+geometry: margin=1.5in
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -48,6 +50,20 @@ glue_latex <- function(...) {
              .open = "[", .close = "]", 
              .sep = "") %>% 
     str_replace_all("\n", " ")
+  
+}
+
+theorem <- function(text) {
+  
+  if (knitr::is_html_output()) {
+    
+    cat("\n> ", text, "\n\n")
+    
+  } else {
+    
+    cat("\\begin{framebox}\n", text, "\n\\end{framebox}\n\n")
+    
+  }
   
 }
 

@@ -1,5 +1,10 @@
 \usepackage{amssymb}
 \usepackage{xfrac}
+% \usepackage{mdframed}
+
+% \newmdtheoremenv{theo}{Theorem}
+% \newmdtheoremenv{def}{Theorem}
+
 % \usepackage{amsmath}
 \usepackage{booktabs}
 \ifxetex
@@ -12,6 +17,10 @@
   \usepackage[spanish,es-tabla]{babel}
 \fi
 \usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand\subsectionmark[1]{}
+\renewcommand\sectionmark[1]{}
+% \renewcommand\frac[2]{\sfrac{#1}{#2}}
 
 % \usepackage[skins]{tcolorbox}
 % 

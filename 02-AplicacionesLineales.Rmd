@@ -45,6 +45,7 @@ __¿Qué preguntas vamos a responder en este capítulo?__
 - [¿Qué dice el teorema de la dimensión para núcleo e imagen?](#th-dim-nucleo)
 
 ## Qué propiedades básicas tienen las aplicaciones lineales {#prop-apli}
+\sectionmark{Propiedades de las Aplicaciones Lineales}
 
 Vamos a revisar aquí algunas de las propiedades básicas de las aplicaciones lineales entre espacios vectoriales. 
 
@@ -65,6 +66,7 @@ Y, por último,
 > Si $f:V \to W$ y $g:W \to U$ son dos aplicaciones lineales, entonces su composición $g \circ f :V \to U$ también es una aplicación lineal.
 
 ## Cuál es la matriz asociada a una aplicación lineal en unas bases dadas {#matriz-apli}
+\sectionmark{Matriz asociada}
 
 > Si tenemos una matriz $A\in \mathcal{M}_{mn}(\mathbb{R})$, podemos definir una aplicación lineal $f_A$ entre $\mathbb{R}^n$ y $\mathbb{R}^m$ de la forma:
 $$f_A(v) = A\cdot v,\quad v\in\mathbb{R}^n$$
@@ -243,6 +245,7 @@ glue_latex(
 ---
 
 ## Cómo influye un cambio de base en la matriz asociada a una aplicación lineal {#cambiobase-apli}
+\sectionmark{Cambio de base en aplicaciones lineales}
 
 Supongamos que tenemos una aplicación lineal $f:V\to W$ y que tenemos prefijadas unas bases $\mathcal{B}_V$ y $\mathcal{B}_W$ y, por tanto, tenemos determinada la matriz $A$, asociada a $f$ en esas bases.
 
@@ -380,6 +383,7 @@ glue_latex(
 ---
 
 ## Qué es y cómo determinar el núcleo de una aplicación lineal {#nucleo}
+\sectionmark{Núcleo}
 
 Llamamos __núcleo__ de una aplicación lineal $f:V \to W$, y lo denotamos por $\mathrm{Ker}\ f$,  al conjunto de aquellos vectores $v\in V$ tales que $f(v) = 0_W$:
 $$\mathrm{Ker}\ f = \{v\in V:f(v) = 0_W\}$$
@@ -490,6 +494,7 @@ if (dimKer > 0) {
 ---
 
 ## Cómo podemos identificar una aplicación lineal inyectiva {#inyectividad}
+\sectionmark{Inyectividad}
 
 Recordemos que una aplicación $f:X\to Y$ es __inyectiva__ si y sólo si $f(x_1)\ne f(x_2)$ siempre que $x_1\ne x_2$, con $x_1, x_2\in X$.
 
@@ -557,6 +562,7 @@ Luego $\mathrm{Ker}\ g=\{0\}$, y así $g$ es inyectiva.
 ---
 
 ## Cómo calcular el subespacio imagen de una aplicación lineal {#imagen}
+\sectionmark{Subespacio imagen}
 
 Llamamos __imagen de la aplicación lineal $f:V\to W$__ a:
 $$\mathrm{Im}\ f = \{w\in W: \text{existe }v\in V \text{ con }f(v) = w\} = f(V)$$
@@ -635,6 +641,7 @@ Entonces \(\mathrm{dim}(\mathrm{Im}\ g) = `r ncol(bImg)`\). Esto nos dice que $\
 ---
 
 ## Cómo identificar si una aplicación lineal es sobreyectiva {#sobrey}
+\sectionmark{Sobreyectividad}
 
 Recordemos que una aplicación $f:X\to Y$ se dice __sobreyectiva__ si, para cada $y\in Y$, existe un $x\in X$ tal que $f(x) = y$, es decir, si $f(X) = Y$.
 
@@ -660,6 +667,7 @@ Si aplicamos el resultado teórico de antes, llegamos a que:
 ---
 
 ## Qué es un isomorfismo {#isomorfismo}
+\sectionmark{Isomorfismos}
 
 Un __isomorfismo__ es una aplicación lineal [inyectiva](#inyectiva) y [sobreyectiva](#sobrey).
 
@@ -686,6 +694,7 @@ Si miramos las aplicaciones $f$ y $g$ de [las secciones anteriores](#nucleo), en
 ---
 
 ## Cómo determinar la imagen de un subespacio vectorial {#imagenU}
+\sectionmark{Imagen de subespacios}
 
 Este problema es realmente un _caso particular_ de [cómo calcular la imagen de una aplicación lineal](#imagen).
 
@@ -764,6 +773,7 @@ Como sabemos que $g$ es un [isomorfismo](#isomorfismo), sabemos que la imagen de
 ---
 
 ## A qué se llama rango y nulidad de la aplicación lineal {#rango-nulidad}
+\sectionmark{Rango y Nulidad}
 
 Se llama __rango__ de una aplicación lineal $f:V\to W$ a la dimensión de la [imagen](#imagen) de $f$: $\mathrm{rg}(f) = \mathrm{dim}(\mathrm{Im}\ f)$.
 
@@ -798,6 +808,7 @@ En cuanto a $f$, recopilando la información que tenemos:
 ---
 
 ## Qué dice el teorema de la dimensión para núcleo e imagen {#th-dim-nucleo}
+\sectionmark{Teorema de la dimensión}
 
 El resultado teórico que nos relaciona las dimensiones de [núcleo](#nucleo) e [imagen](#imagen) de una aplicación lineal $f:V\to W$, es decir, su nulidad y su rango, es el siguiente:
 

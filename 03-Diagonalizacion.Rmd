@@ -175,6 +175,7 @@ __¿Qué preguntas vamos a responder en este capítulo?__
 - [¿Para qué podemos utilizar el Teorema de Cayley-Hamilton?](#th-cayley)
 
 ## Qué son los autovalores de un endomorfismo y de una matriz {#eigenvalue}
+\sectionmark{Valores propios de un endomorfismo}
 
 Consideremos un endomorfismo $f:V\to V$. Diremos que un valor $\lambda\in\mathbb{K}$ es un __autovalor__ (o __valor propio__) de $f$ si existe un vector no nulo $v\in V$ tal que $f(v) = \lambda\ v$. A ese $v$ se le denomina __autovector__ (o __vector propio__) asociado a $\lambda$.
 
@@ -297,6 +298,7 @@ Por tanto, \(\lambda = `r str_flatten(autovalores, ", ")`\) son autovalores de l
 ---
 
 ## Cómo calculamos los autovectores asociados a un autovalor {#eigenspace}
+\sectionmark{Vectores propios}
 
 [Acabamos de ver](#eigenvalue) que los autovectores asociados a un autovalor $\lambda$ son soluciones no triviales del sistema homogéneo $(A-\lambda\ I)x = 0$.
 
@@ -332,11 +334,13 @@ for (av_idx in seq_along(autovalores)) {
   }
   
   glue_latex(
-    "(A [av_str] I)[to_latex(generic_vector(n))] = 0",
-    "\\Leftrightarrow",
-    "[glue_matrices(B, latex = TRUE, fractions = TRUE)][to_latex(generic_vector(n))] = 0",
-    "\\Leftrightarrow",
-    "\\left\\{[write_system(B, zero_vector(n), latex = TRUE, fractions = TRUE)]\\right."
+    "\\begin{array}{rcl}",
+    "(A [av_str] I)[to_latex(generic_vector(n))] = 0 & ",
+    "\\Leftrightarrow & ",
+    "[glue_matrices(B, latex = TRUE, fractions = TRUE)][to_latex(generic_vector(n))] = 0 \\Leftrightarrow\\quad\\\\",
+    "& \\Leftrightarrow &",
+    "\\left\\{[write_system(B, zero_vector(n), latex = TRUE, fractions = TRUE)]\\right. \\\\",
+    "\\end{array}"
   ) %>% 
     cat()
   
@@ -350,7 +354,11 @@ for (av_idx in seq_along(autovalores)) {
   glue_latex(
     "[glue_matrices(B, zero_vector(n), latex = TRUE, fractions = TRUE)]",
     "\\sim",
-    "[glue_matrices(s$splits, latex = TRUE, fractions = TRUE)]",
+    "[glue_matrices(s$splits, latex = TRUE, fractions = TRUE)]"
+  ) %>% 
+    cat()
+  
+  glue_latex(
     "\\Rightarrow",
     "[to_latex(generic_vector(n))] = [write_linear_combination(gen[[av_idx]], vars = params)]"
   ) %>% 
@@ -370,11 +378,13 @@ for (av_idx in seq_along(autovalores)) {
 
 ```
 
-Los vectores de las bases encontradas, así como cualquiera de sus múltiplos, son autvectores asociados al correpondiente autovalor $\lambda$.
+Los vectores de las bases encontradas, así como cualquiera de sus múltiplos, son autovectores asociados al correpondiente autovalor $\lambda$.
 
 ---
 
 ## Cómo sabemos si un endomorfismo o una matriz es diagonalizable {#diagonalizable}
+\sectionmark{Criterios de diagonalización}
+
 
 Una vez que sabemos cómo [hallar los autovalores](#eigenvalue) y [los autovectores](#eigenspace) de una matriz y de un endomorfismo, vamos a plantearnos cómo utilizarlos para saber si podemos encontrar una base $\mathcal{B}$ del espacio $V$ tal que la matriz asociada al endomorfismo $f$ es diagonal. Es decir, nos planteamos el estudio de si __$f$ es diagonalizable__.
 
@@ -493,6 +503,7 @@ if (diagonalizable) {
 ---
 
 ## Si una matriz es diagonalizable, cómo podemos hallar sus potencias {#pot-matrix}
+\sectionmark{Cálculo de potencias de una matriz diagonalizable}
 
 Consideremos una matriz cuadrada [diagonalizable](#diagonalizable). En concreto, eso significa que existe otra matriz cuadrada $P$ regular (cuyas columnas son los vectores de la base de [autovectores](#eigenspace)) tal que 
 $$A = P^{-1}\ D\ P$$
@@ -558,6 +569,7 @@ glue_latex(
 ---
 
 ## Para qué podemos utilizar el Teorema de Cayley-Hamilton {#th-cayley}
+\sectionmark{Teorema de Cayley-Hamilton}
 
 El __Teorema de Cayley-Hamilton__ nos dice que:
 

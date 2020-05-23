@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-05-22" />
+<meta name="date" content="2020-05-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -728,6 +728,66 @@ hallando una base ortonormal de autovectores y expresando de forma explícita la
 <span class="math display">\[\frac{u}{\|u\|} = \frac{1}{3}\left( \begin{array}{c} -1\\ 2\\ 0\\ -2 \end{array} \right) = \left( \begin{array}{c} \frac{-1}{3}\\ \frac{2}{3}\\ 0\\ \frac{-2}{3} \end{array} \right),\quad\quad \frac{v}{\|v\|} = \frac{\sqrt{7}}{7}\left( \begin{array}{c} 1\\ 1\\ 1\\ 2 \end{array} \right) = \left( \begin{array}{c} \frac{\sqrt{7}}{7}\\ \frac{\sqrt{7}}{7}\\ \frac{\sqrt{7}}{7}\\ \frac{2\cdot\sqrt{7}}{7} \end{array} \right)\]</span></p>
 <p>Por último, calculamos la <a href="espeuc.html#norm">distancia</a>:
 <span class="math display">\[d(u,v) = \|u-v\| = \left\|\left( \begin{array}{c} -1\\ 2\\ 0\\ -2 \end{array} \right) - \left( \begin{array}{c} 1\\ 1\\ 1\\ 2 \end{array} \right)\right\| = \left\|\left( \begin{array}{c} -2\\ 1\\ -1\\ -4 \end{array} \right)\right\| = \sqrt{22}\]</span></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Para calcular el <a href="espeuc.html#compl-ortho">complemento ortogonal</a> del subespacio <span class="math inline">\(U\)</span>, partimos de la base <span class="math inline">\(\mathcal{B}\)</span>, y buscamos aquellos vectores <span class="math inline">\(v =\)</span> de <span class="math inline">\(V\)</span> cuyo producto escalar por los vectores de la base sea 0.</li>
+</ol>
+<p>Concretamente, usando el producto escalar usual en <span class="math inline">\(\mathbb{R}^{4}\)</span>, esto equivale a buscar las soluciones del sistema de ecuaciones lineales homogéneo:
+<span class="math display">\[\begin{array}{rrrrcr} -x &amp; + y &amp;  &amp; -t &amp; = &amp; 0\\  &amp;  &amp; 2z &amp; -2t &amp; = &amp; 0\\ \end{array}\]</span>
+donde los coeficientes de cada fila son las coordenadas del vector correspondiente de <span class="math inline">\(\mathcal{B}\)</span>. De esta forma, este sistema representa las ecuaciones cartesianas del espacio <span class="math inline">\(U^{\perp}\)</span>.</p>
+<p>Podemos resolver el sistema usando Gauss-Jordan, y despejando para encontrar las ecuaciones paramétricas del conjunto solución:
+<span class="math display">\[\left( \begin{array}{cccc@{}} -1 &amp; 1 &amp; 0 &amp; -1\\ 0 &amp; 0 &amp; 2 &amp; -2 \end{array} \right) \sim\left( \begin{array}{cccc@{}} -1 &amp; 1 &amp; 0 &amp; -1\\ 0 &amp; 0 &amp; 2 &amp; -2 \end{array} \right) \Rightarrow\left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right)  = \alpha\left(\begin{array}{c} 1\\ 1\\ 0\\ 0 \end{array}\right) {}+\beta\left(\begin{array}{c} -1\\ 0\\ 1\\ 1 \end{array}\right) {}\]</span>
+de donde podemos deducir una <a href="ev.html#base">base</a> para <span class="math inline">\(U^{\perp}\)</span>:
+<span class="math display">\[\mathcal{B}&#39; = \left\{\left( \begin{array}{c@{}} 1\\ 1\\ 0\\ 0 \end{array} \right) , \left( \begin{array}{c@{}} -1\\ 0\\ 1\\ 1 \end{array} \right) \right\}\]</span></p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Comenzamos por hallar el <a href="diagonalización.html#eigenvalue">polinomio característico</a> de <span class="math inline">\(A\)</span> y calculando sus <a href="diagonalización.html#eigenvalue">autovalores</a>.</li>
+</ol>
+<p><span class="math display">\[\begin{array}{rcl}p(\lambda) &amp; = &amp; \mathrm{det}(A - \lambda\ I) = \\ &amp; = &amp; \mathrm{det}\left(\left( \begin{array}{cccc@{}} -1 &amp; 1 &amp; -2 &amp; 1\\ 1 &amp; -1 &amp; 2 &amp; -1\\ -2 &amp; 2 &amp; -4 &amp; 2\\ 1 &amp; -1 &amp; 2 &amp; -1 \end{array} \right)  - \lambda \left( \begin{array}{cccc@{}} 1 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 1 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; 1 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 1 \end{array} \right) \right) = \\ &amp; = &amp; \mathrm{det}\left( \begin{array}{cccc@{}} -1-\lambda &amp; 1 &amp; -2 &amp; 1\\ 1 &amp; -1-\lambda &amp; 2 &amp; -1\\ -2 &amp; 2 &amp; -4-\lambda &amp; 2\\ 1 &amp; -1 &amp; 2 &amp; -1-\lambda \end{array} \right)  \\ &amp; = &amp; \lambda^{4}+7\lambda^{3}\end{array}\]</span></p>
+<p>Igualándolo a 0 y resolviendo la ecuación que queda, llegamos a que los autovalores son: <span class="math inline">\(\lambda = 0, -7\)</span>, ya que:
+<span class="math display">\[p(\lambda) = \lambda ^{3}\cdot (\lambda +7)\]</span></p>
+<p>Recorremos ahora cada autovalor, encontrando una base del subespacio propio asociado, y ortonormalizándola usando el <a href="espeuc.html#gram-schmidt">método de Gram-Schmidt</a>.</p>
+<ul>
+<li>Para el autovalor <span class="math inline">\(\lambda = 0\)</span>:
+<span class="math display">\[\begin{array}{rcl}(A - 0 I)\left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right)  = 0&amp; \Leftrightarrow &amp; \left( \begin{array}{cccc@{}} -1 &amp; 1 &amp; -2 &amp; 1\\ 1 &amp; -1 &amp; 2 &amp; -1\\ -2 &amp; 2 &amp; -4 &amp; 2\\ 1 &amp; -1 &amp; 2 &amp; -1 \end{array} \right) \left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right)  = 0 \Leftrightarrow \\&amp; \Leftrightarrow &amp; \left\{\begin{array}{rrrrcr} -x &amp; + y &amp; -2z &amp; + t &amp; = &amp; 0\\ x &amp; -y &amp; + 2z &amp; -t &amp; = &amp; 0\\ -2x &amp; + 2y &amp; -4z &amp; + 2t &amp; = &amp; 0\\ x &amp; -y &amp; + 2z &amp; -t &amp; = &amp; 0\\ \end{array}\right. \\\end{array}\]</span></li>
+</ul>
+<p>Resolvemos este sistema por Gauss-Jordan, encontrando la forma paramétrica de <span class="math inline">\(U_{ 0 }\)</span>:
+<span class="math display">\[\left( \begin{array}{cccc|c} -1 &amp; 1 &amp; -2 &amp; 1 &amp; 0\\ 1 &amp; -1 &amp; 2 &amp; -1 &amp; 0\\ -2 &amp; 2 &amp; -4 &amp; 2 &amp; 0\\ 1 &amp; -1 &amp; 2 &amp; -1 &amp; 0 \end{array} \right) \sim\left( \begin{array}{cccc|c} -1 &amp; 1 &amp; -2 &amp; 1 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \end{array} \right) \]</span><span class="math display">\[\Rightarrow\left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right)  = \alpha\left(\begin{array}{c} 1\\ 1\\ 0\\ 0 \end{array}\right) {}+\beta\left(\begin{array}{c} -2\\ 0\\ 1\\ 0 \end{array}\right) {}+\gamma\left(\begin{array}{c} 1\\ 0\\ 0\\ 1 \end{array}\right) {}\]</span></p>
+<p>Luego una base de <span class="math inline">\(U_{ 0 }\)</span> es:
+<span class="math display">\[\mathcal{B}_{U_{0}} = \left\{\left( \begin{array}{c@{}} 1\\ 1\\ 0\\ 0 \end{array} \right) , \left( \begin{array}{c@{}} -2\\ 0\\ 1\\ 0 \end{array} \right) , \left( \begin{array}{c@{}} 1\\ 0\\ 0\\ 1 \end{array} \right) \right\}\]</span>
+El siguiente paso es <em>ortonormalizar</em> esta base, mediante el método de Gram-Schmidt. Llamemos <span class="math inline">\(v_i\)</span> a los vectores de esta base hallada.
+Llamamos
+<span class="math display">\[u_1 = v_1 = \left(\begin{array}{c} 1\\ 1\\ 0\\ 0 \end{array}\right) \]</span>
+Procedemos con el resto de vectores:</p>
+<p>Construimos:
+<span class="math display">\[U_1 = \mathcal{L}(\{u_1\}) = \mathcal{L}(\left\{\left( \begin{array}{c@{}} 1\\ 1\\ 0\\ 0 \end{array} \right) \right\})\]</span>
+Entonces
+<span class="math display">\[\mathrm{proy}_{U_1}(v_2)  = \frac{\langle v_2, u_1 \rangle}{\langle u_1, u_1 \rangle} u_1  =  \frac{-2}{2} \left( \begin{array}{c@{}} 1\\ 1\\ 0\\ 0 \end{array} \right)   = \left( \begin{array}{c@{}} -1\\ -1\\ 0\\ 0 \end{array} \right) \]</span>
+Y llamamos
+<span class="math display">\[u_2  = v_2 - \mathrm{proy}_{U_1}(v_2) = \left(\begin{array}{c} -2\\ 0\\ 1\\ 0 \end{array}\right)  - \left( \begin{array}{c@{}} -1\\ -1\\ 0\\ 0 \end{array} \right)  =  \left( \begin{array}{c@{}} -1\\ 1\\ 1\\ 0 \end{array} \right) \]</span>
+Construimos:
+<span class="math display">\[U_2 = \mathcal{L}(\{u_1, u_2\}) = \mathcal{L}(\left\{\left( \begin{array}{c@{}} 1\\ 1\\ 0\\ 0 \end{array} \right) , \left( \begin{array}{c@{}} -1\\ 1\\ 1\\ 0 \end{array} \right) \right\})\]</span>
+Entonces
+<span class="math display">\[\mathrm{proy}_{U_2}(v_3)  = \frac{\langle v_3, u_1 \rangle}{\langle u_1, u_1 \rangle} u_1+\frac{\langle v_3, u_2 \rangle}{\langle u_2, u_2 \rangle} u_2  =  \frac{1}{2} \left( \begin{array}{c@{}} 1\\ 1\\ 0\\ 0 \end{array} \right) +\frac{-1}{3} \left( \begin{array}{c@{}} -1\\ 1\\ 1\\ 0 \end{array} \right)   = \left( \begin{array}{c@{}} \frac{5}{6}\\ \frac{1}{6}\\ - \frac{1}{3}\\ 0 \end{array} \right) \]</span>
+Y llamamos
+<span class="math display">\[u_3  = v_3 - \mathrm{proy}_{U_2}(v_3) = \left(\begin{array}{c} 1\\ 0\\ 0\\ 1 \end{array}\right)  - \left( \begin{array}{c@{}} \frac{5}{6}\\ \frac{1}{6}\\ - \frac{1}{3}\\ 0 \end{array} \right)  =  \left( \begin{array}{c@{}} \frac{1}{6}\\ - \frac{1}{6}\\ \frac{1}{3}\\ 1 \end{array} \right) \]</span></p>
+<p>Y así hemos llegado a un sistema ortogonal formado por los vectores <span class="math inline">\(u_i\)</span>.
+Debemos normalizar ahora los vectores de este sistema ortogonal que tenemos, multiplicando cada uno por el inverso de su norma, llegando a la siguiente base ortonormal de <span class="math inline">\(U_{ 0 }\)</span>.
+<span class="math display">\[\mathcal{B}&#39;_{U_{0}} = \left\{\frac{1}{\sqrt{2}}\left( \begin{array}{c} 1\\ 1\\ 0\\ 0 \end{array} \right), \frac{1}{\sqrt{3}}\left( \begin{array}{c} -1\\ 1\\ 1\\ 0 \end{array} \right), \frac{1}{\frac{\sqrt{42}}{6}}\left( \begin{array}{c} \frac{1}{6}\\ \frac{-1}{6}\\ \frac{1}{3}\\ 1 \end{array} \right)\right\} = \left\{\left( \begin{array}{c} \frac{\sqrt{2}}{2}\\ \frac{\sqrt{2}}{2}\\ 0\\ 0 \end{array} \right), \left( \begin{array}{c} \frac{-\sqrt{3}}{3}\\ \frac{\sqrt{3}}{3}\\ \frac{\sqrt{3}}{3}\\ 0 \end{array} \right), \left( \begin{array}{c} \frac{\sqrt{42}}{42}\\ \frac{-\sqrt{42}}{42}\\ \frac{\sqrt{42}}{21}\\ \frac{\sqrt{42}}{7} \end{array} \right)\right\}\]</span></p>
+<ul>
+<li>Para el autovalor <span class="math inline">\(\lambda = -7\)</span>:
+<span class="math display">\[\begin{array}{rcl}(A + 7 I)\left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right)  = 0&amp; \Leftrightarrow &amp; \left( \begin{array}{cccc@{}} 6 &amp; 1 &amp; -2 &amp; 1\\ 1 &amp; 6 &amp; 2 &amp; -1\\ -2 &amp; 2 &amp; 3 &amp; 2\\ 1 &amp; -1 &amp; 2 &amp; 6 \end{array} \right) \left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right)  = 0 \Leftrightarrow \\&amp; \Leftrightarrow &amp; \left\{\begin{array}{rrrrcr} 6x &amp; + y &amp; -2z &amp; + t &amp; = &amp; 0\\ x &amp; + 6y &amp; + 2z &amp; -t &amp; = &amp; 0\\ -2x &amp; + 2y &amp; + 3z &amp; + 2t &amp; = &amp; 0\\ x &amp; -y &amp; + 2z &amp; + 6t &amp; = &amp; 0\\ \end{array}\right. \\\end{array}\]</span></li>
+</ul>
+<p>Resolvemos este sistema por Gauss-Jordan, encontrando la forma paramétrica de <span class="math inline">\(U_{ -7 }\)</span>:
+<span class="math display">\[\left( \begin{array}{cccc|c} 6 &amp; 1 &amp; -2 &amp; 1 &amp; 0\\ 1 &amp; 6 &amp; 2 &amp; -1 &amp; 0\\ -2 &amp; 2 &amp; 3 &amp; 2 &amp; 0\\ 1 &amp; -1 &amp; 2 &amp; 6 &amp; 0 \end{array} \right) \sim\left( \begin{array}{cccc|c} 6 &amp; 0 &amp; 0 &amp; 6 &amp; 0\\ 0 &amp; \frac{35}{6} &amp; 0 &amp; - \frac{35}{6} &amp; 0\\ 0 &amp; 0 &amp; \frac{7}{5} &amp; \frac{14}{5} &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \end{array} \right) \]</span><span class="math display">\[\Rightarrow\left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right)  = \alpha\left(\begin{array}{c} -1\\ 1\\ -2\\ 1 \end{array}\right) {}\]</span></p>
+<p>Luego una base de <span class="math inline">\(U_{ -7 }\)</span> es:
+<span class="math display">\[\mathcal{B}_{U_{-7}} = \left\{\left( \begin{array}{c@{}} -1\\ 1\\ -2\\ 1 \end{array} \right) \right\}\]</span></p>
+<p>Como solo tenemos un vector en la base, ya forma un sistema ortogonal.
+Debemos normalizar ahora los vectores de este sistema ortogonal que tenemos, multiplicando cada uno por el inverso de su norma, llegando a la siguiente base ortonormal de <span class="math inline">\(U_{ -7 }\)</span>.
+<span class="math display">\[\mathcal{B}&#39;_{U_{-7}} = \left\{\frac{1}{\sqrt{7}}\left( \begin{array}{c} -1\\ 1\\ -2\\ 1 \end{array} \right)\right\} = \left\{\left( \begin{array}{c} \frac{-\sqrt{7}}{7}\\ \frac{\sqrt{7}}{7}\\ \frac{-2\cdot\sqrt{7}}{7}\\ \frac{\sqrt{7}}{7} \end{array} \right)\right\}\]</span>
+Definimos
+<span class="math display">\[\mathcal{B} = \mathcal{B}&#39;_{U_{0}} \cup \mathcal{B}&#39;_{U_{-7}} = \left\{\left( \begin{array}{c} \frac{\sqrt{2}}{2}\\ \frac{\sqrt{2}}{2}\\ 0\\ 0 \end{array} \right), \left( \begin{array}{c} \frac{-\sqrt{3}}{3}\\ \frac{\sqrt{3}}{3}\\ \frac{\sqrt{3}}{3}\\ 0 \end{array} \right), \left( \begin{array}{c} \frac{\sqrt{42}}{42}\\ \frac{-\sqrt{42}}{42}\\ \frac{\sqrt{42}}{21}\\ \frac{\sqrt{42}}{7} \end{array} \right), \left( \begin{array}{c} \frac{-\sqrt{7}}{7}\\ \frac{\sqrt{7}}{7}\\ \frac{-2\cdot\sqrt{7}}{7}\\ \frac{\sqrt{7}}{7} \end{array} \right)\right\}\]</span>
+Es una base ortonormal de <span class="math inline">\(\mathbb{R}^{4}\)</span>, formada únicamente por autovectores de la matriz <span class="math inline">\(A\)</span>.</p>
+<p>Además, la matriz <span class="math inline">\(P\)</span> del <a href="ev.html#cambiobase">cambio de base</a> de esta base <span class="math inline">\(\mathcal{B}\)</span> a la canónica, formada por los vectores de <span class="math inline">\(\mathcal{B}\)</span> puestos por columnas, es <em>ortogonal</em> y nos proporciona la relación entre <span class="math inline">\(A\)</span> y la matriz diagonal <span class="math inline">\(D\)</span> de los autovalores:
+<span class="math display">\[\begin{array}{rcl}D &amp; = &amp; P^{\text{t}}\ A\ P = \\ &amp; = &amp; \left( \begin{array}{cccc@{}} \frac{\sqrt{2}}{2} &amp; \frac{\sqrt{2}}{2} &amp; 0 &amp; 0\\ \frac{-\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3} &amp; 0\\ \frac{\sqrt{42}}{42} &amp; \frac{-\sqrt{42}}{42} &amp; \frac{\sqrt{42}}{21} &amp; \frac{\sqrt{42}}{7}\\ \frac{-\sqrt{7}}{7} &amp; \frac{\sqrt{7}}{7} &amp; \frac{-2\cdot\sqrt{7}}{7} &amp; \frac{\sqrt{7}}{7} \end{array} \right) \ \left( \begin{array}{cccc@{}} -1 &amp; 1 &amp; -2 &amp; 1\\ 1 &amp; -1 &amp; 2 &amp; -1\\ -2 &amp; 2 &amp; -4 &amp; 2\\ 1 &amp; -1 &amp; 2 &amp; -1 \end{array} \right) \ \left( \begin{array}{cccc@{}} \frac{\sqrt{2}}{2} &amp; \frac{-\sqrt{3}}{3} &amp; \frac{\sqrt{42}}{42} &amp; \frac{-\sqrt{7}}{7}\\ \frac{\sqrt{2}}{2} &amp; \frac{\sqrt{3}}{3} &amp; \frac{-\sqrt{42}}{42} &amp; \frac{\sqrt{7}}{7}\\ 0 &amp; \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{42}}{21} &amp; \frac{-2\cdot\sqrt{7}}{7}\\ 0 &amp; 0 &amp; \frac{\sqrt{42}}{7} &amp; \frac{\sqrt{7}}{7} \end{array} \right)  \\ &amp; = &amp; \left( \begin{array}{cccc@{}} 0 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; -7 \end{array} \right) \end{array}\]</span></p>
 
 </div>
 </div>

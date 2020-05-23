@@ -53,6 +53,7 @@ __¿Qué preguntas vamos a responder en este capítulo?__
 - [Qué matrices son diagonalizables ortogonalmente](#diag-ortho2)
 
 ## Qué son las normas y distancias {#norm}
+\sectionmark{Normas y distancias}
 
 Una __norma__ vectorial sobre un espacio $V$ (sobre un cuerpo $\mathbb{K}$) es un operador que sirve para _medir_ la longitud de un vector (es decir, su distancia al origen), y se define formalmente como una aplicación $\|\cdot\|:V\to\mathbb{R}$ que verifica:
 
@@ -117,6 +118,7 @@ glue_latex(
 ---
 
 ## Qué significa el concepto de ortogonalidad {#ortho}
+\sectionmark{Ortogonalidad}
 
 Si partimos de la _desigualdad de Cauchy-Schwarz_ que [hemos visto antes](#norm), podemos llegar a que 
 $$-1 \le \frac{\langle u, v\rangle}{\|u\|\cdot\|v\|} \le 1$$
@@ -336,6 +338,7 @@ Tenemos, por tanto, un sistema de `r ncol(B_ortho)` vectores ortogonales en \(\m
 
 
 ## Qué es el complemento ortogonal de un subespacio {#compl-ortho}
+\sectionmark{Complemento Ortogonal}
 
 Consideremos un espacio vectorial $V$ con producto escalar $\langle \cdot,\cdot \rangle$, y sea $U$ un subespacio de $V$.
 
@@ -478,6 +481,7 @@ Podemos comprobar fácilmente que los vectores de $\mathcal{B}'$ son ortogonales
 ---
 
 ## Cómo calculamos la proyección de un vector sobre un subespacio {#proyec}
+\sectionmark{Proyecciones}
 
 Consideremos un espacio euclídeo $\left(V, \langle\cdot,\cdot\rangle\right)$. Consideremos un subespacio $U$, del que conocemos una [base _ortogonal_](#ortho) $\mathcal{B}_U = \{u_1,\ldots,u_m\}$.  Definimos la __proyección _ortogonal_ de un vector $v$ sobre el subespacio $U$__, como:
 $$\mathrm{proy}_U(v) = \frac{\langle v, u_1\rangle}{\langle u_1, u_1 \rangle}u_1 + \frac{\langle v, u_2\rangle}{\langle u_2, u_2 \rangle}u_2 + \ldots + \frac{\langle v, u_m\rangle}{\langle u_m, u_m \rangle}u_m$$
@@ -633,6 +637,7 @@ Por lo comentado anteriormente, sabemos que $v_2 = \mathrm{proy}_{U^{\perp}}(v)\
 ---
 
 ## Qué es y qué utilidad tiene una base ortonormal {#ortho-basis}
+\sectionmark{Bases ortonormales}
 
 Un vector $v\in V$ se dice __unitario__ si $\|v\| = 1$. Es fácil crear vectores unitarios: dado $u\in V$, si definimos $v = \frac{1}{\|u\|}u$, este vector tiene norma 1. A este proceso se le llama _normalizar_.
 
@@ -738,6 +743,7 @@ glue_latex(
 
 
 ## Cómo construimos una base ortonormal {#gram-schmidt}
+\sectionmark{Método de Gram-Schmidt}
 
 En las secciones anteriores hemos usado bases ortogonales y ortonormales, pero cabe preguntarnos si la existencia de tales bases está asegurada. La respuesta nos la da el siguiente resultado:
 
@@ -940,6 +946,7 @@ glue_latex(
 
 
 ## Qué es una matriz ortogonal y una aplicación ortogonal {#ortho-matrix}
+\sectionmark{Matrices y aplicaciones ortogonales}
 
 Una matriz cuadrada $Q$ se llama __ortogonal__ si $Q^{\text{t}}Q = I$ o, equivalentemente, $Q^{-1} = Q^{\text{t}}$.
 
@@ -1009,6 +1016,7 @@ $$
 ---
 
 ## Qué es la diagonalización ortogonal {#diag-ortho}
+\sectionmark{Diagonalización ortogonal}
 
 Recordemos [la definición de endomorfismo o de matriz diagonalizable](#diagonalizable). Una aplicación lineal $f:V\to V$ es diagonalizable si y solo si existe una base de $V$ formada por autovectores de $f$, lo cual equivale a que la representación matricial de $f$ en dicha base sea una matriz diagonal $D$. En representación matricial, esto se traduce en que una matriz $A\in\mathbb{M}_n(\mathbb{R})$ es diagonalizable si y solo si, existe una matriz regular $P$ tal que $D = P^{-1}\ A\ P$. Las columnas de $P$ están formadas por los autovectores de la base de la definición.
 
@@ -1155,6 +1163,7 @@ donde podemos comprobar que los elementos de la diagonal de $D$ son autovalores 
 ---
 
 ## Qué matrices son diagonalizables ortogonalmente {#diag-ortho2}
+\sectionmark{Diagonalización de matrices simétricas}
 
 Supongamos una matriz $A\in\mathcal{M}_n(\mathbb{R})$ que sea [diagonalizable ortogonalmente](#diag-ortho), es decir, tal que existe $P$ ortogonal con $P^{\text{t}}\ A\ P = D$ una matriz diagonal.
 
@@ -1285,11 +1294,13 @@ for (av_idx in seq_along(autovalores)) {
   }
   
   glue_latex(
+    "\\begin{array}{rcl}",
     "(A [av_str] I)[to_latex(generic_vector(n))] = 0",
-    "\\Leftrightarrow",
-    "[glue_matrices(B, latex = TRUE, fractions = TRUE)][to_latex(generic_vector(n))] = 0",
-    "\\Leftrightarrow",
-    "\\left\\{[write_system(B, zero_vector(n), latex = TRUE, fractions = TRUE)]\\right."
+    "& \\Leftrightarrow & ",
+    "[glue_matrices(B, latex = TRUE, fractions = TRUE)][to_latex(generic_vector(n))] = 0 \\Leftrightarrow \\\\",
+    "& \\Leftrightarrow & ",
+    "\\left\\{[write_system(B, zero_vector(n), latex = TRUE, fractions = TRUE)]\\right. \\\\",
+    "\\end{array}"
   ) %>% 
     cat()
   
@@ -1303,7 +1314,10 @@ for (av_idx in seq_along(autovalores)) {
   glue_latex(
     "[glue_matrices(B, zero_vector(n), latex = TRUE, fractions = TRUE)]",
     "\\sim",
-    "[glue_matrices(s$splits, latex = TRUE, fractions = TRUE)]",
+    "[glue_matrices(s$splits, latex = TRUE, fractions = TRUE)]"    ) %>% 
+    cat()
+  
+  glue_latex(
     "\\Rightarrow",
     "[to_latex(generic_vector(n))] = [write_linear_combination(gen[[av_idx]], vars = params)]"
   ) %>% 
@@ -1311,7 +1325,7 @@ for (av_idx in seq_along(autovalores)) {
   
   cat("\n\n")
   
-  cat("Luego una base de \\(U_{", av, "}\\) sea:\n")
+  cat("Luego una base de \\(U_{", av, "}\\) será:\n")
   
   glue_latex(
     "\\mathcal{B}_{U_{[av]}} = ",

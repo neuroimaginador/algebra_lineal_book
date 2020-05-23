@@ -1143,7 +1143,7 @@ repeat {
   bU <- rMatrix(n = n, m = 2) %>% 
     linearly_independents()
   
-  if(ncol(bU) == 2) break
+  if (ncol(bU) == 2) break
   
 }
 
@@ -1180,6 +1180,7 @@ repeat {
   if (max(roots - floor(roots)) == 0) break
   
 }
+p_latex <- poly2latex(p, var = "\\lambda")
 ```
 
 
@@ -1283,6 +1284,382 @@ u_v <- u - v
 u_v_vector <- Vector$new(u_v)
 glue_latex(
   "d(u,v) = \\|u-v\\| = \\left\\|[u_latex] - [v_latex]\\right\\| = \\left\\|[u_v_vector$to_latex()]\\right\\| = [u_v_vector$norm()$to_latex()]"
+) %>% 
+  cat()
+```
+
+b. Para calcular el [complemento ortogonal](#compl-ortho) del subespacio $U$, partimos de la base $\mathcal{B}$, y buscamos aquellos vectores \(v = `r to_latex(generic_vector(n))`\) de $V$ cuyo producto escalar por los vectores de la base sea 0.
+
+Concretamente, usando el producto escalar usual en \(\mathbb{R}^{`r n`}\), esto equivale a buscar las soluciones del sistema de ecuaciones lineales homogéneo: 
+```{r}
+glue_latex(
+  "[write_system(t(bU), zero_vector(t(bU)), fractions = TRUE, latex = TRUE)]"
+) %>% 
+  cat()
+```
+donde los coeficientes de cada fila son las coordenadas del vector correspondiente de $\mathcal{B}$. De esta forma, este sistema representa las ecuaciones cartesianas del espacio $U^{\perp}$.
+
+Podemos resolver el sistema usando Gauss-Jordan, y despejando para encontrar las ecuaciones paramétricas del conjunto solución:
+```{r}
+s <- gauss_elimination(t(bU), diag1 = FALSE, jordan = TRUE)
+params <- c("\\alpha", "\\beta", "\\delta")
+bUt <- solve_homogeneous(t(bU))
+glue_latex(
+  "[glue_matrices(t(bU), latex = TRUE, fractions = TRUE)]",
+  "\\sim",
+  "[glue_matrices(s$splits, latex = TRUE, fractions = TRUE)]",
+  "\\Rightarrow",
+  "[to_latex(generic_vector(n))] = [write_linear_combination(bUt, vars = params)]"
+) %>% 
+  cat()
+```
+de donde podemos deducir una [base](#base) para $U^{\perp}$:
+```{r}
+bUt <- bUt %>% linearly_independents()
+glue_latex(
+  "\\mathcal{B}' = \\left\\{",
+  "[vectors_to_latex(bUt)]",
+  "\\right\\}"
+) %>% 
+  cat()
+```
+
+c. Comenzamos por hallar el [polinomio característico](#eigenvalue) de $A$ y calculando sus [autovalores](#eigenvalue).
+
+```{r}
+p_latex <- poly2latex(p, var = "\\lambda")
+
+multiplicidad_algebraica <- L$mult
+autovalores <- round(L$root)
+
+o <- order(abs(autovalores))
+autovalores <- autovalores[o]
+multiplicidad_algebraica <- multiplicidad_algebraica[o]
+
+D <- diag(rep(autovalores, times = multiplicidad_algebraica))
+
+# Por cada autovalor, sacamos una base del subsepacio asociado
+gen <- list()
+basis <- list()
+for (av in autovalores) {
+  
+  B <- A - av * eye(n)
+  B[abs(B) < 1.e-7] <- 0
+  H <- solve_homogeneous(B) %>% 
+    linearly_independents()
+  
+  # cat("H\n")
+  # glue_latex(
+  #   "[glue_matrices(H, latex = TRUE, fractions = TRUE)]"
+  # ) %>% 
+  #   cat()
+  # cat("\n")
+
+  gen <- append(gen, list(H))
+  
+  # Ortogonalizamos con GS
+  Bi <- lapply(seq(ncol(H)),
+               function(i) Vector$new(H[, i]))
+  
+  basis <- append(basis, GS(Bi))
+  
+}
+
+b_eigenvectors <- do.call(cbind, gen)
+
+normas <- lapply(basis, function(v) v$norm()) %>% 
+  lapply(function(s) s$simplify()) %>% 
+  lapply(function(s) s$rationalize())
+
+normas_str <- normas %>% 
+  sapply(function(s) s$to_latex())
+
+normas_str <- glue::glue("\\frac{1}{[normas_str]}", 
+                         .open = "[", .close = "]")  
+
+normas <- normas %>% 
+  lapply(function(s) s$inverse())
+
+base_str <- basis %>% 
+  sapply(function(v) v$to_latex())
+
+Bpp <- glue::glue("{normas_str}{base_str}") %>% 
+  str_flatten(", ")
+
+base2 <- lapply(seq_along(basis), function(i) basis[[i]]$prod(normas[[i]])) %>% 
+  lapply(function(s) s$simplify()) %>% 
+  lapply(function(s) s$rationalize())
+
+base2_str <- base2 %>% 
+  sapply(function(v) v$to_latex()) %>% 
+  str_flatten(", ")
+
+
+A_lambdaI <- to_fraction(A, latex = TRUE)
+for (i in seq(nrow(A))) {
+  
+  if (A[i, i] != 0) {
+    
+    A_lambdaI[i, i] <- paste0(A_lambdaI[i, i], "-\\lambda")
+    
+  } else {
+    
+    A_lambdaI[i, i] <- "-\\lambda"
+    
+  }
+  
+}
+glue_latex(
+  "\\begin{array}{rcl}",
+  "p(\\lambda) & = & \\mathrm{det}(A - \\lambda\\ I) = \\\\",
+  " & = & \\mathrm{det}\\left(",
+  "[glue_matrices(A, latex = TRUE, fractions = TRUE)] - \\lambda [glue_matrices(eye(n), latex = TRUE)]",
+  "\\right) = \\\\",
+  " & = & \\mathrm{det}[glue_matrices(A_lambdaI, latex = TRUE)] \\\\",
+  " & = & [p_latex]",
+  "\\end{array}"
+) %>% 
+  cat()
+```
+
+Igualándolo a 0 y resolviendo la ecuación que queda, llegamos a que los autovalores son: \(\lambda = `r str_flatten(autovalores, ", ")`\), ya que:
+```{r}
+terms <- -autovalores %>% to_fraction(latex = TRUE)
+terms[autovalores < 0] <- paste0("+", terms[autovalores < 0])
+terms[autovalores == 0] <- ""
+terms <- paste0("\\lambda ", terms)
+terms[autovalores != 0] <- paste0("(", terms[autovalores != 0], ")")
+powers <- paste0("^{", multiplicidad_algebraica, "}")
+powers[multiplicidad_algebraica == 1] <- "" 
+factorization <- glue::glue("{terms}{powers}") %>% 
+  stringr::str_flatten("\\cdot ")
+glue_latex(
+  "p(\\lambda) = [factorization]"
+) %>% 
+  cat()
+```
+
+Recorremos ahora cada autovalor, encontrando una base del subespacio propio asociado, y ortonormalizándola usando el [método de Gram-Schmidt](#gram-schmidt).
+
+```{r}
+all_bases <- list()
+for (av_idx in seq_along(autovalores)) {
+  
+  av <- autovalores[av_idx]
+  
+  cat("\n- Para el autovalor \\(\\lambda = ", av, "\\):\n")
+  
+  B <- A - av * eye(n)
+  B[abs(B) < 1.e-7] <- 0
+  
+  av_str <- -av %>% to_fraction(latex = TRUE)
+  if (av < 0) {
+    
+    av_str <- paste0("+ ", av_str)
+    
+  }
+  if (av == 0) {
+    
+    av_str <- "- 0"
+    
+  }
+  
+  glue_latex(
+    "\\begin{array}{rcl}",
+    "(A [av_str] I)[to_latex(generic_vector(n))] = 0",
+    "& \\Leftrightarrow & ",
+    "[glue_matrices(B, latex = TRUE, fractions = TRUE)][to_latex(generic_vector(n))] = 0 \\Leftrightarrow \\\\",
+    "& \\Leftrightarrow & ",
+    "\\left\\{[write_system(B, zero_vector(n), latex = TRUE, fractions = TRUE)]\\right. \\\\",
+    "\\end{array}"
+  ) %>% 
+    cat()
+  
+  cat("\n\n")
+  
+  cat("Resolvemos este sistema por Gauss-Jordan, encontrando la forma paramétrica de \\(U_{", av, "}\\):\n")
+  
+  params <- c("\\alpha", "\\beta", "\\gamma", "\\delta")
+  s <- gauss_elimination(B, zero_vector(n), jordan = TRUE)
+  
+  glue_latex(
+    "[glue_matrices(B, zero_vector(n), latex = TRUE, fractions = TRUE)]",
+    "\\sim",
+    "[glue_matrices(s$splits, latex = TRUE, fractions = TRUE)]"    ) %>% 
+    cat()
+  
+  glue_latex(
+    "\\Rightarrow",
+    "[to_latex(generic_vector(n))] = [write_linear_combination(gen[[av_idx]], vars = params)]"
+  ) %>% 
+    cat()
+  
+  cat("\n\n")
+  
+  cat("Luego una base de \\(U_{", av, "}\\) es:\n")
+  
+  glue_latex(
+    "\\mathcal{B}_{U_{[av]}} = ",
+    "\\left\\{[vectors_to_latex(gen[[av_idx]])]\\right\\}"
+  ) %>% 
+    cat()
+  
+  cat("\n")
+  
+  if (ncol(gen[[av_idx]]) > 1) {
+    
+      cat("El siguiente paso es _ortonormalizar_ esta base, mediante el método de Gram-Schmidt. Llamemos $v_i$ a los vectores de esta base hallada.\n")
+
+    B <- gen[[av_idx]]
+    
+    cat("Llamamos\n")
+    
+    v1 <- matrix(B[, 1], ncol = 1)
+    Bp <- v1
+    glue_latex(
+      "u_1 = v_1 = [to_latex(v1, fractions = TRUE)]"
+    ) %>% 
+      cat()
+
+    cat("\n")
+    
+    cat("Procedemos con el resto de vectores:\n")
+    cat("\n")
+    for (i in seq(2, ncol(B))) {
+      
+      Ui <- Bp
+      vi <- matrix(B[, i], ncol = 1)
+      
+      uivi <- (matrix(rep(vi, i - 1), ncol = i - 1) * Ui) %>% 
+        colSums()
+      uiui <- colSums(Ui * Ui)
+      
+      ii <- seq(i - 1)
+      
+      proy_form <- glue::glue("\\frac{\\langle v_[i], u_[ii] \\rangle}{\\langle u_[ii], u_[ii] \\rangle} u_[ii]", .open = "[", .close = "]") %>% 
+        str_flatten("+")
+      
+      ui_str <- sapply(seq(i - 1), function(j) glue_matrices(matrix(Ui[, j], ncol = 1), latex = TRUE, fractions = TRUE))
+      
+      proy_val <- glue::glue("\\frac{[to_fraction(uivi, latex = TRUE)]}{[to_fraction(uiui, latex = TRUE)]} [ui_str]", .open = "[", .close = "]") %>% 
+        str_flatten("+")
+      
+      coefs <- matrix(rep(uivi/uiui, nrow(Ui)), nrow = nrow(Ui), byrow = TRUE)
+      proyec <- matrix(rowSums(coefs * Ui), ncol = 1)
+      ui_new <- vi - proyec
+      Bp <- cbind(Bp, ui_new)
+      
+      previous_ui <- glue::glue("u_{ii}") %>% str_flatten(", ")
+      
+      cat("Construimos:\n")
+      glue_latex(
+        "U_[i-1] = \\mathcal{L}(\\{[previous_ui]\\}) = ",
+        "\\mathcal{L}(\\left\\{[vectors_to_latex(Ui)]\\right\\})"
+      ) %>% str_replace_all("\n", " ") %>% 
+        cat()
+      cat("\n")
+      
+      cat("Entonces\n")
+      
+      glue_latex(
+        "\\mathrm{proy}_{U_[i-1]}(v_[i])  = [proy_form]  =  [proy_val]  = [glue_matrices(proyec, fractions = TRUE, latex = TRUE)]"
+      ) %>% 
+        str_replace_all(pattern = "\n", replacement = " ") %>% 
+        cat()
+      
+      cat("\n")
+      
+      cat("Y llamamos\n")
+      
+      glue_latex(
+        "u_[i]  = v_[i] - \\mathrm{proy}_{U_[i - 1]}(v_[i]) = ",
+        "[to_latex(vi, fractions = TRUE)] - [glue_matrices(proyec, fractions = TRUE, latex = TRUE)] = ",
+        " [glue_matrices(ui_new, fractions = TRUE, latex = TRUE)]"
+      ) %>% str_replace_all(pattern = "\n", replacement = " ") %>% cat()
+      
+      cat("\n")
+      
+    }    
+    
+    cat("\nY así hemos llegado a un sistema ortogonal formado por los vectores $u_i$.\n")
+    
+  } else {
+    
+    cat("\nComo solo tenemos un vector en la base, ya forma un sistema ortogonal.\n")
+    
+    Bp <- gen[[av_idx]]
+    
+  }
+  
+  cat("Debemos normalizar ahora los vectores de este sistema ortogonal que tenemos, multiplicando cada uno por el inverso de su norma, llegando a la siguiente base ortonormal de $U_{", av, "}$.\n")
+  
+  this_basis <- lapply(seq(ncol(Bp)), 
+                       function(i) Vector$new(Bp[, i]))
+  
+normas <- lapply(this_basis, function(v) v$norm()) %>% 
+  lapply(function(s) s$simplify()) %>% 
+  lapply(function(s) s$rationalize())
+
+normas_str <- normas %>% 
+  sapply(function(s) s$to_latex())
+
+normas_str <- glue::glue("\\frac{1}{[normas_str]}", 
+                         .open = "[", .close = "]")  
+
+normas <- normas %>% 
+  lapply(function(s) s$inverse())
+
+base_str <- this_basis %>% 
+  sapply(function(v) v$to_latex())
+
+Bpp <- glue::glue("{normas_str}{base_str}") %>% 
+  str_flatten(", ")
+
+this_base2 <- lapply(seq_along(this_basis), function(i) this_basis[[i]]$prod(normas[[i]])) %>% 
+  lapply(function(s) s$simplify()) %>% 
+  lapply(function(s) s$rationalize())
+
+all_bases <- append(all_bases, this_base2)
+
+base2_str <- this_base2 %>% 
+  sapply(function(v) v$to_latex()) %>% 
+  str_flatten(", ")
+
+  glue_latex(
+    "\\mathcal{B}'_{U_{[av]}} = \\left\\{",
+    "[Bpp]\\right\\} = \\left\\{[base2_str]\\right\\}"
+  ) %>% 
+    cat()
+  
+  cat("\n\n")
+  
+}
+```
+Definimos
+```{r}
+str <- glue::glue("\\mathcal{B}'_{U_{[autovalores]}}", 
+           .open = "[", .close = "]") %>% 
+  str_flatten(" \\cup ")
+base2_str <- all_bases %>% 
+  sapply(function(v) v$to_latex()) %>% 
+  str_flatten(", ")
+
+glue_latex(
+  "\\mathcal{B} = [str] = \\left\\{[base2_str]\\right\\}"
+) %>% 
+  cat()
+```
+Es una base ortonormal de \(\mathbb{R}^{`r n`}\), formada únicamente por autovectores de la matriz $A$.
+
+Además, la matriz $P$ del [cambio de base](#cambiobase) de esta base $\mathcal{B}$ a la canónica, formada por los vectores de $\mathcal{B}$ puestos por columnas, es _ortogonal_ y nos proporciona la relación entre $A$ y la matriz diagonal $D$ de los autovalores:
+```{r}
+P <- vectors2matrix(all_bases)
+glue_latex(
+  "\\begin{array}{rcl}",
+  "D & = & P^{\\text{t}}\\ A\\ P = \\\\",
+  " & = & [glue_matrices(t(P), latex = TRUE)]\\ [glue_matrices(A, latex = TRUE, fractions = TRUE)]\\ [glue_matrices(P, latex = TRUE)] \\\\",
+  " & = & [glue_matrices(D, latex = TRUE, fractions = TRUE)]",
+  "\\end{array}"
 ) %>% 
   cat()
 ```

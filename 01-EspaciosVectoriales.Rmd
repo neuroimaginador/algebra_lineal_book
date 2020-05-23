@@ -65,7 +65,7 @@ __¿Qué preguntas vamos a responder en este capítulo?__
 - [¿Cómo calcular la matriz de cambio de base entre dos bases de un mismo espacio vectorial?](#cambiobase)
 
 ## Qué es un subespacio vectorial {#subesp}
-\chaptermark{Subespacio Vectorial}
+\sectionmark{Subespacio Vectorial}
 
 Un subconjunto de $U\subset V$ es un __subespacio vectorial__ de $V$ si la restricción de las operaciones suma y producto por un escalar a ese conjunto son operaciones cerradas.
 
@@ -80,7 +80,7 @@ $U = \left\{`r paste0(to_latex(generic_vector))`\in\mathbb{R}^{`r n`}: x + y - z
 ---
 
 ## Qué es un sistema de vectores linealmente independiente {#indep}
-\chaptermark{Independencia lineal}
+\sectionmark{Independencia lineal}
 
 Supongamos un conjunto de vectores $\{v_1,\ldots,v_n\}$. Este conjunto es __linealmente independiente__ si ninguno de los vectores se puede poner como combinación lineal de los demás vectores.
 
@@ -129,7 +129,9 @@ Pueden ocurrir dos casos:
 
 Lo más sencillo en este caso es usar el método de Gauss para encontrar la forma escalonada de la matriz de coeficientes. Del estudio de sistemas homogéneos, sabemos el siguiente resultado, que se aplica tras tener la forma escalonada:
 
-> Si el número de ecuaciones (filas) es menor estrictamente que el número de incógnitas (columnas), entonces el sistema es compatible indeterminado. En otro caso (mismo número de ecuaciones que de incógnitas), será compatible determinado.
+```{r}
+theorem("Si el número de ecuaciones (filas) es menor estrictamente que el número de incógnitas (columnas), entonces el sistema es compatible indeterminado. En otro caso (mismo número de ecuaciones que de incógnitas), será compatible determinado.")
+```
 
 Usamos entonces Gauss:
 ```{r}
@@ -149,7 +151,7 @@ Si hubiéramos llegado a 3 ecuaciones no nulas, entonces estaríamos en la situa
 ---
 
 ## Qué es un sistema generador y el subespacio generado por un conjunto de vectores {#gen}
-\chaptermark{Sistema generador} 
+\sectionmark{Sistema generador} 
 
 Consideramos un sistema de vectores $\mathcal{S} = \{v_1,\ldots,v_n\}$. El __subespacio generado__ por $\mathcal{S}$ es el conjunto de vectores que se calcula como combinaciones lineales de los de $\mathcal{S}$.
 
@@ -187,13 +189,14 @@ glue_latex(
   "\\quad\\Rightarrow\\quad",
   "\ v = [write_linear_combination(S, scalars)] = ",
   "[to_latex(new_vector)]\\in \\mathcal{L}(\\mathcal{S})"
-)
+) %>% 
+  cat()
 ```
 
 ---
 
 ## Cómo extraemos una base a partir de un sistema generador de un (sub)espacio vectorial {#sistgenabase}
-\chaptermark{Bases}
+\sectionmark{Bases}
 
 Para cualquier espacio vectorial, o subespacio, una __base__ es un sistema de vectores que [lo genera](#gen) (mediante combinaciones lineales, como hemos visto antes) y que es [linealmente independiente](#indep).
 
@@ -265,7 +268,7 @@ glue_latex(
 ---
 
 ## Cómo encontrar la base (y la dimensión) para un subespacio vectorial {#base}
-\chaptermark{Bases de subespacios}
+\sectionmark{Bases de subespacios}
 
 En muchas ocasiones, necesitaremos encontrar una base para un subespacio vectorial, puesto que con las bases tenemos mucha información adicional sobre un subespacio. Además, cada subespacio queda completamente caracterizado una vez dada su base.
 
@@ -377,7 +380,7 @@ Luego, además, podemos saber que la dimensión de $U$ es $\mathrm{dim}(U) = 2$.
 ---
 
 ## Cómo convertir entre ecuaciones cartesianas y paramétricas de un subespacio vectorial {#param2cartesian}
-\chaptermark{Ecuaciones cartesianas y paramétricas}
+\sectionmark{Ecuaciones cartesianas y paramétricas}
 
 En la [sección anterior](#base), ya hemos visto que para pasar de ecuaciones cartesianas a paramétricas, basta con usar el método de Gauss-Jordan para resolver el sistema de ecuaciones homogéneo.
 
@@ -465,7 +468,7 @@ que es la expresión en cartesianas del espacio $U$.
 ---
 
 ## Cómo hallar la intersección de dos subespacios vectoriales {#interseccion}
-\chaptermark{Intersección de subespacios}
+\sectionmark{Intersección de subespacios}
 
 Si tenemos dos subespacios, $U$ y $W$ de $V$, podemos calcular su intersección, que es el conjunto de vectores que pertenecen a ambos subespacios a la vez.
 
@@ -588,12 +591,12 @@ Y, así, $\mathrm{dim}(U\cap W) = `r ncol(b_Intersect)`$.
 ---
 
 ## ¿Es la unión de subespacios un subespacio? {#union}
-\chaptermark{Unión de subespacios}
+\sectionmark{Unión de subespacios}
 
 En general, no. La única forma en que la unión de dos subespacios sea también un subespacio es que sean iguales o que, al menos, uno de ellos sea el espacio $\{0\}$ o el total, $V$.
 
 ## Cómo hallar la suma de dos subespacios vectoriales {#suma}
-\chaptermark{Suma de subespacios}
+\sectionmark{Suma de subespacios}
 
 Dados dos subespacios $U$ y $W$ de $V$, se define su __suma__ $U+W$ como el conjunto de vectores que son combinación lineal de un vector de $U$ y otro de $W$.
 
@@ -670,7 +673,8 @@ Ahora, tomando
 glue_latex(
   "\\mathcal{G} = \\mathcal{B}_{U} \\cup \\mathcal{B}_{W} = ",
   "\\left\\{[vectors_to_latex(cbind(bU, bW))]\\right\\}"
-)
+) %>% 
+  cat()
 ```
 que es un sistema generador de la suma, podemos construir una base de $U+W$ [eliminando los vectores de $\mathcal{G}$ que sean combinaciones lineales de los demás](#sistgenabase), lo cual requiere usar el método de Gauss para obtener la forma escalonada reducida de ese sistema de vectores.
 
@@ -691,7 +695,7 @@ Y, así, tenemos que $\mathrm{dim}(U+W) = `r ncol(b_Sum)`$.
 ---
 
 ## Qué dice el teorema de la dimensión {#th-dim}
-\chaptermark{Teorema de la dimensión}
+\sectionmark{Teorema de la dimensión}
 
 Hay un resultado teórico que relaciona las dimensiones de dos subespacios $U$ y $W$ con las de su intersección y su suma:
 
@@ -711,7 +715,7 @@ $$\begin{array}{ccccccc}
 ---
 
 ## Cómo calcular el subespacio suplementario de uno dado {#supl}
-\chaptermark{Subespacio suplementario}
+\sectionmark{Subespacio suplementario}
 
 Como hemos comentado antes, el subespacio suplementario de un subespacio $U$ es aquel $W$ que verifica:
 
@@ -809,7 +813,7 @@ glue_latex(
 ---
 
 ## Cómo calcular las coordenadas de un vector con respecto a una base dada {#coord}
-\chaptermark{Coordenadas}
+\sectionmark{Coordenadas}
 
 Un concepto importante es el de __coordenadas__ de un vector, asociadas a una base $\mathcal{B}$ del espacio vectorial $V$.
 
@@ -924,7 +928,7 @@ glue_latex(
 ---
 
 ## Cómo calcular la matriz de cambio de base entre dos bases de un mismo espacio vectorial {#cambiobase}
-\chaptermark{Matriz de cambio de base}
+\sectionmark{Matriz de cambio de base}
 
 Supongamos dos bases $\mathcal{B}_1$ y $\mathcal{B}_2$ de $V$, y que tenemos un vector $v$, expresado en coordenadas de $\mathcal{B}_1$. Nos planteamos una forma sencilla de calcular las coordenadas del mismo vector $v$ respecto a la otra base $\mathcal{B}_2$.
 
