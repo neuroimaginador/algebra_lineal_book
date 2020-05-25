@@ -67,7 +67,10 @@ __¿Qué preguntas vamos a responder en este capítulo?__
 ## Qué es un subespacio vectorial {#subesp}
 \sectionmark{Subespacio Vectorial}
 
-Un subconjunto de $U\subset V$ es un __subespacio vectorial__ de $V$ si la restricción de las operaciones suma y producto por un escalar a ese conjunto son operaciones cerradas.
+```{r}
+definition("Un subconjunto de $U\\subset V$ es un subespacio vectorial de $V$ si la restricción de las operaciones suma y producto por un escalar a ese conjunto son operaciones cerradas.", "Subespacio vectorial", "subespacio vectorial")
+```
+
 
 Eso equivale a decir que la suma de dos vectores cualesquiera de $U$ debe estar en $U$, y si multiplicamos por un escalar un vector de $U$, el producto vuelve a estar en $U$.
 
@@ -82,7 +85,9 @@ $U = \left\{`r paste0(to_latex(generic_vector))`\in\mathbb{R}^{`r n`}: x + y - z
 ## Qué es un sistema de vectores linealmente independiente {#indep}
 \sectionmark{Independencia lineal}
 
-Supongamos un conjunto de vectores $\{v_1,\ldots,v_n\}$. Este conjunto es __linealmente independiente__ si ninguno de los vectores se puede poner como combinación lineal de los demás vectores.
+```{r}
+definition("Supongamos un conjunto de vectores $\\{v_1,\\ldots,v_n\\}$. Este conjunto es linealmente independiente si ninguno de los vectores se puede poner como combinación lineal de los demás vectores.", "Sistema linealmente independiente", "linealmente independiente")
+```
 
 Esto es equivalente a que si tenemos una combinación lineal igualada a 0, de la forma 
 $$\alpha_1 v_1 + \ldots + \alpha_n v_n = 0$$
@@ -153,9 +158,12 @@ Si hubiéramos llegado a 3 ecuaciones no nulas, entonces estaríamos en la situa
 ## Qué es un sistema generador y el subespacio generado por un conjunto de vectores {#gen}
 \sectionmark{Sistema generador} 
 
-Consideramos un sistema de vectores $\mathcal{S} = \{v_1,\ldots,v_n\}$. El __subespacio generado__ por $\mathcal{S}$ es el conjunto de vectores que se calcula como combinaciones lineales de los de $\mathcal{S}$.
+```{r}
+definition("Consideramos un sistema de vectores $\\mathcal{S} = \\{v_1,\\ldots,v_n\\}$. El subespacio generado por $\\mathcal{S}$ es el conjunto de vectores que se calcula como combinaciones lineales de los de $\\mathcal{S}$.", "Subespacio generado", "subespacio generado")
+```
 
-Es decir, si yo voy dando valores a unos escalares $\alpha_1,\ldots,\alpha_n$, entonces el vector $\alpha_1v_1+\ldots+\alpha_nv_n$ es combinación lineal de los de $\mathcal{S}$, luego pertenece al subespacio generado por éste.
+
+Es decir, si vamos dando valores a unos escalares $\alpha_1,\ldots,\alpha_n$, entonces el vector $\alpha_1v_1+\ldots+\alpha_nv_n$ es combinación lineal de los de $\mathcal{S}$, luego pertenece al subespacio generado por éste.
 
 Como conclusión, el subespacio generado por $\mathcal{S}$ es el menor subespacio de $V$ que contiene a los elementos de $\mathcal{S}$. 
 
@@ -198,13 +206,17 @@ glue_latex(
 ## Cómo extraemos una base a partir de un sistema generador de un (sub)espacio vectorial {#sistgenabase}
 \sectionmark{Bases}
 
-Para cualquier espacio vectorial, o subespacio, una __base__ es un sistema de vectores que [lo genera](#gen) (mediante combinaciones lineales, como hemos visto antes) y que es [linealmente independiente](#indep).
+```{r}
+definition("Para cualquier espacio vectorial, o subespacio, una base es un sistema de vectores que [lo genera](#gen) (mediante combinaciones lineales, como hemos visto antes) y que es [linealmente independiente](#indep).", "Base", "base")
+```
 
 La __base canónica__ $\mathcal{C}$ en un espacio $\mathbb{R}^n$ es la dada por los vectores $e_i$ ($i = 1,\ldots,n$), donde $e_i$ es el vector que tiene todas sus componentes a 0 menos la $i$-ésima que vale 1.
 
 Si tenemos un sistema generador de un (sub)espacio vectorial, siempre podremos encontrar una base, gracias al siguiente resultado:
 
-> Todo sistema generador de un subespacio contiene un sistema linealmente independiente, que también genera el mismo subespacio.
+```{r}
+theorem("Todo sistema generador de un subespacio contiene un sistema linealmente independiente, que también genera el mismo subespacio.")
+```
 
 El concepto de __dimensión__ está intrínsecamente relacionado con el de base: es el número de vectores en _cualquier_ base del espacio. Hay que tener en cuenta que todas las bases que se puedan encontrar en un mismo espacio vectorial tienen el mismo número de elementos.
 
@@ -429,22 +441,53 @@ for (p in seq_along(L$eq_idx[-1])) {
   par <- L$splits[[p]][[1]]
   eqs <- L$splits[[p]][[2]]
   
-  str_p <- (write_system(par, fractions = TRUE,
-                       format = 'c', 
-                       vars = params) %>% 
-            stringr::str_split(pattern = "\n"))[[1]] %>% 
-    matrix(ncol = 1)
+  str_p <- c()
+  str_a <- c()
+  
+  for (i in seq(nrow(par))) {
+    
+    this_par <- par[i, ] %>% matrix(nrow = 1)
+    this_eq <- eqs[i, ] %>% matrix(nrow = 1)
+    
+    str_p <- c(str_p,
+               write_system(this_par, 
+                            fractions = TRUE,
+                            latex = TRUE,
+                            format = 'c', 
+                            vars = params) %>% 
+                 str_flatten(" ") %>% 
+                 str_replace_all("\n", " "))
+    
+    str_a <- c(str_a,
+               write_system(this_eq, 
+                            fractions = TRUE,
+                            latex = TRUE,
+                            format = 'c', 
+                            vars = unknowns) %>% 
+                 str_flatten(" ") %>% 
+                 str_replace_all("\n", " "))
+    
+  }
+  
+  # str_p <- (write_system(par, fractions = TRUE,
+  #                      format = 'c', 
+  #                      vars = params) %>% 
+  #           stringr::str_split(pattern = "\n"))[[1]] %>% 
+  #   matrix(ncol = 1)
+  
+  str_p <- str_p %>% matrix(ncol = 1)
+  str_a <- str_a %>% matrix(ncol = 1)
   
   equals <- rep(" = ", nrow(str_p)) %>% matrix(ncol = 1)
   
-  str_a <- (write_system(eqs, fractions = TRUE,
-                       format = 'c', 
-                       vars = unknowns) %>% 
-            stringr::str_split(pattern = "\n"))[[1]] %>% 
-    matrix(ncol = 1)
+  # str_a <- (write_system(eqs, fractions = TRUE,
+  #                      format = 'c', 
+  #                      vars = unknowns) %>% 
+  #           stringr::str_split(pattern = "\n"))[[1]] %>% 
+  #   matrix(ncol = 1)
   
   glue("- Despejamos ${params[p]}$ de la ecuación {L$eq_idx[p]}, y sustituimos en las demás, lo cual nos da:\n",
-       "$${glue_matrices(str_a, equals, str_p, latex = TRUE, ldeco = '', rdeco = '', sep = '')}$$\n"
+       "$${glue_matrices(str_a, equals, str_p, latex = TRUE, ldeco = '', rdeco = '', sep = '', format = 'rcl')}$$\n"
        ) %>% cat()
   cat("\n")
 
@@ -472,7 +515,9 @@ que es la expresión en cartesianas del espacio $U$.
 
 Si tenemos dos subespacios, $U$ y $W$ de $V$, podemos calcular su intersección, que es el conjunto de vectores que pertenecen a ambos subespacios a la vez.
 
-> La intersección de dos subespacios es un nuevo subespacio, aunque puede suceder que la intersección sea únicamente el vector 0.
+```{r}
+theorem("La intersección de dos subespacios es un nuevo subespacio, aunque puede suceder que la intersección sea únicamente el vector 0.")
+```
 
 Conviene tener ambos subespacios expresados en forma de ecuaciones cartesianas. Si no estuviera así (porque solo se dé su base o, lo que es equivalente, las ecuaciones paramétricas), basta ver la sección sobre [cómo convertir de ecuaciones paramétricas a cartesianas](#param2cartesian).
 
@@ -598,13 +643,20 @@ En general, no. La única forma en que la unión de dos subespacios sea también
 ## Cómo hallar la suma de dos subespacios vectoriales {#suma}
 \sectionmark{Suma de subespacios}
 
-Dados dos subespacios $U$ y $W$ de $V$, se define su __suma__ $U+W$ como el conjunto de vectores que son combinación lineal de un vector de $U$ y otro de $W$.
+Aparte de la [intersección](#interseccion) y de la [unión](#union) de subespacios vectoriales, podemos definir una nueva operación:
 
-Si, además, $U\cap W = \{0\}$ y $U+W = V$, entonces se llama __suma ortogonal__ y se denota por $U\oplus W$. Se dice entonces que $U$ es el __subespacio suplementario__ de $W$ y viceversa.
+```{r}
+definition("Dados dos subespacios $U$ y $W$ de $V$, se define su suma $U+W$ como el conjunto de vectores que son combinación lineal de un vector de $U$ y otro de $W$.", "Suma de subespacios", "suma")
+```
+
+Si, además, $U\cap W = \{0\}$ y $U+W = V$, entonces se llama __suma directa__ y se denota por $U\oplus W$. Se dice entonces que $U$ es el __subespacio suplementario__ de $W$ y viceversa.
 
 El resultado teórico esencial es el siguiente:
 
-> Si $\mathcal{B}_U$ y $\mathcal{B}_W$ son bases de $U$ y $W$ respectivamente, entonces $\mathcal{G} = \mathcal{B}_U \cup \mathcal{B}_W$ es un sistema generador de $U+W$.
+```{r}
+theorem("Si $\\mathcal{B}_U$ y $\\mathcal{B}_W$ son bases de $U$ y $W$ respectivamente, entonces $\\mathcal{G} = \\mathcal{B}_U \\cup \\mathcal{B}_W$ es un sistema generador de $U+W$.")
+```
+
 
 Por tanto, teniendo bases de $U$ y de $W$, lo primero será unirlas para obtener un sistema generador de la suma. Después, usaremos la [técnica para conseguir una base de un subespacio a partir de un sistema generador](#sistgenabase).
 
@@ -699,7 +751,10 @@ Y, así, tenemos que $\mathrm{dim}(U+W) = `r ncol(b_Sum)`$.
 
 Hay un resultado teórico que relaciona las dimensiones de dos subespacios $U$ y $W$ con las de su intersección y su suma:
 
-> __Fórmula de Grassmann__: $\mathrm{dim}(U+W) = \mathrm{dim}(U) + \mathrm{dim}(W) - \mathrm{dim}(U\cap W)$
+```{r}
+theorem("$\\mathrm{dim}(U+W) = \\mathrm{dim}(U) + \\mathrm{dim}(W) - \\mathrm{dim}(U\\cap W)$.", "Fórmula de Grassmann")
+```
+
 
 ---
 
@@ -817,8 +872,10 @@ glue_latex(
 
 Un concepto importante es el de __coordenadas__ de un vector, asociadas a una base $\mathcal{B}$ del espacio vectorial $V$.
 
-Supongamos una base $\mathcal{B} = \{v_1,\ldots,v_n\}$ de $V$. Las coordenadas de un vector $v$ son unos escalares $\alpha_1,\ldots,\alpha_n$ tales que podemos expresar $v$ como una combinación lineal de los vectores de la base con esos coeficientes:
-$$v = \alpha_1 v_1 + \cdots + \alpha_n v_n$$
+```{r}
+definition("Supongamos una base $\\mathcal{B} = \\{v_1,\\ldots,v_n\\}$ de $V$. Las __coordenadas__ de un vector $v$ son unos escalares $\\alpha_1,\\ldots,\\alpha_n$ tales que podemos expresar $v$ como una combinación lineal de los vectores de la base con esos coeficientes:\n
+$$v = \\alpha_1 v_1 + \\cdots + \\alpha_n v_n$$", "Coordenadas")
+```
 
 Generalmente, como venimos haciendo desde el principio, estamos denotando e identificando a un vector con sus coordenadas, de forma que escribimos:
 $$v = \left(
@@ -934,9 +991,11 @@ Supongamos dos bases $\mathcal{B}_1$ y $\mathcal{B}_2$ de $V$, y que tenemos un 
 
 El principal resultado teórico en el que nos basamos (y del que alguna pincelada hemos dado en [la sección anterior](#coord)) es el que sigue:
 
-> La transformación de las coordenadas para un mismo vector $v$ entre dos bases $\mathcal{B}_1$ y $\mathcal{B}_2$ viene dada por la siguiente expresión:
-$$[v]_{\mathcal{B}_2} = A [v]_{\mathcal{B}_1}$$
-donde $A$ es una matriz cuadrada formada por las coordenadas de cada vector de $\mathcal{B}_1$ en la base $\mathcal{B}_2$ y $[v]_{\mathcal{B}_i}$ indica las coordenadas de $v$ en la base $\mathcal{B}_i$.
+```{r}
+theorem("La transformación de las coordenadas para un mismo vector $v$ entre dos bases $\\mathcal{B}_1$ y $\\mathcal{B}_2$ viene dada por la siguiente expresión:\n
+$$[v]_{\\mathcal{B}_2} = A [v]_{\\mathcal{B}_1}$$
+donde $A$ es una matriz cuadrada formada por las coordenadas de cada vector de $\\mathcal{B}_1$ en la base $\\mathcal{B}_2$ y $[v]_{\\mathcal{B}_i}$ indica las coordenadas de $v$ en la base $\\mathcal{B}_i$.")
+```
 
 _Notación_: A la matriz de cambio entre la base $\mathcal{B}_1$ y $\mathcal{B}_2$, se suele denotar por $P_{\mathcal{B}_1 \to \mathcal{B}_2}$.
 

@@ -58,8 +58,10 @@ Consideremos una aplicación lineal $f:V\to W$.
 
 Además:
 
-> - Si $U$ es un [subespacio](#subesp) de $V$, entonces $f(U)$ es un subespacio de $W$. Análogamente, si $S$ es subespacio de $W$, su preimagen $f^{-1}(S)$ es también un subespacio de $V$.
-- Si $\mathcal{G} = \{u_1,\ldots,u_m\}$ es un [sistema generador](#gen) de un subespacio $U$ de $V$, entonces $f(\mathcal{G}) = \{f(u_1),\ldots,f(u_m)\}$ es un sistema generador de $f(U)$.
+```{r}
+theorem("- Si $U$ es un [subespacio](#subesp) de $V$, entonces $f(U)$ es un subespacio de $W$. Análogamente, si $S$ es subespacio de $W$, su preimagen $f^{-1}(S)$ es también un subespacio de $V$.\n- Si $\\mathcal{G} = \\{u_1,\\ldots,u_m\\}$ es un [sistema generador](#gen) de un subespacio $U$ de $V$, entonces $f(\\mathcal{G}) = \\{f(u_1),\\ldots,f(u_m)\\}$ es un sistema generador de $f(U)$.")
+```
+
 
 Y, por último,
 
@@ -68,8 +70,11 @@ Y, por último,
 ## Cuál es la matriz asociada a una aplicación lineal en unas bases dadas {#matriz-apli}
 \sectionmark{Matriz asociada}
 
-> Si tenemos una matriz $A\in \mathcal{M}_{mn}(\mathbb{R})$, podemos definir una aplicación lineal $f_A$ entre $\mathbb{R}^n$ y $\mathbb{R}^m$ de la forma:
-$$f_A(v) = A\cdot v,\quad v\in\mathbb{R}^n$$
+```{r}
+theorem("Si tenemos una matriz $A\\in \\mathcal{M}_{mn}(\\mathbb{R})$, podemos definir una aplicación lineal $f_A$ entre $\\mathbb{R}^n$ y $\\mathbb{R}^m$ de la forma:\n
+$$f_A(v) = A\\cdot v,\\quad v\\in\\mathbb{R}^n$$")
+```
+
 
 En este resultado, podemos cambiar el cuerpo $\mathbb{R}$ de los números reales por cualquier otro cuerpo.
 
@@ -77,11 +82,16 @@ Este resultado nos habla de una forma de construir aplicaciones lineales, median
 
 Un resultado más interesante es el siguiente, que nos dice que TODA aplicación lineal viene definida por el producto con una matriz:
 
-> Sea $f:V\to W$ una aplicación lineal. Fijemos dos bases $\mathcal{B}_V$ y $\mathcal{B}_W$ en dichos espacios, respectivamente. Entonces existe una matriz $A\in\mathcal{M}_{mn}(\mathbb{R})$ tal que si $w = f(v)$ entonces $[w]_{\mathcal{B}_W} = A\cdot [v]_{\mathcal{B}_V}$ para todo $v\in V$.
+```{r}
+theorem("Sea $f:V\\to W$ una aplicación lineal. Fijemos dos bases $\\mathcal{B}_V$ y $\\mathcal{B}_W$ en dichos espacios, respectivamente. Entonces existe una matriz $A\\in\\mathcal{M}_{mn}(\\mathbb{R})$ tal que si $w = f(v)$ entonces $[w]_{\\mathcal{B}_W} = A\\cdot [v]_{\\mathcal{B}_V}$ para todo $v\\in V$.", "Matriz asociada a una aplicación lineal")
+```
+
 
 Esto significa que, fijando las bases, podemos encontrar una matriz $A$ de forma que para calcular la imagen de un vector $v\in V$, basta con tomar sus [coordenadas](#coord) en la base $\mathcal{B}_V$, que representamos por $[v]_{\mathcal{B}_V}$, y multiplicarlas por $A$, para obtener las coordenadas de $f(v)$ en la base correspondiente del _codominio_ $W$, las cuales se denotan por $[f(v)]_{\mathcal{B}_W}$.
 
-A la matriz $A$ que nos proporciona este resultado la llamamos __matriz asociada__ a $f$ en las [bases](#base) $\mathcal{B}_V$ y $\mathcal{B}_W$.
+```{r}
+definition("A la matriz $A$ que nos proporciona este resultado la llamamos __matriz asociada__ a $f$ en las [bases](#sisgenabase) $\\mathcal{B}_V$ y $\\mathcal{B}_W$.", "Matriz asociada a aplicación lineal")
+```
 
 Hay que notar que la matriz $A$ está determinada siempre y cuando fijemos las dos bases antes dichas.
 
@@ -119,7 +129,9 @@ Por tanto, para calcular $A$ de forma directa, podemos realizar Gauss-Jordan par
 
 __Caso particular: Base canónica en $V$ y $W$__
 
-En este caso, la matriz asociada a la aplicación lineal es $A = Y = \left(f(v_1)|f(v_2)|\ldots|f(v_n)\right)$, puesto que los vectores de la base canónica puestos por columnas forman la matriz identidad.
+En este caso, la matriz asociada a la aplicación lineal es 
+$$A = Y = \left(f(v_1)|f(v_2)|\ldots|f(v_n)\right)$$
+puesto que los vectores de la base canónica puestos por columnas forman la matriz identidad.
 
 De hecho, en la situación de la base canónica, lo más rápido es fijarse en los coeficientes de cada una de las variables $x,y,z,\ldots$ o $x_1,x_2,\ldots$, según sea el caso, y ponerlos por columnas. Así, para formar la matriz $A$ asociada a la aplicación lineal, tomaríamos como primera columna los coeficientes de la $x$, en la segunda, los coeficientes de la $y$, y así sucesivamente con el resto de variables.
 
@@ -255,13 +267,18 @@ Para saber hallar $A'$, nos basamos en dos resultados teóricos.
 
 El primero de ellos nos relaciona los [cambios de base](#cambiobase) con las aplicaciones lineales:
 
-> Un __cambio de base__ entre dos bases $\mathcal{B}_V$ y $\mathcal{B}'_V$ en un espacio vectorial $V$ se corresponde con la aplicación lineal __identidad__ $\mathrm{id}_V:V \to V$, donde en el dominio hemos considerado la base $\mathcal{B}_V$ y en el codominio la base $\mathcal{B}'_V$. Además, la matriz asociada a $\mathrm{id}_V$ en esta situación es justo la del cambio de base $P_{\mathcal{B}_V \to \mathcal{B}'_V}$.
+```{r}
+theorem("Un __cambio de base__ entre dos bases $\\mathcal{B}_V$ y $\\mathcal{B}'_V$ en un espacio vectorial $V$ se corresponde con la aplicación lineal __identidad__ $\\mathrm{id}_V:V \\to V$, donde en el dominio hemos considerado la base $\\mathcal{B}_V$ y en el codominio la base $\\mathcal{B}'_V$. Además, la matriz asociada a $\\mathrm{id}_V$ en esta situación es justo la del cambio de base $P_{\\mathcal{B}_V \\to \\mathcal{B}'_V}$.", "Cambio de base como aplicación lineal")
+```
 
 Es decir, podemos considerar que un cambio de base no es más que la aplicación de la función identidad en el espacio vectorial, donde en dominio y codominio hemos considerado bases distintas.
 
 El otro resultado teórico nos relaciona la composición de aplicaciones lineales (que [es de nuevo una aplicación lineal](#prop-apli)) con sus matrices asociadas:
 
-> Si $f: V \to W$ y $g:W \to U$ son dos aplicaciones lineales, con matrices asociadas $A_f$ y $A_g$, respectivamente, habiendo fijado bases en $V$, $W$ y $U$, entonces la aplicación lineal composición de $f$ y $g$, $g\circ f:V\to U$, tiene como matriz asociada a $A_{g \circ f} = A_g \cdot A_f$.
+```{r}
+theorem("Si $f: V \\to W$ y $g:W \\to U$ son dos aplicaciones lineales, con matrices asociadas $A_f$ y $A_g$, respectivamente, habiendo fijado bases en $V$, $W$ y $U$, entonces la aplicación lineal composición de $f$ y $g$, $g\\circ f:V\\to U$, tiene como matriz asociada a $A_{g \\circ f} = A_g \\cdot A_f$.", "Composición de aplicaciones lineales")
+```
+
 
 Luego si componemos dos aplicaciones lineales, _habiendo fijado bases en cada caso_, la matriz asociada a la composición es el producto de las matrices individuales.
 
@@ -284,7 +301,9 @@ Teniendo en cuenta los resultados teóricos anteriores, esto quiere decir que $A
 
 Como consecuencia, tenemos además que
 
-> Todas las matrices asociadas a una misma aplicación lineal $f$ en distintas bases son equivalentes.
+```{r}
+theorem("Todas las matrices asociadas a una misma aplicación lineal $f$ en distintas bases son equivalentes.")
+```
 
 ---
 
@@ -370,11 +389,13 @@ glue_latex(
 De ahí:
 ```{r}
 glue_latex(
-  "A' = Q\\ A\\ P = ",
-  "[glue_matrices(gQ, latex = TRUE, fractions = TRUE)]",
+  "\\begin{array}{rcl}",
+  "A' & = & Q\\ A\\ P = \\\\",
+  " & = & [glue_matrices(gQ, latex = TRUE, fractions = TRUE)]",
   "[glue_matrices(newA, latex = TRUE, fractions = TRUE)]",
-  "[glue_matrices(gP, latex = TRUE, fractions = TRUE)] = ",
-  "[glue_matrices(gQ %*% newA %*% gP, latex = TRUE, fractions = TRUE)]"
+  "[glue_matrices(gP, latex = TRUE, fractions = TRUE)] = \\\\",
+  " & = & [glue_matrices(gQ %*% newA %*% gP, latex = TRUE, fractions = TRUE)]\\\\",
+  "\\end{array}"
 ) %>% 
   cat()
 ```
@@ -385,16 +406,22 @@ glue_latex(
 ## Qué es y cómo determinar el núcleo de una aplicación lineal {#nucleo}
 \sectionmark{Núcleo}
 
-Llamamos __núcleo__ de una aplicación lineal $f:V \to W$, y lo denotamos por $\mathrm{Ker}\ f$,  al conjunto de aquellos vectores $v\in V$ tales que $f(v) = 0_W$:
-$$\mathrm{Ker}\ f = \{v\in V:f(v) = 0_W\}$$
+```{r}
+definition("Llamamos __núcleo__ de una aplicación lineal $f:V \\to W$, y lo denotamos por $\\mathrm{Ker}\\ f$,  al conjunto de aquellos vectores $v\\in V$ tales que $f(v) = 0_W$:\n
+$$\\mathrm{Ker}\\ f = \\{v\\in V:f(v) = 0_W\\}$$", "Núcleo de una aplicación lineal")
+```
 
 El primer resultado teórico interesante es:
 
-> $\mathrm{Ker}\ f \ne\varnothing$, puesto que, al menos, $0_V\in\mathrm{Ker}\ f$, como [hemos visto antes](#prop-apli).
+```{r}
+theorem("$\\mathrm{Ker}\\ f \\ne\\varnothing$, puesto que, al menos, $0_V\\in\\mathrm{Ker}\\ f$, como [hemos visto antes](#prop-apli).")
+```
 
 Podemos decir todavía más:
 
-> Dada una aplicación lineal $f:V\to W$, su núcleo $\mathrm{Ker}\ f$ es un subespacio vectorial de $V$.
+```{r}
+theorem("Dada una aplicación lineal $f:V\\to W$, su núcleo $\\mathrm{Ker}\\ f$ es un subespacio vectorial de $V$.", "El núcleo es un subespacio")
+```
 
 Por tanto, para operar con el núcleo, podemos hacerlo como hemos visto en [el capítulo acerca de espacios vectoriales](#ev): podemos calcular [un sistema generador](#gen), [determinar una base y su dimensión](#base).
 
@@ -408,7 +435,9 @@ Pero como conocemos la matriz asociada a $f$, entonces sabemos que $[f(v)]_{\mat
 
 En resumen, $v\in\mathrm{Ker}\ f$ si, y sólo si $A\ [v]_{\mathcal{B}_V} = 0$, es decir, si y sólo si las coordenadas de $v$ son solución del sistema de ecuaciones lineales homogéneo $Ax = 0$.
 
-> $\mathrm{Ker}\ f$ coincide con el subespacio de las soluciones del sistema $Ax = 0$.
+```{r}
+theorem("$\\mathrm{Ker}\\ f$ coincide con el subespacio de las soluciones del sistema $Ax = 0$.")
+```
 
 Esto también implica que __las ecuaciones cartesianas de $\mathrm{Ker}\ f$ son $Ax = 0$__. Por tanto, podemos aplicar [lo que ya hemos visto](#base) para calcular una base del núcleo de $f$.
 
@@ -500,19 +529,28 @@ Recordemos que una aplicación $f:X\to Y$ es __inyectiva__ si y sólo si $f(x_1)
 
 Hay una forma de caracterizar las aplicaciones lineales inyectivas:
 
-> La aplicación lineal $f:V\to W$ es inyectiva si, y sólo si, $\mathrm{Ker}\ f = \{0\}$, es decir, si y sólo si $\mathrm{dim}(\mathrm{Ker}\ f) = 0$.
+```{r}
+theorem("La aplicación lineal $f:V\\to W$ es inyectiva si, y sólo si, $\\mathrm{Ker}\\ f = \\{0\\}$, es decir, si y sólo si $\\mathrm{dim}(\\mathrm{Ker}\\ f) = 0$.", "Caracterización de la inyectividad")
+```
 
 Un resultado interesante nos presenta una relación entre la inyectividad de $f$ y las dimensiones de los espacios $V$ y $W$:
 
-> Si la aplicación lineal $f:V\to W$ es inyectiva, entonces se verifica que $\mathrm{dim}(V)\le\mathrm{dim}(W)$.
+```{r}
+theorem("Si la aplicación lineal $f:V\\to W$ es inyectiva, entonces se verifica que $\\mathrm{dim}(V)\\le\\mathrm{dim}(W)$.")
+```
 
 El recíproco no es cierto, no siempre que tengamos $\mathrm{dim}(V)\le\mathrm{dim}(W)$ la aplicación puede ser inyectiva. Por ejemplo, la aplicación cero $0:\mathbb{R}^2\to\mathbb{R}^3$, que asocia a todo vector el vector 0 del codominio, no puede ser inyectiva, a pesar de que la dimensión del dominio es menor que la del codominio.
 
 Podemos decir todavía algún resultado teórico que nos proporciona más información acerca de cómo identificar aplicaciones lineales inyectivas:
 
-> Una aplicación $f:V\to W$ es inyectiva si, y sólo si, la imagen de todo [sistema linealmente independiente](#indep) es también un sistema linealmente independiente.
+```{r}
+theorem("Una aplicación $f:V\\to W$ es inyectiva si, y sólo si, la imagen de todo [sistema linealmente independiente](#indep) es también un sistema linealmente independiente.")
+```
 
-> Si $V$ es de dimensión finita, entonces la aplicación lineal $f:V\to W$ es inyectiva si, y sólo si, $\mathrm{dim}(V) = \mathrm{dim}(\mathrm{Im}\ f)$
+```{r}
+theorem("Si $V$ es de dimensión finita, entonces la aplicación lineal $f:V\\to W$ es inyectiva si, y sólo si, $\\mathrm{dim}(V) = \\mathrm{dim}(\\mathrm{Im}\\ f)$")
+```
+
 
 ---
 
@@ -564,12 +602,15 @@ Luego $\mathrm{Ker}\ g=\{0\}$, y así $g$ es inyectiva.
 ## Cómo calcular el subespacio imagen de una aplicación lineal {#imagen}
 \sectionmark{Subespacio imagen}
 
-Llamamos __imagen de la aplicación lineal $f:V\to W$__ a:
-$$\mathrm{Im}\ f = \{w\in W: \text{existe }v\in V \text{ con }f(v) = w\} = f(V)$$
+```{r}
+definition("Llamamos __imagen de la aplicación lineal__ $f:V\\to W$ a:\n$$\\mathrm{Im}\\ f = \\{w\\in W: \\text{existe }v\\in V \\text{ con }f(v) = w\\} = f(V)$$", "Imagen de una aplicación lineal")
+```
 
 Análogamente a lo que pasaba con [el núcleo de una aplicación lineal](#nucleo), tenemos:
 
-> Si $f:V\to W$ es una aplicación lineal, entonces $\mathrm{Im}\ f$ es un subespacio vectorial de $W$.
+```{r}
+theorem("Si $f:V\\to W$ es una aplicación lineal, entonces $\\mathrm{Im}\\ f$ es un subespacio vectorial de $W$.", "La imagen es un subespacio vectorial")
+```
 
 Por tanto, podemos estudiarlo con todas las [herramientas que conocemos](#ev).
 
@@ -581,7 +622,10 @@ En concreto, tomando una base $\mathcal{B}$ de $V$, su imagen $f(\mathcal{B})$ e
 
 En consecuencia:
 
-> Sea $f$ una aplicación lineal entre dos espacios $V$ y $W$, y sea $A$ la matriz asociada a $f$, una vez que hemos fijado dos bases en $V$ y $W$. Entonces $\mathrm{Im}\ f$ es el subespacio de $W$ generado por los vectores columna que forman la matriz $A$.
+```{r}
+theorem("Sea $f$ una aplicación lineal entre dos espacios $V$ y $W$, y sea $A$ la matriz asociada a $f$, una vez que hemos fijado dos bases en $V$ y $W$. Entonces $\\mathrm{Im}\\ f$ es el subespacio de $W$ generado por los vectores columna que forman la matriz $A$.", "Sistema generador de $\\mathrm{Im}\\ f$")
+```
+
 
 ---
 
@@ -647,11 +691,16 @@ Recordemos que una aplicación $f:X\to Y$ se dice __sobreyectiva__ si, para cada
 
 En cuanto a aplicaciones lineales, tenemos el siguiente resultado, consecuencia de lo anterior:
 
-> La aplicación lineal $f:V\to W$ es sobreyectiva si $f(V) = \mathrm{Im}\ f = W$, y esto es equivalente a decir que $\mathrm{dim}(\mathrm{Im}\ f) = \mathrm{dim}(W)$.
+```{r}
+theorem("La aplicación lineal $f:V\\to W$ es sobreyectiva si $f(V) = \\mathrm{Im}\\ f = W$, y esto es equivalente a decir que $\\mathrm{dim}(\\mathrm{Im}\\ f) = \\mathrm{dim}(W)$.", "Caracterización de la sobreyectividad")
+```
+
 
 Una propiedad adicional, con relación a las dimensiones de $V$ y de $W$:
 
-> Si la aplicación lineal $f:V\to W$ es sobreyectiva, entonces $\mathrm{dim}(V)\ge\mathrm{dim}(W)$.
+```{r}
+theorem("Si la aplicación lineal $f:V\\to W$ es sobreyectiva, entonces $\\mathrm{dim}(V)\\ge\\mathrm{dim}(W)$.")
+```
 
 ---
 
@@ -669,19 +718,22 @@ Si aplicamos el resultado teórico de antes, llegamos a que:
 ## Qué es un isomorfismo {#isomorfismo}
 \sectionmark{Isomorfismos}
 
-Un __isomorfismo__ es una aplicación lineal [inyectiva](#inyectiva) y [sobreyectiva](#sobrey).
+```{r}
+definition("Un __isomorfismo__ es una aplicación lineal [inyectiva](#inyectiva) y [sobreyectiva](#sobrey).\n\nUn __automorfismo__ es un isomorfismo donde dominio y codominio son el mismo espacio $V$.", "Isomorfismo y automorfismo")
+```
 
-Un __automorfismo__ es un isomorfismo donde dominio y codominio son el mismo espacio $V$.
 
 __Algunas propiedades básicas de los isomorfismos__
 
-> - La composición de isomorfismos es un isomorfismo.
+- La composición de isomorfismos es un isomorfismo.
 - La aplicación inversa de un isomorfismo es también un isomorfismo
 
 Cuando, además, estamos hablando de espacios de dimensión finita, tenemos los siguientes resultados:
 
-> - Una aplicación lineal $f:V\to W$ es un isomorfismo si, y sólo si, $\mathrm{dim}(V) = \mathrm{dim}(W)$.
-- Una aplicación $f:V\to V$ es un _automorfismo_ si, y sólo si, o bien es inyectiva o bien es sobreyectiva.
+```{r}
+theorem("- Una aplicación lineal $f:V\\to W$ es un isomorfismo si, y sólo si, $\\mathrm{dim}(V) = \\mathrm{dim}(W)$.\n
+- Una aplicación $f:V\\to V$ es un _automorfismo_ si, y sólo si, o bien es inyectiva o bien es sobreyectiva.")
+```
 
 Este último resultado nos dice que en un _endomorfismo_, basta con ver si la aplicación es [inyectiva](#inyectividad) o [sobreyectiva](#sobrey) para tener que es un isomorfismo.
 
@@ -775,15 +827,21 @@ Como sabemos que $g$ es un [isomorfismo](#isomorfismo), sabemos que la imagen de
 ## A qué se llama rango y nulidad de la aplicación lineal {#rango-nulidad}
 \sectionmark{Rango y Nulidad}
 
-Se llama __rango__ de una aplicación lineal $f:V\to W$ a la dimensión de la [imagen](#imagen) de $f$: $\mathrm{rg}(f) = \mathrm{dim}(\mathrm{Im}\ f)$.
+```{r}
+definition("Se llama __rango__ de una aplicación lineal $f:V\\to W$ a la dimensión de la [imagen](#imagen) de $f$: $\\mathrm{rg}(f) = \\mathrm{dim}(\\mathrm{Im}\\ f)$.", "Rango")
+```
 
-Se llama __nulidad__ de una aplicación lineal $f:V\to W$ a la dimensión del [núcleo](#nucleo) de $f$: $\mathrm{nul}(f) = \mathrm{dim}(\mathrm{Ker}\ f)$.
+```{r}
+definition("Se llama __nulidad__ de una aplicación lineal $f:V\\to W$ a la dimensión del [núcleo](#nucleo) de $f$: $\\mathrm{nul}(f) = \\mathrm{dim}(\\mathrm{Ker}\\ f)$.", "Nulidad")
+```
 
 De forma análoga, se pueden definir rango y nulidad para __matrices__, puesto que tenemos [una importante relación entre matrices y aplicaciones lineales](#matrix-apli).
 
-Dada una matriz $A$, su __rango__ $\mathrm{rg}(A)$ es la dimensión del subespacio generado por los vectores que forman sus columnas, y su __nulidad__ $\mathrm{nul}(A)$ es la dimensión del subespacio vectorial de las soluciones del sistema de ecuaciones lineales $A\ v = 0$.
+```{r}
+definition("Dada una matriz $A$, su __rango__ $\\mathrm{rg}(A)$ es la dimensión del subespacio generado por los vectores que forman sus columnas, y su __nulidad__ $\\mathrm{nul}(A)$ es la dimensión del subespacio vectorial de las soluciones del sistema de ecuaciones lineales $A\\ v = 0$.", "Rango y nulidad de una matriz")
+```
 
-Un resultado importante, debido a que [todas las matrices asociadas a una misma aplicación lineal son equivalentes](#cambiobase-apli), es que todas tienen el mismo rango y la misma nulidad, y coinciden con el ranog y nulidad de $f$.
+Un resultado importante, debido a que [todas las matrices asociadas a una misma aplicación lineal son equivalentes](#cambiobase-apli), es que todas tienen el mismo rango y la misma nulidad, y coinciden con el rango y nulidad de $f$.
 
 Por tanto, para calcular rango y nulidad de $f$, bastará con estudiar el rango y nulidad de cualquiera de sus expresiones matriciales en unas bases fijadas de $V$ y $W$.
 
@@ -812,13 +870,17 @@ En cuanto a $f$, recopilando la información que tenemos:
 
 El resultado teórico que nos relaciona las dimensiones de [núcleo](#nucleo) e [imagen](#imagen) de una aplicación lineal $f:V\to W$, es decir, su nulidad y su rango, es el siguiente:
 
-> Si $f:V\to W$ es una aplicación lineal, entonces
-$$\mathrm{dim}(V) = \mathrm{dim}(\mathrm{Ker}\ f) + \mathrm{dim}(\mathrm{Im}\ f) = \mathrm{nul}(f) + \mathrm{rg}(f)$$
+```{r}
+theorem("Si $f:V\\to W$ es una aplicación lineal, entonces\n
+$$\\mathrm{dim}(V) = \\mathrm{dim}(\\mathrm{Ker}\\ f) + \\mathrm{dim}(\\mathrm{Im}\\ f) = \\mathrm{nul}(f) + \\mathrm{rg}(f)$$", "Teorema de la dimensión")
+```
 
 Este resultado, reescrito en términos matriciales, queda como:
 
-> Si $A$ es una matriz con $m$ filas y $n$ columnas, entonces
-$$n = \mathrm{nul}(A) + \mathrm{rg}(A)$$
+```{r}
+theorem("Si $A$ es una matriz con $m$ filas y $n$ columnas, entonces\n
+$$n = \\mathrm{nul}(A) + \\mathrm{rg}(A)$$")
+```
 
 ---
 

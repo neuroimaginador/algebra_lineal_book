@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-05-23" />
+<meta name="date" content="2020-05-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="apli.html"/>
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -189,7 +190,7 @@ es un vector de <span class="math inline">\(V\)</span>.</p>
 </ul>
 <div id="subesp" class="section level2" number="2.1">
 <h2 number="2.1"><span class="header-section-number">2.1</span> Qué es un subespacio vectorial</h2>
-<p>Un subconjunto de <span class="math inline">\(U\subset V\)</span> es un <strong>subespacio vectorial</strong> de <span class="math inline">\(V\)</span> si la restricción de las operaciones suma y producto por un escalar a ese conjunto son operaciones cerradas.</p>
+<p><strong>Definición (Subespacio vectorial) </strong> Un subconjunto de <span class="math inline">\(U\subset V\)</span> es un <strong>subespacio vectorial</strong> de <span class="math inline">\(V\)</span> si la restricción de las operaciones suma y producto por un escalar a ese conjunto son operaciones cerradas.</p>
 <p>Eso equivale a decir que la suma de dos vectores cualesquiera de <span class="math inline">\(U\)</span> debe estar en <span class="math inline">\(U\)</span>, y si multiplicamos por un escalar un vector de <span class="math inline">\(U\)</span>, el producto vuelve a estar en <span class="math inline">\(U\)</span>.</p>
 <hr />
 <p><strong>Ejemplo</strong></p>
@@ -198,7 +199,7 @@ es un vector de <span class="math inline">\(V\)</span>.</p>
 </div>
 <div id="indep" class="section level2" number="2.2">
 <h2 number="2.2"><span class="header-section-number">2.2</span> Qué es un sistema de vectores linealmente independiente</h2>
-<p>Supongamos un conjunto de vectores <span class="math inline">\(\{v_1,\ldots,v_n\}\)</span>. Este conjunto es <strong>linealmente independiente</strong> si ninguno de los vectores se puede poner como combinación lineal de los demás vectores.</p>
+<p><strong>Definición (Sistema linealmente independiente) </strong> Supongamos un conjunto de vectores <span class="math inline">\(\{v_1,\ldots,v_n\}\)</span>. Este conjunto es <strong>linealmente independiente</strong> si ninguno de los vectores se puede poner como combinación lineal de los demás vectores.</p>
 <p>Esto es equivalente a que si tenemos una combinación lineal igualada a 0, de la forma
 <span class="math display">\[\alpha_1 v_1 + \ldots + \alpha_n v_n = 0\]</span>
 entonces el sistema de los <span class="math inline">\(v_i\)</span> será independiente si necesariamente todos los <span class="math inline">\(\alpha_i\)</span> valen 0.</p>
@@ -258,8 +259,8 @@ entonces el sistema de los <span class="math inline">\(v_i\)</span> será indepe
 </div>
 <div id="gen" class="section level2" number="2.3">
 <h2 number="2.3"><span class="header-section-number">2.3</span> Qué es un sistema generador y el subespacio generado por un conjunto de vectores</h2>
-<p>Consideramos un sistema de vectores <span class="math inline">\(\mathcal{S} = \{v_1,\ldots,v_n\}\)</span>. El <strong>subespacio generado</strong> por <span class="math inline">\(\mathcal{S}\)</span> es el conjunto de vectores que se calcula como combinaciones lineales de los de <span class="math inline">\(\mathcal{S}\)</span>.</p>
-<p>Es decir, si yo voy dando valores a unos escalares <span class="math inline">\(\alpha_1,\ldots,\alpha_n\)</span>, entonces el vector <span class="math inline">\(\alpha_1v_1+\ldots+\alpha_nv_n\)</span> es combinación lineal de los de <span class="math inline">\(\mathcal{S}\)</span>, luego pertenece al subespacio generado por éste.</p>
+<p><strong>Definición (Subespacio generado) </strong> Consideramos un sistema de vectores <span class="math inline">\(\mathcal{S} = \{v_1,\ldots,v_n\}\)</span>. El <strong>subespacio generado</strong> por <span class="math inline">\(\mathcal{S}\)</span> es el conjunto de vectores que se calcula como combinaciones lineales de los de <span class="math inline">\(\mathcal{S}\)</span>.</p>
+<p>Es decir, si vamos dando valores a unos escalares <span class="math inline">\(\alpha_1,\ldots,\alpha_n\)</span>, entonces el vector <span class="math inline">\(\alpha_1v_1+\ldots+\alpha_nv_n\)</span> es combinación lineal de los de <span class="math inline">\(\mathcal{S}\)</span>, luego pertenece al subespacio generado por éste.</p>
 <p>Como conclusión, el subespacio generado por <span class="math inline">\(\mathcal{S}\)</span> es el menor subespacio de <span class="math inline">\(V\)</span> que contiene a los elementos de <span class="math inline">\(\mathcal{S}\)</span>.</p>
 <p>Denotamos como <span class="math inline">\(\mathcal{L}(\mathcal{S})\)</span> al subsepacio generado por <span class="math inline">\(\mathcal{S}\)</span>.</p>
 <hr />
@@ -273,7 +274,7 @@ entonces el sistema de los <span class="math inline">\(v_i\)</span> será indepe
 </div>
 <div id="sistgenabase" class="section level2" number="2.4">
 <h2 number="2.4"><span class="header-section-number">2.4</span> Cómo extraemos una base a partir de un sistema generador de un (sub)espacio vectorial</h2>
-<p>Para cualquier espacio vectorial, o subespacio, una <strong>base</strong> es un sistema de vectores que <a href="ev.html#gen">lo genera</a> (mediante combinaciones lineales, como hemos visto antes) y que es <a href="ev.html#indep">linealmente independiente</a>.</p>
+<p><strong>Definición (Base) </strong> Para cualquier espacio vectorial, o subespacio, una <strong>base</strong> es un sistema de vectores que <a href="ev.html#gen">lo genera</a> (mediante combinaciones lineales, como hemos visto antes) y que es <a href="ev.html#indep">linealmente independiente</a>.</p>
 <p>La <strong>base canónica</strong> <span class="math inline">\(\mathcal{C}\)</span> en un espacio <span class="math inline">\(\mathbb{R}^n\)</span> es la dada por los vectores <span class="math inline">\(e_i\)</span> (<span class="math inline">\(i = 1,\ldots,n\)</span>), donde <span class="math inline">\(e_i\)</span> es el vector que tiene todas sus componentes a 0 menos la <span class="math inline">\(i\)</span>-ésima que vale 1.</p>
 <p>Si tenemos un sistema generador de un (sub)espacio vectorial, siempre podremos encontrar una base, gracias al siguiente resultado:</p>
 <blockquote>
@@ -409,16 +410,16 @@ t
 <p>Vamos a aplicar el método de eliminación de los parámetros:</p>
 <ul>
 <li>Despejamos <span class="math inline">\(\alpha\)</span> de la ecuación 1, y sustituimos en las demás, lo cual nos da:
-<span class="math display">\[\begin{array}{c@{}cc}
-2x + y &amp;  =  &amp; -5\beta -6\gamma -11\delta\\
--x + z &amp;  =  &amp; \beta + \gamma + 2\delta\\
--x + t &amp;  =  &amp; \beta + 4\gamma + 5\delta
+<span class="math display">\[\begin{array}{rcl@{}rclrcl}
+\begin{array}{c} 2x+ y\\ \end{array} &amp;  =  &amp; \begin{array}{c} -5\beta-6\gamma-11\delta\\ \end{array}\\
+\begin{array}{c} -x+ z\\ \end{array} &amp;  =  &amp; \begin{array}{c} \beta+ \gamma+ 2\delta\\ \end{array}\\
+\begin{array}{c} -x+ t\\ \end{array} &amp;  =  &amp; \begin{array}{c} \beta+ 4\gamma+ 5\delta\\ \end{array}
 \end{array}
 \]</span></li>
 <li>Despejamos <span class="math inline">\(\beta\)</span> de la ecuación 1, y sustituimos en las demás, lo cual nos da:
-<span class="math display">\[\begin{array}{c@{}cc}
--3/5x + 1/5y + z &amp;  =  &amp; -1/5\gamma -1/5\delta\\
--3/5x + 1/5y + t &amp;  =  &amp; 14/5\gamma + 14/5\delta
+<span class="math display">\[\begin{array}{rcl@{}rclrcl}
+\begin{array}{c} - \frac{3}{5}x+ \frac{1}{5}y+ z\\ \end{array} &amp;  =  &amp; \begin{array}{c} - \frac{1}{5}\gamma- \frac{1}{5}\delta\\ \end{array}\\
+\begin{array}{c} - \frac{3}{5}x+ \frac{1}{5}y+ t\\ \end{array} &amp;  =  &amp; \begin{array}{c} \frac{14}{5}\gamma+ \frac{14}{5}\delta\\ \end{array}
 \end{array}
 \]</span></li>
 <li>Por último, despejando <span class="math inline">\(\gamma\)</span> de la ecuación 1, nos queda:<span class="math display">\[\begin{array}{rrrrcr} -9x &amp; + 3y &amp; + 14z &amp; + t &amp; = &amp; 0\\ \end{array}\]</span>
@@ -497,8 +498,9 @@ t
 </div>
 <div id="suma" class="section level2" number="2.9">
 <h2 number="2.9"><span class="header-section-number">2.9</span> Cómo hallar la suma de dos subespacios vectoriales</h2>
-<p>Dados dos subespacios <span class="math inline">\(U\)</span> y <span class="math inline">\(W\)</span> de <span class="math inline">\(V\)</span>, se define su <strong>suma</strong> <span class="math inline">\(U+W\)</span> como el conjunto de vectores que son combinación lineal de un vector de <span class="math inline">\(U\)</span> y otro de <span class="math inline">\(W\)</span>.</p>
-<p>Si, además, <span class="math inline">\(U\cap W = \{0\}\)</span> y <span class="math inline">\(U+W = V\)</span>, entonces se llama <strong>suma ortogonal</strong> y se denota por <span class="math inline">\(U\oplus W\)</span>. Se dice entonces que <span class="math inline">\(U\)</span> es el <strong>subespacio suplementario</strong> de <span class="math inline">\(W\)</span> y viceversa.</p>
+<p>Aparte de la <a href="ev.html#interseccion">intersección</a> y de la <a href="ev.html#union">unión</a> de subespacios vectoriales, podemos definir una nueva operación:</p>
+<p><strong>Definición (Suma de subespacios) </strong> Dados dos subespacios <span class="math inline">\(U\)</span> y <span class="math inline">\(W\)</span> de <span class="math inline">\(V\)</span>, se define su <strong>suma</strong> <span class="math inline">\(U+W\)</span> como el conjunto de vectores que son combinación lineal de un vector de <span class="math inline">\(U\)</span> y otro de <span class="math inline">\(W\)</span>.</p>
+<p>Si, además, <span class="math inline">\(U\cap W = \{0\}\)</span> y <span class="math inline">\(U+W = V\)</span>, entonces se llama <strong>suma directa</strong> y se denota por <span class="math inline">\(U\oplus W\)</span>. Se dice entonces que <span class="math inline">\(U\)</span> es el <strong>subespacio suplementario</strong> de <span class="math inline">\(W\)</span> y viceversa.</p>
 <p>El resultado teórico esencial es el siguiente:</p>
 <blockquote>
 <p>Si <span class="math inline">\(\mathcal{B}_U\)</span> y <span class="math inline">\(\mathcal{B}_W\)</span> son bases de <span class="math inline">\(U\)</span> y <span class="math inline">\(W\)</span> respectivamente, entonces <span class="math inline">\(\mathcal{G} = \mathcal{B}_U \cup \mathcal{B}_W\)</span> es un sistema generador de <span class="math inline">\(U+W\)</span>.</p>
@@ -612,7 +614,8 @@ que es un sistema generador de la suma, podemos construir una base de <span clas
 <h2 number="2.10"><span class="header-section-number">2.10</span> Qué dice el teorema de la dimensión</h2>
 <p>Hay un resultado teórico que relaciona las dimensiones de dos subespacios <span class="math inline">\(U\)</span> y <span class="math inline">\(W\)</span> con las de su intersección y su suma:</p>
 <blockquote>
-<p><strong>Fórmula de Grassmann</strong>: <span class="math inline">\(\mathrm{dim}(U+W) = \mathrm{dim}(U) + \mathrm{dim}(W) - \mathrm{dim}(U\cap W)\)</span></p>
+<p><strong>Fórmula de Grassmann</strong>:
+<span class="math inline">\(\mathrm{dim}(U+W) = \mathrm{dim}(U) + \mathrm{dim}(W) - \mathrm{dim}(U\cap W)\)</span>.</p>
 </blockquote>
 <hr />
 <p><strong>Ejemplo</strong></p>
@@ -651,8 +654,8 @@ que es un sistema generador de la suma, podemos construir una base de <span clas
 <div id="coord" class="section level2" number="2.12">
 <h2 number="2.12"><span class="header-section-number">2.12</span> Cómo calcular las coordenadas de un vector con respecto a una base dada</h2>
 <p>Un concepto importante es el de <strong>coordenadas</strong> de un vector, asociadas a una base <span class="math inline">\(\mathcal{B}\)</span> del espacio vectorial <span class="math inline">\(V\)</span>.</p>
-<p>Supongamos una base <span class="math inline">\(\mathcal{B} = \{v_1,\ldots,v_n\}\)</span> de <span class="math inline">\(V\)</span>. Las coordenadas de un vector <span class="math inline">\(v\)</span> son unos escalares <span class="math inline">\(\alpha_1,\ldots,\alpha_n\)</span> tales que podemos expresar <span class="math inline">\(v\)</span> como una combinación lineal de los vectores de la base con esos coeficientes:
-<span class="math display">\[v = \alpha_1 v_1 + \cdots + \alpha_n v_n\]</span></p>
+<p><strong>Definición (Coordenadas) </strong> Supongamos una base <span class="math inline">\(\mathcal{B} = \{v_1,\ldots,v_n\}\)</span> de <span class="math inline">\(V\)</span>. Las <strong>coordenadas</strong> de un vector <span class="math inline">\(v\)</span> son unos escalares <span class="math inline">\(\alpha_1,\ldots,\alpha_n\)</span> tales que podemos expresar <span class="math inline">\(v\)</span> como una combinación lineal de los vectores de la base con esos coeficientes:</p>
+<p><span class="math display">\[v = \alpha_1 v_1 + \cdots + \alpha_n v_n\]</span></p>
 <p>Generalmente, como venimos haciendo desde el principio, estamos denotando e identificando a un vector con sus coordenadas, de forma que escribimos:
 <span class="math display">\[v = \left(
 \begin{array}{c}
@@ -749,8 +752,8 @@ a &amp; -b &amp;  &amp; + d &amp; = &amp; 1\\
 <p>Supongamos dos bases <span class="math inline">\(\mathcal{B}_1\)</span> y <span class="math inline">\(\mathcal{B}_2\)</span> de <span class="math inline">\(V\)</span>, y que tenemos un vector <span class="math inline">\(v\)</span>, expresado en coordenadas de <span class="math inline">\(\mathcal{B}_1\)</span>. Nos planteamos una forma sencilla de calcular las coordenadas del mismo vector <span class="math inline">\(v\)</span> respecto a la otra base <span class="math inline">\(\mathcal{B}_2\)</span>.</p>
 <p>El principal resultado teórico en el que nos basamos (y del que alguna pincelada hemos dado en <a href="ev.html#coord">la sección anterior</a>) es el que sigue:</p>
 <blockquote>
-<p>La transformación de las coordenadas para un mismo vector <span class="math inline">\(v\)</span> entre dos bases <span class="math inline">\(\mathcal{B}_1\)</span> y <span class="math inline">\(\mathcal{B}_2\)</span> viene dada por la siguiente expresión:
-<span class="math display">\[[v]_{\mathcal{B}_2} = A [v]_{\mathcal{B}_1}\]</span>
+<p>La transformación de las coordenadas para un mismo vector <span class="math inline">\(v\)</span> entre dos bases <span class="math inline">\(\mathcal{B}_1\)</span> y <span class="math inline">\(\mathcal{B}_2\)</span> viene dada por la siguiente expresión:</p>
+<p><span class="math display">\[[v]_{\mathcal{B}_2} = A [v]_{\mathcal{B}_1}\]</span>
 donde <span class="math inline">\(A\)</span> es una matriz cuadrada formada por las coordenadas de cada vector de <span class="math inline">\(\mathcal{B}_1\)</span> en la base <span class="math inline">\(\mathcal{B}_2\)</span> y <span class="math inline">\([v]_{\mathcal{B}_i}\)</span> indica las coordenadas de <span class="math inline">\(v\)</span> en la base <span class="math inline">\(\mathcal{B}_i\)</span>.</p>
 </blockquote>
 <p><em>Notación</em>: A la matriz de cambio entre la base <span class="math inline">\(\mathcal{B}_1\)</span> y <span class="math inline">\(\mathcal{B}_2\)</span>, se suele denotar por <span class="math inline">\(P_{\mathcal{B}_1 \to \mathcal{B}_2}\)</span>.</p>

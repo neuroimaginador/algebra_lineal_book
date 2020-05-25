@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-05-23" />
+<meta name="date" content="2020-05-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="ev.html"/>
 <link rel="next" href="diagonalización.html"/>
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -210,17 +211,18 @@
 <div id="matriz-apli" class="section level2" number="3.2">
 <h2 number="3.2"><span class="header-section-number">3.2</span> Cuál es la matriz asociada a una aplicación lineal en unas bases dadas</h2>
 <blockquote>
-<p>Si tenemos una matriz <span class="math inline">\(A\in \mathcal{M}_{mn}(\mathbb{R})\)</span>, podemos definir una aplicación lineal <span class="math inline">\(f_A\)</span> entre <span class="math inline">\(\mathbb{R}^n\)</span> y <span class="math inline">\(\mathbb{R}^m\)</span> de la forma:
-<span class="math display">\[f_A(v) = A\cdot v,\quad v\in\mathbb{R}^n\]</span></p>
+<p>Si tenemos una matriz <span class="math inline">\(A\in \mathcal{M}_{mn}(\mathbb{R})\)</span>, podemos definir una aplicación lineal <span class="math inline">\(f_A\)</span> entre <span class="math inline">\(\mathbb{R}^n\)</span> y <span class="math inline">\(\mathbb{R}^m\)</span> de la forma:</p>
+<p><span class="math display">\[f_A(v) = A\cdot v,\quad v\in\mathbb{R}^n\]</span></p>
 </blockquote>
 <p>En este resultado, podemos cambiar el cuerpo <span class="math inline">\(\mathbb{R}\)</span> de los números reales por cualquier otro cuerpo.</p>
 <p>Este resultado nos habla de una forma de construir aplicaciones lineales, mediante el producto por una matriz que tenga las dimensiones adecuadas.</p>
 <p>Un resultado más interesante es el siguiente, que nos dice que TODA aplicación lineal viene definida por el producto con una matriz:</p>
 <blockquote>
-<p>Sea <span class="math inline">\(f:V\to W\)</span> una aplicación lineal. Fijemos dos bases <span class="math inline">\(\mathcal{B}_V\)</span> y <span class="math inline">\(\mathcal{B}_W\)</span> en dichos espacios, respectivamente. Entonces existe una matriz <span class="math inline">\(A\in\mathcal{M}_{mn}(\mathbb{R})\)</span> tal que si <span class="math inline">\(w = f(v)\)</span> entonces <span class="math inline">\([w]_{\mathcal{B}_W} = A\cdot [v]_{\mathcal{B}_V}\)</span> para todo <span class="math inline">\(v\in V\)</span>.</p>
+<p><strong>Matriz asociada a una aplicación lineal</strong>:
+Sea <span class="math inline">\(f:V\to W\)</span> una aplicación lineal. Fijemos dos bases <span class="math inline">\(\mathcal{B}_V\)</span> y <span class="math inline">\(\mathcal{B}_W\)</span> en dichos espacios, respectivamente. Entonces existe una matriz <span class="math inline">\(A\in\mathcal{M}_{mn}(\mathbb{R})\)</span> tal que si <span class="math inline">\(w = f(v)\)</span> entonces <span class="math inline">\([w]_{\mathcal{B}_W} = A\cdot [v]_{\mathcal{B}_V}\)</span> para todo <span class="math inline">\(v\in V\)</span>.</p>
 </blockquote>
 <p>Esto significa que, fijando las bases, podemos encontrar una matriz <span class="math inline">\(A\)</span> de forma que para calcular la imagen de un vector <span class="math inline">\(v\in V\)</span>, basta con tomar sus <a href="ev.html#coord">coordenadas</a> en la base <span class="math inline">\(\mathcal{B}_V\)</span>, que representamos por <span class="math inline">\([v]_{\mathcal{B}_V}\)</span>, y multiplicarlas por <span class="math inline">\(A\)</span>, para obtener las coordenadas de <span class="math inline">\(f(v)\)</span> en la base correspondiente del <em>codominio</em> <span class="math inline">\(W\)</span>, las cuales se denotan por <span class="math inline">\([f(v)]_{\mathcal{B}_W}\)</span>.</p>
-<p>A la matriz <span class="math inline">\(A\)</span> que nos proporciona este resultado la llamamos <strong>matriz asociada</strong> a <span class="math inline">\(f\)</span> en las <a href="ev.html#base">bases</a> <span class="math inline">\(\mathcal{B}_V\)</span> y <span class="math inline">\(\mathcal{B}_W\)</span>.</p>
+<p><strong>Definición (Matriz asociada a aplicación lineal) </strong> A la matriz <span class="math inline">\(A\)</span> que nos proporciona este resultado la llamamos <strong>matriz asociada</strong> a <span class="math inline">\(f\)</span> en las <a href="#sisgenabase">bases</a> <span class="math inline">\(\mathcal{B}_V\)</span> y <span class="math inline">\(\mathcal{B}_W\)</span>.</p>
 <p>Hay que notar que la matriz <span class="math inline">\(A\)</span> está determinada siempre y cuando fijemos las dos bases antes dichas.</p>
 <p>Pero, ¿cómo determinamos la matriz <span class="math inline">\(A\)</span>?</p>
 <p>Necesitamos fijar las dos bases de antemano:
@@ -248,7 +250,9 @@ y_j = a_{1,j} w_1 + a_{2,j}w_2 + \ldots + a_{m, j} w_m\]</span></li>
 <p>Entonces, la expresión anterior se puede escribir matricialmente como <span class="math inline">\(Y = B_2\cdot A\)</span>, siendo <span class="math inline">\(A\)</span> la matriz asociada a la aplicación lineal. Por tanto, podemos despejar <span class="math inline">\(A = B_2^{-1} Y\)</span>.</p>
 <p>Por tanto, para calcular <span class="math inline">\(A\)</span> de forma directa, podemos realizar Gauss-Jordan partiendo de <span class="math inline">\((B_2 | Y )\)</span> hasta lograr <span class="math inline">\((I_m | A)\)</span>.</p>
 <p><strong>Caso particular: Base canónica en <span class="math inline">\(V\)</span> y <span class="math inline">\(W\)</span></strong></p>
-<p>En este caso, la matriz asociada a la aplicación lineal es <span class="math inline">\(A = Y = \left(f(v_1)|f(v_2)|\ldots|f(v_n)\right)\)</span>, puesto que los vectores de la base canónica puestos por columnas forman la matriz identidad.</p>
+<p>En este caso, la matriz asociada a la aplicación lineal es
+<span class="math display">\[A = Y = \left(f(v_1)|f(v_2)|\ldots|f(v_n)\right)\]</span>
+puesto que los vectores de la base canónica puestos por columnas forman la matriz identidad.</p>
 <p>De hecho, en la situación de la base canónica, lo más rápido es fijarse en los coeficientes de cada una de las variables <span class="math inline">\(x,y,z,\ldots\)</span> o <span class="math inline">\(x_1,x_2,\ldots\)</span>, según sea el caso, y ponerlos por columnas. Así, para formar la matriz <span class="math inline">\(A\)</span> asociada a la aplicación lineal, tomaríamos como primera columna los coeficientes de la <span class="math inline">\(x\)</span>, en la segunda, los coeficientes de la <span class="math inline">\(y\)</span>, y así sucesivamente con el resto de variables.</p>
 <hr />
 <p><strong>Ejemplo</strong></p>
@@ -335,12 +339,14 @@ Y de aquí que la nueva matriz, asociada a <span class="math inline">\(f\)</span
 <p>Para saber hallar <span class="math inline">\(A&#39;\)</span>, nos basamos en dos resultados teóricos.</p>
 <p>El primero de ellos nos relaciona los <a href="ev.html#cambiobase">cambios de base</a> con las aplicaciones lineales:</p>
 <blockquote>
-<p>Un <strong>cambio de base</strong> entre dos bases <span class="math inline">\(\mathcal{B}_V\)</span> y <span class="math inline">\(\mathcal{B}&#39;_V\)</span> en un espacio vectorial <span class="math inline">\(V\)</span> se corresponde con la aplicación lineal <strong>identidad</strong> <span class="math inline">\(\mathrm{id}_V:V \to V\)</span>, donde en el dominio hemos considerado la base <span class="math inline">\(\mathcal{B}_V\)</span> y en el codominio la base <span class="math inline">\(\mathcal{B}&#39;_V\)</span>. Además, la matriz asociada a <span class="math inline">\(\mathrm{id}_V\)</span> en esta situación es justo la del cambio de base <span class="math inline">\(P_{\mathcal{B}_V \to \mathcal{B}&#39;_V}\)</span>.</p>
+<p><strong>Cambio de base como aplicación lineal</strong>:
+Un <strong>cambio de base</strong> entre dos bases <span class="math inline">\(\mathcal{B}_V\)</span> y <span class="math inline">\(\mathcal{B}&#39;_V\)</span> en un espacio vectorial <span class="math inline">\(V\)</span> se corresponde con la aplicación lineal <strong>identidad</strong> <span class="math inline">\(\mathrm{id}_V:V \to V\)</span>, donde en el dominio hemos considerado la base <span class="math inline">\(\mathcal{B}_V\)</span> y en el codominio la base <span class="math inline">\(\mathcal{B}&#39;_V\)</span>. Además, la matriz asociada a <span class="math inline">\(\mathrm{id}_V\)</span> en esta situación es justo la del cambio de base <span class="math inline">\(P_{\mathcal{B}_V \to \mathcal{B}&#39;_V}\)</span>.</p>
 </blockquote>
 <p>Es decir, podemos considerar que un cambio de base no es más que la aplicación de la función identidad en el espacio vectorial, donde en dominio y codominio hemos considerado bases distintas.</p>
 <p>El otro resultado teórico nos relaciona la composición de aplicaciones lineales (que <a href="apli.html#prop-apli">es de nuevo una aplicación lineal</a>) con sus matrices asociadas:</p>
 <blockquote>
-<p>Si <span class="math inline">\(f: V \to W\)</span> y <span class="math inline">\(g:W \to U\)</span> son dos aplicaciones lineales, con matrices asociadas <span class="math inline">\(A_f\)</span> y <span class="math inline">\(A_g\)</span>, respectivamente, habiendo fijado bases en <span class="math inline">\(V\)</span>, <span class="math inline">\(W\)</span> y <span class="math inline">\(U\)</span>, entonces la aplicación lineal composición de <span class="math inline">\(f\)</span> y <span class="math inline">\(g\)</span>, <span class="math inline">\(g\circ f:V\to U\)</span>, tiene como matriz asociada a <span class="math inline">\(A_{g \circ f} = A_g \cdot A_f\)</span>.</p>
+<p><strong>Composición de aplicaciones lineales</strong>:
+Si <span class="math inline">\(f: V \to W\)</span> y <span class="math inline">\(g:W \to U\)</span> son dos aplicaciones lineales, con matrices asociadas <span class="math inline">\(A_f\)</span> y <span class="math inline">\(A_g\)</span>, respectivamente, habiendo fijado bases en <span class="math inline">\(V\)</span>, <span class="math inline">\(W\)</span> y <span class="math inline">\(U\)</span>, entonces la aplicación lineal composición de <span class="math inline">\(f\)</span> y <span class="math inline">\(g\)</span>, <span class="math inline">\(g\circ f:V\to U\)</span>, tiene como matriz asociada a <span class="math inline">\(A_{g \circ f} = A_g \cdot A_f\)</span>.</p>
 </blockquote>
 <p>Luego si componemos dos aplicaciones lineales, <em>habiendo fijado bases en cada caso</em>, la matriz asociada a la composición es el producto de las matrices individuales.</p>
 <p>Con estos dos resultados, ya estamos en condiciones de estudiar cómo influye un cambio de base en la matriz de la aplicación lineal.</p>
@@ -414,20 +420,21 @@ V_{\mathcal{B}&#39;_V} &amp;
 <p>Hacemos Gauss-Jordan partiendo de <span class="math inline">\((B_1 | B&#39;_1)\)</span> hasta llegar a <span class="math inline">\((I_n | P)\)</span>, y partiendo de <span class="math inline">\((B&#39;_2 | B_2)\)</span> hasta <span class="math inline">\((I_m | Q)\)</span>, obteniendo:
 <span class="math display">\[P = \left( \begin{array}{ccc@{}} -1 &amp; -1 &amp; 0\\ 0 &amp; -1 &amp; 1\\ 0 &amp; 1 &amp; 0 \end{array} \right) ,\quad\quad\ Q = \left( \begin{array}{ccc@{}} 0 &amp; 1 &amp; 0\\ 1 &amp; -1 &amp; 1\\ 0 &amp; 0 &amp; -1 \end{array} \right) \]</span></p>
 <p>De ahí:
-<span class="math display">\[A&#39; = Q\ A\ P = \left( \begin{array}{ccc@{}} 0 &amp; 1 &amp; 0\\ 1 &amp; -1 &amp; 1\\ 0 &amp; 0 &amp; -1 \end{array} \right) \left( \begin{array}{ccc@{}} - \frac{9}{2} &amp; 3 &amp; \frac{3}{2}\\ - \frac{3}{2} &amp; 1 &amp; \frac{1}{2}\\ 5 &amp; -4 &amp; -5 \end{array} \right) \left( \begin{array}{ccc@{}} -1 &amp; -1 &amp; 0\\ 0 &amp; -1 &amp; 1\\ 0 &amp; 1 &amp; 0 \end{array} \right)  = \left( \begin{array}{ccc@{}} \frac{3}{2} &amp; 1 &amp; 1\\ -2 &amp; -4 &amp; -2\\ 5 &amp; 6 &amp; 4 \end{array} \right) \]</span></p>
+<span class="math display">\[\begin{array}{rcl}A&#39; &amp; = &amp; Q\ A\ P = \\ &amp; = &amp; \left( \begin{array}{ccc@{}} 0 &amp; 1 &amp; 0\\ 1 &amp; -1 &amp; 1\\ 0 &amp; 0 &amp; -1 \end{array} \right) \left( \begin{array}{ccc@{}} - \frac{9}{2} &amp; 3 &amp; \frac{3}{2}\\ - \frac{3}{2} &amp; 1 &amp; \frac{1}{2}\\ 5 &amp; -4 &amp; -5 \end{array} \right) \left( \begin{array}{ccc@{}} -1 &amp; -1 &amp; 0\\ 0 &amp; -1 &amp; 1\\ 0 &amp; 1 &amp; 0 \end{array} \right)  = \\ &amp; = &amp; \left( \begin{array}{ccc@{}} \frac{3}{2} &amp; 1 &amp; 1\\ -2 &amp; -4 &amp; -2\\ 5 &amp; 6 &amp; 4 \end{array} \right) \\\end{array}\]</span></p>
 <hr />
 </div>
 <div id="nucleo" class="section level2" number="3.4">
 <h2 number="3.4"><span class="header-section-number">3.4</span> Qué es y cómo determinar el núcleo de una aplicación lineal</h2>
-<p>Llamamos <strong>núcleo</strong> de una aplicación lineal <span class="math inline">\(f:V \to W\)</span>, y lo denotamos por <span class="math inline">\(\mathrm{Ker}\ f\)</span>, al conjunto de aquellos vectores <span class="math inline">\(v\in V\)</span> tales que <span class="math inline">\(f(v) = 0_W\)</span>:
-<span class="math display">\[\mathrm{Ker}\ f = \{v\in V:f(v) = 0_W\}\]</span></p>
+<p><strong>Definición (Núcleo de una aplicación lineal) </strong> Llamamos <strong>núcleo</strong> de una aplicación lineal <span class="math inline">\(f:V \to W\)</span>, y lo denotamos por <span class="math inline">\(\mathrm{Ker}\ f\)</span>, al conjunto de aquellos vectores <span class="math inline">\(v\in V\)</span> tales que <span class="math inline">\(f(v) = 0_W\)</span>:</p>
+<p><span class="math display">\[\mathrm{Ker}\ f = \{v\in V:f(v) = 0_W\}\]</span></p>
 <p>El primer resultado teórico interesante es:</p>
 <blockquote>
 <p><span class="math inline">\(\mathrm{Ker}\ f \ne\varnothing\)</span>, puesto que, al menos, <span class="math inline">\(0_V\in\mathrm{Ker}\ f\)</span>, como <a href="apli.html#prop-apli">hemos visto antes</a>.</p>
 </blockquote>
 <p>Podemos decir todavía más:</p>
 <blockquote>
-<p>Dada una aplicación lineal <span class="math inline">\(f:V\to W\)</span>, su núcleo <span class="math inline">\(\mathrm{Ker}\ f\)</span> es un subespacio vectorial de <span class="math inline">\(V\)</span>.</p>
+<p><strong>El núcleo es un subespacio</strong>:
+Dada una aplicación lineal <span class="math inline">\(f:V\to W\)</span>, su núcleo <span class="math inline">\(\mathrm{Ker}\ f\)</span> es un subespacio vectorial de <span class="math inline">\(V\)</span>.</p>
 </blockquote>
 <p>Por tanto, para operar con el núcleo, podemos hacerlo como hemos visto en <a href="ev.html#ev">el capítulo acerca de espacios vectoriales</a>: podemos calcular <a href="ev.html#gen">un sistema generador</a>, <a href="ev.html#base">determinar una base y su dimensión</a>.</p>
 <p>¿Qué relación tiene el núcleo de <span class="math inline">\(f\)</span> con su matriz asociada?</p>
@@ -473,7 +480,8 @@ que se corresponde con las ecuaciones cartesianas de <span class="math inline">\
 <p>Recordemos que una aplicación <span class="math inline">\(f:X\to Y\)</span> es <strong>inyectiva</strong> si y sólo si <span class="math inline">\(f(x_1)\ne f(x_2)\)</span> siempre que <span class="math inline">\(x_1\ne x_2\)</span>, con <span class="math inline">\(x_1, x_2\in X\)</span>.</p>
 <p>Hay una forma de caracterizar las aplicaciones lineales inyectivas:</p>
 <blockquote>
-<p>La aplicación lineal <span class="math inline">\(f:V\to W\)</span> es inyectiva si, y sólo si, <span class="math inline">\(\mathrm{Ker}\ f = \{0\}\)</span>, es decir, si y sólo si <span class="math inline">\(\mathrm{dim}(\mathrm{Ker}\ f) = 0\)</span>.</p>
+<p><strong>Caracterización de la inyectividad</strong>:
+La aplicación lineal <span class="math inline">\(f:V\to W\)</span> es inyectiva si, y sólo si, <span class="math inline">\(\mathrm{Ker}\ f = \{0\}\)</span>, es decir, si y sólo si <span class="math inline">\(\mathrm{dim}(\mathrm{Ker}\ f) = 0\)</span>.</p>
 </blockquote>
 <p>Un resultado interesante nos presenta una relación entre la inyectividad de <span class="math inline">\(f\)</span> y las dimensiones de los espacios <span class="math inline">\(V\)</span> y <span class="math inline">\(W\)</span>:</p>
 <blockquote>
@@ -501,11 +509,12 @@ que se corresponde con las ecuaciones cartesianas de <span class="math inline">\
 </div>
 <div id="imagen" class="section level2" number="3.6">
 <h2 number="3.6"><span class="header-section-number">3.6</span> Cómo calcular el subespacio imagen de una aplicación lineal</h2>
-<p>Llamamos <strong>imagen de la aplicación lineal <span class="math inline">\(f:V\to W\)</span></strong> a:
+<p><strong>Definición (Imagen de una aplicación lineal) </strong> Llamamos <strong>imagen de la aplicación lineal</strong> <span class="math inline">\(f:V\to W\)</span> a:
 <span class="math display">\[\mathrm{Im}\ f = \{w\in W: \text{existe }v\in V \text{ con }f(v) = w\} = f(V)\]</span></p>
 <p>Análogamente a lo que pasaba con <a href="apli.html#nucleo">el núcleo de una aplicación lineal</a>, tenemos:</p>
 <blockquote>
-<p>Si <span class="math inline">\(f:V\to W\)</span> es una aplicación lineal, entonces <span class="math inline">\(\mathrm{Im}\ f\)</span> es un subespacio vectorial de <span class="math inline">\(W\)</span>.</p>
+<p><strong>La imagen es un subespacio vectorial</strong>:
+Si <span class="math inline">\(f:V\to W\)</span> es una aplicación lineal, entonces <span class="math inline">\(\mathrm{Im}\ f\)</span> es un subespacio vectorial de <span class="math inline">\(W\)</span>.</p>
 </blockquote>
 <p>Por tanto, podemos estudiarlo con todas las <a href="ev.html#ev">herramientas que conocemos</a>.</p>
 <p>¿Cómo calculamos <span class="math inline">\(\mathrm{Im}\ f\)</span>?</p>
@@ -513,7 +522,8 @@ que se corresponde con las ecuaciones cartesianas de <span class="math inline">\
 <p>En concreto, tomando una base <span class="math inline">\(\mathcal{B}\)</span> de <span class="math inline">\(V\)</span>, su imagen <span class="math inline">\(f(\mathcal{B})\)</span> es un sistema generador de <span class="math inline">\(\mathrm{Im}\ f\)</span>. Basta, por tanto, aplicar <span class="math inline">\(f\)</span> a cada vector de <span class="math inline">\(\mathcal{B}\)</span> y con eso construimos un sistema generador del que podemos <a href="#sisgenabase">eliminar los vectores linealmente dependientes para obtener una base</a> de <span class="math inline">\(\mathrm{Im}\ f\)</span>.</p>
 <p>En consecuencia:</p>
 <blockquote>
-<p>Sea <span class="math inline">\(f\)</span> una aplicación lineal entre dos espacios <span class="math inline">\(V\)</span> y <span class="math inline">\(W\)</span>, y sea <span class="math inline">\(A\)</span> la matriz asociada a <span class="math inline">\(f\)</span>, una vez que hemos fijado dos bases en <span class="math inline">\(V\)</span> y <span class="math inline">\(W\)</span>. Entonces <span class="math inline">\(\mathrm{Im}\ f\)</span> es el subespacio de <span class="math inline">\(W\)</span> generado por los vectores columna que forman la matriz <span class="math inline">\(A\)</span>.</p>
+<p><strong>Sistema generador de <span class="math inline">\(\mathrm{Im}\ f\)</span></strong>:
+Sea <span class="math inline">\(f\)</span> una aplicación lineal entre dos espacios <span class="math inline">\(V\)</span> y <span class="math inline">\(W\)</span>, y sea <span class="math inline">\(A\)</span> la matriz asociada a <span class="math inline">\(f\)</span>, una vez que hemos fijado dos bases en <span class="math inline">\(V\)</span> y <span class="math inline">\(W\)</span>. Entonces <span class="math inline">\(\mathrm{Im}\ f\)</span> es el subespacio de <span class="math inline">\(W\)</span> generado por los vectores columna que forman la matriz <span class="math inline">\(A\)</span>.</p>
 </blockquote>
 <hr />
 <p><strong>Ejemplo</strong></p>
@@ -536,7 +546,8 @@ es un sistema generador de <span class="math inline">\(\mathrm{Im}\ g\)</span>.<
 <p>Recordemos que una aplicación <span class="math inline">\(f:X\to Y\)</span> se dice <strong>sobreyectiva</strong> si, para cada <span class="math inline">\(y\in Y\)</span>, existe un <span class="math inline">\(x\in X\)</span> tal que <span class="math inline">\(f(x) = y\)</span>, es decir, si <span class="math inline">\(f(X) = Y\)</span>.</p>
 <p>En cuanto a aplicaciones lineales, tenemos el siguiente resultado, consecuencia de lo anterior:</p>
 <blockquote>
-<p>La aplicación lineal <span class="math inline">\(f:V\to W\)</span> es sobreyectiva si <span class="math inline">\(f(V) = \mathrm{Im}\ f = W\)</span>, y esto es equivalente a decir que <span class="math inline">\(\mathrm{dim}(\mathrm{Im}\ f) = \mathrm{dim}(W)\)</span>.</p>
+<p><strong>Caracterización de la sobreyectividad</strong>:
+La aplicación lineal <span class="math inline">\(f:V\to W\)</span> es sobreyectiva si <span class="math inline">\(f(V) = \mathrm{Im}\ f = W\)</span>, y esto es equivalente a decir que <span class="math inline">\(\mathrm{dim}(\mathrm{Im}\ f) = \mathrm{dim}(W)\)</span>.</p>
 </blockquote>
 <p>Una propiedad adicional, con relación a las dimensiones de <span class="math inline">\(V\)</span> y de <span class="math inline">\(W\)</span>:</p>
 <blockquote>
@@ -554,20 +565,18 @@ es un sistema generador de <span class="math inline">\(\mathrm{Im}\ g\)</span>.<
 </div>
 <div id="isomorfismo" class="section level2" number="3.8">
 <h2 number="3.8"><span class="header-section-number">3.8</span> Qué es un isomorfismo</h2>
-<p>Un <strong>isomorfismo</strong> es una aplicación lineal <a href="#inyectiva">inyectiva</a> y <a href="apli.html#sobrey">sobreyectiva</a>.</p>
+<p><strong>Definición (Isomorfismo y automorfismo) </strong> Un <strong>isomorfismo</strong> es una aplicación lineal <a href="#inyectiva">inyectiva</a> y <a href="apli.html#sobrey">sobreyectiva</a>.</p>
 <p>Un <strong>automorfismo</strong> es un isomorfismo donde dominio y codominio son el mismo espacio <span class="math inline">\(V\)</span>.</p>
 <p><strong>Algunas propiedades básicas de los isomorfismos</strong></p>
-<blockquote>
 <ul>
 <li>La composición de isomorfismos es un isomorfismo.</li>
 <li>La aplicación inversa de un isomorfismo es también un isomorfismo</li>
 </ul>
-</blockquote>
 <p>Cuando, además, estamos hablando de espacios de dimensión finita, tenemos los siguientes resultados:</p>
 <blockquote>
 <ul>
-<li>Una aplicación lineal <span class="math inline">\(f:V\to W\)</span> es un isomorfismo si, y sólo si, <span class="math inline">\(\mathrm{dim}(V) = \mathrm{dim}(W)\)</span>.</li>
-<li>Una aplicación <span class="math inline">\(f:V\to V\)</span> es un <em>automorfismo</em> si, y sólo si, o bien es inyectiva o bien es sobreyectiva.</li>
+<li><p>Una aplicación lineal <span class="math inline">\(f:V\to W\)</span> es un isomorfismo si, y sólo si, <span class="math inline">\(\mathrm{dim}(V) = \mathrm{dim}(W)\)</span>.</p></li>
+<li><p>Una aplicación <span class="math inline">\(f:V\to V\)</span> es un <em>automorfismo</em> si, y sólo si, o bien es inyectiva o bien es sobreyectiva.</p></li>
 </ul>
 </blockquote>
 <p>Este último resultado nos dice que en un <em>endomorfismo</em>, basta con ver si la aplicación es <a href="apli.html#inyectividad">inyectiva</a> o <a href="apli.html#sobrey">sobreyectiva</a> para tener que es un isomorfismo.</p>
@@ -605,11 +614,11 @@ es un sistema generador de <span class="math inline">\(\mathrm{Im}\ g\)</span>.<
 </div>
 <div id="rango-nulidad" class="section level2" number="3.10">
 <h2 number="3.10"><span class="header-section-number">3.10</span> A qué se llama rango y nulidad de la aplicación lineal</h2>
-<p>Se llama <strong>rango</strong> de una aplicación lineal <span class="math inline">\(f:V\to W\)</span> a la dimensión de la <a href="apli.html#imagen">imagen</a> de <span class="math inline">\(f\)</span>: <span class="math inline">\(\mathrm{rg}(f) = \mathrm{dim}(\mathrm{Im}\ f)\)</span>.</p>
-<p>Se llama <strong>nulidad</strong> de una aplicación lineal <span class="math inline">\(f:V\to W\)</span> a la dimensión del <a href="apli.html#nucleo">núcleo</a> de <span class="math inline">\(f\)</span>: <span class="math inline">\(\mathrm{nul}(f) = \mathrm{dim}(\mathrm{Ker}\ f)\)</span>.</p>
+<p><strong>Definición (Rango) </strong> Se llama <strong>rango</strong> de una aplicación lineal <span class="math inline">\(f:V\to W\)</span> a la dimensión de la <a href="apli.html#imagen">imagen</a> de <span class="math inline">\(f\)</span>: <span class="math inline">\(\mathrm{rg}(f) = \mathrm{dim}(\mathrm{Im}\ f)\)</span>.</p>
+<p><strong>Definición (Nulidad) </strong> Se llama <strong>nulidad</strong> de una aplicación lineal <span class="math inline">\(f:V\to W\)</span> a la dimensión del <a href="apli.html#nucleo">núcleo</a> de <span class="math inline">\(f\)</span>: <span class="math inline">\(\mathrm{nul}(f) = \mathrm{dim}(\mathrm{Ker}\ f)\)</span>.</p>
 <p>De forma análoga, se pueden definir rango y nulidad para <strong>matrices</strong>, puesto que tenemos <a href="#matrix-apli">una importante relación entre matrices y aplicaciones lineales</a>.</p>
-<p>Dada una matriz <span class="math inline">\(A\)</span>, su <strong>rango</strong> <span class="math inline">\(\mathrm{rg}(A)\)</span> es la dimensión del subespacio generado por los vectores que forman sus columnas, y su <strong>nulidad</strong> <span class="math inline">\(\mathrm{nul}(A)\)</span> es la dimensión del subespacio vectorial de las soluciones del sistema de ecuaciones lineales <span class="math inline">\(A\ v = 0\)</span>.</p>
-<p>Un resultado importante, debido a que <a href="apli.html#cambiobase-apli">todas las matrices asociadas a una misma aplicación lineal son equivalentes</a>, es que todas tienen el mismo rango y la misma nulidad, y coinciden con el ranog y nulidad de <span class="math inline">\(f\)</span>.</p>
+<p><strong>Definición (Rango y nulidad de una matriz) </strong> Dada una matriz <span class="math inline">\(A\)</span>, su <strong>rango</strong> <span class="math inline">\(\mathrm{rg}(A)\)</span> es la dimensión del subespacio generado por los vectores que forman sus columnas, y su <strong>nulidad</strong> <span class="math inline">\(\mathrm{nul}(A)\)</span> es la dimensión del subespacio vectorial de las soluciones del sistema de ecuaciones lineales <span class="math inline">\(A\ v = 0\)</span>.</p>
+<p>Un resultado importante, debido a que <a href="apli.html#cambiobase-apli">todas las matrices asociadas a una misma aplicación lineal son equivalentes</a>, es que todas tienen el mismo rango y la misma nulidad, y coinciden con el rango y nulidad de <span class="math inline">\(f\)</span>.</p>
 <p>Por tanto, para calcular rango y nulidad de <span class="math inline">\(f\)</span>, bastará con estudiar el rango y nulidad de cualquiera de sus expresiones matriciales en unas bases fijadas de <span class="math inline">\(V\)</span> y <span class="math inline">\(W\)</span>.</p>
 <hr />
 <p><strong>Ejemplo</strong></p>
@@ -631,13 +640,14 @@ es un sistema generador de <span class="math inline">\(\mathrm{Im}\ g\)</span>.<
 <h2 number="3.11"><span class="header-section-number">3.11</span> Qué dice el teorema de la dimensión para núcleo e imagen</h2>
 <p>El resultado teórico que nos relaciona las dimensiones de <a href="apli.html#nucleo">núcleo</a> e <a href="apli.html#imagen">imagen</a> de una aplicación lineal <span class="math inline">\(f:V\to W\)</span>, es decir, su nulidad y su rango, es el siguiente:</p>
 <blockquote>
-<p>Si <span class="math inline">\(f:V\to W\)</span> es una aplicación lineal, entonces
-<span class="math display">\[\mathrm{dim}(V) = \mathrm{dim}(\mathrm{Ker}\ f) + \mathrm{dim}(\mathrm{Im}\ f) = \mathrm{nul}(f) + \mathrm{rg}(f)\]</span></p>
+<p><strong>Teorema de la dimensión</strong>:
+Si <span class="math inline">\(f:V\to W\)</span> es una aplicación lineal, entonces</p>
+<p><span class="math display">\[\mathrm{dim}(V) = \mathrm{dim}(\mathrm{Ker}\ f) + \mathrm{dim}(\mathrm{Im}\ f) = \mathrm{nul}(f) + \mathrm{rg}(f)\]</span></p>
 </blockquote>
 <p>Este resultado, reescrito en términos matriciales, queda como:</p>
 <blockquote>
-<p>Si <span class="math inline">\(A\)</span> es una matriz con <span class="math inline">\(m\)</span> filas y <span class="math inline">\(n\)</span> columnas, entonces
-<span class="math display">\[n = \mathrm{nul}(A) + \mathrm{rg}(A)\]</span></p>
+<p>Si <span class="math inline">\(A\)</span> es una matriz con <span class="math inline">\(m\)</span> filas y <span class="math inline">\(n\)</span> columnas, entonces</p>
+<p><span class="math display">\[n = \mathrm{nul}(A) + \mathrm{rg}(A)\]</span></p>
 </blockquote>
 <hr />
 <p><strong>Ejemplo</strong></p>

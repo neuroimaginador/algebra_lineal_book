@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-05-23" />
+<meta name="date" content="2020-05-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="diagonalización.html"/>
 <link rel="next" href="problems.html"/>
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -188,11 +189,11 @@ es un producto escalar. A esta matriz <span class="math inline">\(A\)</span> se 
 </ul>
 <div id="norm" class="section level2" number="5.1">
 <h2 number="5.1"><span class="header-section-number">5.1</span> Qué son las normas y distancias</h2>
-<p>Una <strong>norma</strong> vectorial sobre un espacio <span class="math inline">\(V\)</span> (sobre un cuerpo <span class="math inline">\(\mathbb{K}\)</span>) es un operador que sirve para <em>medir</em> la longitud de un vector (es decir, su distancia al origen), y se define formalmente como una aplicación <span class="math inline">\(\|\cdot\|:V\to\mathbb{R}\)</span> que verifica:</p>
+<p><strong>Definición (Norma) </strong> Una <strong>norma</strong> vectorial sobre un espacio <span class="math inline">\(V\)</span> (sobre un cuerpo <span class="math inline">\(\mathbb{K}\)</span>) es un operador que sirve para <em>medir</em> la longitud de un vector (es decir, su distancia al origen), y se define formalmente como una aplicación <span class="math inline">\(\|\cdot\|:V\to\mathbb{R}\)</span> que verifica:</p>
 <ul>
-<li>Para todo <span class="math inline">\(v\in V\)</span>, <span class="math inline">\(\|v\| &gt; 0\)</span>, con <span class="math inline">\(\|v\| = 0\)</span> si, y solo si, <span class="math inline">\(v = 0\)</span>.</li>
+<li>Para todo <span class="math inline">\(v\in V\)</span>, <span class="math inline">\(\|v\| \ge 0\)</span>, y <span class="math inline">\(\|v\| = 0\)</span> si, y solo si, <span class="math inline">\(v = 0\)</span>.</li>
 <li>Para todo <span class="math inline">\(c\in\mathbb{K}\)</span>, <span class="math inline">\(v\in V\)</span>, se tiene <span class="math inline">\(\|cv\| = |c|\cdot \|v\|\)</span>.</li>
-<li>Para todo <span class="math inline">\(u,v\in V\)</span>, <span class="math inline">\(\|u+v\|\le\|u\|+\|v\|\)</span>. Esta propiedad se llama <em>desigualdad triangular</em> (en un triángulo, la suma de la longitud de dos de sus lados – <span class="math inline">\(\|u\|\)</span> y <span class="math inline">\(\|v\|\)</span> – es siempre menor que la longitud de su otro lado – <span class="math inline">\(\|u+v\|\)</span> – ).</li>
+<li>Para todo <span class="math inline">\(u,v\in V\)</span>, <span class="math inline">\(\|u+v\|\le\|u\|+\|v\|\)</span>. Esta propiedad se llama <em>desigualdad triangular</em> (en un triángulo, la suma de la longitud de dos de sus lados –<span class="math inline">\(\|u\|\)</span> y <span class="math inline">\(\|v\|\)</span>– es siempre menor que la longitud de su otro lado –<span class="math inline">\(\|u+v\|\)</span>–).</li>
 </ul>
 <p>Cualquier operador <span class="math inline">\(\|\cdot\|\)</span> que verifique lo anterior es una norma vectorial. Sin embargo, podemos construir normas a partir de un producto escalar:</p>
 <blockquote>
@@ -200,17 +201,19 @@ es un producto escalar. A esta matriz <span class="math inline">\(A\)</span> se 
 </blockquote>
 <p>Al definir la norma vectorial a partir de un producto escalar, además, tenemos la siguiente propiedad que será de gran interés en la <a href="espeuc.html#ortho">siguiente sección</a>:</p>
 <blockquote>
-<p>(Desigualdad de Cauchy-Schwarz) Si <span class="math inline">\(\|\cdot\|\)</span> es una norma derivada del producto escalar <span class="math inline">\(\langle\cdot,\cdot\rangle\)</span>, entonces
+<p><strong>Desigualdad de Cauchy-Schwarz</strong>:
+Si <span class="math inline">\(\|\cdot\|\)</span> es una norma derivada del producto escalar <span class="math inline">\(\langle\cdot,\cdot\rangle\)</span>, entonces
 <span class="math display">\[|\langle u, v \rangle| \le \|u\|\cdot\|v\|\]</span>
 para todo <span class="math inline">\(u,v\in V\)</span>.</p>
 </blockquote>
-<p>Un concepto implícitamente relacionado con el de norma vectorial es el de <em>distancia</em>. Una <strong>distancia</strong> (también llamada <em>métrica</em>) es un operador <span class="math inline">\(d:V\times V\to R\)</span> que verifica las siguientes propiedades:</p>
+<p>Un concepto implícitamente relacionado con el de norma vectorial es el de <em>distancia</em>.</p>
+<p><strong>Definición (Distancia) </strong> Una <strong>distancia</strong> (también llamada <em>métrica</em>) es un operador <span class="math inline">\(d:V\times V\to R\)</span> que verifica las siguientes propiedades:</p>
 <ul>
 <li><span class="math inline">\(d(u, v) = 0\)</span> si, y solo si, <span class="math inline">\(u = v\)</span>.</li>
 <li>Es simétrica: <span class="math inline">\(d(u, v) = d(v, u)\)</span>.</li>
 <li>Cumple la desigualdad triangular: <span class="math inline">\(d(u, v) \le d(u, w) + d(w, v)\)</span>.</li>
 </ul>
-<p>Además, de aquí se deduce que <span class="math inline">\(d(u, v) \ge 0\)</span> para todo <span class="math inline">\(u,v\in V\)</span>.</p>
+<p>Además, de esta definición se deduce que <span class="math inline">\(d(u, v) \ge 0\)</span> para todo <span class="math inline">\(u,v\in V\)</span>.</p>
 <p>Podemos deducir una distancia a partir de una norma, para así completar las relaciones existentes entre los conceptos aquí explicados:</p>
 <blockquote>
 <p>Si <span class="math inline">\(\|\cdot\|\)</span> es una norma sobre un espacio vectorial <span class="math inline">\(V\)</span>, entonces la aplicación <span class="math inline">\(d:V\times V\to \mathbb{R}\)</span> definida por
@@ -235,19 +238,22 @@ para todo <span class="math inline">\(u,v\in V\)</span> es una <em>distancia</em
 <span class="math display">\[-1 \le \frac{\langle u, v\rangle}{\|u\|\cdot\|v\|} \le 1\]</span>
 para todo <span class="math inline">\(u,v\in V\)</span>.</p>
 <p>Por otro lado, la función coseno restringida a <span class="math inline">\([0, \pi]\)</span>, es decir, <span class="math inline">\(\cos:[0,\pi]\to[-1,1]\)</span>, es biyectiva. Eso quiere decir que existe un único <span class="math inline">\(\theta\in[0, \pi]\)</span> tal que <span class="math inline">\(\cos\theta = \frac{\langle u, v\rangle}{\|u\|\cdot\|v\|}\)</span>.</p>
-<p>Llamamos entonces <strong>ángulo entre los vectores <span class="math inline">\(u,v\in V\)</span></strong> al único <span class="math inline">\(\theta\in[0,\pi]\)</span> tal que <span class="math inline">\(\cos\theta = \frac{\langle u, v\rangle}{\|u\|\cdot\|v\|}\)</span>.</p>
-<p>Diremos que dos vectores <span class="math inline">\(u\)</span> y <span class="math inline">\(v\)</span> de <span class="math inline">\(V\)</span> son <strong>ortogonales</strong> (o <strong>perpendiculares</strong>) si el ángulo que forman es <span class="math inline">\(\frac{\pi}{2}\)</span>, es decir, si <span class="math inline">\(\langle u, v \rangle = 0\)</span>.</p>
+<p>Esto nos permite la siguiente definición:</p>
+<p><strong>Definición (Ángulo entre vectores) </strong> Llamamos <strong>ángulo entre los vectores <span class="math inline">\(u,v\in V\)</span></strong> al único <span class="math inline">\(\theta\in[0,\pi]\)</span> tal que <span class="math inline">\(\cos\theta = \frac{\langle u, v\rangle}{\|u\|\cdot\|v\|}\)</span>.</p>
+<p><strong>Definición (Vectores ortogonales) </strong> Diremos que dos vectores <span class="math inline">\(u\)</span> y <span class="math inline">\(v\)</span> de <span class="math inline">\(V\)</span> son <strong>ortogonales</strong> (o <strong>perpendiculares</strong>) si el ángulo que forman es <span class="math inline">\(\frac{\pi}{2}\)</span>, es decir, si <span class="math inline">\(\langle u, v \rangle = 0\)</span>.</p>
 <p>La noción de <em>ortogonalidad</em> en el espacio euclídeo se corresponde con la perpendicularidad de vectores que todos tenemos de forma intuitiva. Lo podemos extender también a ortogonalidad con respecto a un espacio vectorial: Un vector <span class="math inline">\(v\in V\)</span> es <strong>ortogonal al subespacio <span class="math inline">\(U\)</span></strong> de <span class="math inline">\(V\)</span> si, y sólo si, es ortogonal a todos y cada uno de los vectores de <span class="math inline">\(U\)</span>, es decir, <span class="math inline">\(\langle v, u \rangle = 0\)</span> para todo <span class="math inline">\(u\in U\)</span>.</p>
+<p>El siguiente resultado nos proporciona una ayuda a la hora de determinar la ortogonalidad entre subespacios vectoriales.</p>
 <blockquote>
 <p>Sea <span class="math inline">\(U\)</span> un subespacio de <span class="math inline">\(V\)</span>, y sea <span class="math inline">\(\mathcal{B} = \{u_1,\ldots,u_k\}\)</span> una base de <span class="math inline">\(U\)</span>. Un vector <span class="math inline">\(v\in V\)</span> es ortogonal a <span class="math inline">\(U\)</span> si, y solo si, es ortogonal a cada <span class="math inline">\(u_i\)</span>: <span class="math inline">\(\langle v, u_i \rangle = 0\)</span> para todo <span class="math inline">\(i=1,\ldots,k\)</span>.</p>
 </blockquote>
 <p>Un <strong>sistema ortogonal</strong> es un conjunto de vectores <span class="math inline">\(\{v_1,\ldots,v_m\}\subset V\)</span> donde los <span class="math inline">\(v_i\)</span> son ortogonales dos a dos, es decir, <span class="math inline">\(\langle v_i, v_j \rangle = 0\)</span> para todo <span class="math inline">\(i\ne j\)</span>.</p>
 <p><strong>Algunas propiedades y caracterizaciones de los vectores y sistemas ortogonales</strong></p>
 <blockquote>
-<ul>
-<li>Dos vectores <span class="math inline">\(u\)</span> y <span class="math inline">\(w\)</span> son ortogonales si, y solo si, <span class="math inline">\(\|u+w\|^2 = \|u\|^2 + \|v\|^2\)</span> (generalización del Teorema de Pitágoras).</li>
-<li>Si un sistema de vectores es ortogonal, entonces es linealmente independiente. Por tanto, en un espacio <span class="math inline">\(V\)</span> de dimensión finita <span class="math inline">\(n\)</span>, cualquier conjunto de <span class="math inline">\(n\)</span> vectores ortogonales entre sí es una base.</li>
-</ul>
+<p><strong>Generalización del teorema de Pitágoras</strong>:
+Dos vectores <span class="math inline">\(u\)</span> y <span class="math inline">\(w\)</span> son ortogonales si, y solo si, <span class="math inline">\(\|u+w\|^2 = \|u\|^2 + \|v\|^2\)</span></p>
+</blockquote>
+<blockquote>
+<p>Si un sistema de vectores es ortogonal, entonces es linealmente independiente. Por tanto, en un espacio <span class="math inline">\(V\)</span> de dimensión finita <span class="math inline">\(n\)</span>, cualquier conjunto de <span class="math inline">\(n\)</span> vectores ortogonales entre sí es una base.</p>
 </blockquote>
 <p>Este último resultado es interesante, pues nos constata que cualquier sistema ortogonal con tantos vectores como la dimensión del espacio vectorial es una base.</p>
 <hr />
@@ -275,15 +281,14 @@ y los vectores
 <div id="compl-ortho" class="section level2" number="5.3">
 <h2 number="5.3"><span class="header-section-number">5.3</span> Qué es el complemento ortogonal de un subespacio</h2>
 <p>Consideremos un espacio vectorial <span class="math inline">\(V\)</span> con producto escalar <span class="math inline">\(\langle \cdot,\cdot \rangle\)</span>, y sea <span class="math inline">\(U\)</span> un subespacio de <span class="math inline">\(V\)</span>.</p>
-<p>Llamamos <strong>complemento ortogonal de <span class="math inline">\(U\)</span></strong> al conjunto de vectores que son ortogonales a todos los de <span class="math inline">\(U\)</span>:
+<p><strong>Definición (Complemento ortogonal) </strong> Llamamos <strong>complemento ortogonal de <span class="math inline">\(U\)</span></strong> al conjunto de vectores que son ortogonales a todos los de <span class="math inline">\(U\)</span>:
 <span class="math display">\[U^{\perp} = \{v\in V: \langle v, u \rangle = 0\,\,\text{para todo }u\in U\}\]</span></p>
 <p>Tenemos las siguientes propiedades del complemento ortogonal de un subespacio:</p>
 <blockquote>
-<ul>
-<li><span class="math inline">\(U^{\perp}\)</span> es un subespacio vectorial de <span class="math inline">\(V\)</span>.</li>
-<li><span class="math inline">\(U\cap U^{\perp} = \{0\}\)</span>.</li>
-<li>Si <span class="math inline">\(V\)</span> es de dimensión finita, <span class="math inline">\(\mathrm{dim}(U) + \mathrm{dim}(U^{\perp}) = \mathrm{dim}(V)\)</span>.</li>
-</ul>
+<p><strong>Propiedades del complemento ortogonal</strong>:
+- <span class="math inline">\(U^{\perp}\)</span> es un subespacio vectorial de <span class="math inline">\(V\)</span>.
+- <span class="math inline">\(U\cap U^{\perp} = \{0\}\)</span>.
+- Si <span class="math inline">\(V\)</span> es de dimensión finita, <span class="math inline">\(\mathrm{dim}(U) + \mathrm{dim}(U^{\perp}) = \mathrm{dim}(V)\)</span>.</p>
 </blockquote>
 <p>Como consecuencia, este resultado nos dice que <strong><span class="math inline">\(V\)</span> se puede descomponer como la suma directa de <span class="math inline">\(U\)</span> y de su complemento ortogonal</strong>: <span class="math inline">\(U\oplus U^{\perp} = V\)</span>.</p>
 <p><strong>¿Cómo calculamos el complemento ortogonal de un subespacio?</strong></p>
@@ -321,8 +326,8 @@ x_1\\ x_2\\ \vdots \\ x_n\\
 \alpha_{m,1} &amp; \alpha_{m,2} &amp; \ldots &amp; \alpha_{m,n} \\
 \end{array}
 \right)\]</span></p>
-<p>Es decir, las <em>ecuaciones cartesianas</em> de <span class="math inline">\(U^{\perp}\)</span> son las que tienen por matriz de coeficientes a las coordenadas de los vectores de la base de <span class="math inline">\(U\)</span> puestos por filas. De hecho, si llamamos <span class="math inline">\(B\)</span> a la matriz que resulta de poner por columnas los vectores de <span class="math inline">\(\mathcal{B}\)</span>, entonces <span class="math inline">\(A = B^{\mathrm{t}}\)</span>.</p>
-<p>A partir de esas ecuaciones cartesianas, ya podríamos <a href="ev.html#base">encontrar una base</a> del subespacio <span class="math inline">\(U^{\perp}\)</span>.</p>
+<p>Es decir, las <em>ecuaciones cartesianas</em> de <span class="math inline">\(U^{\perp}\)</span> son las que tienen por matriz de coeficientes a las coordenadas de los vectores de la base de <span class="math inline">\(U\)</span> puestos <em>por filas</em>. De hecho, si llamamos <span class="math inline">\(B\)</span> a la matriz que resulta de poner por columnas los vectores de <span class="math inline">\(\mathcal{B}\)</span>, entonces <span class="math inline">\(A = B^{\mathrm{t}}\)</span>.</p>
+<p>A partir de esas ecuaciones cartesianas, ya podríamos <a href="#sisgena%20base">encontrar una base</a> del subespacio <span class="math inline">\(U^{\perp}\)</span>.</p>
 <hr />
 <p><strong>Ejemplo</strong></p>
 <p>Consideremos el espacio <span class="math inline">\(U\)</span> generado por la base siguiente:
@@ -343,7 +348,7 @@ Nos podemos dar cuenta de que la matriz del sistema es la que resulta de poner l
 </div>
 <div id="proyec" class="section level2" number="5.4">
 <h2 number="5.4"><span class="header-section-number">5.4</span> Cómo calculamos la proyección de un vector sobre un subespacio</h2>
-<p>Consideremos un espacio euclídeo <span class="math inline">\(\left(V, \langle\cdot,\cdot\rangle\right)\)</span>. Consideremos un subespacio <span class="math inline">\(U\)</span>, del que conocemos una <a href="espeuc.html#ortho">base <em>ortogonal</em></a> <span class="math inline">\(\mathcal{B}_U = \{u_1,\ldots,u_m\}\)</span>. Definimos la <strong>proyección <em>ortogonal</em> de un vector <span class="math inline">\(v\)</span> sobre el subespacio <span class="math inline">\(U\)</span></strong>, como:
+<p><strong>Definición (Proyección ortogonal) </strong> Consideremos un espacio euclídeo <span class="math inline">\(\left(V, \langle\cdot,\cdot\rangle\right)\)</span>. Consideremos un subespacio <span class="math inline">\(U\)</span>, del que conocemos una <a href="espeuc.html#ortho">base <em>ortogonal</em></a> <span class="math inline">\(\mathcal{B}_U = \{u_1,\ldots,u_m\}\)</span>. Definimos la <strong>proyección <em>ortogonal</em> de un vector <span class="math inline">\(v\)</span> sobre el subespacio <span class="math inline">\(U\)</span></strong>, como:
 <span class="math display">\[\mathrm{proy}_U(v) = \frac{\langle v, u_1\rangle}{\langle u_1, u_1 \rangle}u_1 + \frac{\langle v, u_2\rangle}{\langle u_2, u_2 \rangle}u_2 + \ldots + \frac{\langle v, u_m\rangle}{\langle u_m, u_m \rangle}u_m\]</span></p>
 <p>Es decir, la proyección <span class="math inline">\(\mathrm{proy}_U(v)\)</span> es un vector del subespacio <span class="math inline">\(U\)</span>, ya que es combinación lineal de los elementos de su base, y además esta combinación lineal tiene como coeficientes el producto escalar de <span class="math inline">\(v\)</span> por cada elemento de la base, dividido por la norma de <span class="math inline">\(u_i\)</span> al cuadrado (<a href="espeuc.html#norm">recordemos que <span class="math inline">\(\|x\| = \sqrt{\langle x,x \rangle}\)</span></a>).</p>
 <p>Evidentemente, si los elementos de la base de <span class="math inline">\(U\)</span> tienen norma 1, el denominador desaparece.</p>
@@ -363,7 +368,8 @@ Nos podemos dar cuenta de que la matriz del sistema es la que resulta de poner l
 </blockquote>
 <p>Esto, junto con que <span class="math inline">\(\mathrm{proy}_U(v)\in U\)</span>, nos justifican el siguiente resultado, llamado <strong>teorema de la descomposición ortogonal</strong>:</p>
 <blockquote>
-<p>En un espacio euclídeo <span class="math inline">\((V, \langle\cdot,\cdot\rangle)\)</span>, dado un subespacio <span class="math inline">\(U\)</span>, y <span class="math inline">\(v\in V\)</span>, existe una única descomposición de <span class="math inline">\(v\)</span> como suma de dos vectores ortogonales, <span class="math inline">\(v = v_1 + v_2\)</span>, tales que <span class="math inline">\(v_1\in U\)</span> y <span class="math inline">\(v_2\in U^{\perp}\)</span>. Concretamente, <span class="math inline">\(v_1 = \mathrm{proy}_U(v)\)</span> y <span class="math inline">\(v_2 = v - v_1 = \mathrm{proy}_{U^{\perp}}(v)\)</span>.</p>
+<p><strong>Descomposición ortogonal</strong>:
+En un espacio euclídeo <span class="math inline">\((V, \langle\cdot,\cdot\rangle)\)</span>, dado un subespacio <span class="math inline">\(U\)</span>, y <span class="math inline">\(v\in V\)</span>, existe una única descomposición de <span class="math inline">\(v\)</span> como suma de dos vectores ortogonales, <span class="math inline">\(v = v_1 + v_2\)</span>, tales que <span class="math inline">\(v_1\in U\)</span> y <span class="math inline">\(v_2\in U^{\perp}\)</span>. Concretamente, <span class="math inline">\(v_1 = \mathrm{proy}_U(v)\)</span> y <span class="math inline">\(v_2 = v - v_1 = \mathrm{proy}_{U^{\perp}}(v)\)</span>.</p>
 </blockquote>
 <p>Podemos siempre descomponer un vector de <span class="math inline">\(V\)</span> como suma de dos vectores, uno de <span class="math inline">\(U\)</span> y otro de <span class="math inline">\(U^{\perp}\)</span>, que coinciden con las proyecciones sobre ambos subespacios.</p>
 <hr />
@@ -386,22 +392,17 @@ podemos sustituirlas en la expresión de más arriba y llegamos a
 </div>
 <div id="ortho-basis" class="section level2" number="5.5">
 <h2 number="5.5"><span class="header-section-number">5.5</span> Qué es y qué utilidad tiene una base ortonormal</h2>
-<p>Un vector <span class="math inline">\(v\in V\)</span> se dice <strong>unitario</strong> si <span class="math inline">\(\|v\| = 1\)</span>. Es fácil crear vectores unitarios: dado <span class="math inline">\(u\in V\)</span>, si definimos <span class="math inline">\(v = \frac{1}{\|u\|}u\)</span>, este vector tiene norma 1. A este proceso se le llama <em>normalizar</em>.</p>
+<p><strong>Definición (Vector unitario) </strong> Un vector <span class="math inline">\(v\in V\)</span> se dice <strong>unitario</strong> si <span class="math inline">\(\|v\| = 1\)</span>.</p>
+<p>Es fácil crear vectores unitarios: dado <span class="math inline">\(u\in V\)</span>, si definimos <span class="math inline">\(v = \frac{1}{\|u\|}u\)</span>, este vector tiene norma 1. A este proceso se le llama <em>normalizar</em>.</p>
 <p>Un sistema de vectores <span class="math inline">\(\{v_1,\ldots,v_k\}\)</span> se llama <strong>sistema ortonormal</strong> si es un <a href="espeuc.html#ortho">sistema ortogonal</a> y cada <span class="math inline">\(v_i\)</span> es un vector unitario (<span class="math inline">\(i=1,\ldots, k\)</span>).</p>
 <p>En relación a lo comentado de las propiedades de los sistemas ortogonales, en nuestro caso podemos decir que un sistema ortonormal <span class="math inline">\(\{v_1,\ldots,v_n\}\)</span>, donde <span class="math inline">\(\mathrm{dim}(V) = n\)</span>, es una <strong>base ortonormal</strong>.</p>
 <p>El interés de una base ortonormal es que es sencillo calcular las <a href="ev.html#coord">coordenadas</a> de cualquier vector con respecto a dicha base:</p>
 <blockquote>
-<p>Sea <span class="math inline">\(\mathcal{B} = \{v_1,\ldots,v_n\}\)</span> una base <em>ortonormal</em> del espacio vectorial <span class="math inline">\(V\)</span>. Entonces, para cada <span class="math inline">\(v\in V\)</span>, tenemos:
+<p><strong>Coordenadas en base ortonormal</strong>:
+Sea <span class="math inline">\(\mathcal{B} = \{v_1,\ldots,v_n\}\)</span> una base <em>ortonormal</em> del espacio vectorial <span class="math inline">\(V\)</span>. Entonces, para cada <span class="math inline">\(v\in V\)</span>, tenemos:
 <span class="math display">\[v = \langle v, v_1 \rangle v_1 + \ldots \langle v, v_n \rangle v_n\]</span>
 luego las coordenadas de <span class="math inline">\(v\)</span> en la base <span class="math inline">\(\mathcal{B}\)</span> las podemos calcular como:
-<span class="math display">\[[v]_{\mathcal{B}} = \left(
-\begin{array}{c}
-\langle v, v_1 \rangle \\
-\langle v, v_2 \rangle \\
-\vdots \\
-\langle v, v_n \rangle \\
-\end{array}
-\right)_{\mathcal{B}}\]</span></p>
+<span class="math display">\[[v]_{\mathcal{B}} = \left(\begin{array}{c}\langle v, v_1\rangle \\\langle v, v_2 \rangle \\\vdots \\\langle v, v_n \rangle \\\end{array}\right)_{\mathcal{B}}\]</span></p>
 </blockquote>
 <hr />
 <p><strong>Ejemplo</strong></p>
@@ -483,7 +484,7 @@ Y llamamos
 </div>
 <div id="ortho-matrix" class="section level2" number="5.7">
 <h2 number="5.7"><span class="header-section-number">5.7</span> Qué es una matriz ortogonal y una aplicación ortogonal</h2>
-<p>Una matriz cuadrada <span class="math inline">\(Q\)</span> se llama <strong>ortogonal</strong> si <span class="math inline">\(Q^{\text{t}}Q = I\)</span> o, equivalentemente, <span class="math inline">\(Q^{-1} = Q^{\text{t}}\)</span>.</p>
+<p><strong>Definición (Matriz ortogonal) </strong> Una matriz cuadrada <span class="math inline">\(Q\)</span> se llama <strong>ortogonal</strong> si <span class="math inline">\(Q^{\text{t}}Q = I\)</span> o, equivalentemente, <span class="math inline">\(Q^{-1} = Q^{\text{t}}\)</span>.</p>
 <p>Es decir, una matriz ortogonal es aquella cuya inversa es su propia traspuesta.</p>
 <blockquote>
 <p>Una matriz <span class="math inline">\(A\in\mathcal{M}_n(\mathbb{R})\)</span> es ortogonal si, y sólo si, sus columnas forman una base <em>ortonormal</em> de <span class="math inline">\(\mathbb{R}^n\)</span>.</p>
@@ -491,7 +492,7 @@ Y llamamos
 <blockquote>
 <p>Sea <span class="math inline">\(A\)</span> una matriz ortogonal. Entonces <span class="math inline">\(\mathrm{det}(A) = \pm 1\)</span>.</p>
 </blockquote>
-<p>Un endomorfismo <span class="math inline">\(f:V\to V\)</span> se llama <strong>ortogonal</strong> si respeta el producto escalar, es decir, si <span class="math inline">\(\langle\cdot,\cdot\rangle\)</span> es el producto escalar en <span class="math inline">\(V\)</span>, entonces <span class="math inline">\(\langle f(u), f(v) \rangle = \langle u, v \rangle\)</span> para todo <span class="math inline">\(u,v\in V\)</span>.</p>
+<p><strong>Definición (Endomorfismo ortogonal) </strong> Un endomorfismo <span class="math inline">\(f:V\to V\)</span> se llama <strong>ortogonal</strong> si respeta el producto escalar, es decir, si <span class="math inline">\(\langle\cdot,\cdot\rangle\)</span> es el producto escalar en <span class="math inline">\(V\)</span>, entonces <span class="math inline">\(\langle f(u), f(v) \rangle = \langle u, v \rangle\)</span> para todo <span class="math inline">\(u,v\in V\)</span>.</p>
 <p>Como la aplicación ortogonal conserva el producto escalar, también conserva todas las cantidades que hemos definido a partir de él: <a href="espeuc.html#norm">la norma, la distancia</a> y <a href="espeuc.html#ortho">el ángulo</a> entre vectores de <span class="math inline">\(V\)</span>: <span class="math inline">\(\|f(v)\| = \|v\|\)</span>, <span class="math inline">\(d(f(u), f(v)) = d(u,v)\)</span> y <span class="math inline">\(\mathrm{ang}(f(u),f(v)) = \mathrm{ang}(u, v)\)</span> para todo <span class="math inline">\(u,v\in V\)</span>.</p>
 <blockquote>
 <p>Una aplicación <span class="math inline">\(f:V\to V\)</span> es ortogonal si, y sólo si, la imagen de toda base ortonormal es de nuevo una base ortonormal de <span class="math inline">\(V\)</span>.</p>
@@ -534,10 +535,10 @@ son las coordenadas del vector girado, en función de las coordenadas del vector
 </div>
 <div id="diag-ortho" class="section level2" number="5.8">
 <h2 number="5.8"><span class="header-section-number">5.8</span> Qué es la diagonalización ortogonal</h2>
-<p>Recordemos <a href="diagonalización.html#diagonalizable">la definición de endomorfismo o de matriz diagonalizable</a>. Una aplicación lineal <span class="math inline">\(f:V\to V\)</span> es diagonalizable si y solo si existe una base de <span class="math inline">\(V\)</span> formada por autovectores de <span class="math inline">\(f\)</span>, lo cual equivale a que la representación matricial de <span class="math inline">\(f\)</span> en dicha base sea una matriz diagonal <span class="math inline">\(D\)</span>. En representación matricial, esto se traduce en que una matriz <span class="math inline">\(A\in\mathbb{M}_n(\mathbb{R})\)</span> es diagonalizable si y solo si, existe una matriz regular <span class="math inline">\(P\)</span> tal que <span class="math inline">\(D = P^{-1}\ A\ P\)</span>. Las columnas de <span class="math inline">\(P\)</span> están formadas por los autovectores de la base de la definición.</p>
+<p>Recordemos <a href="diagonalización.html#diagonalizable">la definición de endomorfismo o de matriz diagonalizable</a>. Una aplicación lineal <span class="math inline">\(f:V\to V\)</span> es diagonalizable si y solo si existe una base de <span class="math inline">\(V\)</span> formada por autovectores de <span class="math inline">\(f\)</span>, lo cual equivale a que la representación matricial de <span class="math inline">\(f\)</span> en dicha base sea una matriz diagonal <span class="math inline">\(D\)</span>. En representación matricial, esto se traduce en que una matriz <span class="math inline">\(A\in\mathcal{M}_n(\mathbb{R})\)</span> es diagonalizable si y solo si, existe una matriz regular <span class="math inline">\(P\)</span> tal que <span class="math inline">\(D = P^{-1}\ A\ P\)</span>. Las columnas de <span class="math inline">\(P\)</span> están formadas por los autovectores de la base de la definición.</p>
 <p>Veamos cómo influye el hecho de tener bases ortonormales en un espacio euclídeo en la diagonalización, lo que da lugar a la denominada <em>diagonalización ortogonal</em>.</p>
-<p>Diremos que una aplicación lineal <span class="math inline">\(f:V\to V\)</span> es <strong>diagonalizable ortogonalmente</strong> si y solo si existe una base ortonormal en <span class="math inline">\(V\)</span> formada por autovectores de <span class="math inline">\(f\)</span>.</p>
-<p>En matrices, una matriz <span class="math inline">\(A\)</span> se dice <strong>diagonalizable ortogonalmente</strong> si existe una matriz <span class="math inline">\(P\)</span> <em>ortogonal</em> tal que <span class="math inline">\(D = P^{\text{t}}\ A\ P\)</span>, donde <span class="math inline">\(D\)</span>, la matriz asociada a <span class="math inline">\(f\)</span> en la base de autovectores, es diagonal con autovalores en la diagonal principal.</p>
+<p><strong>Definición (Aplicación diagonalizable ortogonalmente) </strong> Diremos que una aplicación lineal <span class="math inline">\(f:V\to V\)</span> es <strong>diagonalizable ortogonalmente</strong> si y solo si existe una base ortonormal en <span class="math inline">\(V\)</span> formada por autovectores de <span class="math inline">\(f\)</span>.</p>
+<p><strong>Definición (Matriz diagonalizable ortogonalmente) </strong> En matrices, una matriz <span class="math inline">\(A\)</span> se dice <strong>diagonalizable ortogonalmente</strong> si existe una matriz <span class="math inline">\(P\)</span> <em>ortogonal</em> tal que <span class="math inline">\(D = P^{\text{t}}\ A\ P\)</span>, donde <span class="math inline">\(D\)</span>, la matriz asociada a <span class="math inline">\(f\)</span> en la base de autovectores, es diagonal con autovalores en la diagonal principal.</p>
 <hr />
 <p><strong>Ejemplo</strong></p>
 <p>Consideremos la matriz <span class="math inline">\(A\)</span> dada por
@@ -546,8 +547,9 @@ asociada a un endomorfismo <span class="math inline">\(f:\mathbb{R}^{4} \to \mat
 <p>Si tomamos la base
 <span class="math display">\[\mathcal{B} = \left\{\left( \begin{array}{c} \frac{-\sqrt{6}}{6}\\ \frac{-\sqrt{6}}{6}\\ \frac{\sqrt{6}}{3}\\ 0 \end{array} \right), \left( \begin{array}{c} \frac{\sqrt{6}}{6}\\ \frac{-\sqrt{6}}{6}\\ 0\\ \frac{\sqrt{6}}{3} \end{array} \right), \left( \begin{array}{c} \frac{\sqrt{3}}{3}\\ \frac{\sqrt{3}}{3}\\ \frac{\sqrt{3}}{3}\\ 0 \end{array} \right), \left( \begin{array}{c} \frac{-\sqrt{3}}{3}\\ \frac{\sqrt{3}}{3}\\ 0\\ \frac{\sqrt{3}}{3} \end{array} \right)\right\}\]</span>
 resulta ser una <a href="espeuc.html#ortho-basis">base ortonormal</a> formada por autovectores de <span class="math inline">\(f\)</span> (en <a href="espeuc.html#diag-ortho2">la siguiente sección</a> detallaremos el proceso completo).</p>
-<p>Por tanto, esta matriz (y el endomorfismo <span class="math inline">\(f\)</span>) es diagonalizable ortogonalmente. De hecho, si consideramos como matriz <span class="math inline">\(P\)</span> la del <a href="ev.html#cambiobase">cambio de base</a> de <span class="math inline">\(\mathcal{B}\)</span> a la canónica, podemos calcular la expresión diagonal, teniendo en cuenta que <span class="math inline">\(P\)</span> es una matriz ortogonal:
-<span class="math display">\[\begin{array}{rcl}D &amp; = &amp; P^{\text{t}}\ A\ P = \\  &amp; = &amp; \left( \begin{array}{cccc@{}} \frac{-\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{3}}{3} &amp; \frac{-\sqrt{3}}{3}\\ \frac{-\sqrt{6}}{6} &amp; \frac{-\sqrt{6}}{6} &amp; \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3}\\ \frac{\sqrt{6}}{3} &amp; 0 &amp; \frac{\sqrt{3}}{3} &amp; 0\\ 0 &amp; \frac{\sqrt{6}}{3} &amp; 0 &amp; \frac{\sqrt{3}}{3} \end{array} \right) ^{\text{t}}\ \left( \begin{array}{cccc@{}} 0 &amp; -2 &amp; -1 &amp; -1\\ -2 &amp; 0 &amp; -1 &amp; 1\\ -1 &amp; -1 &amp; -1 &amp; 0\\ -1 &amp; 1 &amp; 0 &amp; 1 \end{array} \right) \ \left( \begin{array}{cccc@{}} \frac{-\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{3}}{3} &amp; \frac{-\sqrt{3}}{3}\\ \frac{-\sqrt{6}}{6} &amp; \frac{-\sqrt{6}}{6} &amp; \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3}\\ \frac{\sqrt{6}}{3} &amp; 0 &amp; \frac{\sqrt{3}}{3} &amp; 0\\ 0 &amp; \frac{\sqrt{6}}{3} &amp; 0 &amp; \frac{\sqrt{3}}{3} \end{array} \right)  = \\  &amp; = &amp; \left( \begin{array}{cccc@{}} 0 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; -3 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 3 \end{array} \right) \end{array}\]</span>
+<p>Por tanto, esta matriz (y el endomorfismo <span class="math inline">\(f\)</span>) es diagonalizable ortogonalmente. De hecho, si consideramos como matriz <span class="math inline">\(P\)</span> la del <a href="ev.html#cambiobase">cambio de base</a> de <span class="math inline">\(\mathcal{B}\)</span> a la canónica, podemos calcular la expresión diagonal, teniendo en cuenta que <span class="math inline">\(P\)</span> es una matriz ortogonal:</p>
+<p><span class="math display">\[\begin{array}{rcl}D &amp; = &amp; P^{\text{t}}\ A\ P = \\  &amp; = &amp; \left( \begin{array}{cccc@{}} \frac{-\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{3}}{3} &amp; \frac{-\sqrt{3}}{3}\\ \frac{-\sqrt{6}}{6} &amp; \frac{-\sqrt{6}}{6} &amp; \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3}\\ \frac{\sqrt{6}}{3} &amp; 0 &amp; \frac{\sqrt{3}}{3} &amp; 0\\ 0 &amp; \frac{\sqrt{6}}{3} &amp; 0 &amp; \frac{\sqrt{3}}{3} \end{array} \right) ^{\text{t}} \left( \begin{array}{cccc@{}} 0 &amp; -2 &amp; -1 &amp; -1\\ -2 &amp; 0 &amp; -1 &amp; 1\\ -1 &amp; -1 &amp; -1 &amp; 0\\ -1 &amp; 1 &amp; 0 &amp; 1 \end{array} \right)  \left( \begin{array}{cccc@{}} \frac{-\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{3}}{3} &amp; \frac{-\sqrt{3}}{3}\\ \frac{-\sqrt{6}}{6} &amp; \frac{-\sqrt{6}}{6} &amp; \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3}\\ \frac{\sqrt{6}}{3} &amp; 0 &amp; \frac{\sqrt{3}}{3} &amp; 0\\ 0 &amp; \frac{\sqrt{6}}{3} &amp; 0 &amp; \frac{\sqrt{3}}{3} \end{array} \right)  \\  &amp; = &amp; \left( \begin{array}{cccc@{}} 0 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; -3 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 3 \end{array} \right) \end{array}\]</span>
+
 donde podemos comprobar que los elementos de la diagonal de <span class="math inline">\(D\)</span> son autovalores de <span class="math inline">\(A\)</span>.</p>
 <hr />
 </div>
@@ -575,7 +577,7 @@ Luego, multiplicando por <span class="math inline">\(P\)</span> a la izquierda e
 <blockquote>
 <p>Una matriz <span class="math inline">\(A\in\mathcal{M}_n(\mathbb{R})\)</span> es diagonalizable ortogonalmente si y solo si es simétrica.</p>
 </blockquote>
-<p><strong>¿Cómo diagonalizamos ortogonalmente una mtriz simétrica?</strong></p>
+<p><strong>¿Cómo diagonalizamos ortogonalmente una matriz simétrica?</strong></p>
 <p>El procedimiento es idéntico al que se conoce para <a href="diagonalización.html#diagonalizable">diagonalizar</a> una matriz cualquiera, con las siguientes puntualizaciones:</p>
 <ul>
 <li>Al ser una matriz simétrica, tenemos asegurada que es diagonalizable (incluso ortogonalmente).</li>
@@ -652,7 +654,9 @@ Debemos normalizar ahora los vectores de este sistema ortogonal que tenemos, mul
 <span class="math display">\[\mathcal{B} = \mathcal{B}&#39;_{U_{0}} \cup \mathcal{B}&#39;_{U_{-3}} \cup \mathcal{B}&#39;_{U_{3}} = \left\{\left( \begin{array}{c} \frac{-\sqrt{6}}{6}\\ \frac{-\sqrt{6}}{6}\\ \frac{\sqrt{6}}{3}\\ 0 \end{array} \right), \left( \begin{array}{c} \frac{\sqrt{6}}{6}\\ \frac{-\sqrt{6}}{6}\\ 0\\ \frac{\sqrt{6}}{3} \end{array} \right), \left( \begin{array}{c} \frac{\sqrt{3}}{3}\\ \frac{\sqrt{3}}{3}\\ \frac{\sqrt{3}}{3}\\ 0 \end{array} \right), \left( \begin{array}{c} \frac{-\sqrt{3}}{3}\\ \frac{\sqrt{3}}{3}\\ 0\\ \frac{\sqrt{3}}{3} \end{array} \right)\right\}\]</span>
 Es una base ortonormal de <span class="math inline">\(\mathbb{R}^{4}\)</span>, formada únicamente por autovectores de la matriz <span class="math inline">\(A\)</span>.</p>
 <p>Además, la matriz <span class="math inline">\(P\)</span> del <a href="ev.html#cambiobase">cambio de base</a> de esta base <span class="math inline">\(\mathcal{B}\)</span> a la canónica, formada por los vectores de <span class="math inline">\(\mathcal{B}\)</span> puestos por columnas, es <em>ortogonal</em> y nos proporciona la relación entre <span class="math inline">\(A\)</span> y la matriz diagonal <span class="math inline">\(D\)</span> de los autovalores:
-<span class="math display">\[\begin{array}{rcl}D &amp; = &amp; P^{\text{t}}\ A\ P = \\ &amp; = &amp; \left( \begin{array}{cccc@{}} \frac{-\sqrt{6}}{6} &amp; \frac{-\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{3} &amp; 0\\ \frac{\sqrt{6}}{6} &amp; \frac{-\sqrt{6}}{6} &amp; 0 &amp; \frac{\sqrt{6}}{3}\\ \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3} &amp; 0\\ \frac{-\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3} &amp; 0 &amp; \frac{\sqrt{3}}{3} \end{array} \right) \ \left( \begin{array}{cccc@{}} 0 &amp; -2 &amp; -1 &amp; -1\\ -2 &amp; 0 &amp; -1 &amp; 1\\ -1 &amp; -1 &amp; -1 &amp; 0\\ -1 &amp; 1 &amp; 0 &amp; 1 \end{array} \right) \ \left( \begin{array}{cccc@{}} \frac{-\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{3}}{3} &amp; \frac{-\sqrt{3}}{3}\\ \frac{-\sqrt{6}}{6} &amp; \frac{-\sqrt{6}}{6} &amp; \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3}\\ \frac{\sqrt{6}}{3} &amp; 0 &amp; \frac{\sqrt{3}}{3} &amp; 0\\ 0 &amp; \frac{\sqrt{6}}{3} &amp; 0 &amp; \frac{\sqrt{3}}{3} \end{array} \right)  \\ &amp; = &amp; \left( \begin{array}{cccc@{}} 0 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; -3 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 3 \end{array} \right) \end{array}\]</span></p>
+
+<span class="math display">\[\begin{array}{rcl}D &amp; = &amp; P^{\text{t}}\ A\ P = \\ &amp; = &amp; \left( \begin{array}{cccc@{}} \frac{-\sqrt{6}}{6} &amp; \frac{-\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{3} &amp; 0\\ \frac{\sqrt{6}}{6} &amp; \frac{-\sqrt{6}}{6} &amp; 0 &amp; \frac{\sqrt{6}}{3}\\ \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3} &amp; 0\\ \frac{-\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3} &amp; 0 &amp; \frac{\sqrt{3}}{3} \end{array} \right) \ \left( \begin{array}{cccc@{}} 0 &amp; -2 &amp; -1 &amp; -1\\ -2 &amp; 0 &amp; -1 &amp; 1\\ -1 &amp; -1 &amp; -1 &amp; 0\\ -1 &amp; 1 &amp; 0 &amp; 1 \end{array} \right) \ \left( \begin{array}{cccc@{}} \frac{-\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{3}}{3} &amp; \frac{-\sqrt{3}}{3}\\ \frac{-\sqrt{6}}{6} &amp; \frac{-\sqrt{6}}{6} &amp; \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3}\\ \frac{\sqrt{6}}{3} &amp; 0 &amp; \frac{\sqrt{3}}{3} &amp; 0\\ 0 &amp; \frac{\sqrt{6}}{3} &amp; 0 &amp; \frac{\sqrt{3}}{3} \end{array} \right)  \\ &amp; = &amp; \left( \begin{array}{cccc@{}} 0 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; -3 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 3 \end{array} \right) \end{array}\]</span>
+</p>
 <p>Recordemos que en la diagonal de <span class="math inline">\(D\)</span> se encuentran los autovalores (en el mismo orden en que se han puesto los autovectores en las columnas de <span class="math inline">\(P\)</span>), con sus respectivas multiplicidades.</p>
 <hr />
 

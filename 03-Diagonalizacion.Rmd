@@ -17,13 +17,21 @@ Una de las propiedades que hemos estudiado es que si tenemos una base $\mathcal{
 
 En ese caso, la matriz asociada al endomorfismo $f$ será $A' = P^{-1}\ A\ P$, donde $P$ es la [matriz de cambio de base](#cambiobase) de $\mathcal{B'}$ a $\mathcal{B}$.
 
-Esta relación especial entre $A$ y $A'$ tiene nombre: son _matrices semejantes_. Dos matrices $A,A'\in\mathcal{M}_n(\mathbb{K})$ se dicen __semejantes__ si existe $P\in\mathcal{M}_n(\mathbb{K})$ regular tal que $A'=P^{-1}\ A\ P$.
+Esta relación especial entre $A$ y $A'$ tiene nombre: son _matrices semejantes_. 
+
+```{r}
+definition("Dos matrices $A,A'\\in\\mathcal{M}_n(\\mathbb{K})$ se dicen __semejantes__ si existe $P\\in\\mathcal{M}_n(\\mathbb{K})$ regular tal que $A'=P^{-1}\\ A\\ P$.", "Matrices semejantes")
+```
 
 Esto tiene implicaciones como que los cálculos que podamos necesitar hacer con un endomorfismo, como calcular su núcleo y su imagen, o los que veremos en este tema, lo podemos hacer con cualquiera de sus matrices asociadas, respecto a diferentes bases, ya que son todas semejantes.
 
 Sin embargo, para ciertas operaciones, podremos necesitar tener una matriz asociada a $f$ lo más simple posible. ¿Qué entendemos por una matriz simple? Una matriz diagonal. 
 
 La diagonalización es el proceso por el cual pretendemos encontrar una base $\mathcal{B}$ de $V$ tal que la matriz asociada a un endomorfismo $f$ sea diagonal.
+
+```{r}
+definition("Un endomorfismo $f:V\\to V$ se dice __diagonalizable__ si existe una base de $V$ donde la matriz asociada a $f$ es diagonal.", "Endomorfismo diagonalizable")
+```
 
 No todos los endomorfismos serán __diagonalizables__, así que veremos cuándo podremos asegurar que sí lo son, y el mecanismo para encontrar la forma diagonal de la matriz asociada al endomorfismo.
 
@@ -177,7 +185,9 @@ __¿Qué preguntas vamos a responder en este capítulo?__
 ## Qué son los autovalores de un endomorfismo y de una matriz {#eigenvalue}
 \sectionmark{Valores propios de un endomorfismo}
 
-Consideremos un endomorfismo $f:V\to V$. Diremos que un valor $\lambda\in\mathbb{K}$ es un __autovalor__ (o __valor propio__) de $f$ si existe un vector no nulo $v\in V$ tal que $f(v) = \lambda\ v$. A ese $v$ se le denomina __autovector__ (o __vector propio__) asociado a $\lambda$.
+```{r}
+definition("Consideremos un endomorfismo $f:V\\to V$. Diremos que un valor $\\lambda\\in\\mathbb{K}$ es un __autovalor__ (o __valor propio__) de $f$ si existe un vector no nulo $v\\in V$ tal que $f(v) = \\lambda\\ v$. A ese $v$ se le denomina __autovector__ (o __vector propio__) asociado a $\\lambda$.", "Autovalor y autovector")
+```
 
 __Nota__: Eliminamos la posibilidad de que $v$ sea nulo en la definición, porque [sabemos que $f(0) = 0$](#prop-apli) en cualquier aplicación lineal, así que no nos proporcionaría información alguna.
 
@@ -185,15 +195,22 @@ Intuitivamente, un _autovector_ $v$ es un vector no nulo que, al aplicarle $f$, 
 
 Si consideramos una matriz $A$ asociada a $f$, la condición $f(v) = \lambda\ v$ se puede reescribir como $A\ v = \lambda\ v$.
 
-Podemos generalizar entonces esta definición a matrices cuadradas: Un escalar $\lambda$ se llama __autovalor__ o __valor propio__ de una matriz $A\in\mathcal{M}_n(\mathbb{K})$ si existe $v\in\mathbb{K}^{n}$ no nulo, llamado __autovector__ o __vector propio__ asociado a $\lambda$, tal que $A\ v = \lambda\ v$.
+Podemos generalizar entonces esta definición a matrices cuadradas: 
+```{r}
+definition("Un escalar $\\lambda$ se llama __autovalor__ o __valor propio__ de una matriz $A\\in\\mathcal{M}_n(\\mathbb{K})$ si existe $v\\in\\mathbb{K}^{n}$ no nulo, llamado __autovector__ o __vector propio__ asociado a $\\lambda$, tal que $A\\ v = \\lambda\\ v$.", "Autovalor y autovector de una matriz cuadrada")
+```
 
 Nos falta comprobar si hay alguna incoherencia en las definiciones: si distintas matrices asociadas a un mismo endomorfismo tuvieran distintos _autovalores_, eso sería un problema de la definición. Sin embargo, el siguiente resultado nos asegura que esto no puede ser así:
 
-> Si dos matrices $A$ y $A'$ son _semejantes_, entonces tienen los mismos autovalores.
+```{r}
+theorem("Si dos matrices $A$ y $A'$ son _semejantes_, entonces tienen los mismos autovalores.")
+```
 
 Podemos decir entonces que:
 
-> Si $\lambda$ es un autovalor de $f$, entonces lo es de cualquiera de sus matrices asociadas en diferentes bases, y esto es debido a su relación de _semejanza_.
+```{r}
+theorem("Si $\\lambda$ es un autovalor de $f$, entonces lo es de cualquiera de sus matrices asociadas en diferentes bases, y esto es debido a su relación de _semejanza_.")
+```
 
 Esto significa que si queremos calcular los autovalores de un endomorfismo $f$, basta con calcularlos para cualquiera de sus matrices asociadas, en particular para su matriz asociada en la [base canónica](#base), la más sencilla de encontrar.
 
@@ -215,7 +232,9 @@ En este caso, la matriz de coeficientes del sistema es $A-\lambda\ I$, así que 
 
 Hay que notar que la expresión $\mathrm{det}(A-\lambda\ I)$ depende de $\lambda$, así que realmente estamos buscando __los valores de $\lambda$ que hacen que $\mathrm{det}(A-\lambda\ I) = 0$__.
 
-Llamamos __polinomio característico__ de la matriz $A$ a $p(\lambda) = \mathrm{det}(A-\lambda\ I)$, y __ecuación característica__ a $\mathrm{det}(A-\lambda\ I) = 0$.
+```{r}
+definition("Llamamos __polinomio característico__ de la matriz $A$ a $p(\\lambda) = \\mathrm{det}(A-\\lambda\\ I)$, y __ecuación característica__ a $\\mathrm{det}(A-\\lambda\\ I) = 0$.", "Polinomio característico")
+```
 
 Por tanto, __los autovalores de una matriz $A$ son__ soluciones a la ecuación característica, es decir, __las raíces del polinomio característico__.
 
@@ -390,10 +409,9 @@ Una vez que sabemos cómo [hallar los autovalores](#eigenvalue) y [los autovecto
 
 El principal resultado teórico que necesitamos es el siguiente:
 
-> Un endomorfismo $f:V\to V$ es _diagonalizable_ si y sólo si existe una base $\mathcal{B}$ de $V$ formada únicamente por autovectores de $f$. En ese caso, la [matriz asociada](#matriz-apli) $D$ en esa base es diagonal y tiene en su diagonal principal los autovalores de $f$. Además, la [matriz de cambio de base](#cambiobase) $P_{\mathcal{B}\to\mathcal{C}}$ (formada por los vectores de $\mathcal{B}$ por columnas) verifica:
-$$P_{\mathcal{B}\to\mathcal{C}}^{-1}\ A\ P_{\mathcal{B}\to\mathcal{C}} = D$$
-o, equivalentemente,
-$$A = P_{\mathcal{C}\to\mathcal{B}}^{-1}\ D\ P_{\mathcal{C}\to\mathcal{B}}$$
+```{r}
+theorem("Un endomorfismo $f:V\\to V$ es _diagonalizable_ si y sólo si existe una base $\\mathcal{B}$ de $V$ formada únicamente por autovectores de $f$. En ese caso, la [matriz asociada](#matriz-apli) $D$ en esa base es diagonal y tiene en su diagonal principal los autovalores de $f$. Además, la [matriz de cambio de base](#cambiobase) $P_{\\mathcal{B}\\to\\mathcal{C}}$ (formada por los vectores de $\\mathcal{B}$ por columnas) verifica:\n$$P_{\\mathcal{B}\\to\\mathcal{C}}^{-1}\\ A\\ P_{\\mathcal{B}\\to\\mathcal{C}} = D$$\no, equivalentemente,\n$$A = P_{\\mathcal{C}\\to\\mathcal{B}}^{-1}\\ D\\ P_{\\mathcal{C}\\to\\mathcal{B}}$$", "Caracterización de diagonalizable")
+```
 
 Este resultado proporciona mucha información: nos dice que para que sea diagonalizable un endomorfismo (o una matriz), necesitamos una base de $V$ formada por únicamente autovectores, y que la matriz diagonal asociada tendrá a los autovalores en la diagonal principal.
 
@@ -401,7 +419,9 @@ Nos preguntamos entonces bajo qué condiciones podemos asegurar que tenemos una 
 
 El siguiente resultado es de gran ayuda:
 
-> Autovectores asociados a distintos autovalores son linealmente independientes.
+```{r}
+theorem("Autovectores asociados a distintos autovalores son linealmente independientes.")
+```
 
 Supongamos que llamamos $\lambda_1,\ldots,\lambda_k$ a los autovalores de un endomorfismo o de una matriz, y $U_{\lambda_1},\ldots,U_{\lambda_k}$ a los subespacios asociados a los autovalores. Supongamos que todos los $\lambda_i$ son distintos unos de otros. 
 
@@ -414,7 +434,9 @@ $$V = U_{\lambda_1} + \ldots + U_{\lambda_k}$$
 
 La primera consecuencia de esto es:
 
-> Si una matriz o un endomorfismo tienen exactamente $n$ autovalores distintos, entonces es diagonalizable.
+```{r}
+theorem("Si una matriz o un endomorfismo tienen exactamente $n$ autovalores distintos, entonces es diagonalizable.")
+```
 
 Esto es así porque cada uno de los $n$ autovalores tendría un subespacio asociado cuya base es linealmente independiente de la base de los demás subespacios. Esto solo podría suceder si cada una de las $n$ bases $\mathcal{B}_{U_{\lambda_i}}$, ($i = 1,\ldots,n$) solo tiene un elemento, es decir, si $\mathrm{dim}(U_{\lambda_i}) = 1$ para todo $i=1,\ldots,n$. Si no fuera así, acabaríamos con más de $n$ vectores linealmente independientes en $V$, lo cual es imposible.
 
@@ -422,18 +444,25 @@ Entonces $\mathcal{B}$, definida como la unión de las bases mencionadas, tiene 
 
 Pero ¿qué pasa cuando no tenemos $n$ autovalores distintos?
 
-Es de gran importancia conocer, para todo $i = 1,\ldots,k$, la dimensión del subespacio asociado al autovalor $\lambda_i$. Llamaremos __multiplicidad geométrica del autovalor $\lambda$__ a $\mathrm{m_g}(\lambda) = \mathrm{dim}(U_{\lambda_i})$.
+Es de gran importancia conocer, para todo $i = 1,\ldots,k$, la dimensión del subespacio asociado al autovalor $\lambda_i$. 
+
+```{r}
+definition("Llamaremos __multiplicidad geométrica del autovalor $\\lambda$__ a $\\mathrm{m_g}(\\lambda) = \\mathrm{dim}(U_{\\lambda_i})$.", "Multiplicidad geométrica")
+```
 
 Se tiene el siguiente resultado:
 
-> Para todo autovalor $\lambda$ de un endomorfismo o de una matriz, se tiene que $$1\le\mathrm{m_g}(\lambda)\le\mathrm{m_a}(\lambda)$$
-donde $\mathrm{m_g}(\lambda)$ es su multiplicidad geométrica y $\mathrm{m_a}(\lambda)$ es la __multiplicidad algebraica de $\lambda$__, es decir, su multiplicidad como raíz del [polinomio característico](#eigenvalue).
+```{r}
+theorem("Para todo autovalor $\\lambda$ de un endomorfismo o de una matriz, se tiene que $$1\\le\\mathrm{m_g}(\\lambda)\\le\\mathrm{m_a}(\\lambda)$$\ndonde $\\mathrm{m_g}(\\lambda)$ es su multiplicidad geométrica y $\\mathrm{m_a}(\\lambda)$ es la __multiplicidad algebraica de $\\lambda$__, es decir, su multiplicidad como raíz del [polinomio característico](#eigenvalue).")
+```
 
 Es decir, la _multiplicidad geométrica_ siempre es mayor o igual que 1 (indicando que el subespacio $U_{\lambda}$ no es el trivial $\{0\}$), y menor que la _multiplicidad algebraica_.
 
 Un corolario de todos los resultados anteriores es:
 
-> Si, para todo autovalor $\lambda$ de un endomorfismo o de una matriz cuadrada, se tiene que $\mathrm{m_g}(\lambda) = \mathrm{m_a}(\lambda)$, entonces es diagonalizable. Y el recíproco es también cierto.
+```{r}
+theorem("Si, para todo autovalor $\\lambda$ de un endomorfismo o de una matriz cuadrada, se tiene que $\\mathrm{m_g}(\\lambda) = \\mathrm{m_a}(\\lambda)$, entonces es diagonalizable. Y el recíproco es también cierto.")
+```
 
 Aquí tenemos un criterio sencillo para determinar si un endomorfismo o una matriz son diagonalizables:
 
@@ -573,7 +602,9 @@ glue_latex(
 
 El __Teorema de Cayley-Hamilton__ nos dice que:
 
-> Toda matriz cuadrada $A$ verifica su ecuación característica, es decir, si $p(\lambda)$ es el polinomio característico de $A$, entonces $p(A) = 0$.
+```{r}
+theorem("Toda matriz cuadrada $A$ verifica su ecuación característica, es decir, si $p(\\lambda)$ es el polinomio característico de $A$, entonces $p(A) = 0$.", "Cayley-Hamilton")
+```
 
 Supongamos que el [polinomio característico](#eigenvalue) de una matriz $A$ es $$p(\lambda) = c_n\lambda^n+\ldots+c_1\lambda+c_0$$
 
@@ -602,6 +633,7 @@ Si, de la igualdad del teorema, despejamos el término $A^n$, nos queda
 $$A^n = -\frac{1}{c_n}\left(-c_{n-1}A^{n-1}-\ldots-c_1 A- c_0 I\right)$$
 
 A partir de $A^n$, siendo $n$ el número de filas o columnas de la matriz $A$, todas sus potencias se pueden poner como suma de potencias de $A$ de grado menor estrictamente que $n$:
+\small
 $$
 \begin{array}{rcl}
 A^{n+1} & = & A\cdot A^n = \\
@@ -610,7 +642,8 @@ A^{n+1} & = & A\cdot A^n = \\
  & = & -\frac{1}{c_n}\left(-c_{n-1}\left(-\frac{1}{c_n}\left(-c_{n-1}A^{n-1}-\ldots-c_1 A- c_0 I\right)\right)-\ldots-c_1 A^2- c_0 A\right) = \\
  & = & ...\\
 \end{array}
- $$
+$$
+\normalsize
 
 Siguiendo con este patrón, se puede poner cualquier potencia $A^m$, con $m\ge n$, como suma de $A,A^2,\ldots,A^{n-1}$.
 

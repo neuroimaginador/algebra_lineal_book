@@ -189,7 +189,7 @@ glue_latex(
   "[glue_matrices(A_W, matlab::zeros(nrow(A_W), 1), latex = TRUE, fractions = TRUE)]",
   "\\sim",
   "[glue_matrices(PW$splits, latex = TRUE, fractions = TRUE)]",
-  "\\Rightarrow\\quad\\ ",
+  "\\Rightarrow\\ ",
   "[to_latex(generic_vector)] = ",
   "[write_linear_combination(genW, vars = params)]"
 ) %>% 
@@ -891,11 +891,13 @@ for (av_idx in seq_along(autovalores)) {
   }
   
   glue_latex(
-    "(A [av_str] I)[to_latex(generic_vector(n))] = 0",
-    "\\Leftrightarrow",
-    "[glue_matrices(B, latex = TRUE, fractions = TRUE)][to_latex(generic_vector(n))] = 0",
-    "\\Leftrightarrow",
-    "\\left\\{[write_system(B, zero_vector(n), latex = TRUE, fractions = TRUE)]\\right."
+    "\\begin{array}{rcl}",
+    "(A [av_str] I)[to_latex(generic_vector(n))] = 0 &",
+    "\\Leftrightarrow & ",
+    "[glue_matrices(B, latex = TRUE, fractions = TRUE)][to_latex(generic_vector(n))] = 0 \\\\",
+    "& \\Leftrightarrow & ",
+    "\\left\\{[write_system(B, zero_vector(n), latex = TRUE, fractions = TRUE)]\\right.",
+    "\\end{array}"
   ) %>% 
     cat()
   
@@ -1625,11 +1627,27 @@ base2_str <- this_base2 %>%
   sapply(function(v) v$to_latex()) %>% 
   str_flatten(", ")
 
+if (length(this_base2) > 2) {
+  
   glue_latex(
-    "\\mathcal{B}'_{U_{[av]}} = \\left\\{",
-    "[Bpp]\\right\\} = \\left\\{[base2_str]\\right\\}"
+    "\\begin{array}{rcl}",
+    "\\mathcal{B}'_{U_{[av]}} & = & \\left\\{",
+    "[Bpp]\\right\\} = \\\\",
+    " & = & \\left\\{[base2_str]\\right\\} \\\\",
+    "\\end{array}"
   ) %>% 
     cat()
+  
+} else {
+  
+  glue_latex(
+    "\\mathcal{B}'_{U_{[av]}}  =  \\left\\{",
+    "[Bpp]\\right\\} = ",
+    " \\left\\{[base2_str]\\right\\}"
+  ) %>% 
+    cat()
+  
+}
   
   cat("\n\n")
   
@@ -1652,15 +1670,16 @@ glue_latex(
 Es una base ortonormal de \(\mathbb{R}^{`r n`}\), formada únicamente por autovectores de la matriz $A$.
 
 Además, la matriz $P$ del [cambio de base](#cambiobase) de esta base $\mathcal{B}$ a la canónica, formada por los vectores de $\mathcal{B}$ puestos por columnas, es _ortogonal_ y nos proporciona la relación entre $A$ y la matriz diagonal $D$ de los autovalores:
+\small
 ```{r}
 P <- vectors2matrix(all_bases)
 glue_latex(
   "\\begin{array}{rcl}",
-  "D & = & P^{\\text{t}}\\ A\\ P = \\\\",
-  " & = & [glue_matrices(t(P), latex = TRUE)]\\ [glue_matrices(A, latex = TRUE, fractions = TRUE)]\\ [glue_matrices(P, latex = TRUE)] \\\\",
-  " & = & [glue_matrices(D, latex = TRUE, fractions = TRUE)]",
+  "D & \\! = \\! & P^{\\text{t}}\\ A\\ P = \\\\",
+  " & \\! = \\! & \\! [glue_matrices(t(P), latex = TRUE)] [glue_matrices(A, latex = TRUE, fractions = TRUE)] [glue_matrices(P, latex = TRUE)] \\\\",
+  " &\\! = \\! & \\! [glue_matrices(D, latex = TRUE, fractions = TRUE)]",
   "\\end{array}"
 ) %>% 
   cat()
 ```
-
+\normalsize

@@ -4,6 +4,9 @@ author: "Domingo López"
 date: "`r Sys.Date()`"
 fontsize: 11pt
 geometry: margin=1.5in
+linkcolor: blue
+urlcolor: blue
+citecolor: blue
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -53,15 +56,96 @@ glue_latex <- function(...) {
   
 }
 
-theorem <- function(text) {
+md2latex <- function(text) {
+  
+  filename <- pander::Pandoc.convert(text = text,
+                                     format = "latex",
+                                     open = FALSE)
+  
+  latex <- readr::read_lines(filename)
+  
+  idx <- match(c("\\begin{document}", "\\end{document}"), latex)
+  
+  if (length(idx) == 2) {
+    
+    return(str_flatten(latex[(idx[1] + 1):(idx[2] - 1)], " "))
+    
+  }
+  
+}
+
+theorem <- function(text, desc = "") {
   
   if (knitr::is_html_output()) {
     
-    cat("\n> ", text, "\n\n")
+    if (stringr::str_length(desc) > 0) {
+      
+      desc <- paste0("\n> __", desc, "__:\n")
+      
+    }
+    
+    text <- stringr::str_split(text, "\n")[[1]]
+    text <- glue::glue("\n> {text}") %>% 
+      stringr::str_flatten("\n")
+    
+    cat(desc, text, "\n\n")
     
   } else {
     
-    cat("\\begin{framebox}\n", text, "\n\\end{framebox}\n\n")
+    if (stringr::str_length(desc) > 0) {
+      
+      desc <- paste0("[", desc, "]")
+      
+    }
+
+    glue::glue(
+      "\\vspace*{2mm}\n\\begin{theo}#desc#\n",
+      "#md2latex(text)#\n\\end{theo}\n\n",
+      .open = "#", .close = "#"
+    ) %>% 
+      cat()
+    
+  }
+  
+}
+
+definition <- function(text, 
+                       item = "",
+                       bold = tolower(item)) {
+  
+  if (knitr::is_html_output()) {
+    
+    if (stringr::str_length(item) > 0) {
+      
+      item <- paste0(" (", item, ")")
+      
+    }
+    
+    text <- text %>% 
+      str_replace_all(pattern = fixed(bold),
+                      replacement = paste0("__", bold, "__"))
+
+    
+    cat("\n__Definición", item, "__ ", text, "\n\n")
+    
+  } else {
+    
+    if (stringr::str_length(item) > 0) {
+      
+      item <- paste0("[", item, "]")
+      
+    }
+    
+    text <- text %>% 
+      str_replace_all(pattern = fixed(bold),
+                      replacement = paste0("\\textbf{", bold, "}"))
+    
+    glue::glue(
+      "\\vspace*{2mm}\n\\begin{defin}#item#\n",
+      "#md2latex(text)#\n\\end{defin}\n\n",
+      .open = "#", .close = "#"
+    ) %>% 
+      cat()
     
   }
   

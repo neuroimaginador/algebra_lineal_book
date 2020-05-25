@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-05-23" />
+<meta name="date" content="2020-05-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="espeuc.html"/>
 
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -288,7 +289,7 @@ t
 9x &amp;  &amp; + 4z &amp; + 4t &amp; = &amp; 0\\
 \end{array}\right.\]</span></p>
 <p>Lo resolvemos por Gauss para obtener las ecuaciones paramétricas del conjunto solución:
-<span class="math display">\[\left( \begin{array}{cccc|c} 3 &amp; 4 &amp; 0 &amp; 0 &amp; 0\\ 9 &amp; 0 &amp; 4 &amp; 4 &amp; 0 \end{array} \right) \sim\left( \begin{array}{cccc|c} 3 &amp; 4 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; -12 &amp; 4 &amp; 4 &amp; 0 \end{array} \right) \Rightarrow\quad\ \left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right)  = \alpha\left(\begin{array}{c} - \frac{4}{3}\\ 1\\ 1\\ 2 \end{array}\right) {}+\beta\left(\begin{array}{c} 0\\ 0\\ 2\\ -2 \end{array}\right) {}\]</span></p>
+<span class="math display">\[\left( \begin{array}{cccc|c} 3 &amp; 4 &amp; 0 &amp; 0 &amp; 0\\ 9 &amp; 0 &amp; 4 &amp; 4 &amp; 0 \end{array} \right) \sim\left( \begin{array}{cccc|c} 3 &amp; 4 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; -12 &amp; 4 &amp; 4 &amp; 0 \end{array} \right) \Rightarrow\ \left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right)  = \alpha\left(\begin{array}{c} - \frac{4}{3}\\ 1\\ 1\\ 2 \end{array}\right) {}+\beta\left(\begin{array}{c} 0\\ 0\\ 2\\ -2 \end{array}\right) {}\]</span></p>
 <p>Por tanto, una base de <span class="math inline">\(W\)</span> será:
 <span class="math display">\[\mathcal{B}_{W} = \left\{\left(
 \begin{array}{c@{}}
@@ -660,14 +661,14 @@ y así <span class="math inline">\(\mathrm{dim}(f(U)) = 2\)</span>.</p>
 </ol>
 <ul>
 <li>Para el autovalor <span class="math inline">\(\lambda = 4\)</span>:
-<span class="math display">\[(A -4 I)\left(\begin{array}{c} x\\ y\\ z \end{array}\right)  = 0\Leftrightarrow\left( \begin{array}{ccc@{}} 1 &amp; 0 &amp; -3\\ 1 &amp; 4 &amp; 1\\ -1 &amp; 0 &amp; 3 \end{array} \right) \left(\begin{array}{c} x\\ y\\ z \end{array}\right)  = 0\Leftrightarrow\left\{\begin{array}{rrrcr} x &amp;  &amp; -3z &amp; = &amp; 0\\ x &amp; + 4y &amp; + z &amp; = &amp; 0\\ -x &amp;  &amp; + 3z &amp; = &amp; 0\\ \end{array}\right.\]</span></li>
+<span class="math display">\[\begin{array}{rcl}(A -4 I)\left(\begin{array}{c} x\\ y\\ z \end{array}\right)  = 0 &amp;\Leftrightarrow &amp; \left( \begin{array}{ccc@{}} 1 &amp; 0 &amp; -3\\ 1 &amp; 4 &amp; 1\\ -1 &amp; 0 &amp; 3 \end{array} \right) \left(\begin{array}{c} x\\ y\\ z \end{array}\right)  = 0 \\&amp; \Leftrightarrow &amp; \left\{\begin{array}{rrrcr} x &amp;  &amp; -3z &amp; = &amp; 0\\ x &amp; + 4y &amp; + z &amp; = &amp; 0\\ -x &amp;  &amp; + 3z &amp; = &amp; 0\\ \end{array}\right.\end{array}\]</span></li>
 </ul>
 <p>Resolvemos este sistema por Gauss-Jordan, encontrando la forma paramétrica de su conjunto solución, que es <span class="math inline">\(U_{ 4 }\)</span>:
 <span class="math display">\[\left( \begin{array}{ccc|c} 1 &amp; 0 &amp; -3 &amp; 0\\ 1 &amp; 4 &amp; 1 &amp; 0\\ -1 &amp; 0 &amp; 3 &amp; 0 \end{array} \right) \sim\left( \begin{array}{ccc|c} 1 &amp; 0 &amp; -3 &amp; 0\\ 0 &amp; 4 &amp; 4 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 0 \end{array} \right) \Rightarrow\left(\begin{array}{c} x\\ y\\ z \end{array}\right)  = \alpha\left(\begin{array}{c} 3\\ -1\\ 1 \end{array}\right) {}\]</span></p>
 <p>De aquí que una base de <span class="math inline">\(U_{ 4 }\)</span> sea:
 <span class="math display">\[\mathcal{B}_{U_{4}} = \left\{\left( \begin{array}{c@{}} 3\\ -1\\ 1 \end{array} \right) \right\}\]</span>
 - Para el autovalor <span class="math inline">\(\lambda = 8\)</span>:
-<span class="math display">\[(A -8 I)\left(\begin{array}{c} x\\ y\\ z \end{array}\right)  = 0\Leftrightarrow\left( \begin{array}{ccc@{}} -3 &amp; 0 &amp; -3\\ 1 &amp; 0 &amp; 1\\ -1 &amp; 0 &amp; -1 \end{array} \right) \left(\begin{array}{c} x\\ y\\ z \end{array}\right)  = 0\Leftrightarrow\left\{\begin{array}{rrrcr} -3x &amp;  &amp; -3z &amp; = &amp; 0\\ x &amp;  &amp; + z &amp; = &amp; 0\\ -x &amp;  &amp; -z &amp; = &amp; 0\\ \end{array}\right.\]</span></p>
+<span class="math display">\[\begin{array}{rcl}(A -8 I)\left(\begin{array}{c} x\\ y\\ z \end{array}\right)  = 0 &amp;\Leftrightarrow &amp; \left( \begin{array}{ccc@{}} -3 &amp; 0 &amp; -3\\ 1 &amp; 0 &amp; 1\\ -1 &amp; 0 &amp; -1 \end{array} \right) \left(\begin{array}{c} x\\ y\\ z \end{array}\right)  = 0 \\&amp; \Leftrightarrow &amp; \left\{\begin{array}{rrrcr} -3x &amp;  &amp; -3z &amp; = &amp; 0\\ x &amp;  &amp; + z &amp; = &amp; 0\\ -x &amp;  &amp; -z &amp; = &amp; 0\\ \end{array}\right.\end{array}\]</span></p>
 <p>Resolvemos este sistema por Gauss-Jordan, encontrando la forma paramétrica de su conjunto solución, que es <span class="math inline">\(U_{ 8 }\)</span>:
 <span class="math display">\[\left( \begin{array}{ccc|c} -3 &amp; 0 &amp; -3 &amp; 0\\ 1 &amp; 0 &amp; 1 &amp; 0\\ -1 &amp; 0 &amp; -1 &amp; 0 \end{array} \right) \sim\left( \begin{array}{ccc|c} -3 &amp; 0 &amp; -3 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 0 \end{array} \right) \Rightarrow\left(\begin{array}{c} x\\ y\\ z \end{array}\right)  = \alpha\left(\begin{array}{c} 0\\ 1\\ 0 \end{array}\right) {}+\beta\left(\begin{array}{c} -1\\ 0\\ 1 \end{array}\right) {}\]</span></p>
 <p>De aquí que una base de <span class="math inline">\(U_{ 8 }\)</span> sea:
@@ -771,7 +772,7 @@ Y llamamos
 <span class="math display">\[u_3  = v_3 - \mathrm{proy}_{U_2}(v_3) = \left(\begin{array}{c} 1\\ 0\\ 0\\ 1 \end{array}\right)  - \left( \begin{array}{c@{}} \frac{5}{6}\\ \frac{1}{6}\\ - \frac{1}{3}\\ 0 \end{array} \right)  =  \left( \begin{array}{c@{}} \frac{1}{6}\\ - \frac{1}{6}\\ \frac{1}{3}\\ 1 \end{array} \right) \]</span></p>
 <p>Y así hemos llegado a un sistema ortogonal formado por los vectores <span class="math inline">\(u_i\)</span>.
 Debemos normalizar ahora los vectores de este sistema ortogonal que tenemos, multiplicando cada uno por el inverso de su norma, llegando a la siguiente base ortonormal de <span class="math inline">\(U_{ 0 }\)</span>.
-<span class="math display">\[\mathcal{B}&#39;_{U_{0}} = \left\{\frac{1}{\sqrt{2}}\left( \begin{array}{c} 1\\ 1\\ 0\\ 0 \end{array} \right), \frac{1}{\sqrt{3}}\left( \begin{array}{c} -1\\ 1\\ 1\\ 0 \end{array} \right), \frac{1}{\frac{\sqrt{42}}{6}}\left( \begin{array}{c} \frac{1}{6}\\ \frac{-1}{6}\\ \frac{1}{3}\\ 1 \end{array} \right)\right\} = \left\{\left( \begin{array}{c} \frac{\sqrt{2}}{2}\\ \frac{\sqrt{2}}{2}\\ 0\\ 0 \end{array} \right), \left( \begin{array}{c} \frac{-\sqrt{3}}{3}\\ \frac{\sqrt{3}}{3}\\ \frac{\sqrt{3}}{3}\\ 0 \end{array} \right), \left( \begin{array}{c} \frac{\sqrt{42}}{42}\\ \frac{-\sqrt{42}}{42}\\ \frac{\sqrt{42}}{21}\\ \frac{\sqrt{42}}{7} \end{array} \right)\right\}\]</span></p>
+<span class="math display">\[\begin{array}{rcl}\mathcal{B}&#39;_{U_{0}} &amp; = &amp; \left\{\frac{1}{\sqrt{2}}\left( \begin{array}{c} 1\\ 1\\ 0\\ 0 \end{array} \right), \frac{1}{\sqrt{3}}\left( \begin{array}{c} -1\\ 1\\ 1\\ 0 \end{array} \right), \frac{1}{\frac{\sqrt{42}}{6}}\left( \begin{array}{c} \frac{1}{6}\\ \frac{-1}{6}\\ \frac{1}{3}\\ 1 \end{array} \right)\right\} = \\ &amp; = &amp; \left\{\left( \begin{array}{c} \frac{\sqrt{2}}{2}\\ \frac{\sqrt{2}}{2}\\ 0\\ 0 \end{array} \right), \left( \begin{array}{c} \frac{-\sqrt{3}}{3}\\ \frac{\sqrt{3}}{3}\\ \frac{\sqrt{3}}{3}\\ 0 \end{array} \right), \left( \begin{array}{c} \frac{\sqrt{42}}{42}\\ \frac{-\sqrt{42}}{42}\\ \frac{\sqrt{42}}{21}\\ \frac{\sqrt{42}}{7} \end{array} \right)\right\} \\\end{array}\]</span></p>
 <ul>
 <li>Para el autovalor <span class="math inline">\(\lambda = -7\)</span>:
 <span class="math display">\[\begin{array}{rcl}(A + 7 I)\left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right)  = 0&amp; \Leftrightarrow &amp; \left( \begin{array}{cccc@{}} 6 &amp; 1 &amp; -2 &amp; 1\\ 1 &amp; 6 &amp; 2 &amp; -1\\ -2 &amp; 2 &amp; 3 &amp; 2\\ 1 &amp; -1 &amp; 2 &amp; 6 \end{array} \right) \left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right)  = 0 \Leftrightarrow \\&amp; \Leftrightarrow &amp; \left\{\begin{array}{rrrrcr} 6x &amp; + y &amp; -2z &amp; + t &amp; = &amp; 0\\ x &amp; + 6y &amp; + 2z &amp; -t &amp; = &amp; 0\\ -2x &amp; + 2y &amp; + 3z &amp; + 2t &amp; = &amp; 0\\ x &amp; -y &amp; + 2z &amp; + 6t &amp; = &amp; 0\\ \end{array}\right. \\\end{array}\]</span></li>
@@ -782,12 +783,14 @@ Debemos normalizar ahora los vectores de este sistema ortogonal que tenemos, mul
 <span class="math display">\[\mathcal{B}_{U_{-7}} = \left\{\left( \begin{array}{c@{}} -1\\ 1\\ -2\\ 1 \end{array} \right) \right\}\]</span></p>
 <p>Como solo tenemos un vector en la base, ya forma un sistema ortogonal.
 Debemos normalizar ahora los vectores de este sistema ortogonal que tenemos, multiplicando cada uno por el inverso de su norma, llegando a la siguiente base ortonormal de <span class="math inline">\(U_{ -7 }\)</span>.
-<span class="math display">\[\mathcal{B}&#39;_{U_{-7}} = \left\{\frac{1}{\sqrt{7}}\left( \begin{array}{c} -1\\ 1\\ -2\\ 1 \end{array} \right)\right\} = \left\{\left( \begin{array}{c} \frac{-\sqrt{7}}{7}\\ \frac{\sqrt{7}}{7}\\ \frac{-2\cdot\sqrt{7}}{7}\\ \frac{\sqrt{7}}{7} \end{array} \right)\right\}\]</span>
+<span class="math display">\[\mathcal{B}&#39;_{U_{-7}}  =  \left\{\frac{1}{\sqrt{7}}\left( \begin{array}{c} -1\\ 1\\ -2\\ 1 \end{array} \right)\right\} =  \left\{\left( \begin{array}{c} \frac{-\sqrt{7}}{7}\\ \frac{\sqrt{7}}{7}\\ \frac{-2\cdot\sqrt{7}}{7}\\ \frac{\sqrt{7}}{7} \end{array} \right)\right\}\]</span>
 Definimos
 <span class="math display">\[\mathcal{B} = \mathcal{B}&#39;_{U_{0}} \cup \mathcal{B}&#39;_{U_{-7}} = \left\{\left( \begin{array}{c} \frac{\sqrt{2}}{2}\\ \frac{\sqrt{2}}{2}\\ 0\\ 0 \end{array} \right), \left( \begin{array}{c} \frac{-\sqrt{3}}{3}\\ \frac{\sqrt{3}}{3}\\ \frac{\sqrt{3}}{3}\\ 0 \end{array} \right), \left( \begin{array}{c} \frac{\sqrt{42}}{42}\\ \frac{-\sqrt{42}}{42}\\ \frac{\sqrt{42}}{21}\\ \frac{\sqrt{42}}{7} \end{array} \right), \left( \begin{array}{c} \frac{-\sqrt{7}}{7}\\ \frac{\sqrt{7}}{7}\\ \frac{-2\cdot\sqrt{7}}{7}\\ \frac{\sqrt{7}}{7} \end{array} \right)\right\}\]</span>
 Es una base ortonormal de <span class="math inline">\(\mathbb{R}^{4}\)</span>, formada únicamente por autovectores de la matriz <span class="math inline">\(A\)</span>.</p>
 <p>Además, la matriz <span class="math inline">\(P\)</span> del <a href="ev.html#cambiobase">cambio de base</a> de esta base <span class="math inline">\(\mathcal{B}\)</span> a la canónica, formada por los vectores de <span class="math inline">\(\mathcal{B}\)</span> puestos por columnas, es <em>ortogonal</em> y nos proporciona la relación entre <span class="math inline">\(A\)</span> y la matriz diagonal <span class="math inline">\(D\)</span> de los autovalores:
-<span class="math display">\[\begin{array}{rcl}D &amp; = &amp; P^{\text{t}}\ A\ P = \\ &amp; = &amp; \left( \begin{array}{cccc@{}} \frac{\sqrt{2}}{2} &amp; \frac{\sqrt{2}}{2} &amp; 0 &amp; 0\\ \frac{-\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3} &amp; 0\\ \frac{\sqrt{42}}{42} &amp; \frac{-\sqrt{42}}{42} &amp; \frac{\sqrt{42}}{21} &amp; \frac{\sqrt{42}}{7}\\ \frac{-\sqrt{7}}{7} &amp; \frac{\sqrt{7}}{7} &amp; \frac{-2\cdot\sqrt{7}}{7} &amp; \frac{\sqrt{7}}{7} \end{array} \right) \ \left( \begin{array}{cccc@{}} -1 &amp; 1 &amp; -2 &amp; 1\\ 1 &amp; -1 &amp; 2 &amp; -1\\ -2 &amp; 2 &amp; -4 &amp; 2\\ 1 &amp; -1 &amp; 2 &amp; -1 \end{array} \right) \ \left( \begin{array}{cccc@{}} \frac{\sqrt{2}}{2} &amp; \frac{-\sqrt{3}}{3} &amp; \frac{\sqrt{42}}{42} &amp; \frac{-\sqrt{7}}{7}\\ \frac{\sqrt{2}}{2} &amp; \frac{\sqrt{3}}{3} &amp; \frac{-\sqrt{42}}{42} &amp; \frac{\sqrt{7}}{7}\\ 0 &amp; \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{42}}{21} &amp; \frac{-2\cdot\sqrt{7}}{7}\\ 0 &amp; 0 &amp; \frac{\sqrt{42}}{7} &amp; \frac{\sqrt{7}}{7} \end{array} \right)  \\ &amp; = &amp; \left( \begin{array}{cccc@{}} 0 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; -7 \end{array} \right) \end{array}\]</span></p>
+
+<span class="math display">\[\begin{array}{rcl}D &amp; \! = \! &amp; P^{\text{t}}\ A\ P = \\ &amp; \! = \! &amp; \! \left( \begin{array}{cccc@{}} \frac{\sqrt{2}}{2} &amp; \frac{\sqrt{2}}{2} &amp; 0 &amp; 0\\ \frac{-\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3} &amp; 0\\ \frac{\sqrt{42}}{42} &amp; \frac{-\sqrt{42}}{42} &amp; \frac{\sqrt{42}}{21} &amp; \frac{\sqrt{42}}{7}\\ \frac{-\sqrt{7}}{7} &amp; \frac{\sqrt{7}}{7} &amp; \frac{-2\cdot\sqrt{7}}{7} &amp; \frac{\sqrt{7}}{7} \end{array} \right)  \left( \begin{array}{cccc@{}} -1 &amp; 1 &amp; -2 &amp; 1\\ 1 &amp; -1 &amp; 2 &amp; -1\\ -2 &amp; 2 &amp; -4 &amp; 2\\ 1 &amp; -1 &amp; 2 &amp; -1 \end{array} \right)  \left( \begin{array}{cccc@{}} \frac{\sqrt{2}}{2} &amp; \frac{-\sqrt{3}}{3} &amp; \frac{\sqrt{42}}{42} &amp; \frac{-\sqrt{7}}{7}\\ \frac{\sqrt{2}}{2} &amp; \frac{\sqrt{3}}{3} &amp; \frac{-\sqrt{42}}{42} &amp; \frac{\sqrt{7}}{7}\\ 0 &amp; \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{42}}{21} &amp; \frac{-2\cdot\sqrt{7}}{7}\\ 0 &amp; 0 &amp; \frac{\sqrt{42}}{7} &amp; \frac{\sqrt{7}}{7} \end{array} \right)  \\ &amp;\! = \! &amp; \! \left( \begin{array}{cccc@{}} 0 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; -7 \end{array} \right) \end{array}\]</span>
+</p>
 
 </div>
 </div>
