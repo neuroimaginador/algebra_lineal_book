@@ -1195,9 +1195,9 @@ Por tanto, esta matriz (y el endomorfismo $f$) es diagonalizable ortogonalmente.
 P_str <- vectors2matrix(base2)
 glue_latex(
   "\\begin{array}{rcl}",
-  "D & = & P^{\\text{t}}\\ A\\ P = \\\\",
-  "  & = & [glue_matrices(P_str, latex = TRUE)]^{\\text{t}} [glue_matrices(A, latex = TRUE, fractions = TRUE)] [glue_matrices(P_str, latex = TRUE)] \\\\",
-  "  & = & [glue_matrices(D, latex = TRUE, fractions = TRUE)]",
+  "D &\\!\\! = &\\!\\! P^{\\text{t}}\\ A\\ P = \\\\",
+  "  &\\!\\! = &\\!\\! [glue_matrices(P_str, latex = TRUE)]^{\\text{t}} [glue_matrices(A, latex = TRUE, fractions = TRUE)] [glue_matrices(P_str, latex = TRUE)] \\\\",
+  "  &\\!\\! = &\\!\\! [glue_matrices(D, latex = TRUE, fractions = TRUE)]",
   "\\end{array}"
 ) %>% 
   cat()
@@ -1533,9 +1533,9 @@ Además, la matriz $P$ del [cambio de base](#cambiobase) de esta base $\mathcal{
 P <- vectors2matrix(base2)
 glue_latex(
   "\\begin{array}{rcl}",
-  "D & = & P^{\\text{t}}\\ A\\ P = \\\\",
-  " & = & [glue_matrices(t(P), latex = TRUE)]\\ [glue_matrices(A, latex = TRUE, fractions = TRUE)]\\ [glue_matrices(P, latex = TRUE)] \\\\",
-  " & = & [glue_matrices(D, latex = TRUE, fractions = TRUE)]",
+  "D &\\!\\! = &\\!\\! P^{\\text{t}}\\ A\\ P = \\\\",
+  " &\\!\\! = &\\!\\! [glue_matrices(t(P), latex = TRUE)]\\ [glue_matrices(A, latex = TRUE, fractions = TRUE)]\\ [glue_matrices(P, latex = TRUE)] \\\\",
+  " &\\!\\! = &\\!\\! [glue_matrices(D, latex = TRUE, fractions = TRUE)]",
   "\\end{array}"
 ) %>% 
   cat()

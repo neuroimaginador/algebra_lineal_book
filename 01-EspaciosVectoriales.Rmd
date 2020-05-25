@@ -158,10 +158,11 @@ Si hubiéramos llegado a 3 ecuaciones no nulas, entonces estaríamos en la situa
 ## Qué es un sistema generador y el subespacio generado por un conjunto de vectores {#gen}
 \sectionmark{Sistema generador} 
 
-```{r}
-definition("Consideramos un sistema de vectores $\\mathcal{S} = \\{v_1,\\ldots,v_n\\}$. El subespacio generado por $\\mathcal{S}$ es el conjunto de vectores que se calcula como combinaciones lineales de los de $\\mathcal{S}$.", "Subespacio generado", "subespacio generado")
-```
+En esta sección, estudiamos una noción complementaria a la de [sistema linealmente independiente](#indep).
 
+```{r}
+definition("Consideramos un sistema de vectores $\\mathcal{S} = \\{v_1,\\ldots,v_n\\}$. El __subespacio generado__ por $\\mathcal{S}$ es el conjunto de vectores que se calcula como combinaciones lineales de los de $\\mathcal{S}$.", "Subespacio generado")
+```
 
 Es decir, si vamos dando valores a unos escalares $\alpha_1,\ldots,\alpha_n$, entonces el vector $\alpha_1v_1+\ldots+\alpha_nv_n$ es combinación lineal de los de $\mathcal{S}$, luego pertenece al subespacio generado por éste.
 

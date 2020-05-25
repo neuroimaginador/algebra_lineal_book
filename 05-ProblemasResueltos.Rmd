@@ -669,7 +669,7 @@ c. Para determinar si $f$ es [inyectiva](#inyectividad) o [sobreyectiva](#sobrey
 - $f$ será inyectiva si y solo si se cumple $\mathrm{dim}(\mathrm{Ker}\ f) = 0$. Sabemos que \(\mathrm{dim}(\mathrm{Ker}\ f) = `r ncol(genKer)`\), luego $f$ `r ifelse(ncol(genKer) == 0, "", "no")` es inyectiva.
 - $f$ será sobreyectiva si y solo si se cumple que \(\mathrm{dim}(\mathrm{Im}\ f) = \mathrm{dim}(W) = \mathrm{dim}(\mathbb{R}^{`r m`})\), y esto `r ifelse(ncol(bImf) == m, "", "no")` se cumple, como hemos visto en el apartado anterior, luego $f$ `r ifelse(ncol(bImf) == m, "", "no")` es sobreyectiva.
 
-d. El [teorema de la dimensión para núcleo e imagen](@th-dim-nucleo) dice que $\mathrm{dim}(V) = \mathrm{dim}(\mathrm{Ker}\ f) + \mathrm{dim}(\mathrm{Im}\ f)$. Lo podemos comprobar fácilmente:
+d. El [teorema de la dimensión para núcleo e imagen](#th-dim-nucleo) dice que $\mathrm{dim}(V) = \mathrm{dim}(\mathrm{Ker}\ f) + \mathrm{dim}(\mathrm{Im}\ f)$. Lo podemos comprobar fácilmente:
 $$\begin{array}{ccccc}
 \mathrm{dim}(\mathbb{R}^{`r n`}) & = & \mathrm{dim}(\mathrm{Ker}\ f) & + & \mathrm{dim}(\mathrm{Im}\ f) \\
 `r n` & = & `r ncol(genKer)` & + & `r ncol(bImf)` \\
@@ -1675,9 +1675,9 @@ Además, la matriz $P$ del [cambio de base](#cambiobase) de esta base $\mathcal{
 P <- vectors2matrix(all_bases)
 glue_latex(
   "\\begin{array}{rcl}",
-  "D & \\! = \\! & P^{\\text{t}}\\ A\\ P = \\\\",
-  " & \\! = \\! & \\! [glue_matrices(t(P), latex = TRUE)] [glue_matrices(A, latex = TRUE, fractions = TRUE)] [glue_matrices(P, latex = TRUE)] \\\\",
-  " &\\! = \\! & \\! [glue_matrices(D, latex = TRUE, fractions = TRUE)]",
+  "D & \\!\\! = \\!\\! & P^{\\text{t}}\\ A\\ P = \\\\",
+  " & \\!\\! = \\! & \\!\\!\\! [glue_matrices(t(P), latex = TRUE)]\\!\\!\\! [glue_matrices(A, latex = TRUE, fractions = TRUE)]\\!\\!\\! [glue_matrices(P, latex = TRUE)] \\\\",
+  " &\\!\\! = \\! & \\!\\! [glue_matrices(D, latex = TRUE, fractions = TRUE)]",
   "\\end{array}"
 ) %>% 
   cat()
