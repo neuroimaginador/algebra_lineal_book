@@ -1555,7 +1555,7 @@ for (av_idx in seq_along(autovalores)) {
       
       cat("Construimos:\n")
       glue_latex(
-        "U_[i-1] = \\mathcal{L}(\\{[previous_ui]\\}) = ",
+        "\\mathcal{U}_[i-1] = \\mathcal{L}(\\{[previous_ui]\\}) = ",
         "\\mathcal{L}(\\left\\{[vectors_to_latex(Ui)]\\right\\})"
       ) %>% str_replace_all("\n", " ") %>% 
         cat()
@@ -1564,7 +1564,7 @@ for (av_idx in seq_along(autovalores)) {
       cat("Entonces\n")
       
       glue_latex(
-        "\\mathrm{proy}_{U_[i-1]}(v_[i])  = [proy_form]  =  [proy_val]  = [glue_matrices(proyec, fractions = TRUE, latex = TRUE)]"
+        "\\mathrm{proy}_{\\mathcal{U}_[i-1]}(v_[i])  = [proy_form]  =  [proy_val]  = [glue_matrices(proyec, fractions = TRUE, latex = TRUE)]"
       ) %>% 
         str_replace_all(pattern = "\n", replacement = " ") %>% 
         cat()
@@ -1574,7 +1574,7 @@ for (av_idx in seq_along(autovalores)) {
       cat("Y llamamos\n")
       
       glue_latex(
-        "u_[i]  = v_[i] - \\mathrm{proy}_{U_[i - 1]}(v_[i]) = ",
+        "u_[i]  = v_[i] - \\mathrm{proy}_{\\mathcal{U}_[i - 1]}(v_[i]) = ",
         "[to_latex(vi, fractions = TRUE)] - [glue_matrices(proyec, fractions = TRUE, latex = TRUE)] = ",
         " [glue_matrices(ui_new, fractions = TRUE, latex = TRUE)]"
       ) %>% str_replace_all(pattern = "\n", replacement = " ") %>% cat()

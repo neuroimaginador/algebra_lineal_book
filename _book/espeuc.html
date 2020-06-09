@@ -24,7 +24,7 @@
 <meta name="author" content="Domingo López" />
 
 
-<meta name="date" content="2020-05-25" />
+<meta name="date" content="2020-06-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -285,10 +285,12 @@ y los vectores
 <span class="math display">\[U^{\perp} = \{v\in V: \langle v, u \rangle = 0\,\,\text{para todo }u\in U\}\]</span></p>
 <p>Tenemos las siguientes propiedades del complemento ortogonal de un subespacio:</p>
 <blockquote>
-<p><strong>Propiedades del complemento ortogonal</strong>:
-- <span class="math inline">\(U^{\perp}\)</span> es un subespacio vectorial de <span class="math inline">\(V\)</span>.
-- <span class="math inline">\(U\cap U^{\perp} = \{0\}\)</span>.
-- Si <span class="math inline">\(V\)</span> es de dimensión finita, <span class="math inline">\(\mathrm{dim}(U) + \mathrm{dim}(U^{\perp}) = \mathrm{dim}(V)\)</span>.</p>
+<p><strong>Propiedades del complemento ortogonal</strong>:</p>
+<ul>
+<li><span class="math inline">\(U^{\perp}\)</span> es un subespacio vectorial de <span class="math inline">\(V\)</span>.</li>
+<li><span class="math inline">\(U\cap U^{\perp} = \{0\}\)</span>.</li>
+<li>Si <span class="math inline">\(V\)</span> es de dimensión finita, <span class="math inline">\(\mathrm{dim}(U) + \mathrm{dim}(U^{\perp}) = \mathrm{dim}(V)\)</span>.</li>
+</ul>
 </blockquote>
 <p>Como consecuencia, este resultado nos dice que <strong><span class="math inline">\(V\)</span> se puede descomponer como la suma directa de <span class="math inline">\(U\)</span> y de su complemento ortogonal</strong>: <span class="math inline">\(U\oplus U^{\perp} = V\)</span>.</p>
 <p><strong>¿Cómo calculamos el complemento ortogonal de un subespacio?</strong></p>
@@ -335,9 +337,9 @@ x_1\\ x_2\\ \vdots \\ x_n\\
 <p>Para hallar su complemento ortogonal, suponemos un vector genérico
 <span class="math display">\[v = \left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right) \in \mathbb{R}^{4}\]</span>
 y hacemos su producto escalar por todos los vectores de <span class="math inline">\(\mathcal{B}\)</span>, imponiendo que valga 0:
-<span class="math display">\[\langle v, u_1 \rangle = 0\Leftrightarrow\langle \left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right) , \left(\begin{array}{c} -2\\ 0\\ -2\\ 2 \end{array}\right)  = 0\Leftrightarrow\ \begin{array}{ccr} -2x-2z+ 2t &amp; = &amp; 0\\ \end{array}\]</span><span class="math display">\[\langle v, u_2 \rangle = 0\Leftrightarrow\langle \left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right) , \left(\begin{array}{c} -1\\ -1\\ -2\\ 2 \end{array}\right)  = 0\Leftrightarrow\ \begin{array}{ccr} -x-y-2z+ 2t &amp; = &amp; 0\\ \end{array}\]</span></p>
+<span class="math display">\[\langle v, u_1 \rangle = 0\Leftrightarrow\langle \left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right) , \left(\begin{array}{c} -2\\ 0\\ -2\\ 2 \end{array}\right)  \rangle = 0\Leftrightarrow\ \begin{array}{ccr} -2x-2z+ 2t &amp; = &amp; 0\\ \end{array}\]</span><span class="math display">\[\langle v, u_2 \rangle = 0\Leftrightarrow\langle \left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right) , \left(\begin{array}{c} -1\\ -1\\ -2\\ 2 \end{array}\right)  \rangle = 0\Leftrightarrow\ \begin{array}{ccr} -x-y-2z+ 2t &amp; = &amp; 0\\ \end{array}\]</span></p>
 <p>Hemos llegado, por tanto, al siguiente sistema de ecuaciones que representan las ecuaciones cartesianas de <span class="math inline">\(U^{\perp}\)</span>:
-<span class="math display">\[\begin{array}{rrrrcr} -2x &amp;  &amp; -2z &amp; + 2t &amp; = &amp; 0\\ -x &amp; -y &amp; -2z &amp; + 2t &amp; = &amp; 0\\ \end{array}\]</span>
+<span class="math display">\[\left\{\begin{array}{rrrrcr} -2x &amp;  &amp; -2z &amp; + 2t &amp; = &amp; 0\\ -x &amp; -y &amp; -2z &amp; + 2t &amp; = &amp; 0\\ \end{array}\right.\]</span>
 Nos podemos dar cuenta de que la matriz del sistema es la que resulta de poner los vectores de la base <span class="math inline">\(\mathcal{B}\)</span> <em>por filas</em>.</p>
 <p>Como siempre, podemos resolver el sistema por Gauss-Jordan para <a href="ev.html#param2cartesian">deducir la forma paramétrica</a> de la solución, y, por tanto, un <a href="#sisgen">sistema generador</a> de <span class="math inline">\(U^{\perp}\)</span>:
 <span class="math display">\[\left( \begin{array}{cccc@{}} -2 &amp; 0 &amp; -2 &amp; 2\\ -1 &amp; -1 &amp; -2 &amp; 2 \end{array} \right) \sim\left( \begin{array}{cccc@{}} 1 &amp; 0 &amp; 1 &amp; -1\\ 0 &amp; 1 &amp; 1 &amp; -1 \end{array} \right) \Rightarrow\left(\begin{array}{c} x\\ y\\ z\\ t \end{array}\right)  = \alpha\left(\begin{array}{c} -1\\ -1\\ 1\\ 0 \end{array}\right) {}+\beta\left(\begin{array}{c} 1\\ 1\\ 0\\ 1 \end{array}\right) {}\]</span></p>
@@ -400,7 +402,7 @@ podemos sustituirlas en la expresión de más arriba y llegamos a
 <blockquote>
 <p><strong>Coordenadas en base ortonormal</strong>:
 Sea <span class="math inline">\(\mathcal{B} = \{v_1,\ldots,v_n\}\)</span> una base <em>ortonormal</em> del espacio vectorial <span class="math inline">\(V\)</span>. Entonces, para cada <span class="math inline">\(v\in V\)</span>, tenemos:
-<span class="math display">\[v = \langle v, v_1 \rangle v_1 + \ldots \langle v, v_n \rangle v_n\]</span>
+<span class="math display">\[v = \langle v, v_1 \rangle v_1 + \ldots + \langle v, v_n \rangle v_n\]</span>
 luego las coordenadas de <span class="math inline">\(v\)</span> en la base <span class="math inline">\(\mathcal{B}\)</span> las podemos calcular como:
 <span class="math display">\[[v]_{\mathcal{B}} = \left(\begin{array}{c}\langle v, v_1\rangle \\\langle v, v_2 \rangle \\\vdots \\\langle v, v_n \rangle \\\end{array}\right)_{\mathcal{B}}\]</span></p>
 </blockquote>
@@ -436,11 +438,11 @@ podemos hallar sus coordenadas en la base <span class="math inline">\(S&#39;\)</
 <p><em>Primera fase</em></p>
 <p>El proceso del primer paso es incremental.</p>
 <p>Llamamos <span class="math inline">\(u_1 = v_1\)</span>, el primer vector de la base <span class="math inline">\(\mathcal{B}\)</span>.</p>
-<p>Ahora consideramos el segundo vector <span class="math inline">\(v_2\)</span>. Por un <a href="espeuc.html#proyec">resultado teórico</a> sobre las proyecciones que vimos antes, si llamamos <span class="math inline">\(U_1 = \mathcal{L}(\{u_1\})\)</span>, entonces <span class="math inline">\(v_2 - \mathrm{proy}_{U_1}(v_2)\)</span> es un vector ortogonal a <span class="math inline">\(U_1\)</span>, en particular es ortogonal a <span class="math inline">\(u_1\)</span>.</p>
-<p>Llamemos entonces <span class="math inline">\(u_2 = v_2 - \mathrm{proy}_{U_1}(v_2)\)</span>.
+<p>Ahora consideramos el segundo vector <span class="math inline">\(v_2\)</span>. Por un <a href="espeuc.html#proyec">resultado teórico</a> sobre las proyecciones que vimos antes, si llamamos <span class="math inline">\(\mathcal{U}_1 = \mathcal{L}(\{u_1\})\)</span>, entonces <span class="math inline">\(v_2 - \mathrm{proy}_{\mathcal{U}_1}(v_2)\)</span> es un vector ortogonal a <span class="math inline">\(U_1\)</span>, en particular es ortogonal a <span class="math inline">\(u_1\)</span>.</p>
+<p>Llamemos entonces <span class="math inline">\(u_2 = v_2 - \mathrm{proy}_{\mathcal{U}_1}(v_2)\)</span>.
 Entonces, el sistema <span class="math inline">\(\{u_1, u_2\}\)</span> es ortogonal.</p>
-<p>Llamamos ahora <span class="math inline">\(U_2 = \mathcal{L}(\{u_1,u_2\})\)</span>. Entonces, por el mismo motivo que antes, si llamamos <span class="math inline">\(u_3 = v_3 - \mathrm{proy}_{U_2}(v_3)\)</span>, tenemos que <span class="math inline">\(u_3\)</span> es ortogonal a <span class="math inline">\(U_2\)</span>, luego <span class="math inline">\(\{u_1, u_2, u_3\}\)</span> es un sistema ortogonal.</p>
-<p>De esta forma, sucesivamente, en el paso <span class="math inline">\(m\)</span>, vamos construyendo <span class="math inline">\(U_m = \mathcal{L}(\{u_1,\ldots,u_m\})\)</span> y consideramos <span class="math inline">\(u_{m+1} = v_{m+1} - \mathrm{proy}_{U_m}(v_{m+1})\)</span>, que es un vector ortogonal a <span class="math inline">\(U_m\)</span> y, por tanto, <span class="math inline">\(\{u_1,\ldots,u_{m+1}\}\)</span> es un sistema ortogonal.</p>
+<p>Llamamos ahora <span class="math inline">\(\mathcal{U}_2 = \mathcal{L}(\{u_1,u_2\})\)</span>. Entonces, por el mismo motivo que antes, si llamamos <span class="math inline">\(u_3 = v_3 - \mathrm{proy}_{\mathcal{U}_2}(v_3)\)</span>, tenemos que <span class="math inline">\(u_3\)</span> es ortogonal a <span class="math inline">\(\mathcal{U}_2\)</span>, luego <span class="math inline">\(\{u_1, u_2, u_3\}\)</span> es un sistema ortogonal.</p>
+<p>De esta forma, sucesivamente, en el paso <span class="math inline">\(m\)</span>, vamos construyendo <span class="math inline">\(\mathcal{U}_m = \mathcal{L}(\{u_1,\ldots,u_m\})\)</span> y consideramos <span class="math inline">\(u_{m+1} = v_{m+1} - \mathrm{proy}_{\mathcal{U}_m}(v_{m+1})\)</span>, que es un vector ortogonal a <span class="math inline">\(U_m\)</span> y, por tanto, <span class="math inline">\(\{u_1,\ldots,u_{m+1}\}\)</span> es un sistema ortogonal.</p>
 <p>Una vez se haya completado el proceso, se habrá construido el conjunto <span class="math inline">\(\mathcal{B}&#39; = \{u_1,\ldots,u_n\}\)</span>. Como estamos en un espacio <span class="math inline">\(V\)</span> de dimensión <span class="math inline">\(n\)</span>, y tenemos <span class="math inline">\(n\)</span> vectores ortogonales, luego <a href="espeuc.html#ortho">linealmente independientes</a>, éstos forman una base. Luego <span class="math inline">\(\mathcal{B}&#39;\)</span> es una base ortogonal.</p>
 <p><em>Segunda fase</em></p>
 <p>La segunda fase es más sencilla, ya que implica únicamente normalizar cada vector de <span class="math inline">\(\mathcal{B}&#39;\)</span>.</p>
@@ -457,23 +459,23 @@ Entonces, el sistema <span class="math inline">\(\{u_1, u_2\}\)</span> es ortogo
 <p>A partir de este momento, procedemos de forma recursiva:</p>
 <ul>
 <li>Construimos:
-<span class="math display">\[U_1 = \mathcal{L}(\{u_1\}) = \mathcal{L}(\left\{\left( \begin{array}{c@{}} -1\\ -1\\ -1\\ -1 \end{array} \right) \right\})\]</span>
+<span class="math display">\[\mathcal{U}_1 = \mathcal{L}(\{u_1\}) = \mathcal{L}(\left\{\left( \begin{array}{c@{}} -1\\ -1\\ -1\\ -1 \end{array} \right) \right\})\]</span>
 Entonces
-<span class="math display">\[\begin{array}{rcl}\mathrm{proy}_{U_1}(v_2) &amp; = &amp; \frac{\langle v_2, u_1 \rangle}{\langle u_1, u_1 \rangle} u_1 \\ &amp; = &amp; \frac{0}{4} \left( \begin{array}{c@{}} -1\\ -1\\ -1\\ -1 \end{array} \right)  \\ &amp; = &amp; \left( \begin{array}{c@{}} 0\\ 0\\ 0\\ 0 \end{array} \right) \\\end{array}\]</span>
+<span class="math display">\[\begin{array}{rcl}\mathrm{proy}_{\mathcal{U}_1}(v_2) &amp; = &amp; \frac{\langle v_2, u_1 \rangle}{\langle u_1, u_1 \rangle} u_1 \\ &amp; = &amp; \frac{0}{4} \left( \begin{array}{c@{}} -1\\ -1\\ -1\\ -1 \end{array} \right)  \\ &amp; = &amp; \left( \begin{array}{c@{}} 0\\ 0\\ 0\\ 0 \end{array} \right) \\\end{array}\]</span>
 Y llamamos
-<span class="math display">\[u_2  = v_2 - \mathrm{proy}_{U_1}(v_2) = \left(\begin{array}{c} 1\\ -1\\ 1\\ -1 \end{array}\right)  - \left( \begin{array}{c@{}} 0\\ 0\\ 0\\ 0 \end{array} \right)  =  \left( \begin{array}{c@{}} 1\\ -1\\ 1\\ -1 \end{array} \right) \]</span></li>
+<span class="math display">\[u_2  = v_2 - \mathrm{proy}_{\mathcal{U}_1}(v_2) = \left(\begin{array}{c} 1\\ -1\\ 1\\ -1 \end{array}\right)  - \left( \begin{array}{c@{}} 0\\ 0\\ 0\\ 0 \end{array} \right)  =  \left( \begin{array}{c@{}} 1\\ -1\\ 1\\ -1 \end{array} \right) \]</span></li>
 <li>Construimos:
-<span class="math display">\[U_2 = \mathcal{L}(\{u_1, u_2\}) = \mathcal{L}(\left\{\left( \begin{array}{c@{}} -1\\ -1\\ -1\\ -1 \end{array} \right) , \left( \begin{array}{c@{}} 1\\ -1\\ 1\\ -1 \end{array} \right) \right\})\]</span>
+<span class="math display">\[\mathcal{U}_2 = \mathcal{L}(\{u_1, u_2\}) = \mathcal{L}(\left\{\left( \begin{array}{c@{}} -1\\ -1\\ -1\\ -1 \end{array} \right) , \left( \begin{array}{c@{}} 1\\ -1\\ 1\\ -1 \end{array} \right) \right\})\]</span>
 Entonces
-<span class="math display">\[\begin{array}{rcl}\mathrm{proy}_{U_2}(v_3) &amp; = &amp; \frac{\langle v_3, u_1 \rangle}{\langle u_1, u_1 \rangle} u_1+\frac{\langle v_3, u_2 \rangle}{\langle u_2, u_2 \rangle} u_2 \\ &amp; = &amp; \frac{3}{4} \left( \begin{array}{c@{}} -1\\ -1\\ -1\\ -1 \end{array} \right) +\frac{1}{4} \left( \begin{array}{c@{}} 1\\ -1\\ 1\\ -1 \end{array} \right)  \\ &amp; = &amp; \left( \begin{array}{c@{}} - \frac{1}{2}\\ -1\\ - \frac{1}{2}\\ -1 \end{array} \right) \\\end{array}\]</span>
+<span class="math display">\[\begin{array}{rcl}\mathrm{proy}_{\mathcal{U}_2}(v_3) &amp; = &amp; \frac{\langle v_3, u_1 \rangle}{\langle u_1, u_1 \rangle} u_1+\frac{\langle v_3, u_2 \rangle}{\langle u_2, u_2 \rangle} u_2 \\ &amp; = &amp; \frac{3}{4} \left( \begin{array}{c@{}} -1\\ -1\\ -1\\ -1 \end{array} \right) +\frac{1}{4} \left( \begin{array}{c@{}} 1\\ -1\\ 1\\ -1 \end{array} \right)  \\ &amp; = &amp; \left( \begin{array}{c@{}} - \frac{1}{2}\\ -1\\ - \frac{1}{2}\\ -1 \end{array} \right) \\\end{array}\]</span>
 Y llamamos
-<span class="math display">\[u_3  = v_3 - \mathrm{proy}_{U_2}(v_3) = \left(\begin{array}{c} -1\\ -1\\ 0\\ -1 \end{array}\right)  - \left( \begin{array}{c@{}} - \frac{1}{2}\\ -1\\ - \frac{1}{2}\\ -1 \end{array} \right)  =  \left( \begin{array}{c@{}} - \frac{1}{2}\\ 0\\ \frac{1}{2}\\ 0 \end{array} \right) \]</span></li>
+<span class="math display">\[u_3  = v_3 - \mathrm{proy}_{\mathcal{U}_2}(v_3) = \left(\begin{array}{c} -1\\ -1\\ 0\\ -1 \end{array}\right)  - \left( \begin{array}{c@{}} - \frac{1}{2}\\ -1\\ - \frac{1}{2}\\ -1 \end{array} \right)  =  \left( \begin{array}{c@{}} - \frac{1}{2}\\ 0\\ \frac{1}{2}\\ 0 \end{array} \right) \]</span></li>
 <li>Construimos:
-<span class="math display">\[U_3 = \mathcal{L}(\{u_1, u_2, u_3\}) = \mathcal{L}(\left\{\left( \begin{array}{c@{}} -1\\ -1\\ -1\\ -1 \end{array} \right) , \left( \begin{array}{c@{}} 1\\ -1\\ 1\\ -1 \end{array} \right) , \left( \begin{array}{c@{}} - \frac{1}{2}\\ 0\\ \frac{1}{2}\\ 0 \end{array} \right) \right\})\]</span>
+<span class="math display">\[\mathcal{U}_3 = \mathcal{L}(\{u_1, u_2, u_3\}) = \mathcal{L}(\left\{\left( \begin{array}{c@{}} -1\\ -1\\ -1\\ -1 \end{array} \right) , \left( \begin{array}{c@{}} 1\\ -1\\ 1\\ -1 \end{array} \right) , \left( \begin{array}{c@{}} - \frac{1}{2}\\ 0\\ \frac{1}{2}\\ 0 \end{array} \right) \right\})\]</span>
 Entonces
-<span class="math display">\[\begin{array}{rcl}\mathrm{proy}_{U_3}(v_4) &amp; = &amp; \frac{\langle v_4, u_1 \rangle}{\langle u_1, u_1 \rangle} u_1+\frac{\langle v_4, u_2 \rangle}{\langle u_2, u_2 \rangle} u_2+\frac{\langle v_4, u_3 \rangle}{\langle u_3, u_3 \rangle} u_3 \\ &amp; = &amp; \frac{0}{4} \left( \begin{array}{c@{}} -1\\ -1\\ -1\\ -1 \end{array} \right) +\frac{0}{4} \left( \begin{array}{c@{}} 1\\ -1\\ 1\\ -1 \end{array} \right) +\frac{1}{\frac{1}{2}} \left( \begin{array}{c@{}} - \frac{1}{2}\\ 0\\ \frac{1}{2}\\ 0 \end{array} \right)  \\ &amp; = &amp; \left( \begin{array}{c@{}} -1\\ 0\\ 1\\ 0 \end{array} \right) \\\end{array}\]</span>
+<span class="math display">\[\begin{array}{rcl}\mathrm{proy}_{\mathcal{U}_3}(v_4) &amp; = &amp; \frac{\langle v_4, u_1 \rangle}{\langle u_1, u_1 \rangle} u_1+\frac{\langle v_4, u_2 \rangle}{\langle u_2, u_2 \rangle} u_2+\frac{\langle v_4, u_3 \rangle}{\langle u_3, u_3 \rangle} u_3 \\ &amp; = &amp; \frac{0}{4} \left( \begin{array}{c@{}} -1\\ -1\\ -1\\ -1 \end{array} \right) +\frac{0}{4} \left( \begin{array}{c@{}} 1\\ -1\\ 1\\ -1 \end{array} \right) +\frac{1}{\frac{1}{2}} \left( \begin{array}{c@{}} - \frac{1}{2}\\ 0\\ \frac{1}{2}\\ 0 \end{array} \right)  \\ &amp; = &amp; \left( \begin{array}{c@{}} -1\\ 0\\ 1\\ 0 \end{array} \right) \\\end{array}\]</span>
 Y llamamos
-<span class="math display">\[u_4  = v_4 - \mathrm{proy}_{U_3}(v_4) = \left(\begin{array}{c} -1\\ 1\\ 1\\ -1 \end{array}\right)  - \left( \begin{array}{c@{}} -1\\ 0\\ 1\\ 0 \end{array} \right)  =  \left( \begin{array}{c@{}} 0\\ 1\\ 0\\ -1 \end{array} \right) \]</span></li>
+<span class="math display">\[u_4  = v_4 - \mathrm{proy}_{\mathcal{U}_3}(v_4) = \left(\begin{array}{c} -1\\ 1\\ 1\\ -1 \end{array}\right)  - \left( \begin{array}{c@{}} -1\\ 0\\ 1\\ 0 \end{array} \right)  =  \left( \begin{array}{c@{}} 0\\ 1\\ 0\\ -1 \end{array} \right) \]</span></li>
 </ul>
 <p>Por tanto, la base ortogonal a la que llegamos es
 <span class="math display">\[\mathcal{B}&#39; = \{u_i\} = \left\{\left( \begin{array}{c@{}} -1\\ -1\\ -1\\ -1 \end{array} \right) , \left( \begin{array}{c@{}} 1\\ -1\\ 1\\ -1 \end{array} \right) , \left( \begin{array}{c@{}} - \frac{1}{2}\\ 0\\ \frac{1}{2}\\ 0 \end{array} \right) , \left( \begin{array}{c@{}} 0\\ 1\\ 0\\ -1 \end{array} \right) \right\}\]</span></p>
@@ -592,7 +594,7 @@ Luego, multiplicando por <span class="math inline">\(P\)</span> a la izquierda e
 <li>Determinar una <a href="ev.html#base">base</a> <span class="math inline">\(\mathcal{B}_{\lambda}\)</span> del <a href="diagonalización.html#eigenspace">subespacio propio</a> <span class="math inline">\(U_{\lambda}\)</span>.</li>
 <li>Aplicar <a href="espeuc.html#gram-schmidt">el método de Gram-Schmidt</a> a <span class="math inline">\(\mathcal{B}_{\lambda}\)</span> para obtener una <a href="espeuc.html#ortho-basis">base _ortonormal</a> de <span class="math inline">\(U_{\lambda}\)</span> a la que llamaremos <span class="math inline">\(\mathcal{B}&#39;_{\lambda}\)</span>.</li>
 </ol></li>
-<li>Llamamos <span class="math inline">\(\mathcal{B} = \mathcal{B}&#39;_{\lambda_1}\cup\ldots\cup\mathcal{B}_{\lambda_k}\)</span>. Entonces <span class="math inline">\(\mathcal{B}\)</span> es una base ortonormal de <span class="math inline">\(V\)</span>. Además, la matriz <span class="math inline">\(P\)</span> de <a href="ev.html#cambiobase">cambio de base</a> de <span class="math inline">\(\mathcal{B}\)</span> a la canónica es una matriz <a href="espeuc.html#ortho-matrix">ortogonal</a>, tiene por columnas las coordenadas de los vectores de <span class="math inline">\(\mathcal{B}\)</span>, y verifica que <span class="math inline">\(D = P^{\text{t}}\ A\ P\)</span> es una matriz diagonal con los autovalores en la diagonal principal (con multiplicidades incluidas).</li>
+<li>Llamamos <span class="math inline">\(\mathcal{B} = \mathcal{B}&#39;_{\lambda_1}\cup\ldots\cup\mathcal{B}&#39;_{\lambda_k}\)</span>. Entonces <span class="math inline">\(\mathcal{B}\)</span> es una base ortonormal de <span class="math inline">\(V\)</span>. Además, la matriz <span class="math inline">\(P\)</span> de <a href="ev.html#cambiobase">cambio de base</a> de <span class="math inline">\(\mathcal{B}\)</span> a la canónica es una matriz <a href="espeuc.html#ortho-matrix">ortogonal</a>, tiene por columnas las coordenadas de los vectores de <span class="math inline">\(\mathcal{B}\)</span>, y verifica que <span class="math inline">\(D = P^{\text{t}}\ A\ P\)</span> es una matriz diagonal con los autovalores en la diagonal principal (con multiplicidades incluidas).</li>
 </ol>
 <hr />
 <p><strong>Ejemplo</strong></p>
@@ -619,11 +621,11 @@ Llamamos
 <span class="math display">\[u_1 = v_1 = \left(\begin{array}{c} - \frac{1}{2}\\ - \frac{1}{2}\\ 1\\ 0 \end{array}\right) \]</span>
 Procedemos con el resto de vectores:</p>
 <p>Construimos:
-<span class="math display">\[U_1 = \mathcal{L}(\{u_1\}) = \mathcal{L}(\left\{\left( \begin{array}{c@{}} - \frac{1}{2}\\ - \frac{1}{2}\\ 1\\ 0 \end{array} \right) \right\})\]</span>
+<span class="math display">\[\mathcal{U}_1 = \mathcal{L}(\{u_1\}) = \mathcal{L}(\left\{\left( \begin{array}{c@{}} - \frac{1}{2}\\ - \frac{1}{2}\\ 1\\ 0 \end{array} \right) \right\})\]</span>
 Entonces
-<span class="math display">\[\mathrm{proy}_{U_1}(v_2)  = \frac{\langle v_2, u_1 \rangle}{\langle u_1, u_1 \rangle} u_1  =  \frac{0}{\frac{3}{2}} \left( \begin{array}{c@{}} - \frac{1}{2}\\ - \frac{1}{2}\\ 1\\ 0 \end{array} \right)   = \left( \begin{array}{c@{}} 0\\ 0\\ 0\\ 0 \end{array} \right) \]</span>
+<span class="math display">\[\mathrm{proy}_{\mathcal{U}_1}(v_2)  = \frac{\langle v_2, u_1 \rangle}{\langle u_1, u_1 \rangle} u_1  =  \frac{0}{\frac{3}{2}} \left( \begin{array}{c@{}} - \frac{1}{2}\\ - \frac{1}{2}\\ 1\\ 0 \end{array} \right)   = \left( \begin{array}{c@{}} 0\\ 0\\ 0\\ 0 \end{array} \right) \]</span>
 Y llamamos
-<span class="math display">\[u_2  = v_2 - \mathrm{proy}_{U_1}(v_2) = \left(\begin{array}{c} \frac{1}{2}\\ - \frac{1}{2}\\ 0\\ 1 \end{array}\right)  - \left( \begin{array}{c@{}} 0\\ 0\\ 0\\ 0 \end{array} \right)  =  \left( \begin{array}{c@{}} \frac{1}{2}\\ - \frac{1}{2}\\ 0\\ 1 \end{array} \right) \]</span></p>
+<span class="math display">\[u_2  = v_2 - \mathrm{proy}_{\mathcal{U}_1}(v_2) = \left(\begin{array}{c} \frac{1}{2}\\ - \frac{1}{2}\\ 0\\ 1 \end{array}\right)  - \left( \begin{array}{c@{}} 0\\ 0\\ 0\\ 0 \end{array} \right)  =  \left( \begin{array}{c@{}} \frac{1}{2}\\ - \frac{1}{2}\\ 0\\ 1 \end{array} \right) \]</span></p>
 <p>Y así hemos llegado a un sistema ortogonal formado por los vectores <span class="math inline">\(u_i\)</span>.
 Debemos normalizar ahora los vectores de este sistema ortogonal que tenemos, multiplicando cada uno por el inverso de su norma, llegando a la siguiente base ortonormal de <span class="math inline">\(U_{ 0 }\)</span>.
 <span class="math display">\[\mathcal{B}&#39;_{U_{0}} = \left\{\frac{1}{\frac{\sqrt{6}}{2}}\left( \begin{array}{c} \frac{-1}{2}\\ \frac{-1}{2}\\ 1\\ 0 \end{array} \right), \frac{1}{\frac{\sqrt{6}}{2}}\left( \begin{array}{c} \frac{1}{2}\\ \frac{-1}{2}\\ 0\\ 1 \end{array} \right)\right\} = \left\{\left( \begin{array}{c} \frac{-\sqrt{6}}{6}\\ \frac{-\sqrt{6}}{6}\\ \frac{\sqrt{6}}{3}\\ 0 \end{array} \right), \left( \begin{array}{c} \frac{\sqrt{6}}{6}\\ \frac{-\sqrt{6}}{6}\\ 0\\ \frac{\sqrt{6}}{3} \end{array} \right)\right\}\]</span></p>
