@@ -369,7 +369,7 @@ $$U^{\\perp} = \\{v\\in V: \\langle v, u \\rangle = 0\\,\\,\\text{para todo }u\\
 Tenemos las siguientes propiedades del complemento ortogonal de un subespacio:
 
 ```{r}
-theorem("- $U^{\\perp}$ es un subespacio vectorial de $V$.\n- $U\\cap U^{\\perp} = \\{0\\}$.\n- Si $V$ es de dimensión finita, $\\mathrm{dim}(U) + \\mathrm{dim}(U^{\\perp}) = \\mathrm{dim}(V)$.", "Propiedades del complemento ortogonal")
+theorem("\n- $U^{\\perp}$ es un subespacio vectorial de $V$.\n- $U\\cap U^{\\perp} = \\{0\\}$.\n- Si $V$ es de dimensión finita, $\\mathrm{dim}(U) + \\mathrm{dim}(U^{\\perp}) = \\mathrm{dim}(V)$.", "Propiedades del complemento ortogonal")
 ```
 
 Como consecuencia, este resultado nos dice que __$V$ se puede descomponer como la suma directa de $U$ y de su complemento ortogonal__: $U\oplus U^{\perp} = V$.
@@ -456,7 +456,7 @@ for (i in seq(ncol(bW))) {
   glue_latex(
     "\\langle v, u_[i] \\rangle = 0",
     "\\Leftrightarrow",
-    "\\langle [to_latex(generic_vector(n))], [to_latex(ui)] = 0",
+    "\\langle [to_latex(generic_vector(n))], [to_latex(ui)] \\rangle = 0",
     "\\Leftrightarrow",
     "\\ [write_system(t(ui), 0, latex = TRUE, format = 'c')]"
   ) %>% 
@@ -467,7 +467,7 @@ for (i in seq(ncol(bW))) {
 Hemos llegado, por tanto, al siguiente sistema de ecuaciones que representan las ecuaciones cartesianas de $U^{\perp}$:
 ```{r}
 glue_latex(
-  "[write_system(t(bW), zero_vector(t(bW)), latex = TRUE)]"
+  "\\left\\{[write_system(t(bW), zero_vector(t(bW)), latex = TRUE)]\\right."
 ) %>% 
   cat()
 ```
@@ -680,7 +680,7 @@ En relación a lo comentado de las propiedades de los sistemas ortogonales, en n
 El interés de una base ortonormal es que es sencillo calcular las [coordenadas](#coord) de cualquier vector con respecto a dicha base:
 
 ```{r}
-theorem("Sea $\\mathcal{B} = \\{v_1,\\ldots,v_n\\}$ una base _ortonormal_ del espacio vectorial $V$. Entonces, para cada $v\\in V$, tenemos:\n$$v = \\langle v, v_1 \\rangle v_1 + \\ldots \\langle v, v_n \\rangle v_n$$\nluego las coordenadas de $v$ en la base $\\mathcal{B}$ las podemos calcular como:\n$$[v]_{\\mathcal{B}} = \\left(\\begin{array}{c}\\langle v, v_1\\rangle \\\\\\langle v, v_2 \\rangle \\\\\\vdots \\\\\\langle v, v_n \\rangle \\\\\\end{array}\\right)_{\\mathcal{B}}$$", "Coordenadas en base ortonormal")
+theorem("Sea $\\mathcal{B} = \\{v_1,\\ldots,v_n\\}$ una base _ortonormal_ del espacio vectorial $V$. Entonces, para cada $v\\in V$, tenemos:\n$$v = \\langle v, v_1 \\rangle v_1 + \\ldots + \\langle v, v_n \\rangle v_n$$\nluego las coordenadas de $v$ en la base $\\mathcal{B}$ las podemos calcular como:\n$$[v]_{\\mathcal{B}} = \\left(\\begin{array}{c}\\langle v, v_1\\rangle \\\\\\langle v, v_2 \\rangle \\\\\\vdots \\\\\\langle v, v_n \\rangle \\\\\\end{array}\\right)_{\\mathcal{B}}$$", "Coordenadas en base ortonormal")
 ```
 
 
@@ -792,14 +792,14 @@ El proceso del primer paso es incremental.
 
 Llamamos $u_1 = v_1$, el primer vector de la base $\mathcal{B}$.
 
-Ahora consideramos el segundo vector $v_2$. Por un [resultado teórico](#proyec) sobre las proyecciones que vimos antes, si llamamos $U_1 = \mathcal{L}(\{u_1\})$, entonces $v_2 - \mathrm{proy}_{U_1}(v_2)$ es un vector ortogonal a $U_1$, en particular es ortogonal a $u_1$. 
+Ahora consideramos el segundo vector $v_2$. Por un [resultado teórico](#proyec) sobre las proyecciones que vimos antes, si llamamos $\mathcal{U}_1 = \mathcal{L}(\{u_1\})$, entonces $v_2 - \mathrm{proy}_{\mathcal{U}_1}(v_2)$ es un vector ortogonal a $U_1$, en particular es ortogonal a $u_1$. 
 
-Llamemos entonces $u_2 = v_2 - \mathrm{proy}_{U_1}(v_2)$.
+Llamemos entonces $u_2 = v_2 - \mathrm{proy}_{\mathcal{U}_1}(v_2)$.
 Entonces, el sistema $\{u_1, u_2\}$ es ortogonal.
 
-Llamamos ahora $U_2 = \mathcal{L}(\{u_1,u_2\})$. Entonces, por el mismo motivo que antes, si llamamos $u_3 = v_3 - \mathrm{proy}_{U_2}(v_3)$, tenemos que $u_3$ es ortogonal a $U_2$, luego $\{u_1, u_2, u_3\}$ es un sistema ortogonal.
+Llamamos ahora $\mathcal{U}_2 = \mathcal{L}(\{u_1,u_2\})$. Entonces, por el mismo motivo que antes, si llamamos $u_3 = v_3 - \mathrm{proy}_{\mathcal{U}_2}(v_3)$, tenemos que $u_3$ es ortogonal a $\mathcal{U}_2$, luego $\{u_1, u_2, u_3\}$ es un sistema ortogonal.
 
-De esta forma, sucesivamente, en el paso $m$, vamos construyendo $U_m = \mathcal{L}(\{u_1,\ldots,u_m\})$ y consideramos $u_{m+1} = v_{m+1} - \mathrm{proy}_{U_m}(v_{m+1})$, que es un vector ortogonal a $U_m$ y, por tanto, $\{u_1,\ldots,u_{m+1}\}$ es un sistema ortogonal.
+De esta forma, sucesivamente, en el paso $m$, vamos construyendo $\mathcal{U}_m = \mathcal{L}(\{u_1,\ldots,u_m\})$ y consideramos $u_{m+1} = v_{m+1} - \mathrm{proy}_{\mathcal{U}_m}(v_{m+1})$, que es un vector ortogonal a $U_m$ y, por tanto, $\{u_1,\ldots,u_{m+1}\}$ es un sistema ortogonal.
 
 Una vez se haya completado el proceso, se habrá construido el conjunto $\mathcal{B}' = \{u_1,\ldots,u_n\}$. Como estamos en un espacio $V$ de dimensión $n$, y tenemos $n$ vectores ortogonales, luego [linealmente independientes](#ortho), éstos forman una base. Luego $\mathcal{B}'$ es una base ortogonal.
 
@@ -878,7 +878,7 @@ for (i in seq(2, n)) {
   
   cat("- Construimos:\n")
   glue_latex(
-    "U_[i-1] = \\mathcal{L}(\\{[previous_ui]\\}) = ",
+    "\\mathcal{U}_[i-1] = \\mathcal{L}(\\{[previous_ui]\\}) = ",
     "\\mathcal{L}(\\left\\{[vectors_to_latex(Ui)]\\right\\})"
   ) %>% str_replace_all("\n", " ") %>% 
     cat()
@@ -888,7 +888,7 @@ for (i in seq(2, n)) {
   
   glue_latex(
     "\\begin{array}{rcl}",
-    "\\mathrm{proy}_{U_[i-1]}(v_[i]) & = & [proy_form] \\\\",
+    "\\mathrm{proy}_{\\mathcal{U}_[i-1]}(v_[i]) & = & [proy_form] \\\\",
     " & = & [proy_val] \\\\",
     " & = & [glue_matrices(proyec, fractions = TRUE, latex = TRUE)]\\\\",
     "\\end{array}"
@@ -901,7 +901,7 @@ for (i in seq(2, n)) {
   cat("Y llamamos\n")
   
   glue_latex(
-    "u_[i]  = v_[i] - \\mathrm{proy}_{U_[i - 1]}(v_[i]) = ",
+    "u_[i]  = v_[i] - \\mathrm{proy}_{\\mathcal{U}_[i - 1]}(v_[i]) = ",
     "[to_latex(vi)] - [glue_matrices(proyec, fractions = TRUE, latex = TRUE)] = ",
     " [glue_matrices(ui_new, fractions = TRUE, latex = TRUE)]"
   ) %>% str_replace_all(pattern = "\n", replacement = " ") %>% cat()
@@ -1251,7 +1251,7 @@ De forma esquemática, incluyendo todo lo que conocemos de diagonalización, que
 2. Para cada autovalor $\lambda$:
     1. Determinar una [base](#base) $\mathcal{B}_{\lambda}$ del [subespacio propio](#eigenspace) $U_{\lambda}$. 
     2. Aplicar [el método de Gram-Schmidt](#gram-schmidt) a $\mathcal{B}_{\lambda}$ para obtener una [base _ortonormal](#ortho-basis) de $U_{\lambda}$ a la que llamaremos $\mathcal{B}'_{\lambda}$.
-3. Llamamos $\mathcal{B} = \mathcal{B}'_{\lambda_1}\cup\ldots\cup\mathcal{B}_{\lambda_k}$. Entonces $\mathcal{B}$ es una base ortonormal de $V$. Además, la matriz $P$ de [cambio de base](#cambiobase) de $\mathcal{B}$ a la canónica es una matriz [ortogonal](#ortho-matrix), tiene por columnas las coordenadas de los vectores de $\mathcal{B}$, y verifica que $D = P^{\text{t}}\ A\ P$ es una matriz diagonal con los autovalores en la diagonal principal (con multiplicidades incluidas).
+3. Llamamos $\mathcal{B} = \mathcal{B}'_{\lambda_1}\cup\ldots\cup\mathcal{B}'_{\lambda_k}$. Entonces $\mathcal{B}$ es una base ortonormal de $V$. Además, la matriz $P$ de [cambio de base](#cambiobase) de $\mathcal{B}$ a la canónica es una matriz [ortogonal](#ortho-matrix), tiene por columnas las coordenadas de los vectores de $\mathcal{B}$, y verifica que $D = P^{\text{t}}\ A\ P$ es una matriz diagonal con los autovalores en la diagonal principal (con multiplicidades incluidas).
 
 ---
 
@@ -1430,7 +1430,7 @@ for (av_idx in seq_along(autovalores)) {
       
       cat("Construimos:\n")
       glue_latex(
-        "U_[i-1] = \\mathcal{L}(\\{[previous_ui]\\}) = ",
+        "\\mathcal{U}_[i-1] = \\mathcal{L}(\\{[previous_ui]\\}) = ",
         "\\mathcal{L}(\\left\\{[vectors_to_latex(Ui)]\\right\\})"
       ) %>% str_replace_all("\n", " ") %>% 
         cat()
@@ -1439,7 +1439,7 @@ for (av_idx in seq_along(autovalores)) {
       cat("Entonces\n")
       
       glue_latex(
-        "\\mathrm{proy}_{U_[i-1]}(v_[i])  = [proy_form]  =  [proy_val]  = [glue_matrices(proyec, fractions = TRUE, latex = TRUE)]"
+        "\\mathrm{proy}_{\\mathcal{U}_[i-1]}(v_[i])  = [proy_form]  =  [proy_val]  = [glue_matrices(proyec, fractions = TRUE, latex = TRUE)]"
       ) %>% 
         str_replace_all(pattern = "\n", replacement = " ") %>% 
         cat()
@@ -1449,7 +1449,7 @@ for (av_idx in seq_along(autovalores)) {
       cat("Y llamamos\n")
       
       glue_latex(
-        "u_[i]  = v_[i] - \\mathrm{proy}_{U_[i - 1]}(v_[i]) = ",
+        "u_[i]  = v_[i] - \\mathrm{proy}_{\\mathcal{U}_[i - 1]}(v_[i]) = ",
         "[to_latex(vi, fractions = TRUE)] - [glue_matrices(proyec, fractions = TRUE, latex = TRUE)] = ",
         " [glue_matrices(ui_new, fractions = TRUE, latex = TRUE)]"
       ) %>% str_replace_all(pattern = "\n", replacement = " ") %>% cat()
